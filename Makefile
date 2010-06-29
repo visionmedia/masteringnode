@@ -16,7 +16,7 @@ book.html: $(HTML)
 	cat $(HTML) > book.html
 
 %.html: %.md
-	ronn -5 --pipe --fragment $< \
+	ronn --pipe --fragment $< \
 		| sed -E 's/<h1>([^ ]+) - /<h1>/' \
 		> $@
 
