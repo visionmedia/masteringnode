@@ -10,7 +10,7 @@ Lets create a utility module named _utilities_, which will contain a `merge()` f
     var utilities = {};
 	utilities.merge = function(obj, other) {};
 
-CommonJS modules remove this conflict by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module, not just `exports` and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
+CommonJS modules remove this conflict by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module, not just `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
 
     var module = { exports: {}};
 	(function(module, exports){
@@ -53,7 +53,6 @@ Node also supports the idea of _index_ JavaScript files, to illustrate this exam
 	
 The contents of _./math/add.js_ show us a new technique, here we use `module.exports` instead of `exports`. Previously mentioned was the fact that `exports` is not the only object exposed to the module file when evaluated, we also have access to `__dirname`, `__filename`, and `module` which represents the current module. Here we simply define the module export object to a new object, which happens to be a function. 
 
-    
 	module.exports = function add(a, b){
 	    return a + b;
 	};
@@ -73,3 +72,13 @@ if we change our module slightly, we can remove `.Animal`:
 which can now be used without the property:
 
     var Animal = require('./animal');
+
+## Asynchronous Require
+
+Node provides us with an asynchronous version of `require()`, aptly named `require.async()`. Below is the sample example previously shown for our _utilities_ module, however non blocking. `require.async()` accepts a callback of which the first parameter `err` is `null` or an instanceof `Error`, and then the module exports. Passing the error (if there is one) as the first argument is an extremely common idiom in node for async routines.
+    
+	require.async('sys', function(err, sys){
+	    require.async('./utilities', function(err, utils){
+	        sys.p(utils.merge({ foo: 'bar' }, { bar: 'baz' }));
+	    });
+	});
