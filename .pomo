@@ -4,3 +4,8 @@
   description: 
   length: 25
   name: Fix math example ...
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: event loop / evented io chapter
