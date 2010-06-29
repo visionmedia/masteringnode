@@ -34,7 +34,6 @@ Next we will look at utilizing out new module in other libraries.
 
 Create a second file named _./app.js_ with the code shown below. First we load in the core `sys` module, which provides common methods such as `sys.puts()`, `sys.print()`, and the object inspection method `sys.p()`. 
 
-    
 	var sys = require('sys'),
 	    utils = require('./utilities');
 
@@ -44,3 +43,33 @@ Create a second file named _./app.js_ with the code shown below. First we load i
 	sys.p(a);
 
 Since the `sys` module is bundled with node, it's `exports` are returned, however for other modules node will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if we have _~/.node_libraries_/utilities.js_ we may simply `require('utilities')`, instead of our relative example `require('./utilities')` shown above.
+
+Node also supports the idea of _index_ JavaScript files, to illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
+
+	exports = {
+	    add: require('./add'),
+	    sub: require('./sub')
+	};
+	
+The contents of _./math/add.js_ show us a new technique, here we use `module.exports` instead of `exports`. Previously mentioned was the fact that `exports` is not the only object exposed to the module file when evaluated, we also have access to `__dirname`, `__filename`, and `module` which represents the current module. Here we simply define the module export object to a new object, which happens to be a function. 
+
+    
+	module.exports = function add(a, b){
+	    return a + b;
+	};
+
+This technique is usually only helpful when your module has one aspect that it wishes to expose, be it a single function, constructor, string, etc. Below is an example of how we could provide the `Animal` constructor:
+
+    exports.Animal = function Animal(){};
+
+which can then be utilized as shown:
+
+    var Animal = require('./animal').Animal;
+
+if we change our module slightly, we can remove `.Animal`:
+
+    module.exports = function Animal(){};
+
+which can now be used without the property:
+
+    var Animal = require('./animal');
