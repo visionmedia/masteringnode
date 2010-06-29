@@ -24,3 +24,8 @@
   description: 
   length: 25
   name: section on node's repl / cli
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: highlighting
