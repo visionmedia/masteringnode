@@ -1,4 +1,8 @@
 
+PDF_FLAGS = --fontsize 9.0 \
+			--linkstyle plain \
+			--linkcolor green
+
 MD = pages/index.md \
 	 chapters/installation.md \
 	 chapters/modules.md
@@ -6,7 +10,7 @@ MD = pages/index.md \
 HTML = $(MD:.md=.html)
 
 book.pdf: $(HTML)
-	htmldoc $(HTML) --outfile $@
+	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
 
 book.html: $(HTML)
 	cat $(HTML) > book.html
