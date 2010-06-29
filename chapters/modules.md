@@ -82,3 +82,26 @@ Node provides us with an asynchronous version of `require()`, aptly named `requi
 	        sys.p(utils.merge({ foo: 'bar' }, { bar: 'baz' }));
 	    });
 	});
+
+## Requiring Over HTTP
+
+Asynchronous requires in node also have the added bonus of allowing module loading via **HTTP** and **HTTPS**.
+To require a module via http all we have to do is pass a valid url as shown in the _sass_ to _css_ compilation example below: 
+
+    
+	var sys = require('sys'),
+	    sassUrl = 'http://github.com/visionmedia/sass.js/raw/master/lib/sass.js',
+	    sassStr = ''
+	        + 'body\n'
+	        + '  a\n'
+	        + '    :color #eee';
+
+	require.async(sassUrl, function(err, sass){
+	    var str = sass.render(sassStr);
+	    sys.puts(str);
+	});
+
+Outputs:
+
+    body a {
+	  color: #eee;}
