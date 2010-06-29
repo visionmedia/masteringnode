@@ -19,3 +19,8 @@
   description: 
   length: 25
   name: book.html styling
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: section on node's repl / cli
