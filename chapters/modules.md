@@ -32,7 +32,9 @@ Next we will look at utilizing out new module in other libraries.
 
 ## Requiring Modules
 
-Create a second file named _./app.js_ with the code shown below. First we load in the core `sys` module, which provides common methods such as `sys.puts()`, `sys.print()`, and the object inspection method `sys.p()`. 
+There are four main ways to require a module in node, first is the _synchronous_ method, which simply returns the module's exports, second is the _asynchronous_ method which accepts a callback, third is the _asynchronous http_ method which can load remote modules, and lastly is requiring of shared libraries or "node addons" which we will cover later.
+
+To get started create a second file named _./app.js_ with the code shown below. First we load in the core `sys` module, which provides common methods such as `sys.puts()`, `sys.print()`, and the object inspection method `sys.p()`. 
 
 	var sys = require('sys'),
 	    utils = require('./utilities');
