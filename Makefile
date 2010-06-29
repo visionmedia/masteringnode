@@ -1,6 +1,7 @@
 
 MD = pages/index.md \
-	 chapters/introduction.md
+	 chapters/installation.md \
+	 chapters/modules.md
 
 HTML = $(MD:.md=.html)
 
