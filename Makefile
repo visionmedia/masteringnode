@@ -7,7 +7,7 @@ HTML = $(MD:.md=.html)
 book.pdf: $(HTML)
 	htmldoc $(HTML) --outfile $@
 
-book.html: %(HTML)
+book.html: $(HTML)
 	cat $(HTML) > book.html
 
 %.html: %.md
