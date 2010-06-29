@@ -2,6 +2,7 @@
 PDF_FLAGS = --fontsize 9.0 \
 			--linkstyle plain \
 			--linkcolor green \
+			--embedfonts \
 			--no-toc
 
 MD = pages/index.md \
