@@ -29,3 +29,23 @@
   description: 
   length: 25
   name: highlighting
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: connect section
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: deployment
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: howtonode
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: v8 specifics... Error.captureStackTrace(err, baz); etc
