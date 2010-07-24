@@ -13,7 +13,8 @@ MD = pages/index.md \
 	 chapters/tcp.md \
 	 chapters/http.md \
 	 chapters/connect.md \
-	 chapters/express.md
+	 chapters/express.md \
+	 chapters/buffers.md
 
 HTML = $(MD:.md=.html)
 
