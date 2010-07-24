@@ -7,7 +7,11 @@ PDF_FLAGS = --fontsize 9.0 \
 
 MD = pages/index.md \
 	 chapters/installation.md \
-	 chapters/modules.md
+	 chapters/modules.md \
+	 chapters/tcp.md \
+	 chapters/http.md \
+	 chapters/connect.md \
+	 chapters/express.md
 
 HTML = $(MD:.md=.html)
 
