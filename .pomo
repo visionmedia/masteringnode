@@ -49,3 +49,8 @@
   description: 
   length: 25
   name: dailynode
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: ecma5 earlier?...

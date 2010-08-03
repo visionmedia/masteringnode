@@ -5,14 +5,14 @@
 
 var EventEmitter = require('events').EventEmitter;
 
-function Animal(name) {
+function Dog(name) {
     this.name = name;
     EventEmitter.call(this);
 }
 
-Animal.prototype.__proto__ = EventEmitter.prototype;
+Dog.prototype.__proto__ = EventEmitter.prototype;
 
-var simon = new Animal('simon');
+var simon = new Dog('simon');
 
 simon.on('bark', function(){
     console.log(this.name + ' barked');
