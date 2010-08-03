@@ -1,7 +1,7 @@
 
 # Installing Node
 
-In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at [homebrew](http://github.com/mxcl/homebrew), the [Node Version Manager](http://github.com/visionmedia/nvm/tree/refactor)(nvm), and the most flexible method of course, compiling from source.
+In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at [homebrew](http://github.com/mxcl/homebrew), [nDistro](http://github.com/visionmedia/ndistro), and the most flexible method of course, compiling from source.
 
 ### Homebrew
 
@@ -9,11 +9,26 @@ Homebrew is a package management system for _OSX_ written in Ruby, is extremely 
 
     $ brew install node.js
 
-## Node Version Manager
+## nDistro
 
-[NVM](http://github.com/visionmedia/nvm/tree/refactor) is a simple bash script developed by myself and Tim Caswell, created to manage several installations of node. With this script you can install, uninstall, and switch between various node releases. Users should note that my _refactor_ branch of NVM is referenced in this book. Installing a specific version of node is as simple as:
+[nDistro](http://github.com/visionmedia/ndistro) is a distribution toolkit for node, which allows creation and installation of node distros within seconds. An _nDistro_ is simply a dotfile named _.ndistro_ which defines
+ module and node binary version dependencies. In the example
+below we specify the node binary version _0.1.102_, as well as
+several 3rd party modules.
 
-    $ nvm install v0.1.99
+	node 0.1.102
+	module senchalabs connect
+	module visionmedia express 1.0.0beta2
+	module visionmedia connect-form
+	module visionmedia connect-redis
+	module visionmedia jade
+	module visionmedia ejs
+
+Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain an deploy. nDistro uses [pre-compiled node binaries](http://github.com/visionmedia/nodes) making them extremely fast to install, and module tarballs which are fetched from [GitHub](http://github.com) via _wget_ or _curl_ (auto detected).
+
+To get started we first need to install nDistro itself, below we _cd_ to our bin directory of choice, _curl_ the shell script, and pipe the response to _sh_ which will install nDistro to the current directory:
+
+    $ cd /usr/local/bin && curl http://github.com/visionmedia/ndistro/raw/master/install | sh
 
 ## Building From Source
 
