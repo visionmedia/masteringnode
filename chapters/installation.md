@@ -30,6 +30,23 @@ To get started we first need to install nDistro itself, below we _cd_ to our bin
 
     $ cd /usr/local/bin && curl http://github.com/visionmedia/ndistro/raw/master/install | sh
 
+Next we can place the contents of our example in _./.ndistro_, and execute _ndistro_ with no arguments, prompting the program to load the config, and start installing:
+
+    $ ndistro
+
+Installation of the example took less than 17 seconds on my machine, and outputs the following _stdout_ indicating success, not bad for an entire stack!
+
+	... installing node-0.1.102-i386
+	... installing connect
+	... installing express 1.0.0beta2
+	... installing bin/express
+	... installing connect-form
+	... installing connect-redis
+	... installing jade
+	... installing bin/jade
+	... installing ejs
+	... installation complete
+
 ## Building From Source
 
 To build and install node from source, we first need to obtain the code. The first method of doing so is
