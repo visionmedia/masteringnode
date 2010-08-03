@@ -16,7 +16,8 @@ MD = pages/index.md \
 	 chapters/http.md \
 	 chapters/connect.md \
 	 chapters/express.md \
-	 chapters/testing.md
+	 chapters/testing.md \
+	 chapters/deploy.md
 
 HTML = $(MD:.md=.html)
 
