@@ -35,11 +35,15 @@ Here we inherit from `EventEmitter`, so that we may use the methods provided suc
 
 	Dog.prototype.__proto__ = EventEmitter.prototype;
 
+Now that we have our `Dog` set up, we can create .... simon! When simon barks we can let _stdout_ know by calling `console.log()` within the callback. The callback it-self is called in context to the object, aka `this`.
+
 	var simon = new Dog('simon');
 
 	simon.on('bark', function(){
 	    console.log(this.name + ' barked');
 	});
+
+Bark twice a second:
 
 	setInterval(function(){
 	    simon.emit('bark');
