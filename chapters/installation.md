@@ -54,11 +54,11 @@ via `git`, if you have git installed you can execute:
 
     $ git clone http://github.com/ry/node.git && cd node
 
-For those without `git`, or who prefer not to use it, we can also download the source via `curl`, `wget`, or similar:
+For those without _git_, or who prefer not to use it, we can also download the source via _curl_, _wget_, or similar:
 
     $ curl -# http://nodejs.org/dist/node-v0.1.99.tar.gz > node.tar.gz
     $ tar -zxf node.tar.gz
 
-Now that we have the source on our machine, we can run `./configure` which discovers which libraries are available for node to utilize such as _OpenSSL_ for transport security support. `make` which builds node, and `make install` which will install node.
+Now that we have the source on our machine, we can run `./configure` which discovers which libraries are available for node to utilize such as _OpenSSL_ for transport security support, C and C++ compilers, etc. `make` which builds node, and finally `make install` which will install node.
 
     $ ./configure && make && make install
