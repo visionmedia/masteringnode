@@ -12,10 +12,10 @@ MD = pages/index.md \
 	 chapters/events.md \
 	 chapters/fs.md \
 	 chapters/tcp.md \
+	 chapters/buffers.md \
 	 chapters/http.md \
 	 chapters/connect.md \
 	 chapters/express.md \
-	 chapters/buffers.md \
 	 chapters/testing.md
 
 HTML = $(MD:.md=.html)
