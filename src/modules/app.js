@@ -1,5 +1,5 @@
 
-var utils = require('./utilities');
+var utils = require('./utils');
 
 var a = { one: 1 };
 var b = { two: 2 };

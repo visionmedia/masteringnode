@@ -7,10 +7,10 @@ Although this is ideal, in practice modules are often not portable due to relyin
 
 ## Creating Modules
 
-Lets create a utility module named _utilities_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly.
+Lets create a utility module named _utils_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly.
 
-    var utilities = {};
-	utilities.merge = function(obj, other) {};
+    var utils = {};
+	utils.merge = function(obj, other) {};
 
 CommonJS modules remove this conflict by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module, not just `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
 
