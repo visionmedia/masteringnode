@@ -12,14 +12,14 @@ Lets create a utility module named _utils_, which will contain a `merge()` funct
     var utils = {};
 	utils.merge = function(obj, other) {};
 
-CommonJS modules remove this conflict by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module, not just `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
+CommonJS modules remove this conflict by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
 
     var module = { exports: {}};
 	(function(module, exports){
 	    exports.merge = function(){};
 	})(module, module.exports);
 
-First create the file _./utilities.js_, and define the `merge()` function below.
+First create the file _./utils.js_, and define the `merge()` function below.
 
 	exports.merge = function(obj, other) {
 	    var keys = Object.keys(other);
@@ -36,19 +36,18 @@ Next we will look at utilizing out new module in other libraries.
 
 There are four main ways to require a module in node, first is the _synchronous_ method, which simply returns the module's exports, second is the _asynchronous_ method which accepts a callback, third is the _asynchronous http_ method which can load remote modules, and lastly is requiring of shared libraries or "node addons" which we will cover later.
 
-To get started create a second file named _./app.js_ with the code shown below. First we load in the core `sys` module, which provides common methods such as `sys.puts()`, `sys.print()`, and the object inspection method `sys.p()`. 
+To get started create a second file named _./app.js_ with the code shown below. The first line `require('./utils')` fetches the contents of _./utils.js_ and returns the `exports` of which we later utilize our `merge()` method and display the results of our merged object using `console.dir()`.
 
-	var sys = require('sys'),
-	    utils = require('./utilities');
+	var utils = require('./utils');
 
 	var a = { one: 1 };
 	var b = { two: 2 };
 	utils.merge(a, b);
-	sys.p(a);
+	console.dir(a);
 
-Since the `sys` module is bundled with node, it's `exports` are returned, however for other modules node will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if we have _~/.node_libraries_/utilities.js_ we may simply `require('utilities')`, instead of our relative example `require('./utilities')` shown above.
+Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if we have _~/.node_libraries_/utils.js_ we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
 
-Node also supports the idea of _index_ JavaScript files, to illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
+Node also supports the idea of _index_ JavaScript files to compliment _index.html_. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
 
 	module.exports = {
 	    add: require('./add'),
@@ -79,13 +78,11 @@ which can now be used without the property:
 
 ## Asynchronous Require
 
-Node provides us with an asynchronous version of `require()`, aptly named `require.async()`. Below is the sample example previously shown for our _utilities_ module, however non blocking. `require.async()` accepts a callback of which the first parameter `err` is `null` or an instanceof `Error`, and then the module exports. Passing the error (if there is one) as the first argument is an extremely common idiom in node for async routines.
+Node provides us with an asynchronous version of `require()`, aptly named `require.async()`. Below is the sample example previously shown for our _utils_ module, however non blocking. `require.async()` accepts a callback of which the first parameter `err` is `null` or an instanceof `Error`, and then the module exports. Passing the error (if there is one) as the first argument is an extremely common idiom in node for async routines.
     
-	require.async('sys', function(err, sys){
-	    require.async('./utilities', function(err, utils){
-	        sys.p(utils.merge({ foo: 'bar' }, { bar: 'baz' }));
-	    });
-	});
+    require.async('./utils', function(err, utils){
+        console.dir(utils.merge({ foo: 'bar' }, { bar: 'baz' }));
+    });
 
 ## Requiring Over HTTP
 
