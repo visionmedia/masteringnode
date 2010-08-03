@@ -1,7 +1,7 @@
 
 # Events
 
- The concept of events is crucial in node, 
+ Events are crucial to node, and used greatly throughout core and 3rd-party modules. Node's core library _events_
 
 
 	var EventEmitter = require('events').EventEmitter;
