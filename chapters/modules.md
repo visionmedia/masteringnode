@@ -90,8 +90,7 @@ Asynchronous requires in node also have the added bonus of allowing module loadi
 To require a module via http all we have to do is pass a valid url as shown in the _sass_ to _css_ compilation example below: 
 
     
-	var sys = require('sys'),
-	    sassUrl = 'http://github.com/visionmedia/sass.js/raw/master/lib/sass.js',
+	var sassUrl = 'http://github.com/visionmedia/sass.js/raw/master/lib/sass.js',
 	    sassStr = ''
 	        + 'body\n'
 	        + '  a\n'
@@ -99,7 +98,7 @@ To require a module via http all we have to do is pass a valid url as shown in t
 
 	require.async(sassUrl, function(err, sass){
 	    var str = sass.render(sassStr);
-	    sys.puts(str);
+	    console.log(str);
 	});
 
 Outputs:
