@@ -54,3 +54,8 @@
   description: 
   length: 25
   name: ecma5 earlier?...
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: node addons..v8 api
