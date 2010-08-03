@@ -1,7 +1,9 @@
 
 # CommonJS Module System
 
-[CommonJS](http://commonjs.org) is a community driven effort to standardize packaging of JavaScript libraries, known as _modules_. Ideally modules written in JavaScript which support the CommonJS module pattern can be re-used within many environments such as node, narwhal, and even browsers among others.
+[CommonJS](http://commonjs.org) is a community driven effort to standardize packaging of JavaScript libraries, known as _modules_. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers. 
+
+Although this is ideal, in practice modules are often not portable due to relying on apis that are currently only provided by, or are tailored to node specifically. As the framework matures, and additional standards emerge our modules will become more portable.  
 
 ## Creating Modules
 
@@ -48,7 +50,7 @@ Since the `sys` module is bundled with node, it's `exports` are returned, howeve
 
 Node also supports the idea of _index_ JavaScript files, to illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
 
-	exports = {
+	module.exports = {
 	    add: require('./add'),
 	    sub: require('./sub')
 	};
