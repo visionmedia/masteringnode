@@ -48,11 +48,11 @@ The version property contains the node version string, for example "v0.1.103".
 
 ### process.installPrefix
 
-Exposes the installation prefix, in my case "/usr/local", as node's binary was installed to "/usr/local/bin/node".
+Exposes the installation prefix, in my case "_/usr/local_", as node's binary was installed to "_/usr/local/bin/node_".
 
 ### process.execPath
 
-Path to the executable itself "/usr/local/bin/node".
+Path to the executable itself "_/usr/local/bin/node_".
 
 ### process.platform
 
