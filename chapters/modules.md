@@ -45,9 +45,9 @@ To get started create a second file named _./app.js_ with the code shown below. 
 	utils.merge(a, b);
 	console.dir(a);
 
-Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if we have _~/.node_libraries_/utils.js_ we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
+Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if _~/.node_libraries_/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
 
-Node also supports the idea of _index_ JavaScript files to compliment _index.html_. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
+Node also supports the concept of _index_ JavaScript files. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
 
 	module.exports = {
 	    add: require('./add'),
@@ -75,6 +75,18 @@ if we change our module slightly, we can remove `.Animal`:
 which can now be used without the property:
 
     var Animal = require('./animal');
+
+## Require Paths
+
+We talked about `require.paths`, the `Array` utilized by node's module system in order to discover modules. Well since this is just an array, we can manipulate it in order to expose libraries. In our previous example we defined the libraries _./math/{add,sub}.js_, in which we would typically `require('./math')` or `require('./math/add')` etc. Another approach is to prepend or "unshift" a directory onto `require.paths` as shown below, after which we can simply `require('add')` since node will iterate the paths in order to try and locate the module.
+
+	require.paths.unshift(__dirname + '/math');
+
+	var add = require('add'),
+	    sub = require('sub');
+
+	console.log(add(1,2))
+	console.log(sub(1,2))
 
 ## Pseudo Globals
 
