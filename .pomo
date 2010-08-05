@@ -74,3 +74,8 @@
   description: 
   length: 25
   name: registering module compilers
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: require paths
