@@ -76,6 +76,35 @@ which can now be used without the property:
 
     var Animal = require('./animal');
 
+## Pseudo Globals
+
+As mentioned above, modules have several pseudo globals available to them, these are as follows:
+
+  - `require` the require function itself 
+  - `module` the current `Module` instance
+  - `exports` the current module's exported properties
+  - `__filename` absolute path to the current module's file
+  - `__dirname` absolute path to the current module's directory
+
+### require()
+
+Although not obvious at first glance, the `require()` function is actually
+re-defined for the current module, and calls an internal function `loadModule` with a reference to the current `Module` to resolve relative paths and to populate `module.parent`.
+
+## module
+
+When we `require()` a module, typically we only deal with the module's `exports`, however the `module` variable references the current module's `Module` instance. This is why the following is valid, as we may re-assign the module's `exports` to any object, even something trivial like a string:
+
+    // css.js
+    module.exports = 'body { background: blue; }';
+
+To obtain this string we would simply `require('./css')`. The `module` instance also contains these useful properties:
+
+  - `id` the module's id, consisting of a path. Ex: `./app`
+  - `parent` the parent `Module` (which required this one) or `undefined`
+  - `filename` absolute path to the module
+  - `moduleCache` an object containing references to all cached modules
+
 ## Asynchronous Require
 
 Node provides us with an asynchronous version of `require()`, aptly named `require.async()`. Below is the sample example previously shown for our _utils_ module, however non blocking. `require.async()` accepts a callback of which the first parameter `err` is `null` or an instanceof `Error`, and then the module exports. Passing the error (if there is one) as the first argument is an extremely common idiom in node for async routines.
