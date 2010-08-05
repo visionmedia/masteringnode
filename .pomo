@@ -68,14 +68,14 @@
   complete: false
   description: 
   length: 25
-  name: globals
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
   name: registering module compilers
 - !ruby/object:Pomo::Task 
   complete: false
   description: 
   length: 25
   name: node bin
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: finish globals
