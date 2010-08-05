@@ -78,15 +78,25 @@ which can now be used without the property:
 
 ## Require Paths
 
-We talked about `require.paths`, the `Array` utilized by node's module system in order to discover modules. Well since this is just an array, we can manipulate it in order to expose libraries. In our previous example we defined the libraries _./math/{add,sub}.js_, in which we would typically `require('./math')` or `require('./math/add')` etc. Another approach is to prepend or "unshift" a directory onto `require.paths` as shown below, after which we can simply `require('add')` since node will iterate the paths in order to try and locate the module.
+We talked about `require.paths`, the `Array` utilized by node's module system in order to discover modules. By default node checks the following directories for modules:
+
+  - `<node binary>`/../../lib/node
+  - **$HOME**/.node_libraries
+  - **$NODE_PATH**
+
+The **NODE_PATH** environment variable is much like **PATH**, as it allows several paths delimited by the colon (`:`) character.
+
+### Runtime Manipulation
+
+Since `require.paths` is just an array, we can manipulate it at runtime in order to expose libraries. In our previous example we defined the libraries _./math/{add,sub}.js_, in which we would typically `require('./math')` or `require('./math/add')` etc. Another approach is to prepend or "unshift" a directory onto `require.paths` as shown below, after which we can simply `require('add')` since node will iterate the paths in order to try and locate the module.
 
 	require.paths.unshift(__dirname + '/math');
 
 	var add = require('add'),
 	    sub = require('sub');
 
-	console.log(add(1,2))
-	console.log(sub(1,2))
+	console.log(add(1,2));
+	console.log(sub(1,2));
 
 ## Pseudo Globals
 
