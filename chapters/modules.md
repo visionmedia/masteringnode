@@ -91,14 +91,14 @@ As mentioned above, modules have several pseudo globals available to them, these
 Although not obvious at first glance, the `require()` function is actually
 re-defined for the current module, and calls an internal function `loadModule` with a reference to the current `Module` to resolve relative paths and to populate `module.parent`.
 
-## module
+### module
 
 When we `require()` a module, typically we only deal with the module's `exports`, however the `module` variable references the current module's `Module` instance. This is why the following is valid, as we may re-assign the module's `exports` to any object, even something trivial like a string:
 
     // css.js
     module.exports = 'body { background: blue; }';
 
-To obtain this string we would simply `require('./css')`. The `module` instance also contains these useful properties:
+To obtain this string we would simply `require('./css')`. The `module` object also contains these useful properties:
 
   - `id` the module's id, consisting of a path. Ex: `./app`
   - `parent` the parent `Module` (which required this one) or `undefined`
