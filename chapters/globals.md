@@ -110,3 +110,20 @@ in which we call `console.dir(process.argv)`, outputting the following:
 	, 'bar'
 	, 'baz'
 	]
+
+### process.exit()
+
+The `process.exit()` method is synonymous with the C function `exit()`, in which a exit code > 0 is passed indicating failure, or 0 to indicate success. When invoked the _exit_ event is emitted, allowing a short time for arbitrary processing to occur before `process.reallyExit()` is called with the given status code.
+
+### process.on()
+
+The process itself is an `EventEmitter`, allowing you to do things like listen for uncaught exceptions, via the _uncaughtException_ event:
+
+	process.on('uncaughtException', function(err){
+	    console.log('got an error: %s', err.message);
+	    process.exit(1);
+	});
+
+	setTimeout(function(){
+	    throw new Error('fail');
+	}, 100);
