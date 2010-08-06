@@ -141,3 +141,21 @@ The process itself is an `EventEmitter`, allowing you to do things like listen f
 	setTimeout(function(){
 	    throw new Error('fail');
 	}, 100);
+
+### process.kill()
+
+The kill() method sends the **SIGINT** signal to the given process id, or the signal specified. 
+
+	process.on('SIGTERM', function(){
+	    console.log('terminating');
+	    process.exit(1);
+	});
+
+	setTimeout(function(){
+	    console.log('sending SIGTERM to process %d', process.pid);
+	    process.kill(process.pid, 'SIGTERM');
+	}, 500);
+
+	setTimeout(function(){
+	    console.log('never called');
+	}, 1000);
