@@ -93,4 +93,20 @@ An object containing the user's environment variables, for example:
 	, _: '/usr/local/bin/node'
 	, OLDPWD: '/Users/tj'
 	}
-	
+
+### process.argv
+
+When executing a file with the `node` executable `process.argv` provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.
+
+For example our source file _./src/process/misc.js_ can be executed by running:
+
+    $ node src/process/misc.js foo bar baz
+
+in which we call `console.dir(process.argv)`, outputting the following:
+
+	[ 'node'
+	, '/Users/tj/EBooks/masteringnode/src/process/misc.js'
+	, 'foo'
+	, 'bar'
+	, 'baz'
+	]

@@ -9,3 +9,4 @@ console.log('getuid():      ' + process.getuid());
 console.log('getgid():      ' + process.getgid());
 console.log('ENV:');
 console.dir(process.env);
+console.dir(process.argv)
