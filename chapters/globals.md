@@ -74,9 +74,17 @@ Returns the current working directory, for example:
 
 Returns the numerical user id of the running process.
 
+### process.setuid()
+
+Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both `process.setuid(501)`, and `process.setuid('tj')` are valid.
+
 ### process.getgid()
 
 Returns the numerical group id of the running process.
+
+### process.setgid()
+
+Similar to `process.setuid()` however operates on the group, also accepting a numerical value or string representation. For example `process.setgid(20)` or `process.setgid('www')`.
 
 ### process.env
 
