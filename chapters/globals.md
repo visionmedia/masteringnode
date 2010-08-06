@@ -144,7 +144,7 @@ The process itself is an `EventEmitter`, allowing you to do things like listen f
 
 ### process.kill()
 
-The kill() method sends the **SIGINT** signal to the given process id, or the signal specified. 
+`process.kill()` method sends the signal passed to the given _pid_, defaulting to **SIGINT**. In our example below we send the **SIGTERM** signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.
 
 	process.on('SIGTERM', function(){
 	    console.log('terminating');
