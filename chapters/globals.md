@@ -70,6 +70,12 @@ Returns the current working directory, for example:
     node> process.cwd()
     "/Users/tj"
 
+### process.chdir()
+
+Changes the current working directory to the path passed.
+
+    process.chdir('/foo');
+
 ### process.getuid()
 
 Returns the numerical user id of the running process.
