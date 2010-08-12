@@ -84,3 +84,8 @@
   description: 
   length: 25
   name: nextTick
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: error stack traces in es5
