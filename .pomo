@@ -89,3 +89,8 @@
   description: 
   length: 25
   name: error stack traces in es5
+- !ruby/object:Pomo::Task 
+  complete: false
+  description: 
+  length: 25
+  name: upate.. module.js is no more

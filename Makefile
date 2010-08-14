@@ -9,8 +9,8 @@ MD = pages/index.md \
 	 chapters/installation.md \
 	 chapters/modules.md \
 	 chapters/globals.md \
-	 chapters/streams.md \
 	 chapters/events.md \
+	 chapters/streams.md \
 	 chapters/fs.md \
 	 chapters/tcp.md \
 	 chapters/buffers.md \
