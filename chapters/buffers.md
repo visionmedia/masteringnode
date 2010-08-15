@@ -16,3 +16,27 @@ The simplest way to construct a `Buffer` from a string is to simply pass a strin
 An alternative method is to pass an array of integers representing the octet stream, however in this case functionality equivalent.
 
     var hello = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]);
+
+Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the `write()` method, providing an optional offset and encoding. As shown below we provide the offset of 2 bytes to our second call to `write()`, buffering "Hel", and then we continue on to write another two bytes with an offset of 3, completing "Hello".
+
+    var buf = new Buffer(5);
+    buf.write('He');
+    buf.write('l', 2);
+    buf.write('lo', 3);
+    console.log(buf.toString());
+    // => "Hello"
+
+The `.length` property of a buffer instance contains the byte length of the stream, compared to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
+
+    var ellipsis = new Buffer('…', 'utf8');
+
+    console.log('… string length: %d', '…'.length);
+    // => … string length: 1
+
+    console.log('… byte length: %d', ellipsis.length);
+    // => … byte length: 3
+    
+    console.log(ellipsis);
+    // => <Buffer e2 80 a6>
+
+When working with JavaScript strings, we can also pass a string through the `Buffer.byteLength()` method to determine it's byte length.
