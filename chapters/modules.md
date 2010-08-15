@@ -171,3 +171,42 @@ Outputs:
 
     body a {
 	  color: #eee;}
+
+## Registering Module Compilers
+
+Another cool feature that node provides us, is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript, and through the use of `require.registerExtension()` can do so in an automated fashion. 
+
+To illustrate it's usage, lets create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at _./compiler/example.ejs_, it's syntax will look like this:
+
+    ::min(a, b) a < b ? a : b
+    ::max(a, b) a > b ? a : b
+
+which will be compiled to:
+
+    exports.min = function min(a, b) { return a < b ? a : b }
+    exports.max = function max(a, b) { return a > b ? a : b }
+
+First lets create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at _./compiler/extended.js_, and exports a single method named `compile()`. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.
+
+
+    exports.compile = function(str){
+        return str
+            .replace(/(\w+)\(/g, '$1 = function $1(')
+            .replace(/\)(.+?)\n/g, '){ return $1 }\n')
+            .replace(/::/g, 'exports.');
+    };
+
+Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at _./compiler/extended.js_ so we are requiring it in, and passing the `compile()` method to `require.registerExtension()` which simply expects a function accepting a string, and returning a string of JavaScript.
+
+    require.registerExtension('.ejs', require('./compiler/extended').compile);
+
+Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.
+
+    var example = require('./compiler/example');
+    console.dir(example)
+    console.log(example.min(2, 3));
+    console.log(example.max(10, 8));
+
+    // => { min: [Function], max: [Function] }
+    // => 2
+    // => 10
