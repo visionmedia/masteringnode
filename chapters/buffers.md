@@ -50,3 +50,16 @@ The `.length` property of a buffer instance contains the byte length of the stre
     // => <Buffer e2 80 a6>
 
 When working with JavaScript strings, we can also pass a string through the `Buffer.byteLength()` method to determine it's byte length.
+
+The api is written in such a way that it is Array-like, so for example we can work with "slices" of a `Buffer` by passing offsets to the `slice()` method:
+
+    var chunk = buf.slice(4, 9);
+    console.log(chunk.toString());
+    // => "some"
+
+Alternatively when expecting a string we can pass offsets to `Buffer#toString()`:
+
+    var buf = new Buffer('just some data');
+    console.log(buf.toString('ascii', 4, 9));
+    // => "some"
+

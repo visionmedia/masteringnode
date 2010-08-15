@@ -24,3 +24,7 @@ buf.write('lo', 3);
 console.log(buf.toString());
 
 console.log(new Buffer('…', 'ascii').toString());
+
+var buf = new Buffer('just some data');
+console.log(buf.slice(4, 9).toString());
+console.log(buf.toString('ascii', 4, 9));
