@@ -10,10 +10,10 @@ MD = pages/index.md \
 	 chapters/modules.md \
 	 chapters/globals.md \
 	 chapters/events.md \
+	 chapters/buffers.md \
 	 chapters/streams.md \
 	 chapters/fs.md \
 	 chapters/tcp.md \
-	 chapters/buffers.md \
 	 chapters/http.md \
 	 chapters/connect.md \
 	 chapters/express.md \
