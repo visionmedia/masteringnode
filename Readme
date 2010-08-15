@@ -1,4 +1,9 @@
 
 Contents of this eBook reference the following software versions:
 
-  - node 0.1.104 
+  - node 0.1.104
+
+All example source can be run simply by executing node against the file,
+for example:
+
+    $ node src/events/basic.js
