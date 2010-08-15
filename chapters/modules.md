@@ -7,29 +7,44 @@ Although this is ideal, in practice modules are often not portable due to relyin
 
 ## Creating Modules
 
-Lets create a utility module named _utils_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly.
+Lets create a utility module named _utils_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. 
 
     var utils = {};
-	utils.merge = function(obj, other) {};
+	  utils.merge = function(obj, other) {};
 
-CommonJS modules remove this conflict by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
+Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly. CommonJS modules aid in removing this issue by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
 
     var module = { exports: {}};
-	(function(module, exports){
-	    exports.merge = function(){};
-	})(module, module.exports);
+	  (function(module, exports){
+	      function merge(){};
+	      exports.merge = merge;
+	  })(module, module.exports);
 
-First create the file _./utils.js_, and define the `merge()` function below.
+First create the file _./utils.js_, and define the `merge()` function as seen below. The implied anonymous wrapper function shown above allows us to seemingly define globals, however these are not accessible until exported. 
 
-	exports.merge = function(obj, other) {
-	    var keys = Object.keys(other);
-	    for (var i = 0, len = keys.length; i < len; ++i) {
-	        var key = keys[i];
-	        obj[key] = other[key];
-	    }
-	    return obj;
-	};
+	  function merge(obj, other) {
+	      var keys = Object.keys(other);
+	      for (var i = 0, len = keys.length; i < len; ++i) {
+	          var key = keys[i];
+	          obj[key] = other[key];
+	      }
+	      return obj;
+	  };
+	  
+	  exports.merge = merge;
 
+The typical pattern for public properties is to simply define them
+on the `exports` object like so:
+
+    exports.merge = function(obj, other) {
+        var keys = Object.keys(other);
+        for (var i = 0, len = keys.length; i < len; ++i) {
+            var key = keys[i];
+            obj[key] = other[key];
+        }
+        return obj;
+    };
+ 
 Next we will look at utilizing out new module in other libraries.
 
 ## Requiring Modules
