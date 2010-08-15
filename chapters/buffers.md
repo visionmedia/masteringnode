@@ -13,6 +13,16 @@ The simplest way to construct a `Buffer` from a string is to simply pass a strin
     console.log(hello.toString());
     // => "Hello"
 
+By default the encoding is "utf8", however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the '&' character when in "ascii" encoding.
+
+    var buf = new Buffer('…');
+    console.log(buf.toString());
+    // => …
+
+    var buf = new Buffer('…', 'ascii');
+    console.log(buf.toString());
+    // => &
+
 An alternative method is to pass an array of integers representing the octet stream, however in this case functionality equivalent.
 
     var hello = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]);

@@ -22,3 +22,5 @@ buf.write('he');
 buf.write('l', 2);
 buf.write('lo', 3);
 console.log(buf.toString());
+
+console.log(new Buffer('…', 'ascii').toString());
