@@ -3,16 +3,6 @@
   complete: false
   description: 
   length: 25
-  name: Fix math example ...
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
-  name: event loop / evented io chapter
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
   name: about the author
 - !ruby/object:Pomo::Task 
   complete: false
@@ -28,17 +18,7 @@
   complete: false
   description: 
   length: 25
-  name: highlighting
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
   name: connect section
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
-  name: deployment
 - !ruby/object:Pomo::Task 
   complete: false
   description: 
@@ -63,17 +43,7 @@
   complete: false
   description: 
   length: 25
-  name: nave?
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
   name: registering module compilers
-- !ruby/object:Pomo::Task 
-  complete: false
-  description: 
-  length: 25
-  name: node bin
 - !ruby/object:Pomo::Task 
   complete: false
   description: 
