@@ -15,15 +15,15 @@
 
 Required by `make book.pdf`:
 
-  $ brew install htmldoc
-  $ make book.pdf
+    $ brew install htmldoc
+    $ make book.pdf
 
 ## HTML
 
 Required by `make book.html`:
 
-  $ gem install ronn
-  $ make book.html
+    $ gem install ronn
+    $ make book.html
 
 ## References
 
@@ -36,4 +36,4 @@ Contents of this eBook currently reference the following software versions:
 All example source can be run simply by executing node against the file,
 for example:
 
-    $ node src/events/basic.js
+      $ node src/events/basic.js
