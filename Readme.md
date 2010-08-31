@@ -15,6 +15,7 @@ Required by `make book.html`:
 
 Output formats:
 
+  $ make
   $ make book.pdf
   $ make book.html
 

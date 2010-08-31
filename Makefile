@@ -23,11 +23,13 @@ MD = pages/index.md \
 
 HTML = $(MD:.md=.html)
 
+all: book.html book.pdf
+
 book.pdf: $(HTML)
 	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
 
-book.html: $(HTML)
-	cat $(HTML) > book.html
+book.html: pages/head.html pages/tail.html $(HTML)
+	cat pages/head.html $(HTML) pages/tail.html > book.html
 
 %.html: %.md
 	ronn --pipe --fragment $< \
