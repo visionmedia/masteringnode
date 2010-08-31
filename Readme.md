@@ -1,22 +1,28 @@
 
 # Mastering Node
 
- Mastering node is an open source eBook by node hackers for node hackers. I started this as a side project and realized that I don't have time :) so go nuts, download it, build it, extend it, fork it, and share it.
+ Mastering node is an open source eBook by node hackers for node hackers. I started this as a side project and realized that I don't have time :) so go nuts, download it, build it, fork it, extend it and share it.
 
 ## Formats
+
+ Mastering node is written using the markdown files provided in `./chapters`, which can then be converted to several output formats, currently including _pdf_, and of course _html_.
+
+## All Formats
+
+    $ make
+
+## PDF
 
 Required by `make book.pdf`:
 
   $ brew install htmldoc
+  $ make book.pdf
+
+## HTML
 
 Required by `make book.html`:
 
   $ gem install ronn
-
-Output formats:
-
-  $ make
-  $ make book.pdf
   $ make book.html
 
 ## References
