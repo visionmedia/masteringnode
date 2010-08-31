@@ -41,7 +41,6 @@ view: book.pdf
 
 clean:
 	rm -f book.*
-	rm -f pages/*.html
 	rm -f chapters/*.html
 
 .PHONY: view clean

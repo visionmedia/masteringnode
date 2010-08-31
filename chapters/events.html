@@ -1,0 +1,75 @@
+<div class='mp'>
+<h1>Events</h1>
+<p> Events are crucial to node, and used greatly throughout core and 3rd-party modules. Node's core library <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
+
+<h2 id="Emitting-Events">Emitting Events</h2>
+
+<p>Typically an object inherits from <em>EventEmitter</em>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
+
+<pre><code>var EventEmitter = require('events').EventEmitter;
+
+var emitter = new EventEmitter;
+
+emitter.on('name', function(first, last){
+    console.log(first + ', ' + last);
+});
+
+emitter.emit('name', 'tj', 'holowaychuk');
+emitter.emit('name', 'simon', 'holowaychuk');
+</code></pre>
+
+<h2 id="Inheriting-From-EventEmitter">Inheriting From EventEmitter</h2>
+
+<p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing it's api for our own means of world domination!</p>
+
+<p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>. Our <code>Dog</code> constructor accepts a <code>name</code>, followed by <code>EventEmitter.call(this)</code>, which invokes the <code>EventEmitter</code> function in context to the given argument. Doing this is essentially the same as a "super" or "parent" call in languages that support classes. This is a crucial step, as it allows <code>EventEmitter</code> to set up the <code>_events</code> property which it utilizes internally to manage callbacks.</p>
+
+<pre><code>var EventEmitter = require('events').EventEmitter;
+
+function Dog(name) {
+    this.name = name;
+    EventEmitter.call(this);
+}
+</code></pre>
+
+<p>Here we inherit from <code>EventEmitter</code>, so that we may use the methods provided such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, no worries! we will be touching on this later.</p>
+
+<pre><code>Dog.prototype.__proto__ = EventEmitter.prototype;
+</code></pre>
+
+<p>Now that we have our <code>Dog</code> set up, we can create .... simon! When simon barks we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback it-self is called in context to the object, aka <code>this</code>.</p>
+
+<pre><code>var simon = new Dog('simon');
+
+simon.on('bark', function(){
+    console.log(this.name + ' barked');
+});
+</code></pre>
+
+<p>Bark twice a second:</p>
+
+<pre><code>setInterval(function(){
+    simon.emit('bark');
+}, 500);
+</code></pre>
+
+<h2 id="Removing-Event-Listeners">Removing Event Listeners</h2>
+
+<p>As we have seen event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
+
+<pre><code>var EventEmitter = require('events').EventEmitter;
+
+var emitter = new EventEmitter;
+
+emitter.on('message', console.log);
+
+setInterval(function(){
+    emitter.emit('message', 'foo bar');
+}, 300);
+
+setTimeout(function(){
+    emitter.removeListener('message', console.log);
+}, 1000);
+</code></pre>
+
+</div>
