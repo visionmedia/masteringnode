@@ -5,7 +5,18 @@
 
 ## Formats
 
+Required by `make book.pdf`:
+
+  $ brew install htmldoc
+
+Required by `make book.html`:
+
+  $ gem install ronn
+
+Output formats:
+
   $ make book.pdf
+  $ make book.html
 
 ## References
 
