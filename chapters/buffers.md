@@ -1,7 +1,7 @@
 
 # Buffers
 
- To handle binary data, node provides us the `Buffer` object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to constructor a `Buffer` instance, and many ways you can manipulate it's data.
+ To handle binary data, node provides us with the global `Buffer` object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a `Buffer` instance, and many ways you can manipulate it's data.
  
 The simplest way to construct a `Buffer` from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.
 
