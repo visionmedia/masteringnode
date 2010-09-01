@@ -36,7 +36,7 @@ Buffers can also be created with an integer representing the number of bytes all
     console.log(buf.toString());
     // => "Hello"
 
-The `.length` property of a buffer instance contains the byte length of the stream, compared to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
+The `.length` property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
 
     var ellipsis = new Buffer('…', 'utf8');
 
@@ -49,9 +49,9 @@ The `.length` property of a buffer instance contains the byte length of the stre
     console.log(ellipsis);
     // => <Buffer e2 80 a6>
 
-When working with JavaScript strings, we can also pass a string through the `Buffer.byteLength()` method to determine it's byte length.
+When dealing with JavaScript strings, we may pass it to the `Buffer.byteLength()` method to determine it's byte length.
 
-The api is written in such a way that it is Array-like, so for example we can work with "slices" of a `Buffer` by passing offsets to the `slice()` method:
+The api is written in such a way that it is String-like, so for example we can work with "slices" of a `Buffer` by passing offsets to the `slice()` method:
 
     var chunk = buf.slice(4, 9);
     console.log(chunk.toString());
