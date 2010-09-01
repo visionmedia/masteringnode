@@ -36,6 +36,12 @@ book.html: pages/head.html pages/tail.html $(HTML)
 		| sed -E 's/<h1>([^ ]+) - /<h1>/' \
 		> $@
 
+book.mobi:
+	ebook-convert book.html book.mobi --output-profile kindle
+
+book.epub:
+	ebook-convert book.html book.epub
+
 view: book.pdf
 	open book.pdf
 

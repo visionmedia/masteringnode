@@ -25,6 +25,20 @@ Required by `make book.html`:
     $ gem install ronn
     $ make book.html
 
+## EPUB
+
+Required by `make book.epub`:
+Requires (Calibre)[http://calibre-ebook.com/]
+
+    $ make book.epub
+
+## MOBI
+
+Required by `make book.mobi`:
+Requires (Calibre)[http://calibre-ebook.com/]
+
+    $ make book.mobi
+
 ## References
 
 Contents of this eBook currently reference the following software versions:
