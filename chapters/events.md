@@ -1,7 +1,7 @@
 
 # Events
 
- Events are crucial to node, and used greatly throughout core and 3rd-party modules. Node's core library _events_ supplies us with a single constructor, _EventEmitter_.
+ The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module _events_ supplies us with a single constructor, _EventEmitter_.
 
 ## Emitting Events
 
