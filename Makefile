@@ -23,7 +23,7 @@ MD = pages/index.md \
 
 HTML = $(MD:.md=.html)
 
-all: book.html book.pdf
+all: book.html book.pdf book.mobi book.epub
 
 book.pdf: $(HTML)
 	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
