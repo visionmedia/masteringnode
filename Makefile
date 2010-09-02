@@ -23,7 +23,7 @@ MD = pages/index.md \
 
 HTML = $(MD:.md=.html)
 
-all: book.html book.pdf
+all: book.html book.pdf book.mobi book.epub
 
 book.pdf: $(HTML)
 	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
@@ -35,6 +35,12 @@ book.html: pages/head.html pages/tail.html $(HTML)
 	ronn --pipe --fragment $< \
 		| sed -E 's/<h1>([^ ]+) - /<h1>/' \
 		> $@
+
+book.mobi:
+	ebook-convert book.html book.mobi --output-profile kindle
+
+book.epub:
+	ebook-convert book.html book.epub
 
 view: book.pdf
 	open book.pdf

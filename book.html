@@ -523,7 +523,7 @@ setTimeout(function(){
 </div>
 <div class='mp'>
 <h1>Events</h1>
-<p> Events are crucial to node, and used greatly throughout core and 3rd-party modules. Node's core library <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
+<p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
 
 <h2 id="Emitting-Events">Emitting Events</h2>
 
@@ -598,7 +598,7 @@ setTimeout(function(){
 </div>
 <div class='mp'>
 <h1>Buffers</h1>
-<p> To handle binary data, node provides us the <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to constructor a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
+<p> To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
 
 <p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
@@ -637,7 +637,7 @@ console.log(buf.toString());
 // =&gt; "Hello"
 </code></pre>
 
-<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, compared to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
+<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
 
 <pre><code>var ellipsis = new Buffer('…', 'utf8');
 
@@ -651,9 +651,9 @@ console.log(ellipsis);
 // =&gt; &lt;Buffer e2 80 a6>
 </code></pre>
 
-<p>When working with JavaScript strings, we can also pass a string through the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
+<p>When dealing with JavaScript strings, we may pass it to the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
 
-<p>The api is written in such a way that it is Array-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
+<p>The api is written in such a way that it is String-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
 <pre><code>var chunk = buf.slice(4, 9);
 console.log(chunk.toString());
