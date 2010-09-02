@@ -26,9 +26,11 @@ HTML = $(MD:.md=.html)
 all: book.html book.pdf book.mobi book.epub
 
 book.pdf: $(HTML)
+	@echo "\n... generating $@"
 	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
 
 book.html: pages/head.html pages/tail.html $(HTML)
+	@echo "\n... generating $@"
 	cat pages/head.html $(HTML) pages/tail.html > book.html
 
 %.html: %.md
@@ -37,9 +39,11 @@ book.html: pages/head.html pages/tail.html $(HTML)
 		> $@
 
 book.mobi:
+	@echo "\n... generating $@"
 	ebook-convert book.html book.mobi --output-profile kindle
 
 book.epub:
+	@echo "\n... generating $@"
 	ebook-convert book.html book.epub
 
 view: book.pdf
