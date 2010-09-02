@@ -5,7 +5,7 @@
 
 ## Formats
 
- Mastering node is written using the markdown files provided in `./chapters`, which can then be converted to several output formats, currently including _pdf_, and of course _html_.
+ Mastering node is written using the markdown files provided in `./chapters`, which can then be converted to several output formats, currently including _pdf_, _mobi_, _epub_ and of course _html_.
 
 ## All Formats
 
