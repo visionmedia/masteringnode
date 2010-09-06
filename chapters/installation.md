@@ -1,7 +1,7 @@
 
 # Installing Node
 
-In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at [homebrew](http://github.com/mxcl/homebrew), [nDistro](http://github.com/visionmedia/ndistro), and the most flexible method of course, compiling from source.
+In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at [homebrew](http://github.com/mxcl/homebrew), [nDistro](http://github.com/visionmedia/ndistro), and the most flexible method, of course - compiling from source.
 
 ### Homebrew
 
@@ -34,7 +34,7 @@ Next we can place the contents of our example in _./.ndistro_, and execute _ndis
 
     $ ndistro
 
-Installation of the example took less than 17 seconds on my machine, and outputs the following _stdout_ indicating success, not bad for an entire stack!
+Installation of the example took less than 17 seconds on my machine, and outputs the following _stdout_ indicating success. Not bad for an entire stack!
 
 	... installing node-0.1.102-i386
 	... installing connect
