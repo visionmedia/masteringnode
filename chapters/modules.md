@@ -7,7 +7,7 @@ Although this is ideal, in practice modules are often not portable due to relyin
 
 ## Creating Modules
 
-Lets create a utility module named _utils_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. 
+Let's create a utility module named _utils_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. 
 
     var utils = {};
 	  utils.merge = function(obj, other) {};
@@ -174,9 +174,9 @@ Outputs:
 
 ## Registering Module Compilers
 
-Another cool feature that node provides us, is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript, and through the use of `require.registerExtension()` can do so in an automated fashion. 
+Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using `require.registerExtension()` we can have node compile CoffeeScript to JavaScript in an automated fashion. 
 
-To illustrate it's usage, lets create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at _./compiler/example.ejs_, it's syntax will look like this:
+To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at _./compiler/example.ejs_, its syntax will look like this:
 
     ::min(a, b) a < b ? a : b
     ::max(a, b) a > b ? a : b
@@ -186,7 +186,7 @@ which will be compiled to:
     exports.min = function min(a, b) { return a < b ? a : b }
     exports.max = function max(a, b) { return a > b ? a : b }
 
-First lets create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at _./compiler/extended.js_, and exports a single method named `compile()`. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.
+First let's create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at _./compiler/extended.js_, and exports a single method named `compile()`. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.
 
 
     exports.compile = function(str){
