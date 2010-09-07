@@ -22,12 +22,50 @@
         height: 113px;
         background: url(public/images/logo.png) 0 0 no-repeat;
       }
+      ul {
+        list-style: none;
+      }
+      a {
+        color: white;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
       #logo {
         margin: 250px auto 0 auto;
         width: 322px;
       }
       #logo span {
         color: white;
+      }
+      #formats {
+        margin: 15px 0 0 0;
+        padding: 0;
+      }
+      #formats li {
+        display: inline-block;
+      }
+      #formats a {
+        outline: none;
+        display: block;
+        margin: 0 1px;
+        padding: 5px 10px;
+        border-top: 1px solid rgba(255,255,255,0.4);
+        background: #3981c7;
+        background: -webkit-gradient(linear, left top, left bottom, from(#4399ec), to(#3981c7));
+        -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+      }
+      #formats a:hover {
+        text-decoration: none;
+        background: #255fac;
+        background: -webkit-gradient(linear, left top, left bottom, from(#4399ec), to(#255fac));
+      }
+      #formats a:active {
+        background: #4399ec;
+        background: -webkit-gradient(linear, left top, left bottom, from(#3981c7), to(#4399ec));
       }
       #footer {
         position: absolute;
@@ -55,6 +93,12 @@
       <h1><a href="http://github.com/visionmedia/masteringnode">Mastering Node eBook</a></h1>
       <span>Open Source Node eBook</span>
     </div>
+    <ul id="formats">
+      <li id="pdf"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.pdf">pdf</a></li>
+      <li id="html"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.html">html</a></li>
+      <li id="mobi"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.mobi">mobi</a></li>
+      <li id="epub"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.epub">epub</a></li>
+    </ul>
     <div id="footer">Created by <a href="http://github.com/visionmedia">TJ Holowaychuk</a></div>
   </body>
 </html>
