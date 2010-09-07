@@ -5,7 +5,7 @@
 
 ## console
 
-The `console` object contains several methods which are used to output information to _stdout_ or _stderr_. Lets take a look at what each method does.
+The `console` object contains several methods which are used to output information to _stdout_ or _stderr_. Let's take a look at what each method does.
 
 ### console.log()
 
@@ -162,7 +162,7 @@ The process itself is an `EventEmitter`, allowing you to do things like listen f
 
 ### errno
 
-The `process` object is host of the error numbers, these reference what you would find in C-land, for example `process.EPERM` represents a permission based error, while `process.ENOENT` represents a missing file or directory. Typically these are used within bindings to bridge the gap between c++ and JavaScript, however useful for handling exceptions as well:
+The `process` object is host of the error numbers, these reference what you would find in C-land, for example `process.EPERM` represents a permission based error, while `process.ENOENT` represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:
 
     if (err.errno === process.ENOENT) {
 		// Display a 404 "Not Found" page
