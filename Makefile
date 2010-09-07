@@ -25,6 +25,9 @@ HTML = $(MD:.md=.html)
 
 all: book.html book.pdf book.mobi book.epub
 
+regenerate: clean all
+	git commit -a -m 'Regenerated book' && echo done
+
 book.pdf: $(HTML)
 	@echo "\n... generating $@"
 	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
@@ -53,4 +56,4 @@ clean:
 	rm -f book.*
 	rm -f chapters/*.html
 
-.PHONY: view clean
+.PHONY: view clean regenerate

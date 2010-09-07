@@ -27,7 +27,7 @@
 </div>
 <div class='mp'>
 <h1>Installing Node</h1>
-<p>In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at <a href="http://github.com/mxcl/homebrew">homebrew</a>, <a href="http://github.com/visionmedia/ndistro">nDistro</a>, and the most flexible method of course, compiling from source.</p>
+<p>In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at <a href="http://github.com/mxcl/homebrew">homebrew</a>, <a href="http://github.com/visionmedia/ndistro">nDistro</a>, and the most flexible method, of course - compiling from source.</p>
 
 <h3 id="Homebrew">Homebrew</h3>
 
@@ -64,7 +64,7 @@ module visionmedia ejs
 <pre><code>$ ndistro
 </code></pre>
 
-<p>Installation of the example took less than 17 seconds on my machine, and outputs the following <em>stdout</em> indicating success, not bad for an entire stack!</p>
+<p>Installation of the example took less than 17 seconds on my machine, and outputs the following <em>stdout</em> indicating success. Not bad for an entire stack!</p>
 
 <pre><code>... installing node-0.1.102-i386
 ... installing connect
@@ -106,7 +106,7 @@ $ tar -zxf node.tar.gz
 
 <h2 id="Creating-Modules">Creating Modules</h2>
 
-<p>Lets create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable.</p>
+<p>Let's create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable.</p>
 
 <pre><code>var utils = {};
   utils.merge = function(obj, other) {};
@@ -297,9 +297,9 @@ require.async(sassUrl, function(err, sass){
 
 <h2 id="Registering-Module-Compilers">Registering Module Compilers</h2>
 
-<p>Another cool feature that node provides us, is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript, and through the use of <code>require.registerExtension()</code> can do so in an automated fashion.</p>
+<p>Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using <code>require.registerExtension()</code> we can have node compile CoffeeScript to JavaScript in an automated fashion.</p>
 
-<p>To illustrate it's usage, lets create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at <em>./compiler/example.ejs</em>, it's syntax will look like this:</p>
+<p>To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at <em>./compiler/example.ejs</em>, its syntax will look like this:</p>
 
 <pre><code>::min(a, b) a &lt; b ? a : b
 ::max(a, b) a &gt; b ? a : b
@@ -311,7 +311,7 @@ require.async(sassUrl, function(err, sass){
 exports.max = function max(a, b) { return a &gt; b ? a : b }
 </code></pre>
 
-<p>First lets create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
+<p>First let's create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
 
 <pre><code>exports.compile = function(str){
     return str
@@ -345,7 +345,7 @@ console.log(example.max(10, 8));
 
 <h2 id="console">console</h2>
 
-<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Lets take a look at what each method does.</p>
+<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does.</p>
 
 <h3 id="console-log-">console.log()</h3>
 
@@ -513,7 +513,7 @@ setTimeout(function(){
 
 <h3 id="errno">errno</h3>
 
-<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between c++ and JavaScript, however useful for handling exceptions as well:</p>
+<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
 
 <pre><code>if (err.errno === process.ENOENT) {
     // Display a 404 "Not Found" page
@@ -545,7 +545,7 @@ emitter.emit('name', 'simon', 'holowaychuk');
 
 <h2 id="Inheriting-From-EventEmitter">Inheriting From EventEmitter</h2>
 
-<p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing it's api for our own means of world domination!</p>
+<p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
 
 <p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>. Our <code>Dog</code> constructor accepts a <code>name</code>, followed by <code>EventEmitter.call(this)</code>, which invokes the <code>EventEmitter</code> function in context to the given argument. Doing this is essentially the same as a "super" or "parent" call in languages that support classes. This is a crucial step, as it allows <code>EventEmitter</code> to set up the <code>_events</code> property which it utilizes internally to manage callbacks.</p>
 

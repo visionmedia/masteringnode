@@ -4,7 +4,7 @@
 
 <h2 id="console">console</h2>
 
-<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Lets take a look at what each method does.</p>
+<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does.</p>
 
 <h3 id="console-log-">console.log()</h3>
 
@@ -172,7 +172,7 @@ setTimeout(function(){
 
 <h3 id="errno">errno</h3>
 
-<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between c++ and JavaScript, however useful for handling exceptions as well:</p>
+<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
 
 <pre><code>if (err.errno === process.ENOENT) {
     // Display a 404 "Not Found" page

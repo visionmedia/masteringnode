@@ -6,7 +6,7 @@
 
 <h2 id="Creating-Modules">Creating Modules</h2>
 
-<p>Lets create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable.</p>
+<p>Let's create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable.</p>
 
 <pre><code>var utils = {};
   utils.merge = function(obj, other) {};
@@ -197,9 +197,9 @@ require.async(sassUrl, function(err, sass){
 
 <h2 id="Registering-Module-Compilers">Registering Module Compilers</h2>
 
-<p>Another cool feature that node provides us, is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript, and through the use of <code>require.registerExtension()</code> can do so in an automated fashion.</p>
+<p>Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using <code>require.registerExtension()</code> we can have node compile CoffeeScript to JavaScript in an automated fashion.</p>
 
-<p>To illustrate it's usage, lets create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at <em>./compiler/example.ejs</em>, it's syntax will look like this:</p>
+<p>To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at <em>./compiler/example.ejs</em>, its syntax will look like this:</p>
 
 <pre><code>::min(a, b) a &lt; b ? a : b
 ::max(a, b) a &gt; b ? a : b
@@ -211,7 +211,7 @@ require.async(sassUrl, function(err, sass){
 exports.max = function max(a, b) { return a &gt; b ? a : b }
 </code></pre>
 
-<p>First lets create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
+<p>First let's create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
 
 <pre><code>exports.compile = function(str){
     return str
