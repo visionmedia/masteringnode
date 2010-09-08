@@ -51,7 +51,8 @@ book.epub:
 		--title "Mastering Node" \
 		--no-default-epub-cover \
 		--authors "TJ Holowaychuk" \
-		--language en
+		--language en \
+		--cover pages/cover.jpg
 
 view: book.pdf
 	open book.pdf
