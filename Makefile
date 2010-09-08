@@ -47,7 +47,11 @@ book.mobi:
 
 book.epub:
 	@echo "\n... generating $@"
-	ebook-convert book.html book.epub
+	ebook-convert book.html book.epub \
+		--title "Mastering Node" \
+		--no-default-epub-cover \
+		--authors "TJ Holowaychuk" \
+		--language en
 
 view: book.pdf
 	open book.pdf
