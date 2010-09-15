@@ -1,7 +1,11 @@
 
 # Mastering Node
 
- Mastering node is an open source eBook by node hackers for node hackers. I started this as a side project and realized that I don't have time :) so go nuts, download it, build it, fork it, extend it and share it.
+ Mastering node is an open source eBook by node hackers for node hackers. I started this as a side project and realized that I don't have time :) so go nuts, download it, build it, fork it, extend it and share it. If you come up with something you wish to contribute back, send me a pull request.
+
+## Authors
+
+ - TJ Holowaychuk ([visionmedia](http://github.com/visionmedia))
 
 ## Formats
 
