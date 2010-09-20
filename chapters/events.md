@@ -22,13 +22,12 @@ Typically an object inherits from _EventEmitter_, however our small example belo
 
 A perhaps more practical use of `EventEmitter`, and commonly used throughout node is to inherit from it. This means we can leave `EventEmitter`'s prototype untouched, while utilizing its api for our own means of world domination!
 
-To do so we begin by defining the `Dog` constructor, which of course will bark from time to time, also known as an _event_. Our `Dog` constructor accepts a `name`, followed by `EventEmitter.call(this)`, which invokes the `EventEmitter` function in context to the given argument. Doing this is essentially the same as a "super" or "parent" call in languages that support classes. This is a crucial step, as it allows `EventEmitter` to set up the `_events` property which it utilizes internally to manage callbacks.
+To do so we begin by defining the `Dog` constructor, which of course will bark from time to time, also known as an _event_.
 
 	var EventEmitter = require('events').EventEmitter;
 
 	function Dog(name) {
 	    this.name = name;
-	    EventEmitter.call(this);
 	}
 
 Here we inherit from `EventEmitter`, so that we may use the methods provided such as `EventEmitter#on()` and `EventEmitter#emit()`. If the `__proto__` property is throwing you off, no worries! we will be touching on this later.

@@ -7,7 +7,6 @@ var EventEmitter = require('events').EventEmitter;
 
 function Dog(name) {
     this.name = name;
-    EventEmitter.call(this);
 }
 
 Dog.prototype.__proto__ = EventEmitter.prototype;
