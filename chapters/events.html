@@ -22,13 +22,12 @@ emitter.emit('name', 'simon', 'holowaychuk');
 
 <p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
 
-<p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>. Our <code>Dog</code> constructor accepts a <code>name</code>, followed by <code>EventEmitter.call(this)</code>, which invokes the <code>EventEmitter</code> function in context to the given argument. Doing this is essentially the same as a "super" or "parent" call in languages that support classes. This is a crucial step, as it allows <code>EventEmitter</code> to set up the <code>_events</code> property which it utilizes internally to manage callbacks.</p>
+<p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>.</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
 function Dog(name) {
     this.name = name;
-    EventEmitter.call(this);
 }
 </code></pre>
 
