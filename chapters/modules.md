@@ -49,9 +49,7 @@ Next we will look at utilizing out new module in other libraries.
 
 ## Requiring Modules
 
-There are four main ways to require a module in node, first is the _synchronous_ method, which simply returns the module's exports, second is the _asynchronous_ method which accepts a callback, third is the _asynchronous http_ method which can load remote modules, and lastly is requiring of shared libraries or "node addons" which we will cover later.
-
-To get started create a second file named _./app.js_ with the code shown below. The first line `require('./utils')` fetches the contents of _./utils.js_ and returns the `exports` of which we later utilize our `merge()` method and display the results of our merged object using `console.dir()`.
+To get started with requiring modules, first create a second file named _./app.js_ with the code shown below. The first line `require('./utils')` fetches the contents of _./utils.js_ and returns the `exports` of which we later utilize our `merge()` method and display the results of our merged object using `console.dir()`.
 
 	var utils = require('./utils');
 
@@ -141,36 +139,6 @@ To obtain this string we would simply `require('./css')`. The `module` object al
   - `parent` the parent `Module` (which required this one) or `undefined`
   - `filename` absolute path to the module
   - `moduleCache` an object containing references to all cached modules
-
-## Asynchronous Require
-
-Node provides us with an asynchronous version of `require()`, aptly named `require.async()`. Below is the sample example previously shown for our _utils_ module, however non blocking. `require.async()` accepts a callback of which the first parameter `err` is `null` or an instanceof `Error`, and then the module exports. Passing the error (if there is one) as the first argument is an extremely common idiom in node for async routines.
-    
-    require.async('./utils', function(err, utils){
-        console.dir(utils.merge({ foo: 'bar' }, { bar: 'baz' }));
-    });
-
-## Requiring Over HTTP
-
-Asynchronous requires in node also have the added bonus of allowing module loading via **HTTP** and **HTTPS**.
-To require a module via http all we have to do is pass a valid url as shown in the _sass_ to _css_ compilation example below: 
-
-    
-	var sassUrl = 'http://github.com/visionmedia/sass.js/raw/master/lib/sass.js',
-	    sassStr = ''
-	        + 'body\n'
-	        + '  a\n'
-	        + '    :color #eee';
-
-	require.async(sassUrl, function(err, sass){
-	    var str = sass.render(sassStr);
-	    console.log(str);
-	});
-
-Outputs:
-
-    body a {
-	  color: #eee;}
 
 ## Registering Module Compilers
 
