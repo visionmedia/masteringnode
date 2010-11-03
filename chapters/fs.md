@@ -1,12 +1,9 @@
 
 # File System
 
- The 'fs' module is the library to work with the filesystem. The commands follows the unix operations to work with the filesystem. 
+ The 'fs' module is the library to work with the filesystem. The commands follows the UNIX operations to work with the filesystem. 
  Most methods support an asynchronous and synchronous method call. 
  
- //However using the synchronous call will cause the whole process to halt
- //and wait for this operation to complete. It is therefore to be used on in special cases. 
-
 ## Working with the filesystem
 
  A basic example of working with the filesystem using chainable callbacks:
@@ -27,10 +24,11 @@
       });
     });
   
-  When working with the asychronous methods, each call must be inside the previous method call as there is no gaurantee that the
-  previous call will complete before the next one. This could cause operations to happen in the wrong order. 
-
-  This can also be done using a synchronous approach:
+  When working with the asynchronous methods, the following operation on a file should be inside the callback of the previous operation.
+  This is because there is no guarantee that the operations will be completed in the order that they are created. This could lead to
+  unpredictable behavior.
+ 
+  The above example can also be done using a synchronous approach:
 
     fs.mkdirSync('./helloDirSync',0777);
     fs.writeFileSync('./helloDirSync/message.txt', 'Hello Node');
@@ -44,7 +42,8 @@
 ## File information
   
   The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we
-  are working with. In this example we are getting all the file objects in a directory and display whether they are a file or an object.
+  are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a
+  directory object.
 
     var fs = require('fs');
 
@@ -65,6 +64,33 @@
         });
       });
     });
+
+ 
+## Watching files
+
+  The fs.watchfile monitors a file and will fire the event whenever the file is changed.
+
+    var fs = require('fs');
+
+    fs.watchFile('./testFile.txt', function (curr, prev) {
+      console.log('the current mtime is: ' + curr.mtime);
+      console.log('the previous mtime was: ' + prev.mtime);
+    });
+
+    fs.writeFile('./testFile.txt', "changed", function (err) {
+      if (err) throw err;
+
+      console.log("file write complete");   
+    });
+
+  A file can also be unwatched using the fs.unwatchFile method call. This is used once watching of a file is no longer required.
+
+
+## Nodejs Docs
+
+  The node api [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands
+  possible from Nodejs.
+
 
   
 
