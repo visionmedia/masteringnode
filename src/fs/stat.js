@@ -11,13 +11,13 @@ fs.readdir('/etc/', function (err, files) {
         console.log("%s is file", file);
       }
       else if (stats.isDirectory ()) {
-         console.log("%s is a directory", file);
+        console.log("%s is a directory", file);
       }    
-        console.log('stats:  %s',JSON.stringify(stats));
-
-      });
+    console.log('stats:  %s',JSON.stringify(stats));
 
     });
+
   });
+});
 
 
