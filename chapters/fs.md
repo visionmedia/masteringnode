@@ -1,12 +1,11 @@
 
 # File System
 
- The 'fs' module is the library to work with the filesystem. The commands follows the UNIX operations to work with the filesystem. 
- Most methods support an asynchronous and synchronous method call. 
+ To work with the filesystem node provides us with the 'fs' module. The commands follows the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and which is the better option.
  
 ## Working with the filesystem
 
- A basic example of working with the filesystem using chainable callbacks:
+ Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:
     
     var fs = require('fs');
 
@@ -24,11 +23,9 @@
       });
     });
   
-  When working with the asynchronous methods, the following operation on a file should be inside the callback of the previous operation.
-  This is because there is no guarantee that the operations will be completed in the order that they are created. This could lead to
-  unpredictable behavior.
+  As can be seen from the example above, each callback is placed in the previous callback, this is what is refered to as chainable callbacks. When using asynchronous methods this pattern should be used, as there is no guarantee that the operations will be completed in the order that they are created. This could lead to unpredictable behavior.
  
-  The above example can also be done using a synchronous approach:
+  The example can be rewritten to use synchronous approach:
 
     fs.mkdirSync('./helloDirSync',0777);
     fs.writeFileSync('./helloDirSync/message.txt', 'Hello Node');
@@ -36,8 +33,7 @@
     console.log('file created with contents:');
     console.log(data);
 
-  It is advised to rather work using the asynchronous approach as the synchronous methods will cause the whole process to halt and wait
-  for the operation to complete, this will block any incoming connections and any other events.
+  It is better to use the asynchronous approach on servers with a high load, as the synchronous methods will cause the whole process to halt and wait for the operation to complete. This will block any incoming connections and other events.
 
 ## File information
   
@@ -86,10 +82,10 @@
   A file can also be unwatched using the fs.unwatchFile method call. This is used once watching of a file is no longer required.
 
 
-## Nodejs Docs
+## Nodejs Docs for further reading
 
   The node api [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands
-  possible from Nodejs.
+  possible when working with Nodejs.
 
 
   
