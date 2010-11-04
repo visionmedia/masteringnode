@@ -1,7 +1,7 @@
 
 # File System
 
- To work with the filesystem node provides us with the 'fs' module. The commands follows the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and which is the better option.
+ To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.
  
 ## Working with the filesystem
 
@@ -23,9 +23,9 @@
       });
     });
   
-  As can be seen from the example above, each callback is placed in the previous callback, this is what is refered to as chainable callbacks. When using asynchronous methods this pattern should be used, as there is no guarantee that the operations will be completed in the order that they are created. This could lead to unpredictable behavior.
+  As evident in the example above, each callback is placed in the previous callback - this is what is referred to as chainable callbacks. When using asynchronous methods this pattern should be used, as there is no guarantee that the operations will be completed in the order that they are created. This could lead to unpredictable behavior.
  
-  The example can be rewritten to use synchronous approach:
+  The example can be rewritten to use a synchronous approach:
 
     fs.mkdirSync('./helloDirSync',0777);
     fs.writeFileSync('./helloDirSync/message.txt', 'Hello Node');
@@ -79,13 +79,13 @@
       console.log("file write complete");   
     });
 
-  A file can also be unwatched using the fs.unwatchFile method call. This is used once watching of a file is no longer required.
+  A file can also be unwatched using the fs.unwatchFile method call. This is used once monitoring of a file is no longer required.
 
 
 ## Nodejs Docs for further reading
 
   The node api [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands
-  possible when working with Nodejs.
+  available when working with Nodejs.
 
 
   
