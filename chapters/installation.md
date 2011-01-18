@@ -24,7 +24,7 @@ several 3rd party modules.
 	module visionmedia jade
 	module visionmedia ejs
 
-Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain an deploy. nDistro uses [pre-compiled node binaries](http://github.com/visionmedia/nodes) making them extremely fast to install, and module tarballs which are fetched from [GitHub](http://github.com) via _wget_ or _curl_ (auto detected).
+Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain and deploy. nDistro uses [pre-compiled node binaries](http://github.com/visionmedia/nodes) making them extremely fast to install, and module tarballs which are fetched from [GitHub](http://github.com) via _wget_ or _curl_ (auto detected).
 
 To get started we first need to install nDistro itself, below we _cd_ to our bin directory of choice, _curl_ the shell script, and pipe the response to _sh_ which will install nDistro to the current directory:
 
@@ -59,6 +59,6 @@ For those without _git_, or who prefer not to use it, we can also download the s
     $ curl -# http://nodejs.org/dist/node-v0.1.99.tar.gz > node.tar.gz
     $ tar -zxf node.tar.gz
 
-Now that we have the source on our machine, we can run `./configure` which discovers which libraries are available for node to utilize such as _OpenSSL_ for transport security support, C and C++ compilers, etc. `make` which builds node, and finally `make install` which will install node.
+Now that we have the source on our machine, we can run `./configure` which discovers which libraries are available for node to use such as _OpenSSL_ for transport security support, C and C++ compilers, etc. `make` which builds node, and finally `make install` which will install node.
 
     $ ./configure && make && make install

@@ -1,7 +1,7 @@
 
 # Streams
 
- Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from _stdin_. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.
+ Streams are an important concept in node. The stream API is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from _stdin_. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the API.
  
 ## Readable Streams
 

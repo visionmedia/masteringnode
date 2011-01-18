@@ -3,7 +3,7 @@
 
 [CommonJS](http://commonjs.org) is a community driven effort to standardize packaging of JavaScript libraries, known as _modules_. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers. 
 
-Although this is ideal, in practice modules are often not portable due to relying on apis that are currently only provided by, or are tailored to node specifically. As the framework matures, and additional standards emerge our modules will become more portable.  
+Although this is ideal, in practice modules are often not portable due to relying on APIs that are currently only provided by, or are tailored to node specifically. As the framework matures, and additional standards emerge our modules will become more portable.  
 
 ## Creating Modules
 
@@ -45,7 +45,7 @@ on the `exports` object like so:
         return obj;
     };
  
-Next we will look at utilizing out new module in other libraries.
+Next we will look at using our new module in other libraries.
 
 ## Requiring Modules
 
@@ -77,7 +77,7 @@ This technique is usually only helpful when your module has one aspect that it w
 
     exports.Animal = function Animal(){};
 
-which can then be utilized as shown:
+which can then be used as shown:
 
     var Animal = require('./animal').Animal;
 
@@ -91,7 +91,7 @@ which can now be used without the property:
 
 ## Require Paths
 
-We talked about `require.paths`, the `Array` utilized by node's module system in order to discover modules. By default node checks the following directories for modules:
+We talked about `require.paths`, the `Array` used by node's module system in order to discover modules. By default node checks the following directories for modules:
 
   - `<node binary>`/../../lib/node
   - **$HOME**/.node_libraries

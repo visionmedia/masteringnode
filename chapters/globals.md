@@ -1,7 +1,7 @@
 
 # Globals
 
- As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the `process` global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a `console` object.
+ As we have learnt node's module system discourages the use of globals, however node provides a few important globals for us to use. The first and most important is the `process` global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a `console` object.
 
 ## console
 
@@ -9,7 +9,7 @@ The `console` object contains several methods which are used to output informati
 
 ### console.log()
 
-The most frequently used console method is `console.log()` simply writing to _stdout_ with a line feed (`\n`). Currently aliased as `console.info()`.
+The most frequently used console method is `console.log()` which simply writes to _stdout_ with a line feed (`\n`). Currently aliased as `console.info()`.
 
     console.log('wahoo');
 	// => wahoo
@@ -19,13 +19,13 @@ The most frequently used console method is `console.log()` simply writing to _st
 
 ### console.error()
 
-Identical to `console.log()`, however writes to _stderr_. Aliased as `console.warn()` as well.
+Identical to `console.log()`, however it writes to _stderr_. Aliased as `console.warn()` as well.
 
     console.error('database connection failed');
 
 ### console.dir()
 
-Utilizes the _sys_ module's `inspect()` method to pretty-print the object to
+Uses the _sys_ module's `inspect()` method to pretty-print the object to
 _stdout_.
 
     console.dir({ foo: 'bar' });
@@ -39,7 +39,7 @@ Asserts that the given expression is truthy, or throws an exception.
 
 ## process
 
-The `process` object is plastered with goodies, first we will take a look
+The `process` object is plastered with goodies. First we will take a look
 at some properties that provide information about the node process itself.
 
 ### process.version

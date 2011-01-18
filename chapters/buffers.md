@@ -13,7 +13,7 @@ The simplest way to construct a `Buffer` from a string is to simply pass a strin
     console.log(hello.toString());
     // => "Hello"
 
-By default the encoding is "utf8", however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the '&' character when in "ascii" encoding.
+By default the encoding is "utf8", however this can be specified by passing a string as the second argument. The ellipsis below for example will be printed to stdout as the '&' character when in "ascii" encoding.
 
     var buf = new Buffer('…');
     console.log(buf.toString());
@@ -23,7 +23,7 @@ By default the encoding is "utf8", however this can be specified by passing as s
     console.log(buf.toString());
     // => &
 
-An alternative method is to pass an array of integers representing the octet stream, however in this case functionality equivalent.
+An alternative method is to pass an array of integers representing the octet stream. The case below is functionally equivalent.
 
     var hello = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]);
 
@@ -36,7 +36,7 @@ Buffers can also be created with an integer representing the number of bytes all
     console.log(buf.toString());
     // => "Hello"
 
-The `.length` property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
+The `.length` property of a buffer instance contains the byte length of the stream, as opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
 
     var ellipsis = new Buffer('…', 'utf8');
 
@@ -51,7 +51,7 @@ The `.length` property of a buffer instance contains the byte length of the stre
 
 When dealing with JavaScript strings, we may pass it to the `Buffer.byteLength()` method to determine it's byte length.
 
-The api is written in such a way that it is String-like, so for example we can work with "slices" of a `Buffer` by passing offsets to the `slice()` method:
+The API is written in such a way that it is String-like, so for example we can work with "slices" of a `Buffer` by passing offsets to the `slice()` method:
 
     var chunk = buf.slice(4, 9);
     console.log(chunk.toString());

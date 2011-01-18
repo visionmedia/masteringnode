@@ -84,7 +84,7 @@
 
 ## Nodejs Docs for further reading
 
-  The node api [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands
+  The node API [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands
   available when working with Nodejs.
 
 
