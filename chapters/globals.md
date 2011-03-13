@@ -1,41 +1,61 @@
 
 # Globals
 
- As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the `process` global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a `console` object.
+ As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the `process` global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the `console` object, provide JavaScript functionality common in most browsers.
 
 ## console
 
-The `console` object contains several methods which are used to output information to _stdout_ or _stderr_. Let's take a look at what each method does.
+The `console` object contains several methods which are used to output information to _stdout_ or _stderr_. 
+
+	> console
+	{ log: [Function],
+	  info: [Function],
+	  warn: [Function],
+	  error: [Function],
+	  dir: [Function],
+	  time: [Function],
+	  timeEnd: [Function],
+	  trace: [Function],
+	  assert: [Function] }
+
+
+Let's take a look at what each method does.
 
 ### console.log()
 
 The most frequently used console method is `console.log()` simply writing to _stdout_ with a line feed (`\n`). Currently aliased as `console.info()`.
 
-    console.log('wahoo');
+	> console.log('wahoo');
 	// => wahoo
 
-    console.log({ foo: 'bar' });
-	// => [object Object]
+	> console.log({ foo: 'bar' });
+	// => { foo: 'bar' }
 
 ### console.error()
 
 Identical to `console.log()`, however writes to _stderr_. Aliased as `console.warn()` as well.
 
-    console.error('database connection failed');
+	console.error('database connection failed');
 
 ### console.dir()
 
 Utilizes the _sys_ module's `inspect()` method to pretty-print the object to
 _stdout_.
 
-    console.dir({ foo: 'bar' });
-    // => { foo: 'bar' } 
+	console.dir({ foo: 'bar' });
+	// => { foo: 'bar' } 
 
 ### console.assert()
 
-Asserts that the given expression is truthy, or throws an exception.
+Asserts that the given expression is truthy, or throws an exception.  Here, you can also use `console.trace()` and `console.error()` to print a stack trace and a helpful message when the exception is caught.
 
-    console.assert(connected, 'Database connection failed');
+	try {
+	   console.assert( (1 != 2), '1 != 2: Should be true' );
+	   console.assert( (1 == 2), '1 == 2: Should be false');
+	} catch(e) {
+	   console.error('Caught error ' + e);
+	   console.trace();
+	}
 
 ## process
 
