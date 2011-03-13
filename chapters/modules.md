@@ -58,7 +58,7 @@ To get started with requiring modules, first create a second file named _./app.j
 	utils.merge(a, b);
 	console.dir(a);
 
-Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if _~/.node_libraries_/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
+Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if _~/.node_libraries/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
 
 Node also supports the concept of _index_ JavaScript files. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
 
@@ -67,7 +67,7 @@ Node also supports the concept of _index_ JavaScript files. To illustrate this e
 	    sub: require('./sub')
 	};
 	
-The contents of _./math/add.js_ show us a new technique, here we use `module.exports` instead of `exports`. Previously mentioned was the fact that `exports` is not the only object exposed to the module file when evaluated, we also have access to `__dirname`, `__filename`, and `module` which represents the current module. Here we simply define the module export object to a new object, which happens to be a function. 
+The contents of _./math/add.js_ show us a new technique; here we use `module.exports` instead of `exports`.  As previously mentioned, `exports` is not the only object exposed to the module file when evaluated. We also have access to `__dirname`, `__filename`, and `module` which represents the current module. We simply define the module export object to a new object, which happens to be a function. 
 
 	module.exports = function add(a, b){
 	    return a + b;
@@ -91,7 +91,7 @@ which can now be used without the property:
 
 ## Require Paths
 
-We talked about `require.paths`, the `Array` utilized by node's module system in order to discover modules. By default node checks the following directories for modules:
+We talked about `require.paths`, the `Array` utilized by node's module system in order to discover modules. By default, node checks the following directories for modules:
 
   - `<node binary>`/../../lib/node
   - **$HOME**/.node_libraries
@@ -120,6 +120,20 @@ As mentioned above, modules have several pseudo globals available to them, these
   - `exports` the current module's exported properties
   - `__filename` absolute path to the current module's file
   - `__dirname` absolute path to the current module's directory
+
+To examine the functionality of `require`, `module`, and `exports`, open a node console by running the command `node`.  You should then enter a node prompt as seen below:
+
+    $ node
+    > 
+
+To view these objects, enter the following commands into node:
+
+    > require
+    > module
+    > module.exports
+    > module.filename
+
+If you'd like to examine other objects, the node console supports the well-known `<TAB>``<TAB>` auto-completion. 
 
 ### require()
 
