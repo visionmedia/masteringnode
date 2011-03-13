@@ -50,7 +50,7 @@ Bark twice a second:
 
 ## Removing Event Listeners
 
-As we have seen event listeners are simply functions which are called when we `emit()` an event. Although not seen often we can remove these listeners by calling the `removeListener(type, callback)` method. In the example below we emit the _message_ "foo bar" every `300` milliseconds, which has the callback of `console.log()`. After 1000 milliseconds we call `removeListener()` with the same arguments that we passed to `on()` originally. To compliment this method is `removeAllListeners(type)` which removes all listeners associated to the given _type_.
+As we have seen, event listeners are simply functions which are called when we `emit()` an event. Although not seen often we can remove these listeners by calling the `removeListener(type, callback)` method. In the example below we emit the _message_ "foo bar" every `300` milliseconds, which has the callback of `console.log()`. After 1000 milliseconds we call `removeListener()` with the same arguments that we passed to `on()` originally. To compliment this method is `removeAllListeners(type)` which removes all listeners associated to the given _type_.
 
 	var EventEmitter = require('events').EventEmitter;
 
