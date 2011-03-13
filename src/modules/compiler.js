@@ -1,5 +1,12 @@
-
-require.registerExtension('.ejs', require('./compiler/extended').compile);
+if(require.extensions) {
+  require.extensions['.ejs'] = function(module,filename){
+    var content = require('fs').readFileSync(filename, 'utf8');
+    var newContent = require('./compiler/extended').compile(content);
+    module._compile(newContent, filename);
+  };
+} else {
+  require.registerExtension('.ejs', require('./compiler/extended').compile);
+}
 
 var example = require('./compiler/example');
 
