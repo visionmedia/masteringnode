@@ -164,9 +164,22 @@ First let's create the module that will actually be doing the ejs to JavaScript 
             .replace(/::/g, 'exports.');
     };
 
-Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at _./compiler/extended.js_ so we are requiring it in, and passing the `compile()` method to `require.registerExtension()` which simply expects a function accepting a string, and returning a string of JavaScript.
+Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at _./compiler/extended.js_ so we are requiring it in.  Prior to node.js 0.3.0, we would pass the `compile()` method to `require.registerExtension()` which simply expects a function accepting a string, and returning a string of JavaScript.
 
     require.registerExtension('.ejs', require('./compiler/extended').compile);
+
+The new way to register an extension is to add a key to the require.extensions object with a function which specifies how to process the file.  For compatibility, we can use `require.extensions` and fallback to `require.registerExtension`.
+
+    if(require.extensions) {
+      require.extensions['.ejs'] = function(module,filename){
+        var content = require('fs').readFileSync(filename, 'utf8');
+        var newContent = require('./compiler/extended').compile(content);
+        module._compile(newContent, filename);
+      };
+    } else {
+      require.registerExtension('.ejs', require('./compiler/extended').compile);
+    }
+
 
 Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.
 
@@ -178,3 +191,6 @@ Now when we require our example, the ".ejs" extension is detected, and will pass
     // => { min: [Function], max: [Function] }
     // => 2
     // => 10
+
+Run the above script in a terminal with `node ./src/modules/compile.js`
+
