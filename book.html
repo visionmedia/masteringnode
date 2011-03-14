@@ -31,12 +31,21 @@
 
 <h3 id="Homebrew">Homebrew</h3>
 
-<p>Homebrew is a package management system for <em>OSX</em> written in Ruby, is extremely well adopted, and easy to use. To install node via the <code>brew</code> executable simply run:</p>
+<p>Homebrew is a package management system for <em>OSX</em> written in Ruby, is extremely well adopted, and easy to use.  Homebrew can be installed in a number of ways.  Possibly the easiest way is to perform a quick install to <code>/usr/local/</code>:</p>
+
+<pre><code>$ ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"
+</code></pre>
+
+<p>Next, to install node via the <code>brew</code> executable, simply run:</p>
 
 <pre><code>$ brew install node.js
 </code></pre>
 
+<p>For more information on packages and commands available to homebrew, checkout the README at github.</p>
+
 <h2 id="nDistro">nDistro</h2>
+
+<p><em>NOTE: nDistro uses pre-compiled node binaries. To use the most recent node.js release, skip to compiling by source.</em></p>
 
 <p><a href="http://github.com/visionmedia/ndistro">nDistro</a> is a distribution toolkit for node, which allows creation and installation of node distros within seconds. An <em>nDistro</em> is simply a dotfile named <em>.ndistro</em> which defines
  module and node binary version dependencies. In the example
@@ -52,7 +61,7 @@ module visionmedia jade
 module visionmedia ejs
 </code></pre>
 
-<p>Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain an deploy. nDistro uses <a href="http://github.com/visionmedia/nodes">pre-compiled node binaries</a> making them extremely fast to install, and module tarballs which are fetched from <a href="http://github.com">GitHub</a> via <em>wget</em> or <em>curl</em> (auto detected).</p>
+<p>Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain and deploy. nDistro uses <a href="http://github.com/visionmedia/nodes">pre-compiled node binaries</a> making them extremely fast to install, and module tarballs which are fetched from <a href="http://github.com">GitHub</a> via <em>wget</em> or <em>curl</em> (auto detected).</p>
 
 <p>To get started we first need to install nDistro itself, below we <em>cd</em> to our bin directory of choice, <em>curl</em> the shell script, and pipe the response to <em>sh</em> which will install nDistro to the current directory:</p>
 
@@ -88,13 +97,23 @@ via <code>git</code>, if you have git installed you can execute:</p>
 
 <p>For those without <em>git</em>, or who prefer not to use it, we can also download the source via <em>curl</em>, <em>wget</em>, or similar:</p>
 
-<pre><code>$ curl -# http://nodejs.org/dist/node-v0.1.99.tar.gz &gt; node.tar.gz
+<pre><code>$ curl -# http://nodejs.org/dist/node-v0.4.2.tar.gz &gt; node.tar.gz
 $ tar -zxf node.tar.gz
 </code></pre>
 
 <p>Now that we have the source on our machine, we can run <code>./configure</code> which discovers which libraries are available for node to utilize such as <em>OpenSSL</em> for transport security support, C and C++ compilers, etc. <code>make</code> which builds node, and finally <code>make install</code> which will install node.</p>
 
-<pre><code>$ ./configure &amp;&amp; make &amp;&amp; make install
+<pre><code>$ ./configure &amp;&amp; make &amp;&amp; sudo make install
+</code></pre>
+
+<h2 id="Installing-from-Distribution-Sources">Installing from Distribution Sources</h2>
+
+<p>Installing node.js from a distribution's repositories is not highly recommended.  This is because the version included with your distribution may be very outdated.  As an example, the original version of this document was written to target node.js 0.1.99.  In Ubuntu 10.10, the version of node.js included in the official repository is 0.1.97-1build1.  Because node.js is a relatively young project with a large community, changes to the API occur quickly and often.</p>
+
+<p>If you still wish to install nodejs from an official repository, it can be done in the usual way:</p>
+
+<pre><code>$ sudo apt-get install nodejs
+$ yum install nodejs
 </code></pre>
 
 </div>
@@ -162,7 +181,7 @@ utils.merge(a, b);
 console.dir(a);
 </code></pre>
 
-<p>Core modules such as the <em>sys</em> which are bundled with node can be required without a path, such as <code>require('sys')</code>, however 3rd-party modules will iterate the <code>require.paths</code> array in search of a module matching the given path. By default <code>require.paths</code> includes <em>~/.node_libraries</em>, so if <em>~/.node_libraries</em>/utils.js_ exists we may simply <code>require('utils')</code>, instead of our relative example <code>require('./utils')</code> shown above.</p>
+<p>Core modules such as the <em>sys</em> which are bundled with node can be required without a path, such as <code>require('sys')</code>, however 3rd-party modules will iterate the <code>require.paths</code> array in search of a module matching the given path. By default <code>require.paths</code> includes <em>~/.node_libraries</em>, so if <em>~/.node_libraries/utils.js</em> exists we may simply <code>require('utils')</code>, instead of our relative example <code>require('./utils')</code> shown above.</p>
 
 <p>Node also supports the concept of <em>index</em> JavaScript files. To illustrate this example lets create a <em>math</em> module that will provide the <code>math.add()</code>, and <code>math.sub()</code> methods. For organizational purposes we will keep each method in their respective <em>./math/add.js</em> and <em>./math/sub.js</em> files. So where does <em>index.js</em> come into play? we can populate <em>./math/index.js</em> with the code shown below, which is used when <code>require('./math')</code> is invoked, which is conceptually identical to invoking <code>require('./math/index')</code>.</p>
 
@@ -172,7 +191,7 @@ console.dir(a);
 };
 </code></pre>
 
-<p>The contents of <em>./math/add.js</em> show us a new technique, here we use <code>module.exports</code> instead of <code>exports</code>. Previously mentioned was the fact that <code>exports</code> is not the only object exposed to the module file when evaluated, we also have access to <code>__dirname</code>, <code>__filename</code>, and <code>module</code> which represents the current module. Here we simply define the module export object to a new object, which happens to be a function.</p>
+<p>The contents of <em>./math/add.js</em> show us a new technique; here we use <code>module.exports</code> instead of <code>exports</code>.  As previously mentioned, <code>exports</code> is not the only object exposed to the module file when evaluated. We also have access to <code>__dirname</code>, <code>__filename</code>, and <code>module</code> which represents the current module. We simply define the module export object to a new object, which happens to be a function.</p>
 
 <pre><code>module.exports = function add(a, b){
     return a + b;
@@ -201,7 +220,7 @@ console.dir(a);
 
 <h2 id="Require-Paths">Require Paths</h2>
 
-<p>We talked about <code>require.paths</code>, the <code>Array</code> utilized by node's module system in order to discover modules. By default node checks the following directories for modules:</p>
+<p>We talked about <code>require.paths</code>, the <code>Array</code> utilized by node's module system in order to discover modules. By default, node checks the following directories for modules:</p>
 
 <ul>
 <li><code>&lt;node binary></code>/../../lib/node</li>
@@ -237,6 +256,22 @@ console.log(sub(1,2));
 <li><code>__dirname</code> absolute path to the current module's directory</li>
 </ul>
 
+
+<p>To examine the functionality of <code>require</code>, <code>module</code>, and <code>exports</code>, open a node console by running the command <code>node</code>.  You should then enter a node prompt as seen below:</p>
+
+<pre><code>$ node
+&gt; 
+</code></pre>
+
+<p>To view these objects, enter the following commands into node:</p>
+
+<pre><code>&gt; require
+&gt; module
+&gt; module.exports
+&gt; module.filename
+</code></pre>
+
+<p>If you'd like to examine other objects, the node console supports the well-known <code>&lt;TAB>``&lt;TAB></code> auto-completion.</p>
 
 <h3 id="require-">require()</h3>
 
@@ -287,9 +322,22 @@ exports.max = function max(a, b) { return a &gt; b ? a : b }
 };
 </code></pre>
 
-<p>Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at <em>./compiler/extended.js</em> so we are requiring it in, and passing the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
+<p>Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at <em>./compiler/extended.js</em> so we are requiring it in.  Prior to node.js 0.3.0, we would pass the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
 
 <pre><code>require.registerExtension('.ejs', require('./compiler/extended').compile);
+</code></pre>
+
+<p>The new way to register an extension is to add a key to the require.extensions object with a function which specifies how to process the file.  For compatibility, we can use <code>require.extensions</code> and fallback to <code>require.registerExtension</code>.</p>
+
+<pre><code>if(require.extensions) {
+  require.extensions['.ejs'] = function(module,filename){
+    var content = require('fs').readFileSync(filename, 'utf8');
+    var newContent = require('./compiler/extended').compile(content);
+    module._compile(newContent, filename);
+  };
+} else {
+  require.registerExtension('.ejs', require('./compiler/extended').compile);
+}
 </code></pre>
 
 <p>Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.</p>
@@ -304,24 +352,40 @@ console.log(example.max(10, 8));
 // =&gt; 10
 </code></pre>
 
+<p>Run the above script in a terminal with <code>node ./src/modules/compile.js</code></p>
+
 </div>
 <div class='mp'>
 <h1>Globals</h1>
-<p> As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the <code>process</code> global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a <code>console</code> object.</p>
+<p> As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
 
 <h2 id="console">console</h2>
 
-<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does.</p>
+<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>.</p>
+
+<pre><code>&gt; console
+{ log: [Function],
+  info: [Function],
+  warn: [Function],
+  error: [Function],
+  dir: [Function],
+  time: [Function],
+  timeEnd: [Function],
+  trace: [Function],
+  assert: [Function] }
+</code></pre>
+
+<p>Let's take a look at what each method does.</p>
 
 <h3 id="console-log-">console.log()</h3>
 
 <p>The most frequently used console method is <code>console.log()</code> simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
-<pre><code>console.log('wahoo');
+<pre><code>&gt; console.log('wahoo');
 // =&gt; wahoo
 
-console.log({ foo: 'bar' });
-// =&gt; [object Object]
+&gt; console.log({ foo: 'bar' });
+// =&gt; { foo: 'bar' }
 </code></pre>
 
 <h3 id="console-error-">console.error()</h3>
@@ -342,23 +406,37 @@ console.log({ foo: 'bar' });
 
 <h3 id="console-assert-">console.assert()</h3>
 
-<p>Asserts that the given expression is truthy, or throws an exception.</p>
+<p>Asserts that the given expression is truthy, or throws an exception.  Here, you can also use <code>console.trace()</code> and <code>console.error()</code> to print a stack trace and a helpful message when the exception is caught.</p>
 
-<pre><code>console.assert(connected, 'Database connection failed');
+<pre><code>try {
+   console.assert( (1 != 2), '1 != 2: Should be true' );
+   console.assert( (1 == 2), '1 == 2: Should be false');
+} catch(e) {
+   console.error('Caught error ' + e);
+   console.trace();
+}
 </code></pre>
 
 <h2 id="process">process</h2>
 
-<p>The <code>process</code> object is plastered with goodies, first we will take a look
+<p>The <code>process</code> object is plastered with goodies. In a node console, type <code>process</code> and look at what it has to offer. First we will take a look
 at some properties that provide information about the node process itself.</p>
 
-<h3 id="process-version">process.version</h3>
+<h3 id="process-version-s-">process.version(s)</h3>
 
-<p>The version property contains the node version string, for example "v0.1.103".</p>
+<p>The <code>process.version</code> property contains the node version string, for example "v0.4.0".  The <code>process.versions</code> object displays the versions of node, v8, ares, ev, and openssl:</p>
+
+<pre><code>&gt; process.versions
+{ node: '0.4.0',
+  v8: '3.1.2',
+  ares: '1.7.4',
+  ev: '4.3',
+  openssl: '0.9.8o' }
+</code></pre>
 
 <h3 id="process-installPrefix">process.installPrefix</h3>
 
-<p>Exposes the installation prefix, in my case "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
+<p>Exposes the installation prefix, which defaults to "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process-execPath">process.execPath</h3>
 
@@ -366,7 +444,7 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process-platform">process.platform</h3>
 
-<p>Exposes a string indicating the platform you are running on, for example "darwin".</p>
+<p>Exposes a string indicating the platform you are running on, for example "darwin" or "linux".</p>
 
 <h3 id="process-pid">process.pid</h3>
 
@@ -376,16 +454,18 @@ at some properties that provide information about the node process itself.</p>
 
 <p>Returns the current working directory, for example:</p>
 
-<pre><code>cd ~ &amp;&amp; node
-node&gt; process.cwd()
-"/Users/tj"
+<pre><code>cd /var &amp;&amp; node
+&gt; process.cwd()
+'/var'
 </code></pre>
 
 <h3 id="process-chdir-">process.chdir()</h3>
 
 <p>Changes the current working directory to the path passed.</p>
 
-<pre><code>process.chdir('/foo');
+<pre><code>&gt; process.chdir('lib')
+&gt; process.cwd()
+'/var/lib'
 </code></pre>
 
 <h3 id="process-getuid-">process.getuid()</h3>
@@ -394,7 +474,7 @@ node&gt; process.cwd()
 
 <h3 id="process-setuid-">process.setuid()</h3>
 
-<p>Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both <code>process.setuid(501)</code>, and <code>process.setuid('tj')</code> are valid.</p>
+<p>Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both <code>process.setuid(501)</code>, and <code>process.setuid('tj')</code> are valid, where 501 is TJ's <em>uid</em>.</p>
 
 <h3 id="process-getgid-">process.getgid()</h3>
 
@@ -423,7 +503,7 @@ node&gt; process.cwd()
 
 <h3 id="process-argv">process.argv</h3>
 
-<p>When executing a file with the <code>node</code> executable <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
+<p>When executing a file with the <code>node</code> executable, <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
 
 <p>For example our source file <em>./src/process/misc.js</em> can be executed by running:</p>
 
@@ -448,7 +528,8 @@ node&gt; process.cwd()
 
 <p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
 
-<pre><code>process.on('uncaughtException', function(err){
+<pre><code>/* ./src/process/exceptions.js */
+process.on('uncaughtException', function(err){
     console.log('got an error: %s', err.message);
     process.exit(1);
 });
@@ -462,7 +543,8 @@ setTimeout(function(){
 
 <p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
 
-<pre><code>process.on('SIGTERM', function(){
+<pre><code>/* ./src/process/kill.js */
+process.on('SIGTERM', function(){
     console.log('terminating');
     process.exit(1);
 });
@@ -478,6 +560,8 @@ setTimeout(function(){
 </code></pre>
 
 <h3 id="errno">errno</h3>
+
+<p><em>*TODO: Does process still support these error constants?</em></p>
 
 <p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
 
@@ -545,7 +629,7 @@ simon.on('bark', function(){
 
 <h2 id="Removing-Event-Listeners">Removing Event Listeners</h2>
 
-<p>As we have seen event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
+<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
@@ -569,70 +653,100 @@ setTimeout(function(){
 
 <p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
-<pre><code>var hello = new Buffer('Hello');
+<pre><code>&gt; var hello = new Buffer('Hello');
 
-console.log(hello);
-// =&gt; &lt;Buffer 48 65 6c 6c 6f>
+&gt; console.log(hello);
+&lt;Buffer 48 65 6c 6c 6f>
 
-console.log(hello.toString());
-// =&gt; "Hello"
+&gt; console.log(hello.toString());
+'Hello'
 </code></pre>
 
 <p>By default the encoding is "utf8", however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the '&amp;' character when in "ascii" encoding.</p>
 
-<pre><code>var buf = new Buffer('…');
-console.log(buf.toString());
-// =&gt; …
+<pre><code>&gt; var buf = new Buffer('…');
+&gt; console.log(buf.toString());
+'…'
 
-var buf = new Buffer('…', 'ascii');
-console.log(buf.toString());
-// =&gt; &amp;
+&gt; var buf = new Buffer('…', 'ascii');
+&gt; console.log(buf.toString());
+'&amp;'
 </code></pre>
 
-<p>An alternative method is to pass an array of integers representing the octet stream, however in this case functionality equivalent.</p>
+<p>An alternative method is to pass an array of integers representing the octet stream.</p>
 
-<pre><code>var hello = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]);
+<pre><code>&gt; var h = [0x48, 0x65, 0x6c, 0x6c, 0x6f];
+&gt; h
+[ 72, 101, 108, 108, 111 ]
+
+&gt; h.toString();
+'72,101,108,108,111'
+
+&gt; var hello = new Buffer(h);
+&lt;Buffer 48 65 6c 6c 6f>
+
+&gt; hello.toString();
+'Hello'
 </code></pre>
 
-<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below we provide the offset of 2 bytes to our second call to <code>write()</code>, buffering "Hel", and then we continue on to write another two bytes with an offset of 3, completing "Hello".</p>
+<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below, we create a buffer large enough to hold the string "Hello World!"  After writing 'Hello', we see the bytes 5 through 12 are unused bytes.  We then write ' World' starting at byte 6 and examine the output.  Whoops!  We skipped a byte.  We can overwrite this part of the buffer with ' World!' starting at byte 5.  We then call <code>toString()</code> on the buffer and see that the buffer is now filled with the desired string.</p>
 
-<pre><code>var buf = new Buffer(5);
-buf.write('He');
-buf.write('l', 2);
-buf.write('lo', 3);
-console.log(buf.toString());
-// =&gt; "Hello"
+<pre><code>&gt; var hello = new Buffer(12);
+&gt; hello.write('Hello');
+5
+
+&gt; hello.toString();
+'Hello\u0000�̵\u0001\u0000\u0000'
+&gt; hello.write(' World', 6);
+6
+
+&gt; hello.toString();
+'Hello\u0000 World'
+
+&gt; hello.write(' World!', 5);
+7
+
+&gt; hello.toString();
+'Hello World!'
+
+&gt; hello.length
+12
 </code></pre>
 
 <p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
 
-<pre><code>var ellipsis = new Buffer('…', 'utf8');
+<pre><code>&gt; var ellipsis = new Buffer('…', 'utf8');
+&gt; console.log('… string length: %d', '…'.length);
+… string length: 1
 
-console.log('… string length: %d', '…'.length);
-// =&gt; … string length: 1
+&gt; console.log('… byte length: %d', ellipsis.length);
+… byte length: 3
 
-console.log('… byte length: %d', ellipsis.length);
-// =&gt; … byte length: 3
-
-console.log(ellipsis);
-// =&gt; &lt;Buffer e2 80 a6>
+&gt; ellipsis
+&lt;Buffer e2 80 a6>
 </code></pre>
 
-<p>When dealing with JavaScript strings, we may pass it to the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
+<p>When dealing with a JavaScript string, we may pass it to the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
+
+<pre><code>&gt; Buffer.byteLength('…');
+3
+</code></pre>
 
 <p>The api is written in such a way that it is String-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
-<pre><code>var chunk = buf.slice(4, 9);
-console.log(chunk.toString());
-// =&gt; "some"
+<pre><code>&gt; var chunk = buf.slice(4, 9);
+&gt; console.log(chunk.toString());
+'some'
 </code></pre>
 
 <p>Alternatively when expecting a string we can pass offsets to <code>Buffer#toString()</code>:</p>
 
-<pre><code>var buf = new Buffer('just some data');
-console.log(buf.toString('ascii', 4, 9));
-// =&gt; "some"
+<pre><code>&gt; var buffer = new Buffer('The quick brown fox');
+&gt; buffer.toString('ascii', 4, 9);
+'quick'
 </code></pre>
+
+<p>A Buffer object has a number of helper functions: <code>.utf8Write()</code>, <code>.utf8Slice()</code>, <code>.asciiWrite()</code>, <code>.asciiSlice()</code>, <code>.binaryWrite()</code>, <code>.binarySlice()</code>.  These methods provide similar functionality while enforcing proper encoding.</p>
 
 </div>
 <div class='mp'>

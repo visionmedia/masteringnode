@@ -4,12 +4,21 @@
 
 <h3 id="Homebrew">Homebrew</h3>
 
-<p>Homebrew is a package management system for <em>OSX</em> written in Ruby, is extremely well adopted, and easy to use. To install node via the <code>brew</code> executable simply run:</p>
+<p>Homebrew is a package management system for <em>OSX</em> written in Ruby, is extremely well adopted, and easy to use.  Homebrew can be installed in a number of ways.  Possibly the easiest way is to perform a quick install to <code>/usr/local/</code>:</p>
+
+<pre><code>$ ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"
+</code></pre>
+
+<p>Next, to install node via the <code>brew</code> executable, simply run:</p>
 
 <pre><code>$ brew install node.js
 </code></pre>
 
+<p>For more information on packages and commands available to homebrew, checkout the README at github.</p>
+
 <h2 id="nDistro">nDistro</h2>
+
+<p><em>NOTE: nDistro uses pre-compiled node binaries. To use the most recent node.js release, skip to compiling by source.</em></p>
 
 <p><a href="http://github.com/visionmedia/ndistro">nDistro</a> is a distribution toolkit for node, which allows creation and installation of node distros within seconds. An <em>nDistro</em> is simply a dotfile named <em>.ndistro</em> which defines
  module and node binary version dependencies. In the example
@@ -25,7 +34,7 @@ module visionmedia jade
 module visionmedia ejs
 </code></pre>
 
-<p>Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain an deploy. nDistro uses <a href="http://github.com/visionmedia/nodes">pre-compiled node binaries</a> making them extremely fast to install, and module tarballs which are fetched from <a href="http://github.com">GitHub</a> via <em>wget</em> or <em>curl</em> (auto detected).</p>
+<p>Any machine that can run a shell script can install distributions, and keeps dependencies defined to a single directory structure, making it easy to maintain and deploy. nDistro uses <a href="http://github.com/visionmedia/nodes">pre-compiled node binaries</a> making them extremely fast to install, and module tarballs which are fetched from <a href="http://github.com">GitHub</a> via <em>wget</em> or <em>curl</em> (auto detected).</p>
 
 <p>To get started we first need to install nDistro itself, below we <em>cd</em> to our bin directory of choice, <em>curl</em> the shell script, and pipe the response to <em>sh</em> which will install nDistro to the current directory:</p>
 
@@ -61,13 +70,23 @@ via <code>git</code>, if you have git installed you can execute:</p>
 
 <p>For those without <em>git</em>, or who prefer not to use it, we can also download the source via <em>curl</em>, <em>wget</em>, or similar:</p>
 
-<pre><code>$ curl -# http://nodejs.org/dist/node-v0.1.99.tar.gz &gt; node.tar.gz
+<pre><code>$ curl -# http://nodejs.org/dist/node-v0.4.2.tar.gz &gt; node.tar.gz
 $ tar -zxf node.tar.gz
 </code></pre>
 
 <p>Now that we have the source on our machine, we can run <code>./configure</code> which discovers which libraries are available for node to utilize such as <em>OpenSSL</em> for transport security support, C and C++ compilers, etc. <code>make</code> which builds node, and finally <code>make install</code> which will install node.</p>
 
-<pre><code>$ ./configure &amp;&amp; make &amp;&amp; make install
+<pre><code>$ ./configure &amp;&amp; make &amp;&amp; sudo make install
+</code></pre>
+
+<h2 id="Installing-from-Distribution-Sources">Installing from Distribution Sources</h2>
+
+<p>Installing node.js from a distribution's repositories is not highly recommended.  This is because the version included with your distribution may be very outdated.  As an example, the original version of this document was written to target node.js 0.1.99.  In Ubuntu 10.10, the version of node.js included in the official repository is 0.1.97-1build1.  Because node.js is a relatively young project with a large community, changes to the API occur quickly and often.</p>
+
+<p>If you still wish to install nodejs from an official repository, it can be done in the usual way:</p>
+
+<pre><code>$ sudo apt-get install nodejs
+$ yum install nodejs
 </code></pre>
 
 </div>

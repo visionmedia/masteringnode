@@ -54,7 +54,7 @@ simon.on('bark', function(){
 
 <h2 id="Removing-Event-Listeners">Removing Event Listeners</h2>
 
-<p>As we have seen event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
+<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 

@@ -1,10 +1,13 @@
 
 PDF_FLAGS = --fontsize 9.0 \
-			--linkstyle plain \
-			--linkcolor green \
-			--embedfonts \
-			--footer "c 1" \
-			--no-toc
+	--linkstyle plain \
+	--linkcolor green \
+	--embedfonts \
+	--footer "c 1" \
+	--format pdf12 \
+	--left 0.5in \
+	--right 0.2in \
+        --jpeg=85
 
 MD = pages/index.md \
 	 chapters/installation.md \
@@ -30,7 +33,7 @@ regenerate: clean all
 
 book.pdf: $(HTML)
 	@echo "\n... generating $@"
-	htmldoc $(HTML) $(PDF_FLAGS) --outfile $@
+	htmldoc $(HTML) $(PDF_FLAGS) -f $@
 
 book.html: pages/head.html pages/tail.html $(HTML)
 	@echo "\n... generating $@"

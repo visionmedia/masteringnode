@@ -1,20 +1,34 @@
 <div class='mp'>
 <h1>Globals</h1>
-<p> As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the <code>process</code> global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a <code>console</code> object.</p>
+<p> As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
 
 <h2 id="console">console</h2>
 
-<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does.</p>
+<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>.</p>
+
+<pre><code>&gt; console
+{ log: [Function],
+  info: [Function],
+  warn: [Function],
+  error: [Function],
+  dir: [Function],
+  time: [Function],
+  timeEnd: [Function],
+  trace: [Function],
+  assert: [Function] }
+</code></pre>
+
+<p>Let's take a look at what each method does.</p>
 
 <h3 id="console-log-">console.log()</h3>
 
 <p>The most frequently used console method is <code>console.log()</code> simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
-<pre><code>console.log('wahoo');
+<pre><code>&gt; console.log('wahoo');
 // =&gt; wahoo
 
-console.log({ foo: 'bar' });
-// =&gt; [object Object]
+&gt; console.log({ foo: 'bar' });
+// =&gt; { foo: 'bar' }
 </code></pre>
 
 <h3 id="console-error-">console.error()</h3>
@@ -35,23 +49,37 @@ console.log({ foo: 'bar' });
 
 <h3 id="console-assert-">console.assert()</h3>
 
-<p>Asserts that the given expression is truthy, or throws an exception.</p>
+<p>Asserts that the given expression is truthy, or throws an exception.  Here, you can also use <code>console.trace()</code> and <code>console.error()</code> to print a stack trace and a helpful message when the exception is caught.</p>
 
-<pre><code>console.assert(connected, 'Database connection failed');
+<pre><code>try {
+   console.assert( (1 != 2), '1 != 2: Should be true' );
+   console.assert( (1 == 2), '1 == 2: Should be false');
+} catch(e) {
+   console.error('Caught error ' + e);
+   console.trace();
+}
 </code></pre>
 
 <h2 id="process">process</h2>
 
-<p>The <code>process</code> object is plastered with goodies, first we will take a look
+<p>The <code>process</code> object is plastered with goodies. In a node console, type <code>process</code> and look at what it has to offer. First we will take a look
 at some properties that provide information about the node process itself.</p>
 
-<h3 id="process-version">process.version</h3>
+<h3 id="process-version-s-">process.version(s)</h3>
 
-<p>The version property contains the node version string, for example "v0.1.103".</p>
+<p>The <code>process.version</code> property contains the node version string, for example "v0.4.0".  The <code>process.versions</code> object displays the versions of node, v8, ares, ev, and openssl:</p>
+
+<pre><code>&gt; process.versions
+{ node: '0.4.0',
+  v8: '3.1.2',
+  ares: '1.7.4',
+  ev: '4.3',
+  openssl: '0.9.8o' }
+</code></pre>
 
 <h3 id="process-installPrefix">process.installPrefix</h3>
 
-<p>Exposes the installation prefix, in my case "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
+<p>Exposes the installation prefix, which defaults to "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process-execPath">process.execPath</h3>
 
@@ -59,7 +87,7 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process-platform">process.platform</h3>
 
-<p>Exposes a string indicating the platform you are running on, for example "darwin".</p>
+<p>Exposes a string indicating the platform you are running on, for example "darwin" or "linux".</p>
 
 <h3 id="process-pid">process.pid</h3>
 
@@ -69,16 +97,18 @@ at some properties that provide information about the node process itself.</p>
 
 <p>Returns the current working directory, for example:</p>
 
-<pre><code>cd ~ &amp;&amp; node
-node&gt; process.cwd()
-"/Users/tj"
+<pre><code>cd /var &amp;&amp; node
+&gt; process.cwd()
+'/var'
 </code></pre>
 
 <h3 id="process-chdir-">process.chdir()</h3>
 
 <p>Changes the current working directory to the path passed.</p>
 
-<pre><code>process.chdir('/foo');
+<pre><code>&gt; process.chdir('lib')
+&gt; process.cwd()
+'/var/lib'
 </code></pre>
 
 <h3 id="process-getuid-">process.getuid()</h3>
@@ -87,7 +117,7 @@ node&gt; process.cwd()
 
 <h3 id="process-setuid-">process.setuid()</h3>
 
-<p>Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both <code>process.setuid(501)</code>, and <code>process.setuid('tj')</code> are valid.</p>
+<p>Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both <code>process.setuid(501)</code>, and <code>process.setuid('tj')</code> are valid, where 501 is TJ's <em>uid</em>.</p>
 
 <h3 id="process-getgid-">process.getgid()</h3>
 
@@ -116,7 +146,7 @@ node&gt; process.cwd()
 
 <h3 id="process-argv">process.argv</h3>
 
-<p>When executing a file with the <code>node</code> executable <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
+<p>When executing a file with the <code>node</code> executable, <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
 
 <p>For example our source file <em>./src/process/misc.js</em> can be executed by running:</p>
 
@@ -141,7 +171,8 @@ node&gt; process.cwd()
 
 <p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
 
-<pre><code>process.on('uncaughtException', function(err){
+<pre><code>/* ./src/process/exceptions.js */
+process.on('uncaughtException', function(err){
     console.log('got an error: %s', err.message);
     process.exit(1);
 });
@@ -155,7 +186,8 @@ setTimeout(function(){
 
 <p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
 
-<pre><code>process.on('SIGTERM', function(){
+<pre><code>/* ./src/process/kill.js */
+process.on('SIGTERM', function(){
     console.log('terminating');
     process.exit(1);
 });
@@ -171,6 +203,8 @@ setTimeout(function(){
 </code></pre>
 
 <h3 id="errno">errno</h3>
+
+<p><em>*TODO: Does process still support these error constants?</em></p>
 
 <p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
 

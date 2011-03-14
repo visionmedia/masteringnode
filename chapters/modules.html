@@ -1,12 +1,12 @@
+<div class='mp'>
 <h1>CommonJS Module System</h1>
+<p><a href="http://commonjs.org">CommonJS</a> is a community driven effort to standardize packaging of JavaScript libraries, known as <em>modules</em>. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers.</p>
 
-<p><a href="http://commonjs.org">CommonJS</a> is a community driven effort to standardize packaging of JavaScript libraries, known as <em>modules</em>. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers. </p>
+<p>Although this is ideal, in practice modules are often not portable due to relying on apis that are currently only provided by, or are tailored to node specifically. As the framework matures, and additional standards emerge our modules will become more portable.</p>
 
-<p>Although this is ideal, in practice modules are often not portable due to relying on apis that are currently only provided by, or are tailored to node specifically. As the framework matures, and additional standards emerge our modules will become more portable.  </p>
+<h2 id="Creating-Modules">Creating Modules</h2>
 
-<h2>Creating Modules</h2>
-
-<p>Let's create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable. </p>
+<p>Let's create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable.</p>
 
 <pre><code>var utils = {};
   utils.merge = function(obj, other) {};
@@ -21,7 +21,7 @@
   })(module, module.exports);
 </code></pre>
 
-<p>First create the file <em>./utils.js</em>, and define the <code>merge()</code> function as seen below. The implied anonymous wrapper function shown above allows us to seemingly define globals, however these are not accessible until exported. </p>
+<p>First create the file <em>./utils.js</em>, and define the <code>merge()</code> function as seen below. The implied anonymous wrapper function shown above allows us to seemingly define globals, however these are not accessible until exported.</p>
 
 <pre><code>  function merge(obj, other) {
       var keys = Object.keys(other);
@@ -50,7 +50,7 @@ on the <code>exports</code> object like so:</p>
 
 <p>Next we will look at utilizing out new module in other libraries.</p>
 
-<h2>Requiring Modules</h2>
+<h2 id="Requiring-Modules">Requiring Modules</h2>
 
 <p>To get started with requiring modules, first create a second file named <em>./app.js</em> with the code shown below. The first line <code>require('./utils')</code> fetches the contents of <em>./utils.js</em> and returns the <code>exports</code> of which we later utilize our <code>merge()</code> method and display the results of our merged object using <code>console.dir()</code>.</p>
 
@@ -62,7 +62,7 @@ utils.merge(a, b);
 console.dir(a);
 </code></pre>
 
-<p>Core modules such as the <em>sys</em> which are bundled with node can be required without a path, such as <code>require('sys')</code>, however 3rd-party modules will iterate the <code>require.paths</code> array in search of a module matching the given path. By default <code>require.paths</code> includes <em>~/.node</em>libraries<em>, so if _~/.node</em>libraries<em>/utils.js</em> exists we may simply <code>require('utils')</code>, instead of our relative example <code>require('./utils')</code> shown above.</p>
+<p>Core modules such as the <em>sys</em> which are bundled with node can be required without a path, such as <code>require('sys')</code>, however 3rd-party modules will iterate the <code>require.paths</code> array in search of a module matching the given path. By default <code>require.paths</code> includes <em>~/.node_libraries</em>, so if <em>~/.node_libraries/utils.js</em> exists we may simply <code>require('utils')</code>, instead of our relative example <code>require('./utils')</code> shown above.</p>
 
 <p>Node also supports the concept of <em>index</em> JavaScript files. To illustrate this example lets create a <em>math</em> module that will provide the <code>math.add()</code>, and <code>math.sub()</code> methods. For organizational purposes we will keep each method in their respective <em>./math/add.js</em> and <em>./math/sub.js</em> files. So where does <em>index.js</em> come into play? we can populate <em>./math/index.js</em> with the code shown below, which is used when <code>require('./math')</code> is invoked, which is conceptually identical to invoking <code>require('./math/index')</code>.</p>
 
@@ -72,7 +72,7 @@ console.dir(a);
 };
 </code></pre>
 
-<p>The contents of <em>./math/add.js</em> show us a new technique, here we use <code>module.exports</code> instead of <code>exports</code>. Previously mentioned was the fact that <code>exports</code> is not the only object exposed to the module file when evaluated, we also have access to <code>__dirname</code>, <code>__filename</code>, and <code>module</code> which represents the current module. Here we simply define the module export object to a new object, which happens to be a function. </p>
+<p>The contents of <em>./math/add.js</em> show us a new technique; here we use <code>module.exports</code> instead of <code>exports</code>.  As previously mentioned, <code>exports</code> is not the only object exposed to the module file when evaluated. We also have access to <code>__dirname</code>, <code>__filename</code>, and <code>module</code> which represents the current module. We simply define the module export object to a new object, which happens to be a function.</p>
 
 <pre><code>module.exports = function add(a, b){
     return a + b;
@@ -99,19 +99,20 @@ console.dir(a);
 <pre><code>var Animal = require('./animal');
 </code></pre>
 
-<h2>Require Paths</h2>
+<h2 id="Require-Paths">Require Paths</h2>
 
-<p>We talked about <code>require.paths</code>, the <code>Array</code> utilized by node's module system in order to discover modules. By default node checks the following directories for modules:</p>
+<p>We talked about <code>require.paths</code>, the <code>Array</code> utilized by node's module system in order to discover modules. By default, node checks the following directories for modules:</p>
 
 <ul>
-<li><code>&lt;node binary&gt;</code>/../../lib/node</li>
+<li><code>&lt;node binary></code>/../../lib/node</li>
 <li><strong>$HOME</strong>/.node_libraries</li>
 <li><strong>$NODE_PATH</strong></li>
 </ul>
 
+
 <p>The <strong>NODE_PATH</strong> environment variable is much like <strong>PATH</strong>, as it allows several paths delimited by the colon (<code>:</code>) character.</p>
 
-<h3>Runtime Manipulation</h3>
+<h3 id="Runtime-Manipulation">Runtime Manipulation</h3>
 
 <p>Since <code>require.paths</code> is just an array, we can manipulate it at runtime in order to expose libraries. In our previous example we defined the libraries <em>./math/{add,sub}.js</em>, in which we would typically <code>require('./math')</code> or <code>require('./math/add')</code> etc. Another approach is to prepend or "unshift" a directory onto <code>require.paths</code> as shown below, after which we can simply <code>require('add')</code> since node will iterate the paths in order to try and locate the module.</p>
 
@@ -124,24 +125,41 @@ console.log(add(1,2));
 console.log(sub(1,2));
 </code></pre>
 
-<h2>Pseudo Globals</h2>
+<h2 id="Pseudo-Globals">Pseudo Globals</h2>
 
 <p>As mentioned above, modules have several pseudo globals available to them, these are as follows:</p>
 
 <ul>
-<li><code>require</code> the require function itself </li>
+<li><code>require</code> the require function itself</li>
 <li><code>module</code> the current <code>Module</code> instance</li>
 <li><code>exports</code> the current module's exported properties</li>
 <li><code>__filename</code> absolute path to the current module's file</li>
 <li><code>__dirname</code> absolute path to the current module's directory</li>
 </ul>
 
-<h3>require()</h3>
+
+<p>To examine the functionality of <code>require</code>, <code>module</code>, and <code>exports</code>, open a node console by running the command <code>node</code>.  You should then enter a node prompt as seen below:</p>
+
+<pre><code>$ node
+&gt; 
+</code></pre>
+
+<p>To view these objects, enter the following commands into node:</p>
+
+<pre><code>&gt; require
+&gt; module
+&gt; module.exports
+&gt; module.filename
+</code></pre>
+
+<p>If you'd like to examine other objects, the node console supports the well-known <code>&lt;TAB>``&lt;TAB></code> auto-completion.</p>
+
+<h3 id="require-">require()</h3>
 
 <p>Although not obvious at first glance, the <code>require()</code> function is actually
 re-defined for the current module, and calls an internal function <code>loadModule</code> with a reference to the current <code>Module</code> to resolve relative paths and to populate <code>module.parent</code>.</p>
 
-<h3>module</h3>
+<h3 id="module">module</h3>
 
 <p>When we <code>require()</code> a module, typically we only deal with the module's <code>exports</code>, however the <code>module</code> variable references the current module's <code>Module</code> instance. This is why the following is valid, as we may re-assign the module's <code>exports</code> to any object, even something trivial like a string:</p>
 
@@ -158,9 +176,10 @@ module.exports = 'body { background: blue; }';
 <li><code>moduleCache</code> an object containing references to all cached modules</li>
 </ul>
 
-<h2>Registering Module Compilers</h2>
 
-<p>Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using <code>require.registerExtension()</code> we can have node compile CoffeeScript to JavaScript in an automated fashion. </p>
+<h2 id="Registering-Module-Compilers">Registering Module Compilers</h2>
+
+<p>Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using <code>require.registerExtension()</code> we can have node compile CoffeeScript to JavaScript in an automated fashion.</p>
 
 <p>To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at <em>./compiler/example.ejs</em>, its syntax will look like this:</p>
 
@@ -215,3 +234,5 @@ console.log(example.max(10, 8));
 </code></pre>
 
 <p>Run the above script in a terminal with <code>node ./src/modules/compile.js</code></p>
+
+</div>
