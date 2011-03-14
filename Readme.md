@@ -6,6 +6,7 @@
 ## Authors
 
  - TJ Holowaychuk ([visionmedia](http://github.com/visionmedia))
+ - Jim Schubert ([jimschubert](http://github.com/jimschubert))
 
 ## Formats
 
@@ -47,7 +48,7 @@ Requires [Calibre](http://calibre-ebook.com/)
 
 Contents of this eBook currently reference the following software versions:
 
-  - node 0.2.0
+  - node 0.4.0
 
 ## Source
 
@@ -55,6 +56,34 @@ All example source can be run simply by executing node against the file,
 for example:
 
       $ node src/events/basic.js
+
+## Hacking node
+
+Executing node without parameters will enter a node console, a Read-Eval-Print-Loop (REPL). Here, you can inspect objects and execute commands.
+
+	> require
+	{ [Function: require]
+	  resolve: [Function],
+	  paths: 
+	   [ '/home/jim/.node_modules',
+	     '/home/jim/.node_libraries',
+	     '/usr/local/lib/node' ],
+	  main: undefined,
+	  extensions: { '.js': [Function], '.node': [Function] },
+	  registerExtension: [Function],
+	  cache: {} }
+	> console
+	{ log: [Function],
+	  info: [Function],
+	  warn: [Function],
+	  error: [Function],
+	  dir: [Function],
+	  time: [Function],
+	  timeEnd: [Function],
+	  trace: [Function],
+	  assert: [Function] }
+	> 
+
 
 ## License
 
