@@ -1,4 +1,3 @@
-
 # Mastering Node
 
  Mastering node is an open source eBook by node hackers for node hackers. TJ started this as a side project and realized that he didn't have time :) Jim picked up some editing and project structuring.  It's open to everyone, so go nuts, download it, build it, fork it, extend it and share it. If you come up with something you wish to contribute back, send a pull request.
@@ -27,7 +26,10 @@ Required by `make book.pdf`:
 
 Required by `make book.html`:
 
-    $ gem install ronn
+Node.js is required to convert markdown to html.  The conversion process was borrowed from node.js and its generation of API documentation.
+
+The scripts are located in tools/docbook with minor modifications from the node.js repository.
+
     $ make book.html
 
 ## EPUB
