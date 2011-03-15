@@ -1,8 +1,17 @@
-<div class='mp'>
-<h1>File System</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+</head>
+<body class="fs" >
+  <div id="container">   
+    <h1>File System</h1>
+
 <p> To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
 
-<h2 id="Working-with-the-filesystem">Working with the filesystem</h2>
+<h2 id="working_with_the_filesystem">Working with the filesystem</h2>
 
 <p> Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:</p>
 
@@ -20,8 +29,7 @@ fs.mkdir('./helloDir',0777, function (err) {
       console.log(data);
     });
   });
-});
-</code></pre>
+});</code></pre>
 
 <p>  As evident in the example above, each callback is placed in the previous callback - this is what is referred to as chainable callbacks. When using asynchronous methods this pattern should be used, as there is no guarantee that the operations will be completed in the order that they are created. This could lead to unpredictable behavior.</p>
 
@@ -31,12 +39,11 @@ fs.mkdir('./helloDir',0777, function (err) {
 fs.writeFileSync('./helloDirSync/message.txt', 'Hello Node');
 var data = fs.readFileSync('./helloDirSync/message.txt','UTF-8');
 console.log('file created with contents:');
-console.log(data);
-</code></pre>
+console.log(data);</code></pre>
 
 <p>  It is better to use the asynchronous approach on servers with a high load, as the synchronous methods will cause the whole process to halt and wait for the operation to complete. This will block any incoming connections and other events.</p>
 
-<h2 id="File-information">File information</h2>
+<h2 id="file_information">File information</h2>
 
 <p>  The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we
   are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a
@@ -60,10 +67,9 @@ fs.readdir('/etc/', function (err, files) {
     console.log('stats:  %s',JSON.stringify(stats));
     });
   });
-});
-</code></pre>
+});</code></pre>
 
-<h2 id="Watching-files">Watching files</h2>
+<h2 id="watching_files">Watching files</h2>
 
 <p>  The fs.watchfile monitors a file and will fire the event whenever the file is changed.</p>
 
@@ -78,14 +84,21 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
   if (err) throw err;
 
   console.log("file write complete");   
-});
-</code></pre>
+});</code></pre>
 
 <p>  A file can also be unwatched using the fs.unwatchFile method call. This is used once monitoring of a file is no longer required.</p>
 
-<h2 id="Nodejs-Docs-for-further-reading">Nodejs Docs for further reading</h2>
+<h2 id="nodejs_Docs_for_further_reading">Nodejs Docs for further reading</h2>
 
 <p>  The node api <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands
   available when working with Nodejs.</p>
-
-</div>
+  </div>
+  <script type="text/javascript" src="assets/sh_main.js"></script>
+  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
+  <script type="text/javascript">
+	sh_highlightDocument(undefined, 'javascript', 'tt');
+	sh_highlightDocument(undefined, 'javascript', 'code');
+	sh_highlightDocument(undefined, 'javascript', 'pre');
+  </script>
+</body>
+</html>
