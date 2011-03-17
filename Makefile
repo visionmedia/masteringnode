@@ -1,29 +1,12 @@
 
-PDF_FLAGS = --fontsize 9.0 \
+PDF_FLAGS = --fontsize 8.0 \
 	--linkstyle plain \
 	--linkcolor green \
 	--embedfonts \
 	--footer "c 1" \
-	--format pdf12 \
-	--left 0.5in \
-	--right 0.2in \
-        --jpeg=85
+	--format pdf12
 
-
-MD = 	 chapters/intro.md \
-	 chapters/installation.md \
-	 chapters/modules.md \
-	 chapters/globals.md \
-	 chapters/events.md \
-	 chapters/buffers.md \
-	 chapters/streams.md \
-	 chapters/fs.md \
-	 chapters/tcp.md \
-	 chapters/http.md \
-	 chapters/connect.md \
-	 chapters/express.md \
-	 chapters/testing.md \
-	 chapters/deploy.md
+MD = 	 chapters/all.md
 
 HTML = $(MD:.md=.html)
 
@@ -33,16 +16,16 @@ regenerate: clean all clean_html
 	@echo "\nRunning: $@"
 	git commit -a -m 'Regenerated book' && echo done
 
-book.pdf: $(HTML)
+book.pdf: book.html
 	@echo "\nGenerating: $@"
-	htmldoc $(HTML) $(PDF_FLAGS) -f docs/$@
+	htmldoc docs/book.html $(PDF_FLAGS) -f docs/$@
 
 book.html: pages/head.html pages/tail.html $(HTML)
 	@echo "\nGenerating: $@"
 	cat pages/head.html $(HTML) pages/tail.html > docs/book.html
 
 %.html: %.md
-	node tools/doctool/doctool.js pages/template.html $< > $@
+	node tools/doctool/doctool.js pages/singletemplate.html $< > $@
 
 book.mobi:
 	@echo "\nGenerating: $@"

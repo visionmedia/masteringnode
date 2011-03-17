@@ -71,7 +71,7 @@ var includeExpr = /^@include\s+([A-Za-z0-9-_]+)(?:\.)?([a-zA-Z]*)$/gmi;
 function loadIncludes(data, current_file) {
   return data.replace(includeExpr, function(src, name, ext) {
     try {
-      var include_path = path.join(current_file, "../", name+"."+(ext || "markdown"))
+      var include_path = path.join(current_file, "../", name+"."+(ext || "md"))
       return loadIncludes(fs.readFileSync(include_path, "utf8"), current_file);
     } catch(e) {
       return "";

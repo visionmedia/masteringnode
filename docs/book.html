@@ -1,57 +1,46 @@
-<html>
-  <head>
-    <title>Mastering Node</title>
-    <style>
-      body {
-        font: 14px/1.4 "Lucida Grande", "Helvetica Neue", Arial, sans-serif;
-        padding: 50px 180px;
-      }
-      h1 {
-        padding-left: 5px;
-        border-bottom: 3px solid #eee;
-      }
-      pre {
-        margin: 15px 0;
-        padding: 15px;
-        border: 1px solid #eee;
-      }
-      a {
-        color: #00aaff;
-      }
-    </style>
-  </head>
-  <body><!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="intro" >
-  <div id="container">   
-    <p>** Mastering Node</p>
-
-<p><a href="http://nodejs.org">Node</a> is an exciting new platform developed by <em>Ryan Dahl</em>, allowing JavaScript developers to create extremely high performance servers by leveraging <a href="http://code.google.com/p/v8/">Google's V8</a> JavaScript engine, and asynchronous I/O. In _Mastering Node) we will discover how to write high concurrency web servers, utilizing the CommonJS module system, node's core libraries, third party modules, high level web development and more.</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Mastering Node</title>
   <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
   <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
 </head>
-<body class="installation" >
-  <div id="container">   
-    <h1>Installing Node</h1>
+<body>
+  <div id="container"> 
+<div style="display:none"></div>
+<h1>Mastering Node</h1>
+
+<p><a href="http://nodejs.org">Node</a> is an exciting new platform developed by <em>Ryan Dahl</em>, allowing JavaScript developers to create extremely high performance servers by leveraging <a href="http://code.google.com/p/v8/">Google V8</a> JavaScript engine, and asynchronous I/O. In <em>Mastering Node</em>) we will discover how to write high concurrency web servers, utilizing the CommonJS module system, node's core libraries, third party modules, high level web development and more.</p>
+
+<h2 id="why_Node_">Why Node?</h2>
+
+<p>Node is an evented I/O framework for server-side JavaScript.  What does that mean, though?  In many programming languages, I/O operations are blocking.  This means that when you open a file, no other code executes until that file is fully opened.  </p>
+
+<p>Using a busy office environment as an example, blocking I/O operations are like a very busy and very focussed desk worker name Frank. Work may pile up on the desk, but Frank finishes every task that he starts (however, when he finds the smallest problem, he gives up).  This is traditionally how procedural programming languages perform tasks.</p>
+
+<p>Node.js is more like an office manager. Sure, there are management tasks, but all of those I/O operations are handled fairly well by the operating system or node addons.  So, the manager sees a task, assigns it to Frank.  The manager may check back on Frank from time to time to see how he's doing, but he doesn't need to waste his time on the task because he knows that when it's completed, Frank will give it back.</p>
+
+<p>Don't worry, though.  Node.js isn't a jerk, so look forward to a healthy relationship.</p>
+
+<h2 id="why_JavaScript_">Why JavaScript?</h2>
+
+<p><strong>JavaScript is a well-known dynamic language.</strong></p>
+
+<p>In fact, many people who don't consider themselves programmers know JavaScript. Node.js uses <a href="http://code.google.com/apis/v8/intro.html">Google's V8 JavaScript engine</a>.  V8 is an implementation of the JavaScript standards specified in <a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf">ECMA-262, Version 3</a>. It is a high-performance, garbage-collected execution environment which can be embedded in any stand-alone application.</p>
+
+<p><strong>Everything in JavaScript is an <code>Object</code>.</strong></p>
+
+<p>Arrays are <code>Objects</code>.  Object literals are <code>Object</code>s.  Even functions are <code>Object</code>s.</p>
+
+<p><strong>JavaScript supports some fairly advanced functional programming concepts. <a href="http://www.ibm.com/developerworks/library/wa-javascript.html#functional">?</a></strong></p>
+
+<p>Currying, closures, functions-as-arguments, and anonymous functions are concepts typically found in functional programming languages.  There are libraries available, such as <a href="http://documentcloud.github.com/underscore/">underscore.js</a>, which provider more functional programming functionality without changing JavaScript itself.</p>
+
+<p><strong>It's awesome. I had to say it.</strong></p>
+
+<p>For a deep understanding of what JavaScript really has to offer, check out <a href="http://oreilly.com/catalog/9780596806767">JavaScript Patterns</a>.</p>
+
+<h1>Installing Node</h1>
 
 <p>In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at <a href="http://github.com/mxcl/homebrew">homebrew</a>, <a href="http://github.com/visionmedia/ndistro">nDistro</a>, and the most flexible method, of course - compiling from source.</p>
 
@@ -131,26 +120,8 @@ $ tar -zxf node.tar.gz</code></pre>
 
 <pre><code>$ sudo apt-get install nodejs
 $ yum install nodejs</code></pre>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="modules" >
-  <div id="container">   
-    <h1>CommonJS Module System</h1>
+
+<h1>CommonJS Module System</h1>
 
 <p><a href="http://commonjs.org">CommonJS</a> is a community driven effort to standardize packaging of JavaScript libraries, known as <em>modules</em>. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers. </p>
 
@@ -347,26 +318,8 @@ console.log(example.max(10, 8));
 // =&gt; 10</code></pre>
 
 <p>Run the above script in a terminal with <code>node ./src/modules/compile.js</code></p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="globals" >
-  <div id="container">   
-    <h1>Globals</h1>
+
+<h1>Globals</h1>
 
 <p> As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
 
@@ -568,26 +521,8 @@ setTimeout(function(){
 } else {
 	// Display a 500 "Internal Server Error" page
 }</code></pre>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="events" >
-  <div id="container">   
-    <h1>Events</h1>
+
+<h1>Events</h1>
 
 <p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
 
@@ -636,6 +571,39 @@ simon.on('bark', function(){
     simon.emit('bark');
 }, 500);</code></pre>
 
+<p>You may look at the above code and think, "Why don't I just add a <em>bark</em> function?"  That's a good question.  The power of events is in subscribing to events that occur when a function on the object is executed.  For instance, if you have a writeable <code>Stream</code> object with the function <code>.write()</code>, you may subscribe to a data event.  The follow event example is directly from the node api documentation:</p>
+
+<pre><code>var util = require("util");
+var events = require("events");
+
+function MyStream() {
+    events.EventEmitter.call(this);
+}
+
+util.inherits(MyStream, events.EventEmitter);
+
+MyStream.prototype.write = function(data) {
+    this.emit("data", data);
+}
+
+var stream = new MyStream();
+
+console.log(stream instanceof events.EventEmitter); // true
+console.log(MyStream.super_ === events.EventEmitter); // true
+
+stream.on("data", function(data) {
+	console.log('Received data: "' + data + '"');
+});
+stream.write("It works!"); // Received data: "It works!"</code></pre>
+
+<p>This example is fairly complicated compared to most of the examples so far.  It does a number of things that haven't yet been covered, but are included here for completeness.  First of all, we're creating an object called MyStream which inherits from EventEmitter. This was mentioned earlier, but this provides a nice example of using the util module for inheritance.  Then, we set the write function to emit the <em>data</em> event to any subscribers (<em>EventListeners</em>).  In this function, we could also provide some default functionality (more than emitting an event), such as writing to an inner sink, logging, or any number of operations.</p>
+
+<p>After setting up the object, this example writes to the log to demonstrate that both the stream and the <code>super_</code> object are instances of EvenEmitter.  Afterward, we subscribe to the "data" event and log the data that is emitted from the <code>MyStream.prototype.write</code> function.  This means that anything passed to the <code>.write()</code> function is emitted to all subscribers as the single object passed to the callback function.  In other words, anytime we call <code>.write()</code>, we're going to log with a little message to show that the parameter is being written by the emitted event.</p>
+
+<p>So, unlike the dog barking example, this shows that a single function can have multiple operations occur via events.</p>
+
+<p><strong>Note: when adding an event, it is pushed onto the end of an array of existing events</strong> </p>
+
 <h2 id="removing_Event_Listeners">Removing Event Listeners</h2>
 
 <p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
@@ -653,26 +621,8 @@ setInterval(function(){
 setTimeout(function(){
     emitter.removeListener('message', console.log);
 }, 1000);</code></pre>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="buffers" >
-  <div id="container">   
-    <h1>Buffers</h1>
+
+<h1>Buffers</h1>
 
 <p> To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
 
@@ -764,26 +714,8 @@ setTimeout(function(){
 'quick'</code></pre>
 
 <p>A Buffer object has a number of helper functions: <code>.utf8Write()</code>, <code>.utf8Slice()</code>, <code>.asciiWrite()</code>, <code>.asciiSlice()</code>, <code>.binaryWrite()</code>, <code>.binarySlice()</code>.  These methods provide similar functionality while enforcing proper encoding.</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="streams" >
-  <div id="container">   
-    <h1>Streams</h1>
+
+<h1>Streams</h1>
 
 <p> Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from <em>stdin</em>. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.</p>
 
@@ -826,26 +758,8 @@ http.createServer(function(req, res){
     res.writeHead(200);
     sys.pump(req, res);
 }).listen(3000);</code></pre>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="fs" >
-  <div id="container">   
-    <h1>File System</h1>
+
+<h1>File System</h1>
 
 <p> To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
 
@@ -930,26 +844,8 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 
 <p>  The node api <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands
   available when working with Nodejs.</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="tcp" >
-  <div id="container">   
-    <h1>TCP</h1>
+
+<h1>TCP</h1>
 
 <p> ...</p>
 
@@ -960,26 +856,8 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 <h2 id="tCP_Clients">TCP Clients</h2>
 
 <p> ...</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="http" >
-  <div id="container">   
-    <h1>HTTP</h1>
+
+<h1>HTTP</h1>
 
 <p> ...</p>
 
@@ -990,70 +868,16 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 <h2 id="hTTP_Clients">HTTP Clients</h2>
 
 <p> ...</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="connect" >
-  <div id="container">   
-    <h1>Connect</h1>
+
+<h1>Connect</h1>
 
 <p>Connect is a ...</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="express" >
-  <div id="container">   
-    <h1>Express</h1>
+
+<h1>Express</h1>
 
 <p>Express is a ...</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="testing" >
-  <div id="container">   
-    <h1>Testing</h1>
+
+<h1>Testing</h1>
 
 <p>  ...</p>
 
@@ -1064,28 +888,11 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 <h2 id="vows">Vows</h2>
 
 <p>  ...</p>
-  </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
-  <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title></title>
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
-</head>
-<body class="deploy" >
-  <div id="container">   
-    <h1>Deployment</h1>
+
+<h1>Deployment</h1>
 
 <p>  ...</p>
+
   </div>
   <script type="text/javascript" src="assets/sh_main.js"></script>
   <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
@@ -1095,6 +902,4 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 	sh_highlightDocument(undefined, 'javascript', 'pre');
   </script>
 </body>
-</html>
-  </body>
 </html>
