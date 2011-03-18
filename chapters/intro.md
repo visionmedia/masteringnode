@@ -30,6 +30,13 @@ Currying, closures, functions-as-arguments, and anonymous functions are concepts
 
 For a deep understanding of what JavaScript really has to offer, check out [JavaScript Patterns](http://oreilly.com/catalog/9780596806767).
 
+## Hello World!
+**Becuase it has to be done**
 
+	// hello.js
+	sys = require('sys');
+	sys.puts("Hello, World!");
+
+To run the 'Hello, World!' example, execute `node hello.js` on the command line.
 
 

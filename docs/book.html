@@ -40,6 +40,16 @@
 
 <p>For a deep understanding of what JavaScript really has to offer, check out <a href="http://oreilly.com/catalog/9780596806767">JavaScript Patterns</a>.</p>
 
+<h2 id="hello_World_">Hello World!</h2>
+
+<p><strong>Becuase it has to be done</strong></p>
+
+<pre><code>// hello.js
+sys = require('sys');
+sys.puts("Hello, World!");</code></pre>
+
+<p>To run the 'Hello, World!' example, execute <code>node hello.js</code> on the command line.</p>
+
 <h1>Installing Node</h1>
 
 <p>In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at <a href="http://github.com/mxcl/homebrew">homebrew</a>, <a href="http://github.com/visionmedia/ndistro">nDistro</a>, and the most flexible method, of course - compiling from source.</p>
@@ -847,11 +857,26 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 
 <h1>TCP</h1>
 
-<p> ...</p>
+<p>  ...</p>
 
 <h2 id="tCP_Servers">TCP Servers</h2>
 
-<p> ...</p>
+<p>Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos "You were connected!" to a client connection and outputs "A client has connected!" to <em>stdout</em>.</p>
+
+<pre><code>// tcp_server.js
+var sys = require('sys');
+var tcp = require('net');
+var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
+    sys.puts("A client has connected!");
+    socket.write("You were connected!\n", "utf8");
+    socket.end();
+}).listen(8000, '127.0.0.1');</code></pre>
+
+<p>To test this server, enter <code>node tcp_server.js</code> in a terminal.  Then, open another terminal to telnet into this server.</p>
+
+<pre><code>$ telnet 127.0.0.1 8000</code></pre>
+
+<p>In the server's terminal, you should see the message output from <code>sys.puts</code>, while the client's server should display, "You were connected!"</p>
 
 <h2 id="tCP_Clients">TCP Clients</h2>
 
