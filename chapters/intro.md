@@ -39,4 +39,21 @@ For a deep understanding of what JavaScript really has to offer, check out [Java
 
 To run the 'Hello, World!' example, execute `node hello.js` on the command line.
 
+## Conventions in this book
 
+There are a few conventions used in the code examples (such as the Hello, World! example above).
+
+First, if the example is a script (or a part of a script) that needs to be run from the command line, it will begin with a `//` styled comment of the filename.  These files are located under the `./src` directory of the _Mastering Node_ project.  Running these examples is fairly simple: open a terminal (CTRL+SHIFT+T might do it) and type `node` followed by a space and the relative path of the script.  In other words, if you're in _/home/jim/masteringnode_ and you want to run a script under _/home/jim/masteringnode/scripts/_ which is called _hello.js_, you would run `node scripts/hello.js` or `node ./scripts/hello.js`.  For an example of how this code snippet is displayed, see the Hello, World! example above.
+
+Second, if the example is a command to be entered directly into what will be referred to as a 'node terminal', you should first open a terminal then type `node` and ENTER (assuming the node executable is in your PATH variable, and is called node).  At the prompt, you should enter the commands following the `>` character. Text following the `>` character are commands you should enter, while text on a line that does not begin with `>` is the output.  This is done to closely match what you should see in your terminal.  These examples are not included in files under the _src_ directory.  For instance:
+
+	> console.log("Hello, World!")
+	Hello, World.
+
+Third, if an example is to be run from the terminal itself, it is prefixed by a `$`.  This represents a bash environment, and may look differently depending on your configuration.  For instance, my bash terminal displays:
+
+	jim@cr-48:~/projects/masteringnode$
+
+These code examples will look like this:
+	
+	$ ruby -e "puts 'Hello, World'"
