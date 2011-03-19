@@ -1,7 +1,7 @@
 /*--------------------- Layout and Typography ----------------------------*/
 body {
-//  font-family: "Helvetica Neue", Helvetica, FreeSans, Arial, sans-serif;
-  font-family: Georgia, FreeSerif, Times, serif;
+  font-family: "Helvetica Neue", Helvetica, FreeSans, Arial, sans-serif;
+/*  font-family: Georgia, FreeSerif, Times, serif; */
   font-size: 0.9375em;
   line-height: 1.4667em;
   color: #222;
