@@ -1,7 +1,3 @@
 .DS_Store
 chapters/*.html
-.ndistro
-bin/*
-lib/*
-modules/*
 

@@ -10,9 +10,9 @@ MD = 	 chapters/all.md
 
 HTML = $(MD:.md=.html)
 
-all: book.html book.pdf book.mobi book.epub
+all: clean book.html book.pdf book.mobi book.epub
 
-regenerate: clean all clean_html
+regenerate: all clean_html
 	@echo "\nRunning: $@"
 	git commit -a -m 'Regenerated book' && echo done
 
@@ -20,18 +20,18 @@ book.pdf: book.html
 	@echo "\nGenerating: $@"
 	htmldoc docs/book.html $(PDF_FLAGS) -f docs/$@
 
-book.html: pages/head.html pages/tail.html $(HTML)
+book.html: clean pages/head.html pages/tail.html $(HTML)
 	@echo "\nGenerating: $@"
 	cat pages/head.html $(HTML) pages/tail.html > docs/book.html
 
 %.html: %.md
 	node tools/doctool/doctool.js pages/singletemplate.html $< > $@
 
-book.mobi:
+book.mobi: book.html
 	@echo "\nGenerating: $@"
 	ebook-convert docs/book.html docs/book.mobi --output-profile kindle
 
-book.epub:
+book.epub: book.html
 	@echo "\nGenerating: $@"
 	ebook-convert docs/book.html docs/book.epub \
 		--title "Mastering Node" \
