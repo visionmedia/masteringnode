@@ -1,12 +1,13 @@
 
 # File System
 
- To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.
+  To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.
  
 ## Working with the filesystem
 
- Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:
+  Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:
     
+    // fs/basics.js
     var fs = require('fs');
 
     fs.mkdir('./helloDir',0777, function (err) {
@@ -37,10 +38,9 @@
 
 ## File information
   
-  The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we
-  are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a
-  directory object.
+The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a directory object.
 
+    // fs/stat.js
     var fs = require('fs');
 
     fs.readdir('/etc/', function (err, files) {
@@ -66,6 +66,7 @@
 
   The fs.watchfile monitors a file and will fire the event whenever the file is changed.
 
+    // fs/watch.js
     var fs = require('fs');
 
     fs.watchFile('./testFile.txt', function (curr, prev) {
@@ -84,8 +85,7 @@
 
 ## Nodejs Docs for further reading
 
-  The node api [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands
-  available when working with Nodejs.
+  The node api [docs](http://nodejs.org/api.html#file-system-106) are very detailed and list all the possible filesystem commands available when working with Nodejs.
 
 
   
