@@ -1,9 +1,9 @@
 
 # Buffers
 
- To handle binary data, node provides us with the global `Buffer` object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a `Buffer` instance, and many ways you can manipulate it's data.
+To handle binary data, node provides us with the global `Buffer` object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a `Buffer` instance, and many ways you can manipulate it's data.
  
-The simplest way to construct a `Buffer` from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.
+The simplest way to construct a `Buffer` from a string is to pass a string as the first argument to `Buffer`'s constructor. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.
 
 	> var hello = new Buffer('Hello');
 	    
@@ -62,7 +62,7 @@ Buffers can also be created with an integer representing the number of bytes all
 	> hello.length
 	12
 
-The `.length` property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
+The `length` property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.
 
 	> var ellipsis = new Buffer('…', 'utf8');
 	> console.log('… string length: %d', '…'.length);
