@@ -9,8 +9,8 @@ Although this is ideal, in practice modules are often not portable due to relyin
 
 Let's create a utility module named _utils_, which will contain a `merge()` function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where `utils` is a global variable. 
 
-    var utils = {};
-	  utils.merge = function(obj, other) {};
+	var utils = {};
+	utils.merge = function(obj, other) {};
 
 Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly. CommonJS modules aid in removing this issue by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to `exports`, `require`, and `module`. The `exports` object is then returned when a user invokes `require('utils')`.
 
@@ -20,37 +20,38 @@ Although namespacing can lower the chance of collisions, it can still become an 
 	      exports.merge = merge;
 	  })(module, module.exports);
 
-First create the file _./utils.js_, and define the `merge()` function as seen below. The implied anonymous wrapper function shown above allows us to seemingly define globals, however these are not accessible until exported. 
+First create the file _./modules/utils.js_, and define the `merge()` function as seen below. The implied anonymous wrapper function shown above allows us to seemingly define globals, however these are not accessible until exported. 
 
-	  function merge(obj, other) {
-	      var keys = Object.keys(other);
-	      for (var i = 0, len = keys.length; i < len; ++i) {
-	          var key = keys[i];
-	          obj[key] = other[key];
-	      }
-	      return obj;
-	  };
-	  
-	  exports.merge = merge;
+	function merge(obj, other) {
+	  var keys = Object.keys(other);
+	  for (var i = 0, len = keys.length; i < len; ++i) {
+	    var key = keys[i];
+	    obj[key] = other[key];
+	  }
+	  return obj;
+	};
 
-The typical pattern for public properties is to simply define them
-on the `exports` object like so:
+	exports.merge = merge;
 
-    exports.merge = function(obj, other) {
-        var keys = Object.keys(other);
-        for (var i = 0, len = keys.length; i < len; ++i) {
-            var key = keys[i];
-            obj[key] = other[key];
-        }
-        return obj;
-    };
+The typical pattern for public properties is to simply define them on the `exports` object like so:
+
+	// modules/utils.js
+	exports.merge = function(obj, other) {
+	  var keys = Object.keys(other);
+	  for (var i = 0, len = keys.length; i < len; ++i) {
+	      var key = keys[i];
+	      obj[key] = other[key];
+	  }
+	  return obj;
+	};
  
 Next we will look at utilizing out new module in other libraries.
 
 ## Requiring Modules
 
-To get started with requiring modules, first create a second file named _./app.js_ with the code shown below. The first line `require('./utils')` fetches the contents of _./utils.js_ and returns the `exports` of which we later utilize our `merge()` method and display the results of our merged object using `console.dir()`.
-
+To get started with requiring modules, first create a second file named _./modules/app.js_ with the code shown below. The first line `require('./utils')` fetches the contents of _./modules/utils.js_ and returns the `exports` of which we later utilize our `merge()` method and display the results of our merged object using `console.dir()`.
+	
+	// modules/app.js
 	var utils = require('./utils');
 
 	var a = { one: 1 };
@@ -58,17 +59,19 @@ To get started with requiring modules, first create a second file named _./app.j
 	utils.merge(a, b);
 	console.dir(a);
 
-Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if _~/.node_libraries/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
+Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node\_libraries_, so if _~/.node\_libraries/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
 
-Node also supports the concept of _index_ JavaScript files. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
+Node also supports the concept of _index_ JavaScript files. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./modules/math/add.js_ and _./modules/math/sub.js_ files. So where does _index.js_ come into play? we can populate _./modules/math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
 
+	// modules/util.js
 	module.exports = {
 	    add: require('./add'),
 	    sub: require('./sub')
 	};
 	
-The contents of _./math/add.js_ show us a new technique; here we use `module.exports` instead of `exports`.  As previously mentioned, `exports` is not the only object exposed to the module file when evaluated. We also have access to `__dirname`, `__filename`, and `module` which represents the current module. We simply define the module export object to a new object, which happens to be a function. 
+The contents of _./modules/math/add.js_ show us a new technique; here we use `module.exports` instead of `exports`.  As previously mentioned, `exports` is not the only object exposed to the module file when evaluated. We also have access to `__dirname`, `__filename`, and `module` which represents the current module. We simply define the module export object to a new object, which happens to be a function. 
 
+	// modules/math/add.js
 	module.exports = function add(a, b){
 	    return a + b;
 	};
@@ -137,14 +140,13 @@ If you'd like to examine other objects, the node console supports the well-known
 
 ### require()
 
-Although not obvious at first glance, the `require()` function is actually
-re-defined for the current module, and calls an internal function `loadModule` with a reference to the current `Module` to resolve relative paths and to populate `module.parent`.
+Although not obvious at first glance, the `require()` function is actually re-defined for the current module, and calls an internal function `loadModule` with a reference to the current `Module` to resolve relative paths and to populate `module.parent`.
 
 ### module
 
 When we `require()` a module, typically we only deal with the module's `exports`, however the `module` variable references the current module's `Module` instance. This is why the following is valid, as we may re-assign the module's `exports` to any object, even something trivial like a string:
 
-    // css.js
+    // modules/css.js
     module.exports = 'body { background: blue; }';
 
 To obtain this string we would simply `require('./css')`. The `module` object also contains these useful properties:
@@ -158,32 +160,34 @@ To obtain this string we would simply `require('./css')`. The `module` object al
 
 Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using `require.registerExtension()` we can have node compile CoffeeScript to JavaScript in an automated fashion. 
 
-To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at _./compiler/example.ejs_, its syntax will look like this:
+To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at _./modules/compiler/example.ejs_, its syntax will look like this:
 
-    ::min(a, b) a < b ? a : b
-    ::max(a, b) a > b ? a : b
+	// modules/compiler/example.ejs
+	::min(a, b) a < b ? a : b
+	::max(a, b) a > b ? a : b
 
 which will be compiled to:
 
-    exports.min = function min(a, b) { return a < b ? a : b }
-    exports.max = function max(a, b) { return a > b ? a : b }
+	exports.min = function min(a, b) { return a < b ? a : b }
+	exports.max = function max(a, b) { return a > b ? a : b }
 
-First let's create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at _./compiler/extended.js_, and exports a single method named `compile()`. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.
+First let's create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at _./modules/compiler/extended.js_, and exports a single method named `compile()`. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.
 
-
-    exports.compile = function(str){
-        return str
+	// modules/compiler/extended.js
+	exports.compile = function(str){
+	  return str
             .replace(/(\w+)\(/g, '$1 = function $1(')
             .replace(/\)(.+?)\n/g, '){ return $1 }\n')
             .replace(/::/g, 'exports.');
-    };
+    	};
 
-Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at _./compiler/extended.js_ so we are requiring it in.  Prior to node.js 0.3.0, we would pass the `compile()` method to `require.registerExtension()` which simply expects a function accepting a string, and returning a string of JavaScript.
+Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at _./modules/compiler/extended.js_ so we are requiring it in.  Prior to node.js 0.3.0, we would pass the `compile()` method to `require.registerExtension()` which simply expects a function accepting a string, and returning a string of JavaScript.
 
     require.registerExtension('.ejs', require('./compiler/extended').compile);
 
 The new way to register an extension is to add a key to the require.extensions object with a function which specifies how to process the file.  For compatibility, we can use `require.extensions` and fallback to `require.registerExtension`.
 
+    // modules/compiler.js
     if(require.extensions) {
       require.extensions['.ejs'] = function(module,filename){
         var content = require('fs').readFileSync(filename, 'utf8');
@@ -197,14 +201,17 @@ The new way to register an extension is to add a key to the require.extensions o
 
 Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.
 
+    // modules/compiler.js
     var example = require('./compiler/example');
     console.dir(example)
     console.log(example.min(2, 3));
     console.log(example.max(10, 8));
 
-    // => { min: [Function], max: [Function] }
-    // => 2
-    // => 10
+This should display the following output when run with `node ./src/modules/compiler.js` in a terminal:
 
-Run the above script in a terminal with `node ./src/modules/compile.js`
+    $ node compiler.js 
+    { min: [Function: min], max: [Function: max] }
+    2
+    10
+
 

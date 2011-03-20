@@ -1,7 +1,7 @@
 
 # Installing Node
 
-In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at [homebrew](http://github.com/mxcl/homebrew), [nDistro](http://github.com/visionmedia/ndistro), and the most flexible method, of course - compiling from source.
+In this chapter we will be looking at the installation and compilation of node. Although there are several ways we may install node, we will be looking at [homebrew](http://github.com/mxcl/homebrew), and the most flexible method, of course - compiling from source.
 
 ### Homebrew
 
