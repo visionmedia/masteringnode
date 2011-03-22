@@ -208,3 +208,10 @@ Now when we require our example, the ".ejs" extension is detected, and will pass
 
 Run the above script in a terminal with `node ./src/modules/compile.js`
 
+## Patterns 
+
+  ...
+
+## Best Practices
+
+  ...

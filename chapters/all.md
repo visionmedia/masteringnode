@@ -8,6 +8,7 @@
 @include fs.md
 @include tcp.md
 @include http.md
+@include https.md
 @include connect.md
 @include express.md
 @include testing.md
