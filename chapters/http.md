@@ -11,21 +11,27 @@ Let's take a look at the `request` and `response` objects of an HTTP server crea
 
     // http/view_request.js
     var http = require('http'), 
-        fs = require('fs'), 
-        util = require('util');
+    fs = require('fs'), 
+    util = require('util'),
+    tty = require('tty');
 
-    http.createServer(function(req, res) {
+    var server = http.createServer(function(req, res) {
         console.log("Received a request!");
         fs.writeFile('./request.txt', util.inspect(req) );
         res.writeHead(200, { 'Content-Type' : 'text/html' });
         res.write("<html><head></head><body><h1>Hello, World!</h1><p>We're serving up html!</p></body></html>");
         res.end();
         fs.writeFile('./response.txt', util.inspect(res) );
-    }).listen(9111);
+    });
+
+    // ... cleanup on exit (see file)
 
     console.log("Server is running on http://localhost:9111");
+    console.log("Hit CTRL+C to shutdown the http server");
 
 Run this sample with `node src/http/view_request.js` from a terminal.  Then, navigate to the server location displayed in the terminal.  This will generate two files: `./src/http/request.txt` and `./src/http/response.txt`.
+
+*!IMPORTANT!* You must always remember to provide a way to close a server.  Leaving an open server running developmental code can be a security risk.
 
 ## HTTP Request
 
