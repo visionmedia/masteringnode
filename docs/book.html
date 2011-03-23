@@ -376,6 +376,14 @@ console.log(example.max(10, 8));</code></pre>
 2
 10</code></pre>
 
+<h2 id="patterns">Patterns</h2>
+
+<p>  ...</p>
+
+<h2 id="best_Practices">Best Practices</h2>
+
+<p>  ...</p>
+
 <h1>Globals</h1>
 
 <p> As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
@@ -399,13 +407,13 @@ console.log(example.max(10, 8));</code></pre>
 
 <h3 id="console.log">console.log()</h3>
 
-<p>The most frequently used console method is <code>console.log()</code> simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
+<p>The most frequently used console method is <code>console.log()</code>, simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
 <pre><code>&gt; console.log('wahoo');
-// =&gt; wahoo
+wahoo
 
 &gt; console.log({ foo: 'bar' });
-// =&gt; { foo: 'bar' }</code></pre>
+{ foo: 'bar' }</code></pre>
 
 <h3 id="console.error">console.error()</h3>
 
@@ -418,8 +426,8 @@ console.log(example.max(10, 8));</code></pre>
 <p>Utilizes the <em>sys</em> module's <code>inspect()</code> method to pretty-print the object to
 <em>stdout</em>.</p>
 
-<pre><code>console.dir({ foo: 'bar' });
-// =&gt; { foo: 'bar' } </code></pre>
+<pre><code>&gt; console.dir({ foo: 'bar' });
+{ foo: 'bar' } </code></pre>
 
 <h3 id="console.assert">console.assert()</h3>
 
@@ -455,7 +463,7 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process.execPath">process.execPath</h3>
 
-<p>Path to the executable itself "<em>/usr/local/bin/node</em>".</p>
+<p>Path to the executable itself, defaults to "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process.platform">process.platform</h3>
 
@@ -469,7 +477,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>Returns the current working directory, for example:</p>
 
-<pre><code>cd /var &amp;&amp; node
+<pre><code>$ cd /var &amp;&amp; node
 &gt; process.cwd()
 '/var'</code></pre>
 
@@ -517,7 +525,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>When executing a file with the <code>node</code> executable, <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
 
-<p>For example our source file <em>./src/process/misc.js</em> can be executed by running:</p>
+<p>For example, our source file <em>./src/process/misc.js</em> can be executed by running:</p>
 
 <pre><code>$ node src/process/misc.js foo bar baz</code></pre>
 
@@ -538,7 +546,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
 
-<pre><code>/* ./src/process/exceptions.js */
+<pre><code>// process/exceptions.js
 process.on('uncaughtException', function(err){
     console.log('got an error: %s', err.message);
     process.exit(1);
@@ -552,7 +560,7 @@ setTimeout(function(){
 
 <p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
 
-<pre><code>/* ./src/process/kill.js */
+<pre><code>// process/kill.js
 process.on('SIGTERM', function(){
     console.log('terminating');
     process.exit(1);
@@ -581,13 +589,14 @@ setTimeout(function(){
 
 <h1>Events</h1>
 
-<p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
+<p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <code>EventEmitter</code>.</p>
 
 <h2 id="emitting_Events">Emitting Events</h2>
 
-<p>Typically an object inherits from <em>EventEmitter</em>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
+<p>Typically an object inherits from <code>EventEmitter</code>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
 
-<pre><code>var EventEmitter = require('events').EventEmitter;
+<pre><code>// events/basic.js
+var EventEmitter = require('events').EventEmitter;
 
 var emitter = new EventEmitter;
 
@@ -600,15 +609,18 @@ emitter.emit('name', 'simon', 'holowaychuk');</code></pre>
 
 <h2 id="inheriting_From_EventEmitter">Inheriting From EventEmitter</h2>
 
-<p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
+<p>Perhaps a more practical use of <code>EventEmitter</code>, and commonly used throughout node, is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
 
 <p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>.</p>
 
-<pre><code>var EventEmitter = require('events').EventEmitter;
+<pre><code>// events/subclass.js
+var EventEmitter = require('events').EventEmitter;
 
 function Dog(name) {
     this.name = name;
 }</code></pre>
+
+<ul><li>Note: JavaScript doesn't have 'classes'.  The file above is called 'subclass' because this is a term commonly used for inheritance in an object-oriented language.*</li></ul>
 
 <p>Here we inherit from <code>EventEmitter</code>, so that we may use the methods provided such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, no worries! we will be touching on this later.</p>
 
@@ -628,9 +640,10 @@ simon.on('bark', function(){
     simon.emit('bark');
 }, 500);</code></pre>
 
-<p>You may look at the above code and think, "Why don't I just add a <em>bark</em> function?"  That's a good question.  The power of events is in subscribing to events that occur when a function on the object is executed.  For instance, if you have a writeable <code>Stream</code> object with the function <code>.write()</code>, you may subscribe to a data event.  The follow event example is directly from the node api documentation:</p>
+<p>You may look at the above code and think, "Why don't I just add a <em>bark</em> function?"  That's a good question.  The power of events is in subscribing to events that occur when a function on the object is executed.  For instance, if you have a writeable <code>Stream</code> object with the function <code>write()</code>, you may subscribe to a data event.  The following event example is directly from the node api documentation:</p>
 
-<pre><code>var util = require("util");
+<pre><code>// events/streams.js
+var util = require("util");
 var events = require("events");
 
 function MyStream() {
@@ -653,9 +666,9 @@ stream.on("data", function(data) {
 });
 stream.write("It works!"); // Received data: "It works!"</code></pre>
 
-<p>This example is fairly complicated compared to most of the examples so far.  It does a number of things that haven't yet been covered, but are included here for completeness.  First of all, we're creating an object called MyStream which inherits from EventEmitter. This was mentioned earlier, but this provides a nice example of using the util module for inheritance.  Then, we set the write function to emit the <em>data</em> event to any subscribers (<em>EventListeners</em>).  In this function, we could also provide some default functionality (more than emitting an event), such as writing to an inner sink, logging, or any number of operations.</p>
+<p>This example is fairly complicated compared to most of the examples so far.  It does a number of things that haven't yet been covered, but are included here for completeness.  First of all, we're creating an object of <code>MyStream</code> called <code>stream</code>, which inherits from <code>EventEmitter</code>. This was mentioned earlier, but the api's example provides a nice use of the util module for inheritance.  Then, we set the <code>write</code> function to emit the <em>data</em> event to any subscribers (which are called <em>EventListeners</em>).  In this function, we could also provide some default functionality (more than emitting an event), such as writing to an inner sink, logging, or any number of operations.</p>
 
-<p>After setting up the object, this example writes to the log to demonstrate that both the stream and the <code>super_</code> object are instances of EvenEmitter.  Afterward, we subscribe to the "data" event and log the data that is emitted from the <code>MyStream.prototype.write</code> function.  This means that anything passed to the <code>.write()</code> function is emitted to all subscribers as the single object passed to the callback function.  In other words, anytime we call <code>.write()</code>, we're going to log with a little message to show that the parameter is being written by the emitted event.</p>
+<p>After setting up the object, this example writes to <code>console.log()</code> to demonstrate that both the stream and the <code>super_</code> object are instances of <code>EventEmitter</code>.  Afterward, we subscribe to the <code>"data"</code> event and log the data that is emitted from the <code>MyStream.prototype.write</code> function.  This means that anything passed to the <code>write()</code> function is emitted to all subscribers as the single object passed to the callback function.  In other words, anytime we call <code>write()</code>, we're going to log with a little message to show that the parameter is being written by the emitted event.</p>
 
 <p>So, unlike the dog barking example, this shows that a single function can have multiple operations occur via events.</p>
 
@@ -663,9 +676,10 @@ stream.write("It works!"); // Received data: "It works!"</code></pre>
 
 <h2 id="removing_Event_Listeners">Removing Event Listeners</h2>
 
-<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
+<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often, we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below, we emit the <em>message</em> <code>'foo bar'</code> every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>emitter.on()</code> originally. To complement this method is <code>removeAllListeners(type)</code>, which removes all listeners associated to the given <em>type</em>.</p>
 
-<pre><code>var EventEmitter = require('events').EventEmitter;
+<pre><code>// events/removing.js
+var EventEmitter = require('events').EventEmitter;
 
 var emitter = new EventEmitter;
 
@@ -681,9 +695,9 @@ setTimeout(function(){
 
 <h1>Buffers</h1>
 
-<p> To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
+<p>To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
 
-<p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
+<p>The simplest way to construct a <code>Buffer</code> from a string is to pass a string as the first argument to <code>Buffer</code>'s constructor. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
 <pre><code>&gt; var hello = new Buffer('Hello');
 
@@ -741,7 +755,7 @@ setTimeout(function(){
 &gt; hello.length
 12</code></pre>
 
-<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
+<p>The <code>length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
 
 <pre><code>&gt; var ellipsis = new Buffer('…', 'utf8');
 &gt; console.log('… string length: %d', '…'.length);
@@ -774,11 +788,11 @@ setTimeout(function(){
 
 <h1>Streams</h1>
 
-<p> Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from <em>stdin</em>. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.</p>
+<p>Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from <em>stdin</em>. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.</p>
 
 <h2 id="readable_Streams">Readable Streams</h2>
 
-<p> Readable streams such as an HTTP request inherit from <code>EventEmitter</code> in order to expose incoming data through events. The first of these events is the <em>data</em> event, which is an arbitrary chunk of data passed to the event handler as a <code>Buffer</code> instance. </p>
+<p>Readable streams such as an HTTP request inherit from <code>EventEmitter</code> in order to expose incoming data through events. The first of these events is the <em>data</em> event, which is an arbitrary chunk of data passed to the event handler as a <code>Buffer</code> instance. </p>
 
 <pre><code>req.on('data', function(buf){
     // Do something with the Buffer
@@ -794,7 +808,8 @@ req.on('data', function(str){
 
 <p>Another import event is the <em>end</em> event, which represents the ending of <em>data</em> events. For example below we define an HTTP echo server, simply "pumping" the request body data through to the response. So if we <strong>POST</strong> "hello world", our response will be "hello world".</p>
 
-<pre><code>var http = require('http');
+<pre><code>// streams/echo.js
+var http = require('http');
 
 http.createServer(function(req, res){
     res.writeHead(200);
@@ -808,7 +823,8 @@ http.createServer(function(req, res){
 
 <p>The <em>sys</em> module actually has a function designed specifically for this "pumping" action, aptly named <code>sys.pump()</code>, which accepts a read stream as the first argument, and write stream as the second.</p>
 
-<pre><code>var http = require('http'),
+<pre><code>// streams/pump.js
+var http = require('http'),
     sys = require('sys');
 
 http.createServer(function(req, res){
@@ -818,13 +834,14 @@ http.createServer(function(req, res){
 
 <h1>File System</h1>
 
-<p> To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
+<p>  To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
 
 <h2 id="working_with_the_filesystem">Working with the filesystem</h2>
 
-<p> Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:</p>
+<p>  Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:</p>
 
-<pre><code>var fs = require('fs');
+<pre><code>// fs/basics.js
+var fs = require('fs');
 
 fs.mkdir('./helloDir',0777, function (err) {
   if (err) throw err;
@@ -854,11 +871,10 @@ console.log(data);</code></pre>
 
 <h2 id="file_information">File information</h2>
 
-<p>  The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we
-  are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a
-  directory object.</p>
+<p>The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a directory object.</p>
 
-<pre><code>var fs = require('fs');
+<pre><code>// fs/stat.js
+var fs = require('fs');
 
 fs.readdir('/etc/', function (err, files) {
   if (err) throw err;
@@ -882,7 +898,8 @@ fs.readdir('/etc/', function (err, files) {
 
 <p>  The fs.watchfile monitors a file and will fire the event whenever the file is changed.</p>
 
-<pre><code>var fs = require('fs');
+<pre><code>// fs/watch.js
+var fs = require('fs');
 
 fs.watchFile('./testFile.txt', function (curr, prev) {
   console.log('the current mtime is: ' + curr.mtime);
@@ -899,8 +916,7 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 
 <h2 id="nodejs_Docs_for_further_reading">Nodejs Docs for further reading</h2>
 
-<p>  The node api <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands
-  available when working with Nodejs.</p>
+<p>  The node api <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands available when working with Nodejs.</p>
 
 <h1>TCP</h1>
 
@@ -910,7 +926,7 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 
 <p>Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos "You were connected!" to a client connection and outputs "A client has connected!" to <em>stdout</em>.</p>
 
-<pre><code>// tcp_server.js
+<pre><code>// tcp/tcp_server.js
 var sys = require('sys');
 var tcp = require('net');
 var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
@@ -919,7 +935,7 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
     socket.end();
 }).listen(8000, '127.0.0.1');</code></pre>
 
-<p>To test this server, enter <code>node tcp_server.js</code> in a terminal.  Then, open another terminal to telnet into this server.</p>
+<p>To test this server, enter <code>node src/tcp/tcp_server.js</code> in a terminal.  Then, open another terminal to telnet into this server.</p>
 
 <pre><code>$ telnet 127.0.0.1 8000</code></pre>
 
@@ -931,15 +947,106 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <h1>HTTP</h1>
 
-<p> ...</p>
+<p>Node's HTTP module offers a chunkable, buffered interface to the HTTP protocol.  Headers are JSON objects with lower-case keys and original values.</p>
+
+<pre><code>{ 'content-length': '123', 'content-type': 'text/plain' }</code></pre>
+
+<p>The HTTP module is low-level, meaning it handles the headers and the message (and that's about it).  This creates a solid framework ontop of which modules can be built for web frameworks (<a href="http://www.expressjs.com">express</a>, <a href="http://www.geddy.com">geddy</a>, file servers, browsers (<a href="http://www.google.com/?q=zombiejs">zombie.js</a>, and even SaaS (<a href="http://www.cloud9ide.com)">cloud9 IDE</a>.</p>
+
+<p>Let's take a look at the <code>request</code> and <code>response</code> objects of an HTTP server created by node.  To do this, we're going to create a server, inspect both of these objects in the request, and write a dump of the inspection out to a file.</p>
+
+<pre><code>// http/view_request.js
+var http = require('http'), 
+    fs = require('fs'), 
+    util = require('util');
+
+http.createServer(function(req, res) {
+    console.log("Received a request!");
+    fs.writeFile('./request.txt', util.inspect(req) );
+    res.writeHead(200, { 'Content-Type' : 'text/html' });
+    res.write("&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;p&gt;We're serving up html!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;");
+    res.end();
+    fs.writeFile('./response.txt', util.inspect(res) );
+}).listen(9111);
+
+console.log("Server is running on http://localhost:9111");</code></pre>
+
+<p>Run this sample with <code>node src/http/view_request.js</code> from a terminal.  Then, navigate to the server location displayed in the terminal.  This will generate two files: <code>./src/http/request.txt</code> and <code>./src/http/response.txt</code>.</p>
+
+<h2 id="hTTP_Request">HTTP Request</h2>
+
+<p>Let's take a look at what the request object looks like from the server example above. You should see output similar to:</p>
+
+<pre><code>// http/request.txt
+// ...
+httpVersion: '1.1',
+  complete: false,
+  headers: 
+   { host: 'localhost:9111',
+     connection: 'keep-alive',
+     accept: '*/*',
+     'user-agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.14 Safari/534.24',
+     'accept-encoding': 'gzip,deflate,sdch',
+     'accept-language': 'en-US,ru;q=0.8',
+     'accept-charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3' },
+  trailers: {},
+  readable: true,
+  url: '/favicon.ico',
+  method: 'GET',
+  statusCode: null, 
+// ...</code></pre>
+
+<h2 id="hTTP_Response">HTTP Response</h2>
+
+<p>Let's take a look at what the request object looks like from the server example above. You should see output similar to:</p>
+
+<pre><code>{ output: [],
+  outputEncodings: [],
+  writable: true,
+  _last: false,
+  chunkedEncoding: true,
+  shouldKeepAlive: true,
+  useChunkedEncodingByDefault: true,
+  _hasBody: true,
+  _trailer: '',
+  finished: true,
+  socket: null,
+  connection: null,
+  _events: { finish: [Function] },
+  _header: 'HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: keep-alive\r\nTransfer-Encoding: chunked\r\n\r\n',
+  _headerSent: true }</code></pre>
 
 <h2 id="hTTP_Servers">HTTP Servers</h2>
 
-<p> ...</p>
+<p>http.Server exposes a number of events (request, connection, close, request, etc.) and three functions for creation, listening for requests, and closing the server.</p>
 
 <h2 id="hTTP_Clients">HTTP Clients</h2>
 
 <p> ...</p>
+
+<h2 id="url_Module">Url Module</h2>
+
+<p> ...</p>
+
+<h2 id="micro_Frameworks">Micro-Frameworks</h2>
+
+<h3 id="geddy">Geddy</h3>
+
+<p>...</p>
+
+<h3 id="zombieJS">ZombieJS</h3>
+
+<p>...</p>
+
+<h3 id="cloud9_IDE">cloud9 IDE</h3>
+
+<p>...</p>
+
+<h1>HTTPS</h1>
+
+<h2 id="hTTPS_Server">HTTPS Server</h2>
+
+<h2 id="hTTPS_Client">HTTPS Client</h2>
 
 <h1>Connect</h1>
 
@@ -947,9 +1054,239 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <h1>Express</h1>
 
-<p>Express is a ...</p>
+<p><a href="www.expressjs.com">Express</a> is a robust and feature-rich web application framework for node.js written by TJ Holowaychuk, Ciaran Jessup, Aaron Heckmann, and Guillermo Rauch.  </p>
+
+<h2 id="install">Install</h2>
+
+<h2 id="simple_First_Project">Simple First Project</h2>
 
 <h1>Testing</h1>
+
+<p>Testing is a very large topic.  There are different types of testing, each with different methodologies.  Then, there are also strong feelings of developers toward which type of testing is the best or most effective.</p>
+
+<ul><li>Assertion Testing<ul><li>Tests a true or false condition against known objects or values</li></ul></li><li>Behavioral Testing<ul><li>Tests how one object acts when interacting with another</li></ul></li><li>Functional/Acceptance Testing<ul><li>"Black box" testing of a system, usually code-agnostic</li></ul></li><li>Regression Testing<ul><li>Tests for consistency after changes have been made to code</li></ul></li><li>Others...</li></ul>
+
+<p>There are many other types of testing, but these are some large topics in the testing arena.  Development practices include Test-Driven Development (TDD), Behavior-Driven Development, and others. Some programmers don't believe in testing, others believe tests should be written before the code, while others still believe tests should only be written for the most important code.  As you can see, this is a large and complex topic.</p>
+
+<p>Whether you write tests before you code, test only the most important code, or casually write tests when there is time, it is important to choose a testing tool that fits your needs.</p>
+
+<h2 id="assert_Module">assert Module</h2>
+
+<p>To begin, require the assert module:</p>
+
+<pre><code>var assert = require('assert');</code></pre>
+
+<p>This module exposes a few functions common to assertion testing:</p>
+
+<pre><code>// equality
+assert.equal(actual, expected, [message])
+assert.notEqual(actual, expected, [message])
+assert.deepEqual(actual, expected, [message])
+assert.notDeepEqual(actual, expected, [message])
+assert.strictEqual(actual, expected, [message])
+assert.notStrictEqual(actual, expected, [message])
+
+// exception
+assert.throws(block, [error], [message])
+assert.doesNotThrow(block, [error], [message])
+assert.ifError(value)
+
+// condition
+assert.ok(value, [message])
+assert.fail(actual, expected, message, operator)</code></pre>
+
+<p>These are pretty self-explanatory if you've written assertion tests before. Let's look at a pretty simple test, anyway.  We'll code in an object for the test that will do what we want for each test.</p>
+
+<h3 id="synchronous_Testing_with_Assert">Synchronous Testing with Assert</h3>
+
+<pre><code>// testing/equality_no_errors.js
+var assert = require('assert'),
+    tester_a = {
+      val : 'a'
+    }, 	
+    tester_b = {
+      val : 'b'
+    };
+
+assert.equal(tester_a.val, 'a');
+assert.equal(tester_b.val, 'b');</code></pre>
+
+<p>In this example, we're using the assert module to check that a value on each of these objects is the expected value.  This works well because the values are equal.  But, the assert module throws an <code>AssertionError</code> whenever an assertion fails.  So, it doesn't really make sense to have a single file with end-to-end assertions as in the <code>./src/testing/equality\_no\_errors.js</code> file.  This is where testing frameworks like <em>nodeunit</em> or <em>expresso</em> come in very handy.  They offer common functionality of test frameworks (like metrics, etc.).</p>
+
+<p>To see how the <code>AssertionError</code> being thrown from <code>assert.equal</code> can be problematic, change the expected value in the first test to an incorrect value.  Then, change the expected value in the very last test to an incorrect value and run <code>node src/testing/equality_no_errors.js</code> again.  You'll see that, because of the procedural style of the code, the last test never runs!  </p>
+
+<p>In order to run multiple assertions and provide feedback, the simplest test (without a testing framework) would use a <code>try/catch</code> and provide output to <em>stdout</em>.</p>
+
+<pre><code>// testing/equality_with_errors.js
+var assert = require('assert'),
+    tester_a = {
+      val : 'aa'
+    }, total = 0, good = 0;
+
+// assert.equal(actual, expected, [message])
+try {
+    console.log("assert.equal(tester_a.val, 'a')");
+    assert.equal(tester_a.val, 'a');
+    passed();
+} catch (err) { writeException(err); }
+
+console.log("%d of %d tests passed", good, total);
+
+function writeException(err) {
+    console.log("Test failed!");
+    util.inspect(err);
+    if(err["name"] === "AssertionError") {
+        console.log("Message: " + (err["message"] || "None"));
+        console.log("Expected: " + err["expected"]);
+        console.log("Actual: " + err["actual"]);
+        console.log("Operation: " + err["operator"]);
+    }
+    console.log("");
+    total = total + 1;
+}
+
+function passed() {
+    good = good + 1;
+    total = total + 1;
+    console.log("Test passed!\n");
+}</code></pre>
+
+<p>The above code is part of the code from within <em>./src/testing/equality_with_errors.js</em>.  It shows how to run synchronous tests with a minimal amount of redundant code, <em>without</em> writing a lightweight testing module for your tests.  This may be what you want, but most likely it isn't.</p>
+
+<h3 id="the_problems">The problems</h3>
+
+<p>You <em>could</em> write a simple helper module to run these tests for you.  But, how do you verify the order of your tests?  This can become complex very quickly.</p>
+
+<p>You can partially resolve this with the <code>try/catch</code> block example above, but this requires a lot of redundant code.  Compare <em>./src/testing/equality_with_errors.js</em> and <em>./src/testing/equality_no_errors.js</em> to see how the testing quickly expands!  Run <code>node testing/equality_with_errors.js</code> to see the output.  That's more like it! Isn't that nice?  </p>
+
+<p>Yes and no.  There are a few problems with this code: </p>
+
+<ol><li>It isn't evented</li><li>It hard-codes test objects</li><li>It is very redundant</li><li>It isn't scalable</li></ol>
+
+<p>Well, then, <em>what are other options?</em></p>
+
+<h2 id="nodeunit">Nodeunit</h2>
+
+<p><a href="https://github.com/caolan/nodeunit">Nodeunit</a> is a framework similar to nunit in that it allows for multiple test cases (running in parallel), and supports mocks and stubs.  It is easy to use, and even allows you to run tests in the browser.</p>
+
+<p>Nodeunit testing starts with exporting a test or two from a module.</p>
+
+<pre><code>// testing/nodeunit_basics.js
+module.exports = {
+    'Test 1' : function(test) {
+        test.expect(1);
+        test.ok(true, "This shouldn't fail");
+        test.done();
+    },
+    'Test 2' : function(test) {
+        test.expect(2);
+        test.ok(1 === 1, "This shouldn't fail");
+        test.ok(false, "This should fail");
+        test.done();
+    }
+};</code></pre>
+
+<p>Here, we have a module exporting two tests, <code>Test 1</code> and <code>Test 2</code>.  You may have noticed that the <code>test</code> object in the functions have an <code>ok()</code> method just like the <code>assert</code> module mentioned above.  Good eye.  In fact, <code>test</code> supports all of the assert functions and adds two others: <code>expect(number)</code> and <code>done()</code>.  The <code>expect</code> function tells nodeunit how many tests are being run within the context of the current test case.  When all tests are finished, call <code>test.done()</code> to let nodeunit know the test case has completed (and a callback may have failed).</p>
+
+<p>The output of nodeunit is visually helpful.  </p>
+
+<pre><code>$ nodeunit src/testing/nodeunit_basics.js 
+
+nodeunit_basics.js
+✔ Test 1
+✖ Test 2
+
+Assertion Message: This should fail
+AssertionError: false == true
+    at Object.ok (/usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/types.js:81:39)
+    at /home/jim/projects/masteringnode/src/testing/nodeunit_basics.js:10:14
+    at Object.runTest (/usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/core.js:54:9)
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/core.js:90:21
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:508:13
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:118:25
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:129:25
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:510:17
+    at Array.&lt;anonymous&gt; (/usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/types.js:144:17)
+    at EventEmitter._tickCallback (node.js:108:26)
+
+
+FAILURES: 1/3 assertions failed (8ms)</code></pre>
+
+<p>Nodeunit will list all test cases run within the test, followed by any <code>AssertionError</code> output and the number of passing or failing assertions.  This is the default (minimal) output.  </p>
+
+<h3 id="nodeunit_reporters">Nodeunit reporters</h3>
+
+<p>Nodeunit ships with a number of reporters and it is possible to add custom reporters.  </p>
+
+<pre><code>$ nodeunit --list-reporters
+Build-in reporters: 
+  * default: Default tests reporter
+  * minimal: Pretty minimal output
+  * junit: jUnit XML test reports
+  * html: Report tests result as HTML
+  * skip_passed: Skip passed tests output
+  * browser: Browser-based test reporter</code></pre>
+
+<p>To output to junit, run the command as:</p>
+
+<pre><code>$ cd src/testing &amp;&amp; nodeunit --reporter junit nodeunit_basics.js --output junit.out</code></pre>
+
+<p>This creates an xml file (whitespace has been condensed):</p>
+
+<pre><code>// testing/junit.out/nodeunit_basics.js.xml
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;testsuite name="nodeunit_basics.js"
+         errors="0"
+         failures="0"
+         tests="2"&gt;
+  &lt;testcase name="Test 1"&gt;
+  &lt;/testcase&gt;
+  &lt;testcase name="Test 2"&gt;
+  &lt;/testcase&gt;
+&lt;/testsuite&gt;</code></pre>
+
+<p>This is great, but in a real-world development environment, you may be asked to write reports with a specific format, wording, or links (in html) to files with failing test cases.  Luckily, nodeunit allows us to customize this output.</p>
+
+<h3 id="nodeunit_Custom_reporters">Nodeunit Custom reporters</h3>
+
+<p>To write a custom reporter for nodeunit, first decide how you'd like nodeunit to report information about your tests.  As a simple example, let's take a look at a different take on the <a href="https://github.com/caolan/nodeunit/blob/master/lib/reporters/minimal.js">minimal</a> reporter.</p>
+
+<p>Here are the modifications I'd like to see:</p>
+
+<ul><li>Show the start time of the test</li><li>Show the filename as bold/green</li><li>Add <em>[PASS]</em> or <em>[FAIL]</em> after the <em>✔</em> or <em>✖</em></li><li>Prefix a test case with a '|'</li></ul>
+
+<p>These may seem like contrived requirements.  But, what if my manager wants me to parse textual output for <em>[FAIL]</em> and, for whatever reason, it has to say <em>[FAIL]</em>?  </p>
+
+<p>The modifications to the <em>minimal</em> reporter are too spread out to include inline here, so be sure to check out the file at <em>./src/testing/reporterse/example.js</em>.</p>
+
+<p>Here is the slightly modified minimal output, meeting all of the requirements.</p>
+
+<pre><code>$ cd src/testing &amp;&amp; nodeunit --reporter reporters/example.js nodeunit_basics.js 
+Tests started: Tue Mar 22 2011 21:24:42 GMT-0700 (PDT)
+nodeunit_basics.js: 
+
+✔ [PASS] | Test 1
+✖ [FAIL] | Test 2
+
+
+AssertionError: false == true
+    at Object.ok (/usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/types.js:81:39)
+    at /home/jim/projects/masteringnode/src/testing/nodeunit_basics.js:10:14
+    at Object.runTest (/usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/core.js:54:9)
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/core.js:90:21
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:508:13
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:118:25
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:129:25
+    at /usr/local/lib/node/.npm/nodeunit/0.5.1/package/deps/async.js:510:17
+    at Array.&lt;anonymous&gt; (/usr/local/lib/node/.npm/nodeunit/0.5.1/package/lib/types.js:144:17)
+    at EventEmitter._tickCallback (node.js:108:26)
+
+
+FAILURES: 1/3 assertions failed (9ms)</code></pre>
+
+<p>These were small modifications, but following through the <a href="https://github.com/caolan/nodeunit/tree/master/lib/reporters">reporters included in nodeunit</a>, it will be easy to output test reports to your desired format.</p>
+
+<h3 id="nodeunit_Mocks_and_Stubs">Nodeunit Mocks and Stubs</h3>
 
 <p>  ...</p>
 
@@ -958,6 +1295,10 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 <p>  ...</p>
 
 <h2 id="vows">Vows</h2>
+
+<p>  ...</p>
+
+<h2 id="fixtures">Fixtures</h2>
 
 <p>  ...</p>
 
