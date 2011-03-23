@@ -215,3 +215,10 @@ This should display the following output when run with `node ./src/modules/compi
     10
 
 
+## Patterns 
+
+  ...
+
+## Best Practices
+
+  ...
