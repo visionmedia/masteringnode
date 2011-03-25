@@ -957,21 +957,27 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <pre><code>// http/view_request.js
 var http = require('http'), 
-    fs = require('fs'), 
-    util = require('util');
+fs = require('fs'), 
+util = require('util'),
+tty = require('tty');
 
-http.createServer(function(req, res) {
+var server = http.createServer(function(req, res) {
     console.log("Received a request!");
     fs.writeFile('./request.txt', util.inspect(req) );
     res.writeHead(200, { 'Content-Type' : 'text/html' });
     res.write("&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;p&gt;We're serving up html!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;");
     res.end();
     fs.writeFile('./response.txt', util.inspect(res) );
-}).listen(9111);
+});
 
-console.log("Server is running on http://localhost:9111");</code></pre>
+// ... cleanup on exit (see file)
+
+console.log("Server is running on http://localhost:9111");
+console.log("Hit CTRL+C to shutdown the http server");</code></pre>
 
 <p>Run this sample with <code>node src/http/view_request.js</code> from a terminal.  Then, navigate to the server location displayed in the terminal.  This will generate two files: <code>./src/http/request.txt</code> and <code>./src/http/response.txt</code>.</p>
+
+<p><em>!IMPORTANT!</em> You must always remember to provide a way to close a server.  Leaving an open server running developmental code can be a security risk.</p>
 
 <h2 id="hTTP_Request">HTTP Request</h2>
 
@@ -1018,7 +1024,164 @@ httpVersion: '1.1',
 
 <h2 id="hTTP_Servers">HTTP Servers</h2>
 
-<p>http.Server exposes a number of events (request, connection, close, request, etc.) and three functions for creation, listening for requests, and closing the server.</p>
+<p>http.Server exposes a number of events (request, connection, close, response, etc.) and three functions for creation, listening for requests, and closing the server.  We saw examples of a few of these at the beginning of this section. Up to this point, most of the code we've looked at has been mainly procedural.  To create a server, we will have to implement quite a few things we've learned up to this point:</p>
+
+<ul><li>Write a module for an http server</li><li>Expose events which occur on the server</li><li>Serve/compile files</li><li>Respond to events</li></ul>
+
+<p>Like the first example in this chapter, we'll be using the <em>http</em>, <em>fs</em> and <em>tty</em> modules.  To make this interesting, though, we'll also do a compilation from markdown to html so that our server is doing a little more than serving static files. To simplify the example, we won't also be serving static files or even sending a full range of HTTP status codes; everything is <code>200 OK</code> in this example.</p>
+
+<h3 id="creating_the_module">Creating the module</h3>
+
+<p>Our module will be located at <code>./src/http/server/</code>.  The directory is structured in the following way:</p>
+
+<pre><code>$ ls -l
+total 20
+drwxr-xr-x 3 jim jim 4096 2011-03-23 16:31 lib
+-rw-r--r-- 1 jim jim   56 2011-03-23 17:13 package.json
+drwxr-xr-x 2 jim jim 4096 2011-03-24 07:25 pages
+-rw-r--r-- 1 jim jim 3034 2011-03-24 07:57 server.js
+drwxr-xr-x 2 jim jim 4096 2011-03-23 20:31 templates</code></pre>
+
+<p>The file <code>server.js</code> is our module.  So we don't need to call <code>var server = require('./server/server.js')</code> at the top of our node application, we're also going to include <code>package.json</code> which specifies where the main routine for our module is located.</p>
+
+<pre><code>// http/server/package.json
+{ "name" : "example server",
+  "main" : "./server.js" }</code></pre>
+
+<p>Recall from the <em>Modules</em> chapter that it is also possible to include an <code>index.js</code> file.  </p>
+
+<p>Next, let's identify the functionality we'll require in this module.  First, we know that we'll have to read a file.  We'll call that function <code>getFile()</code>. Then, since we're simplifying things for example's sake, we're assuming all files are in markdown format and converting all files to html.  We'll call that function <code>getHtml()</code>.  I know, I'm really creative.</p>
+
+<p>Finally, we'll have a function called <code>run()</code> which creates the server and listens on the specified port.  To make our module useful, we have to expose functionality which, in our case, is only the run method.  Here is how we will interface with our module:</p>
+
+<pre><code>// http/server_example.js
+var server = require('./server');
+server.run({ port: 9222 });</code></pre>
+
+<p>We also have the option of performing a function before starting the server:</p>
+
+<pre><code>server.run({ port: 9222, 
+    beforeStart: function(){ 
+        console.log("before start");
+    } 
+});</code></pre>
+
+<p>Now that we have a plan in place for the interaction with the module, let's take a look at the three functions, <code>getFile()</code>, <code>getHtml()</code>, and <code>run()</code>.</p>
+
+<p><strong> getFile(request) </strong></p>
+
+<p>The <code>getFile()</code> function assumes that all requests occur at the base of the server's uri. It also ignores requests for <code>/favicon.ico</code> and for the base uri <code>/</code>.  It then builds a full path to the file and attempts to read the file in a single blocking call. This blocking call helps ensure that we're passing data correctly to the Markdown module.</p>
+
+<pre><code>// http/server/server.js
+var getFile = function(request) {
+    if(!request) {
+        console.log("getFile called with empty request");
+        noop();
+    }
+
+   var callback = arguments[arguments.length - 1];
+   if (typeof(callback) !== 'function') callback = noop;
+
+   var filename = url.parse(request).pathname.replace('html', 'md');
+   if(filename === "/favicon.ico") return;
+   if(filename === "/" || filename === "") { filename = "/index.md"; }
+
+   var requestedFile = __dirname + '/pages' + filename;
+
+   console.log('Requested: ' + requestedFile);
+   var data = fs.readFileSync(requestedFile, "utf8");
+   callback(data);
+};</code></pre>
+
+<p>This function uses the same pattern of identifying a callback as the node libraries.  The <code>noop()</code> function is defined as <code>var noop = function() { };</code> which saves us from creating numerous empty callbacks and checking for functions where those callbacks are required.  For those unfamiliar with the term <em>noop</em>, it means the function performs <strong>no op</strong>eration.</p>
+
+<p><strong> getHtml(request) </strong></p>
+
+<p>The second function in our module performs the conversion between markdown and html.  It does this in the callack to the <code>getFile()</code> function, transforms the markdown to html, and passes the result to its own callback. </p>
+
+<pre><code>// http/server/server.js
+var getHtml = function(request) {
+    var callback = arguments[arguments.length - 1];
+    if (typeof(callback) !== 'function') callback = noop;
+
+    // get the data and call markdown
+    try {
+        getFile(request, function(data) {
+            if(!data) { 
+                callback("Nothing to see here!");
+            }
+            var html = template.replace("{{content}}", markdown.toHTML(markdown.parse(data), {xhtml:true}));
+            console.log(html);
+            callback(html);
+        }); 
+    } catch(err) {
+        console.log(err);
+        callback("Nothing to see here!");
+    }
+}; </code></pre>
+
+<p>If there are any errors, it returns a string: "Nothing to see here!" A message like this usually accompanies a <code>404 - Not Found</code> HTTP status, but we're keeping this pretty simple.</p>
+
+<p><strong> run() </strong></p>
+
+<p>The run function requires the following server to be created.  The <code>requestListener</code> function calls <code>getHtml</code> and writes the html to the response.  Here, we're using a buffer to get the proper byte length and attempt to output a properly-encoded html string.</p>
+
+<pre><code>// http/server/server.js
+var server = http.createServer(function(req, res) {
+    getHtml(req.url, function(html) {
+        var buf = new Buffer(html, "utf8");
+        res.writeHead(200, { 'Content-Type' : 'text/html', 'Content-Length' : buf.length });
+        res.write(buf.toString());
+        res.end();
+    });
+});</code></pre>
+
+<p>Next, the run function sets the options we're allowing (port number and a function to call before starting the server).  We're also catching all errors and logging the output to the console.  </p>
+
+<pre><code>// http/server/server.js
+var run = function(opts) {
+    try {
+        if(opts &amp;&amp; typeof opts['beforeStart'] === 'function'){
+            opts['beforeStart']();
+        }
+        var port = (opts &amp;&amp; opts.port) || 9111;
+
+        // ... Removed CTRL+C interrupt code from previous example
+
+        server.listen(port, function() {
+            console.log("Server is running on http://localhost:" + port);
+            console.log("Hit CTRL+C to shutdown the http server");
+        });
+    } catch(err) {
+        console.log(err);
+    }
+};</code></pre>
+
+<p>Notice how we've moved the console logging to the <code>server.listen</code> callback.  This makes more sense than the procedural example from before- if the port isn't available and <code>server.listen</code> throws an error, you don't want to tell the developer that the server has started!  This is how things should be programmed, and it's part of what makes node.js so awesome.</p>
+
+<p><strong> Exposing <code>run()</code> </strong></p>
+
+<p>The last thing to do to make our module run is to expose the run function.  To revisit from the <em>Modules</em> chapter, you can do this a few ways:</p>
+
+<pre><code>// 1. Multiple assignment
+var server = exports.server = http.createServer(requestListener);
+
+// 2. Inline assignment
+exports.server = http.createServer(requestListener);
+
+// 3. Post-facto assignment
+var server = http.createServer(requestListener);
+exports.server = server;</code></pre>
+
+<p>There's no 'correct' method, and each has it's benefits. Please refer to the <em>Best Practices</em> section for more information.</p>
+
+<p><strong> Run it! </strong></p>
+
+<pre><code>$ node src/http/server_example.js 
+Server is running on http://localhost:9222
+Hit CTRL+C to shutdown the http server</code></pre>
+
+<p>After receiving the output to confirm the server is running, visit <a href="http://localhost:9222">http://localhost:9222</a> to check it out.  Then, hit <code>CTRL+C</code> to be sure the server's <code>close</code> function is working as expected.</p>
 
 <h2 id="hTTP_Clients">HTTP Clients</h2>
 

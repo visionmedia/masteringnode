@@ -42,7 +42,13 @@ Requires [Calibre](http://calibre-ebook.com/)
 ## MOBI
 
 Required by `make book.mobi`:
-Requires [Calibre](http://calibre-ebook.com/)
+Requires [Calibre](http://calibre-ebook.com/), specifically `ebook-convert` version 3.
+
+To install the most recent version of calibre:
+
+    sudo python -c "import urllib2; exec urllib2.urlopen('http://status.calibre-ebook.com/linux_installer').read(); main()"
+
+To make the `book.mobi` format:
 
     $ make book.mobi
 

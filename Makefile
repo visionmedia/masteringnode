@@ -29,7 +29,22 @@ book.html: clean pages/head.html pages/tail.html $(HTML)
 
 book.mobi: book.html
 	@echo "\nGenerating: $@"
-	ebook-convert docs/book.html docs/book.mobi --output-profile kindle
+	ebook-convert docs/book.html docs/book.mobi --output-profile kindle \
+		--dont-compress \
+		--mobi-ignore-margins \
+		--pretty-print \
+		--insert-blank-line \
+		--margin-left 50 \
+		--margin-right 50 \
+		--margin-top 50 \
+		--margin-bottom 50 \
+		--title "Mastering Node" \
+		--authors "TJ Holowaychuk, Jim Schubert" \
+		--tags "Mastering Node, JavaScript, node.js" \
+		--language en \
+		--cover pages/cover.jpg \
+		--disable-fix-indents \
+		--disable-font-rescaling 
 
 book.epub: book.html
 	@echo "\nGenerating: $@"
@@ -37,6 +52,7 @@ book.epub: book.html
 		--title "Mastering Node" \
 		--no-default-epub-cover \
 		--authors "TJ Holowaychuk, Jim Schubert" \
+		--tags "Mastering Node, JavaScript, node.js" \
 		--language en \
 		--cover pages/cover.jpg
 
