@@ -150,11 +150,96 @@ The `getFile()` function assumes that all requests occur at the base of the serv
        callback(data);
     };
 
-This function uses the same pattern of identifying a callback as the node libraries.  The `noop()` function is defined as `var noop = function() { };` which saves us from creating numerous empty callbacks and checking for functions where those callbacks are required.
+This function uses the same pattern of identifying a callback as the node libraries.  The `noop()` function is defined as `var noop = function() { };` which saves us from creating numerous empty callbacks and checking for functions where those callbacks are required.  For those unfamiliar with the term _noop_, it means the function performs **no op**eration.
 
 ** getHtml(request) **
 
-... 
+The second function in our module performs the conversion between markdown and html.  It does this in the callack to the `getFile()` function, transforms the markdown to html, and passes the result to its own callback. 
+
+    // http/server/server.js
+    var getHtml = function(request) {
+        var callback = arguments[arguments.length - 1];
+        if (typeof(callback) !== 'function') callback = noop;
+
+        // get the data and call markdown
+        try {
+            getFile(request, function(data) {
+                if(!data) { 
+                    callback("Nothing to see here!");
+                }
+                var html = template.replace("{{content}}", markdown.toHTML(markdown.parse(data), {xhtml:true}));
+                console.log(html);
+                callback(html);
+            }); 
+        } catch(err) {
+            console.log(err);
+            callback("Nothing to see here!");
+        }
+    }; 
+
+If there are any errors, it returns a string: "Nothing to see here!" A message like this usually accompanies a `404 - Not Found` HTTP status, but we're keeping this pretty simple.
+
+** run() **
+
+The run function requires the following server to be created.  The `requestListener` function calls `getHtml` and writes the html to the response.  Here, we're using a buffer to get the proper byte length and attempt to output a properly-encoded html string.
+
+    // http/server/server.js
+    var server = http.createServer(function(req, res) {
+        getHtml(req.url, function(html) {
+            var buf = new Buffer(html, "utf8");
+            res.writeHead(200, { 'Content-Type' : 'text/html', 'Content-Length' : buf.length });
+            res.write(buf.toString());
+            res.end();
+        });
+    });
+
+Next, the run function sets the options we're allowing (port number and a function to call before starting the server).  We're also catching all errors and logging the output to the console.  
+
+    // http/server/server.js
+    var run = function(opts) {
+        try {
+            if(opts && typeof opts['beforeStart'] === 'function'){
+                opts['beforeStart']();
+            }
+            var port = (opts && opts.port) || 9111;
+
+            // ... Removed CTRL+C interrupt code from previous example
+
+            server.listen(port, function() {
+                console.log("Server is running on http://localhost:" + port);
+                console.log("Hit CTRL+C to shutdown the http server");
+            });
+        } catch(err) {
+            console.log(err);
+        }
+    };
+
+Notice how we've moved the console logging to the `server.listen` callback.  This makes more sense than the procedural example from before- if the port isn't available and `server.listen` throws an error, you don't want to tell the developer that the server has started!  This is how things should be programmed, and it's part of what makes node.js so awesome.
+
+** Exposing `run()` **
+
+The last thing to do to make our module run is to expose the run function.  To revisit from the _Modules_ chapter, you can do this a few ways:
+
+    // 1. Multiple assignment
+    var server = exports.server = http.createServer(requestListener);
+
+    // 2. Inline assignment
+    exports.server = http.createServer(requestListener);
+
+    // 3. Post-facto assignment
+    var server = http.createServer(requestListener);
+    exports.server = server;
+    
+There's no 'correct' method, and each has it's benefits. Please refer to the _Best Practices_ section for more information.
+
+** Run it! **
+
+    $ node src/http/server_example.js 
+    Server is running on http://localhost:9222
+    Hit CTRL+C to shutdown the http server
+
+After receiving the output to confirm the server is running, visit [http://localhost:9222](http://localhost:9222) to check it out.  Then, hit `CTRL+C` to be sure the server's `close` function is working as expected.
+
 
 ## HTTP Clients
 
