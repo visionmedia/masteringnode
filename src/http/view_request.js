@@ -13,8 +13,10 @@ var server = http.createServer(function(req, res) {
 });
 
 process.on('exit', function(){
-    console.log('Shutting down the server on http://localhost:9111');
-    if(server) server.close();
+    if(server) {
+        console.log('Shutting down the server on http://localhost:9111');
+        server.close();
+    }
 });
 
 process.on('SIGTERM', function(){
@@ -29,6 +31,7 @@ process.stdin.on('keypress', function(char, key) {
 });
 
 server.listen(9111);
+fs.writeFile((__dirname + '/server.txt'), util.inspect(server));
 tty.setRawMode(true);
 process.stdin.resume();
 
