@@ -7,7 +7,7 @@
 
 Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos "You were connected!" to a client connection and outputs "A client has connected!" to _stdout_.
 
-	// tcp_server.js
+	// tcp/tcp_server.js
 	var sys = require('sys');
 	var tcp = require('net');
 	var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
@@ -17,7 +17,7 @@ Many times, a server will do two things: write data to the console and send data
 	}).listen(8000, '127.0.0.1');
 
 
-To test this server, enter `node tcp_server.js` in a terminal.  Then, open another terminal to telnet into this server.
+To test this server, enter `node src/tcp/tcp_server.js` in a terminal.  Then, open another terminal to telnet into this server.
 
 	$ telnet 127.0.0.1 8000
 

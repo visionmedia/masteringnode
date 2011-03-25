@@ -23,13 +23,13 @@ Let's take a look at what each method does.
 
 ### console.log()
 
-The most frequently used console method is `console.log()` simply writing to _stdout_ with a line feed (`\n`). Currently aliased as `console.info()`.
+The most frequently used console method is `console.log()`, simply writing to _stdout_ with a line feed (`\n`). Currently aliased as `console.info()`.
 
 	> console.log('wahoo');
-	// => wahoo
+	wahoo
 
 	> console.log({ foo: 'bar' });
-	// => { foo: 'bar' }
+	{ foo: 'bar' }
 
 ### console.error()
 
@@ -42,8 +42,8 @@ Identical to `console.log()`, however writes to _stderr_. Aliased as `console.wa
 Utilizes the _sys_ module's `inspect()` method to pretty-print the object to
 _stdout_.
 
-	console.dir({ foo: 'bar' });
-	// => { foo: 'bar' } 
+	> console.dir({ foo: 'bar' });
+	{ foo: 'bar' } 
 
 ### console.assert()
 
@@ -80,7 +80,7 @@ Exposes the installation prefix, which defaults to "_/usr/local_", as node's bin
 
 ### process.execPath
 
-Path to the executable itself "_/usr/local/bin/node_".
+Path to the executable itself, defaults to "_/usr/local/bin/node_".
 
 ### process.platform
 
@@ -94,7 +94,7 @@ The process id.
 
 Returns the current working directory, for example:
 
-	cd /var && node
+	$ cd /var && node
 	> process.cwd()
 	'/var'
 
@@ -142,7 +142,7 @@ An object containing the user's environment variables, for example:
 
 When executing a file with the `node` executable, `process.argv` provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.
 
-For example our source file _./src/process/misc.js_ can be executed by running:
+For example, our source file _./src/process/misc.js_ can be executed by running:
 
 	$ node src/process/misc.js foo bar baz
 
@@ -163,7 +163,7 @@ The `process.exit()` method is synonymous with the C function `exit()`, in which
 
 The process itself is an `EventEmitter`, allowing you to do things like listen for uncaught exceptions, via the _uncaughtException_ event:
 
-	/* ./src/process/exceptions.js */
+	// process/exceptions.js
 	process.on('uncaughtException', function(err){
 	    console.log('got an error: %s', err.message);
 	    process.exit(1);
@@ -177,7 +177,7 @@ The process itself is an `EventEmitter`, allowing you to do things like listen f
 
 `process.kill()` method sends the signal passed to the given _pid_, defaulting to **SIGINT**. In our example below we send the **SIGTERM** signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.
 
-	/* ./src/process/kill.js */
+	// process/kill.js
 	process.on('SIGTERM', function(){
 	    console.log('terminating');
 	    process.exit(1);
