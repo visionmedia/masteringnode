@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="container"> 
-<div style="display:none"></div>
+<div style="display:none"><!-- all --></div>
 <h1>Mastering Node</h1>
 
 <p><a href="http://nodejs.org">Node</a> is an exciting new platform developed by <em>Ryan Dahl</em>, allowing JavaScript developers to create extremely high performance servers by leveraging <a href="http://code.google.com/p/v8/">Google V8</a> JavaScript engine, and asynchronous I/O. In <em>Mastering Node</em>) we will discover how to write high concurrency web servers, utilizing the CommonJS module system, node's core libraries, third party modules, high level web development and more.</p>
@@ -1026,7 +1026,7 @@ httpVersion: '1.1',
 
 <p>http.Server exposes a number of events (request, connection, close, response, etc.) and three functions for creation, listening for requests, and closing the server.  We saw examples of a few of these at the beginning of this section. Up to this point, most of the code we've looked at has been mainly procedural.  To create a server, we will have to implement quite a few things we've learned up to this point:</p>
 
-<ul><li>Write a module for an http server</li><li>Expose events which occur on the server</li><li>Serve/compile files</li><li>Respond to events</li></ul>
+<ul><li>Write a module for an http server</li><li>Expose events which occur on the server</li><li>Serve/compile files</li></ul>
 
 <p>Like the first example in this chapter, we'll be using the <em>http</em>, <em>fs</em> and <em>tty</em> modules.  To make this interesting, though, we'll also do a compilation from markdown to html so that our server is doing a little more than serving static files. To simplify the example, we won't also be serving static files or even sending a full range of HTTP status codes; everything is <code>200 OK</code> in this example.</p>
 
@@ -1182,6 +1182,44 @@ Server is running on http://localhost:9222
 Hit CTRL+C to shutdown the http server</code></pre>
 
 <p>After receiving the output to confirm the server is running, visit <a href="http://localhost:9222">http://localhost:9222</a> to check it out.  Then, hit <code>CTRL+C</code> to be sure the server's <code>close</code> function is working as expected.</p>
+
+<p><strong> Where are the events? </strong></p>
+
+<p>You may have noticed that we met only half of the requirements with the above implementation of our server.  To expose events, our <code>run</code> method would have to inherit from <code>EventEmitter</code>. That doesn't <em>really</em> make sense.  For the sake of simplicity and brevity, we previously only had three methods.  We had no class-like objects, and we didn't touch an object's prototype.  Also, the three methods we did have didn't make good use of callbacks.  So, there is another take on this example at <em>./src/http/server/server2.js</em>.</p>
+
+<p>This is set up so that our <code>run</code> function returns our <code>Example</code> object. This object has properties for our configurables (such as the pages directory, template name, etc.).  It also has the functions from the previous example, which have been slightly refactored.</p>
+
+<p>First, you'll notice the inheritence of the <code>Example</code> object from <code>EventEmitter</code>:</p>
+
+<pre><code>// http/server/server2.js
+util.inherits(Example, EventEmitter);</code></pre>
+
+<p>This allows us to call <code>this.emit('eventName')</code> at different times in our code, which executes all of the listeners bound to these events in the order they were declared.</p>
+
+<p>Now, at different points of the code, you'll see a <code>this.emit()</code> or <code>self.emit()</code> call.  For instance, in the <code>getServer</code> function, we emit the <code>request</code> and <code>requestComplete</code> events.</p>
+
+<pre><code>// http/server/server2.js
+Example.prototype.getServer = function() {
+	var self = this, ct = 'text/html; charset=utf-8';
+	return http.createServer(function(req, res) {
+		self.emit('request', req.url);
+		self.getHtml(req.url, function(html) {
+			var buf = new Buffer(html, "utf8");
+			res.writeHead(200, 
+				{ 
+					'Content-Type' : ct, 
+				 	'Content-Length' : buf.length 
+			 	});
+			res.write(buf.toString());
+			res.end();
+			self.emit('requestComplete');
+		});
+	});
+};</code></pre>
+
+<p>Because we know that all responses will be <em>html</em>, the request comes in and immediate emits the <code>request</code> event.  Our <code>getHtml</code> function is written to do one of two things. First, it gets a valid string of html, emits it as <em>data</em> to the <code>data</code> event, then passes it to <code>getHtml</code>'s callback as the <em>html</em> parameter, which ultimately writes that string to the response. </p>
+
+<p>The alternative is when a request is ignored either explicitly with the <code>option.ignorePaths</code> array, or implicitly by <code>fs.readFileSync</code> throwing an error.  Either way, we emit the <code>data</code> event with the content as "ignored".  The <code>getHtml</code> function above then writes an empty response.</p>
 
 <h2 id="hTTP_Clients">HTTP Clients</h2>
 
