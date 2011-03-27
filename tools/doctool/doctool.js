@@ -113,7 +113,7 @@ if (argc > 3) {
 
       output = output.replace("{{section}}", filename);
     } else {
-      output = output.replace("{{section}}", "");
+      output = output.replace("{{section}}", filename);
       output = output.replace(/<body([^>]*)>/, '<body class="'+filename+'" $1>');
     }
     if (html.length == 0) {

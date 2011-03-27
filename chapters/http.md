@@ -83,7 +83,6 @@ http.Server exposes a number of events (request, connection, close, response, et
 * Write a module for an http server
 * Expose events which occur on the server
 * Serve/compile files
-* Respond to events
 
 Like the first example in this chapter, we'll be using the _http_, _fs_ and _tty_ modules.  To make this interesting, though, we'll also do a compilation from markdown to html so that our server is doing a little more than serving static files. To simplify the example, we won't also be serving static files or even sending a full range of HTTP status codes; everything is `200 OK` in this example.
 
@@ -239,6 +238,44 @@ There's no 'correct' method, and each has it's benefits. Please refer to the _Be
     Hit CTRL+C to shutdown the http server
 
 After receiving the output to confirm the server is running, visit [http://localhost:9222](http://localhost:9222) to check it out.  Then, hit `CTRL+C` to be sure the server's `close` function is working as expected.
+
+** Where are the events? **
+
+You may have noticed that we met only half of the requirements with the above implementation of our server.  To expose events, our `run` method would have to inherit from `EventEmitter`. That doesn't *really* make sense.  For the sake of simplicity and brevity, we previously only had three methods.  We had no class-like objects, and we didn't touch an object's prototype.  Also, the three methods we did have didn't make good use of callbacks.  So, there is another take on this example at _./src/http/server/server2.js_.
+
+This is set up so that our `run` function returns our `Example` object. This object has properties for our configurables (such as the pages directory, template name, etc.).  It also has the functions from the previous example, which have been slightly refactored.
+
+First, you'll notice the inheritence of the `Example` object from `EventEmitter`:
+
+	// http/server/server2.js
+	util.inherits(Example, EventEmitter);
+	
+This allows us to call `this.emit('eventName')` at different times in our code, which executes all of the listeners bound to these events in the order they were declared.
+
+Now, at different points of the code, you'll see a `this.emit()` or `self.emit()` call.  For instance, in the `getServer` function, we emit the `request` and `requestComplete` events.
+
+	// http/server/server2.js
+	Example.prototype.getServer = function() {
+		var self = this, ct = 'text/html; charset=utf-8';
+		return http.createServer(function(req, res) {
+			self.emit('request', req.url);
+			self.getHtml(req.url, function(html) {
+				var buf = new Buffer(html, "utf8");
+				res.writeHead(200, 
+					{ 
+						'Content-Type' : ct, 
+					 	'Content-Length' : buf.length 
+				 	});
+				res.write(buf.toString());
+				res.end();
+				self.emit('requestComplete');
+			});
+		});
+	};
+	
+Because we know that all responses will be _html_, the request comes in and immediate emits the `request` event.  Our `getHtml` function is written to do one of two things. First, it gets a valid string of html, emits it as _data_ to the `data` event, then passes it to `getHtml`'s callback as the _html_ parameter, which ultimately writes that string to the response. 
+
+The alternative is when a request is ignored either explicitly with the `option.ignorePaths` array, or implicitly by `fs.readFileSync` throwing an error.  Either way, we emit the `data` event with the content as "ignored".  The `getHtml` function above then writes an empty response.
 
 
 ## HTTP Clients
