@@ -277,10 +277,51 @@ Because we know that all responses will be _html_, the request comes in and imme
 
 The alternative is when a request is ignored either explicitly with the `option.ignorePaths` array, or implicitly by `fs.readFileSync` throwing an error.  Either way, we emit the `data` event with the content as "ignored".  The `getHtml` function above then writes an empty response.
 
+**Note:** `http.ServerRequest`, the type of the `request` parameter in the _requestListener_ passed to `http.createServer`, emits its own _data_ and _end_ events.  Instead of emitting our own events, we could expose the existing events instead of emitting completely new and renamed events.
 
 ## HTTP Clients
 
- ...
+Node also provides client functionality in the _http_ module.  To begin with the http client functionality, we're going to open one terminal and run the server from the previous example: `node src/http/server_example2.js`.  The first client code we're going to run is slightly modified from node's v0.4.0 documentation.  
+
+### http.get(options, callback)
+
+This example uses the `http.get` function.  This function is a wrapper around the `http.request` function which assumes that a get doesn't write a body to the server request, ultimately only expecting a response.  If you're familiar with jQuery, node's `http.get` is a wrapper around `http.request` in much the same way as jQuery's `$.get` is a wrapper around the `$.ajax` function; the big difference is that in node, we're not working with an _XmlHttpRequest_ object-- we're working directly with _sockets_ and _streams_.
+
+	// http/http_get.js
+	var http = require('http'),
+		util = require('util');
+
+	var opt = {
+		host: 'localhost',
+		port: 9222,
+		path: '/index.html'
+	};
+
+	http.get(opt, function(response) {
+		console.log("http.get [Status]: %s", response.statusCode);
+		console.log("http.get [method]: %s", response.client._httpMessage.method);
+		console.log("http.get [path]: %s", response.client._httpMessage.path);
+		console.log("http.get [method]:\n%s", response.client._httpMessage._header);
+		// console.log("http.get [client]:\n%s", util.inspect(response.client));
+	}).on('error', function(err) {
+		console.log("http.get [Error]: " + err.message);
+	});
+
+**Note: see the Globals chapter for information on `err.errno` constants**
+	
+With the server from the previous example running, we can run the _./src/http/http_get.js_ example and examine the output.
+
+	$ node src/http/http_get.js 
+	http.get [Status]: 200
+	http.get [method]: GET
+	http.get [path]: /index.html
+	http.get [method]:
+	GET /index.html HTTP/1.1
+	Host: localhost
+	Connection: close
+	
+If you'd like to view the full client object, uncomment the last line from the callback in the file _./src/http/http_get.js_.  
+
 
 ## Url Module
 

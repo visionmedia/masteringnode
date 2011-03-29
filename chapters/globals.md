@@ -192,13 +192,37 @@ The process itself is an `EventEmitter`, allowing you to do things like listen f
 	    console.log('never called');
 	}, 1000);
 
+### process.binding()
+
+Node performs lazy initialization and caching for a number of built-in modules through the `process.binding` function.  If you'd like to poke around in node's source code and view this binding cache implementation, navigate to your node checkout directory and open _./src/node.cc_.  The code for the binding cache starts on like 1749 (of node.js v0.4.0).
+
+Currently, the cacheable process bindings include: built-in modules, `constants`, `io_watcher`, `timer` and `natives`.  To access the constants, instead of using `var constants = require('constants');`, you could lazily bind the constants as it is done in the `fs` module:
+
+	// [node.js source]/lib/fs.js
+	var util = require('util');
+
+	var binding = process.binding('fs');
+	var constants = process.binding('constants');
+	var fs = exports;
+	var Stream = require('stream').Stream;
+	// ...
+
+Binding in this way allows us to perform the initialization of those modules bound to `process` only once. We can then extend those bindings because they are an exported module like any other `require`.
+
+Another reason for caching the bindings in this way is because these bindings differ across platforms.  If you were to open _node_constants.cc_, you would see conditional includes for _MINGW32_ and `ifdef`s for each constant.  You wouldn't want to hardcode these constants in a module's exports.  If you opened opened the _constants_ module definition, you would see one line:
+
+	// [node.js source]/lib/constants.js
+	module.exports = process.binding('constants');
+	
+After a single require of this module, or call to `process.binding('constants')`, the constants are initialized and cached.  This lazy initialization improves node's startup.
+
 ### errno
 
-_*TODO: Does process still support these error constants?_
+To access `errno` constants, you'll need to either add the include `var constants = require('constants');` or use the `var constants = process.binding('constants');` method described earlier.
 
-The `process` object is host of the error numbers, these reference what you would find in C-land, for example `process.EPERM` represents a permission based error, while `process.ENOENT` represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:
+The `constants` object is host of the error numbers, these reference what you would find in C-land, for example `constants.EPERM` represents a permission based error, while `constants.ENOENT` represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well as in the http request error object:
 
-    if (err.errno === process.ENOENT) {
+    if (err.errno === constants.ENOENT) {
 		// Display a 404 "Not Found" page
 	} else {
 		// Display a 500 "Internal Server Error" page

@@ -21,10 +21,11 @@ To build and install node from source, we first need to obtain the code. The fir
 via `git`, if you have git installed you can execute:
 
     $ git clone http://github.com/joyent/node.git && cd node
+    $ git checkout v0.4.0
 
 For those without _git_, or who prefer not to use it, we can also download the source via _curl_, _wget_, or similar:
 
-    $ curl -# http://nodejs.org/dist/node-v0.4.2.tar.gz > node.tar.gz
+    $ curl -# http://nodejs.org/dist/node-v0.4.0.tar.gz > node.tar.gz
     $ tar -zxf node.tar.gz
 
 Now that we have the source on our machine, we can run `./configure` which discovers which libraries are available for node to utilize such as _OpenSSL_ for transport security support, C and C++ compilers, etc. `make` which builds node, and finally `make install` which will install node.
