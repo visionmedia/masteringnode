@@ -81,7 +81,8 @@ When dealing with a JavaScript string, we may pass it to the `Buffer.byteLength(
 
 The api is written in such a way that it is String-like, so for example we can work with "slices" of a `Buffer` by passing offsets to the `slice()` method:
 
-	> var chunk = buf.slice(4, 9);
+	> var buf = new Buffer('For some other string!');
+	> var chunk = buf.slice(4, 8);
 	> console.log(chunk.toString());
 	'some'
 
