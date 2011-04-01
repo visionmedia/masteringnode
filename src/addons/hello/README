@@ -1,0 +1,66 @@
+Here is a dump of the console for creating the addon from the node docs.
+__________________
+
+jim@jim-cr48:~$ cd projects/masteringnode/src/
+jim@jim-cr48:~/projects/masteringnode/src$ mkdir -p addons/hello
+jim@jim-cr48:~/projects/masteringnode/src$ cd addons/hello/
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello$ cat > hello.cc<<EOF
+> #include <v8.h>
+> 
+> using namespace v8;
+> 
+> extern "C" void
+> init (Handle<Object> target)
+> {
+>   HandleScope scope;
+>   target->Set(String::New("hello"), String::New("world"));
+> }
+> EOF
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello$ cat > wscript<<EOF
+> srcdir = '.'
+> blddir = 'build'
+> VERSION = '0.0.1'
+> 
+> def set_options(opt):
+>   opt.tool_options('compiler_cxx')
+> 
+> def configure(conf):
+>   conf.check_tool('compiler_cxx')
+>   conf.check_tool('node_addon')
+> 
+> def build(bld):
+>   obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
+>   obj.target = 'hello'
+>   obj.source = 'hello.cc'
+> 
+> EOF
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello$ node-waf configure build
+Checking for program g++ or c++          : /usr/bin/g++ 
+Checking for program cpp                 : /usr/bin/cpp 
+Checking for program ar                  : /usr/bin/ar 
+Checking for program ranlib              : /usr/bin/ranlib 
+Checking for g++                         : ok  
+Checking for node path                   : ok /home/jim/.node_libraries 
+Checking for node prefix                 : ok /usr/local 
+'configure' finished successfully (0.177s)
+Waf: Entering directory `/media/16GB/projects/masteringnode/src/addons/hello/build'
+[1/2] cxx: hello.cc -> build/default/hello_1.o
+[2/2] cxx_link: build/default/hello_1.o -> build/default/hello.node
+Waf: Leaving directory `/media/16GB/projects/masteringnode/src/addons/hello/build'
+'build' finished successfully (0.586s)
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello$ ls
+build  hello.cc  wscript
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello$ cd build/
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello/build$ ls
+c4che  config.log  default
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello/build$ cd default/
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello/build/default$ ls
+hello_1.o  hello.node
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello/build/default$ ./hello.node 
+Segmentation fault
+jim@jim-cr48:~/projects/masteringnode/src/addons/hello/build/default$ node
+> var hello = require('./hello.node');
+> hello
+{ hello: 'world' }
+> 
+
