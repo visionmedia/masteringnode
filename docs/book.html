@@ -118,11 +118,12 @@ var num = 1;</code></pre>
 <p>To build and install node from source, we first need to obtain the code. The first method of doing so is
 via <code>git</code>, if you have git installed you can execute:</p>
 
-<pre><code>$ git clone http://github.com/joyent/node.git &amp;&amp; cd node</code></pre>
+<pre><code>$ git clone http://github.com/joyent/node.git &amp;&amp; cd node
+$ git checkout v0.4.0</code></pre>
 
 <p>For those without <em>git</em>, or who prefer not to use it, we can also download the source via <em>curl</em>, <em>wget</em>, or similar:</p>
 
-<pre><code>$ curl -# http://nodejs.org/dist/node-v0.4.2.tar.gz &gt; node.tar.gz
+<pre><code>$ curl -# http://nodejs.org/dist/node-v0.4.0.tar.gz &gt; node.tar.gz
 $ tar -zxf node.tar.gz</code></pre>
 
 <p>Now that we have the source on our machine, we can run <code>./configure</code> which discovers which libraries are available for node to utilize such as <em>OpenSSL</em> for transport security support, C and C++ compilers, etc. <code>make</code> which builds node, and finally <code>make install</code> which will install node.</p>
@@ -384,6 +385,187 @@ console.log(example.max(10, 8));</code></pre>
 
 <p>  ...</p>
 
+<h1>Addons</h1>
+
+<p>The node documentation for addons is self-admittedly pretty weak as of v0.4.0.</p>
+
+<p>This chapter doesn't aim to be a replacement for the official documentation.  Instead, we'd hope this can expand on some of the basics a little more than a simple "Hello, World!" and drive you as a developer more on the path toward mastering node through its source code.</p>
+
+<p>In fact, for now, we're only going to cover some shortcuts for creating properties on an object, functions, and interacting with function prototypes.  This doesn't reach the evented level of node's awesomeness, but you should be able to look at examples in node's source and the documention for <em>libev</em> and <em>libeio</em> to find answers.</p>
+
+<h2 id="pre_requisites">Pre-requisites</h2>
+
+<ul><li>Some C/C++ knowledge</li><li>V8 JavaScript</li><li>Internal Node libraries</li><li><a href="http://cvs.schmorp.de/libev/ev.html">libev</a></li><li>libeio</li></ul>
+
+<h2 id="hello.node">hello.node</h2>
+
+<p>Our first example is the very same one from node's docs.  We're going to include it for those who haven't read through the docs and have instead trusted in the knowledge of this ebook's authors (thanks, by the way).</p>
+
+<p>A node addon begins with a source file containing a single entry point: </p>
+
+<pre><code>// addons/hello/hello.cc
+#include &lt;v8.h&gt;
+
+using namespace v8;
+
+extern "C" void
+init (Handle&lt;Object&gt; target)
+{
+  HandleScope scope;
+  target-&gt;Set(String::New("hello"), String::New("world"));
+}</code></pre>
+
+<p>This is a C/C++ file which begins by including the <em>v8.h</em> header.  It then uses the <em>v8</em> namespace to make the code a little cleaner. Finally, the entry point accepts a single parameter, <code>Handle&lt;Object&gt; target</code>.  If you don't use the <em>v8</em> namespace as we've done here, your parameter will read <code>v8::Handle&lt;v8::Object&gt; target</code>.  As you can see, <code>Object</code> is a <em>v8</em> class.  This is actually the same object we would otherwise refer to using <code>exports</code> in a regular node source file.</p>
+
+<p>Within the <code>init</code> method, we do two things.  First, we create a scope.  Again, this is the same as is done with the <code>exports</code> object in a JavaScript file.  Then we set a property on the <code>target</code> called <code>hello</code> which returns the string "world".</p>
+
+<p>If you were to perform the same actions as this source file (ignoring the scope part) in a node REPL console, it would look like:</p>
+
+<pre><code>$ node
+&gt; var target = {};
+&gt; target.hello = "world";
+'world'</code></pre>
+
+<h3 id="building_hello.node">Building hello.node</h3>
+
+<p>Building a node addon requires <a href="http://code.google.com/p/waf">WAF</a>.  <em>node-waf</em>  should be installed if you've installed node.js from source or distro. </p>
+
+<pre><code>// addons/hello/wscript
+srcdir = '.'
+blddir = 'build'
+VERSION = '0.0.1'
+
+def set_options(opt):
+  opt.tool_options('compiler_cxx')
+
+def configure(conf):
+  conf.check_tool('compiler_cxx')
+  conf.check_tool('node_addon')
+
+def build(bld):
+  obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
+  obj.target = 'hello'
+  obj.source = 'hello.cc'</code></pre>
+
+<p>This file is relatively simple, there are two tasks: <em>configure</em> and <em>build</em>.  To run this script:</p>
+
+<pre><code>$ cd src/addons/hello/wscript &amp;&amp; node-waf configure build</code></pre>
+
+<p>Notice how you have to run node-waf from the directory of the <code>wscript</code> build script. Afterward, your built addon will be located at <em>./build/default/hello.node</em>.  You can load and play with the addon when you're finished.</p>
+
+<pre><code>$ cd build/default &amp;&amp; node
+&gt; var hello = require('./hello.node');
+&gt; hello
+{ hello: 'world' }
+&gt; </code></pre>
+
+<h2 id="basic_Functions">Basic Functions</h2>
+
+<p>The world of functions begins with an object that will resemble the following object:</p>
+
+<pre><code>{ version: '0.1', echo: [Function] }</code></pre>
+
+<p>As you can imagine, node is already coding functions in the same way as you would for an addon.  Luckily, <em>node.h</em> provides a helper definition for setting a function to a callback, or method defined within your source file.  If you open <em>node.h</em> and look at line 33, you'll see:</p>
+
+<pre><code>// [node repo]/src/node.h
+#define NODE_SET_METHOD(obj, name, callback)                              \
+  obj-&gt;Set(v8::String::NewSymbol(name),                                   \
+           v8::FunctionTemplate::New(callback)-&gt;GetFunction())</code></pre>
+
+<p>Let's reuse this bit of code.  One thing to note here is that since node is already defining how to set a method on a target object, changes to this functionality in v8 will most likely be reflected in this macro.  Because the addon compilation process links node anyway, including the header here shouldn't be an issue.  Plus, reusing the macro ensures that we're creating functions in the same way as the rest of the framework.</p>
+
+<p>The following example will compile our desired object mentioned earlier.</p>
+
+<pre><code>// addons/functions/v0.1/func.cc
+#include &lt;v8.h&gt;
+#include &lt;node.h&gt;
+
+using namespace v8;  
+
+static Handle&lt;Value&gt; Echo(const Arguments&amp; args) {
+  HandleScope scope;
+
+  if (args.Length() &lt; 1) {
+    return ThrowException(Exception::TypeError(String::New("Bad argument")));
+  }
+  return scope.Close(args[0]);
+}
+
+extern "C" void
+init (Handle&lt;Object&gt; target)
+{
+    HandleScope scope;
+
+    target-&gt;Set(String::New("version"), String::New("0.1"));
+
+    NODE_SET_METHOD(target, "echo", Echo);
+}</code></pre>
+
+<p>This example differs in a couple of ways from the <em>Hello, World!</em> example.  First, it includes the <em>node.h</em> header containing the <code>NODE_SET_METHOD</code> macro.  Second, this contains a callback which is providing the functionality of our function.</p>
+
+<p>Just as you would expect in a JavaScript function, the entrance and exit points of the function define a <code>scope</code> in which the <em>context</em> of the function executes (i.e. 'this').  Our function will throw an error if it doesn't receive the proper number of arguments, then returns the first argument regardless of how many others are passed.</p>
+
+<p>The <em>WAF</em> script used to build this file is nearly identical to the one used for the <em>Hello, World!</em> example.  </p>
+
+<p>Now, build the source and toy with it.  Here's a dump of my console, run from <em>./src/addons/functions/v0.1</em>. </p>
+
+<pre><code>$ node-waf configure build &amp;&amp; cd build/default &amp;&amp; node
+Checking for program g++ or c++          : /usr/bin/g++ 
+Checking for program cpp                 : /usr/bin/cpp 
+Checking for program ar                  : /usr/bin/ar 
+Checking for program ranlib              : /usr/bin/ranlib 
+Checking for g++                         : ok  
+Checking for node path                   : ok /home/jim/.node_libraries 
+Checking for node prefix                 : ok /usr/local 
+'configure' finished successfully (0.164s)
+Waf: Entering directory `/media/16GB/projects/masteringnode/src/addons/functions/v0.1/build'
+[1/2] cxx: func.cc -&gt; build/default/func_1.o
+Waf: Leaving directory `/media/16GB/projects/masteringnode/src/addons/functions/v0.1/build'
+'build' finished successfully (0.587s)
+&gt; var func = require('./func');
+&gt; func
+{ version: '0.1', echo: [Function] }
+&gt; func.echo
+[Function]
+&gt; func.echo()
+TypeError: Bad argument
+    at [object Context]:1:6
+    at Interface.&lt;anonymous&gt; (repl.js:144:22)
+    at Interface.emit (events.js:42:17)
+    at Interface._onLine (readline.js:132:10)
+    at Interface._line (readline.js:387:8)
+    at Interface._ttyWrite (readline.js:564:14)
+    at ReadStream.&lt;anonymous&gt; (readline.js:52:12)
+    at ReadStream.emit (events.js:59:20)
+    at ReadStream._emitKey (tty_posix.js:280:10)
+    at ReadStream.onData (tty_posix.js:43:12)
+&gt; func.echo(1)
+1
+&gt; func.echo("asdf", 20)
+'asdf'
+&gt; func.echo(function() { return 1; }, 222)
+[Function]
+&gt; func.echo(function() { return 1; }, 222)()
+1</code></pre>
+
+<p>Notice the construct of the last line is <code>func.echo()()</code>, which executes the function that is passed as the first argument.</p>
+
+<h2 id="functionTemplate">FunctionTemplate</h2>
+
+<p><em>TODO</em></p>
+
+<h2 id="function_Prototypes">Function Prototypes</h2>
+
+<p><em>TODO</em></p>
+
+<h2 id="function_Constructor">Function Constructor</h2>
+
+<p><em>TODO</em></p>
+
+<h2 id="making_it_Evented">Making it Evented</h2>
+
+<p><em>TODO</em></p>
+
 <h1>Globals</h1>
 
 <p> As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
@@ -575,13 +757,37 @@ setTimeout(function(){
     console.log('never called');
 }, 1000);</code></pre>
 
+<h3 id="process.binding">process.binding()</h3>
+
+<p>Node performs lazy initialization and caching for a number of built-in modules through the <code>process.binding</code> function.  If you'd like to poke around in node's source code and view this binding cache implementation, navigate to your node checkout directory and open <em>./src/node.cc</em>.  The code for the binding cache starts on like 1749 (of node.js v0.4.0).</p>
+
+<p>Currently, the cacheable process bindings include: built-in modules, <code>constants</code>, <code>io_watcher</code>, <code>timer</code> and <code>natives</code>.  To access the constants, instead of using <code>var constants = require('constants');</code>, you could lazily bind the constants as it is done in the <code>fs</code> module:</p>
+
+<pre><code>// [node.js source]/lib/fs.js
+var util = require('util');
+
+var binding = process.binding('fs');
+var constants = process.binding('constants');
+var fs = exports;
+var Stream = require('stream').Stream;
+// ...</code></pre>
+
+<p>Binding in this way allows us to perform the initialization of those modules bound to <code>process</code> only once. We can then extend those bindings because they are an exported module like any other <code>require</code>.</p>
+
+<p>Another reason for caching the bindings in this way is because these bindings differ across platforms.  If you were to open <em>node</em>constants.cc<em>, you would see conditional includes for </em>MINGW32<em> and <code>ifdef</code>s for each constant.  You wouldn't want to hardcode these constants in a module's exports.  If you opened opened the </em>constants_ module definition, you would see one line:</p>
+
+<pre><code>// [node.js source]/lib/constants.js
+module.exports = process.binding('constants');</code></pre>
+
+<p>After a single require of this module, or call to <code>process.binding('constants')</code>, the constants are initialized and cached.  This lazy initialization improves node's startup.</p>
+
 <h3 id="errno">errno</h3>
 
-<p><em>*TODO: Does process still support these error constants?</em></p>
+<p>To access <code>errno</code> constants, you'll need to either add the include <code>var constants = require('constants');</code> or use the <code>var constants = process.binding('constants');</code> method described earlier.</p>
 
-<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
+<p>The <code>constants</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>constants.EPERM</code> represents a permission based error, while <code>constants.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well as in the http request error object:</p>
 
-<pre><code>if (err.errno === process.ENOENT) {
+<pre><code>if (err.errno === constants.ENOENT) {
 	// Display a 404 "Not Found" page
 } else {
 	// Display a 500 "Internal Server Error" page
@@ -774,7 +980,8 @@ setTimeout(function(){
 
 <p>The api is written in such a way that it is String-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
-<pre><code>&gt; var chunk = buf.slice(4, 9);
+<pre><code>&gt; var buf = new Buffer('For some other string!');
+&gt; var chunk = buf.slice(4, 8);
 &gt; console.log(chunk.toString());
 'some'</code></pre>
 
@@ -1221,9 +1428,50 @@ Example.prototype.getServer = function() {
 
 <p>The alternative is when a request is ignored either explicitly with the <code>option.ignorePaths</code> array, or implicitly by <code>fs.readFileSync</code> throwing an error.  Either way, we emit the <code>data</code> event with the content as "ignored".  The <code>getHtml</code> function above then writes an empty response.</p>
 
+<p><strong>Note:</strong> <code>http.ServerRequest</code>, the type of the <code>request</code> parameter in the <em>requestListener</em> passed to <code>http.createServer</code>, emits its own <em>data</em> and <em>end</em> events.  Instead of emitting our own events, we could expose the existing events instead of emitting completely new and renamed events.</p>
+
 <h2 id="hTTP_Clients">HTTP Clients</h2>
 
-<p> ...</p>
+<p>Node also provides client functionality in the <em>http</em> module.  To begin with the http client functionality, we're going to open one terminal and run the server from the previous example: <code>node src/http/server_example2.js</code>.  The first client code we're going to run is slightly modified from node's v0.4.0 documentation.  </p>
+
+<h3 id="http.get">http.get(options, callback)</h3>
+
+<p>This example uses the <code>http.get</code> function.  This function is a wrapper around the <code>http.request</code> function which assumes that a get doesn't write a body to the server request, ultimately only expecting a response.  If you're familiar with jQuery, node's <code>http.get</code> is a wrapper around <code>http.request</code> in much the same way as jQuery's <code>$.get</code> is a wrapper around the <code>$.ajax</code> function; the big difference is that in node, we're not working with an <em>XmlHttpRequest</em> object-- we're working directly with <em>sockets</em> and <em>streams</em>.</p>
+
+<pre><code>// http/http_get.js
+var http = require('http'),
+	util = require('util');
+
+var opt = {
+	host: 'localhost',
+	port: 9222,
+	path: '/index.html'
+};
+
+http.get(opt, function(response) {
+	console.log("http.get [Status]: %s", response.statusCode);
+	console.log("http.get [method]: %s", response.client._httpMessage.method);
+	console.log("http.get [path]: %s", response.client._httpMessage.path);
+	console.log("http.get [method]:\n%s", response.client._httpMessage._header);
+	// console.log("http.get [client]:\n%s", util.inspect(response.client));
+}).on('error', function(err) {
+	console.log("http.get [Error]: " + err.message);
+});</code></pre>
+
+<p><strong>Note: see the Globals chapter for information on <code>err.errno</code> constants</strong></p>
+
+<p>With the server from the previous example running, we can run the <em>./src/http/http</em>get.js_ example and examine the output.</p>
+
+<pre><code>$ node src/http/http_get.js 
+http.get [Status]: 200
+http.get [method]: GET
+http.get [path]: /index.html
+http.get [method]:
+GET /index.html HTTP/1.1
+Host: localhost
+Connection: close</code></pre>
+
+<p>If you'd like to view the full client object, uncomment the last line from the callback in the file <em>./src/http/http</em>get.js_.  </p>
 
 <h2 id="url_Module">Url Module</h2>
 
