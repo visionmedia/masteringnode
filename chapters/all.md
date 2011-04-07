@@ -1,6 +1,7 @@
 @include intro.md
 @include installation.md
 @include modules.md
+@include addons.md
 @include globals.md
 @include events.md
 @include buffers.md
