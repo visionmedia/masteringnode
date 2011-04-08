@@ -4,13 +4,13 @@
 Testing is a very large topic.  There are different types of testing, each with different methodologies.  Then, there are also strong feelings of developers toward which type of testing is the best or most effective.
 
 * Assertion Testing
-    - Tests a true or false condition against known objects or values
+  * Tests a true or false condition against known objects or values
 * Behavioral Testing
-    - Tests how one object acts when interacting with another
+  * Tests how one object acts when interacting with another
 * Functional/Acceptance Testing
-    - "Black box" testing of a system, usually code-agnostic
+  * "Black box" testing of a system, usually code-agnostic
 * Regression Testing
-    - Tests for consistency after changes have been made to code
+  * Tests for consistency after changes have been made to code
 * Others...
 
 There are many other types of testing, but these are some large topics in the testing arena.  Development practices include Test-Driven Development (TDD), Behavior-Driven Development, and others. Some programmers don't believe in testing, others believe tests should be written before the code, while others still believe tests should only be written for the most important code.  As you can see, this is a large and complex topic.

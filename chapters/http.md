@@ -124,7 +124,7 @@ We also have the option of performing a function before starting the server:
 
 Now that we have a plan in place for the interaction with the module, let's take a look at the three functions, `getFile()`, `getHtml()`, and `run()`.
 
-** getFile(request) **
+### getFile(request)
 
 The `getFile()` function assumes that all requests occur at the base of the server's uri. It also ignores requests for `/favicon.ico` and for the base uri `/`.  It then builds a full path to the file and attempts to read the file in a single blocking call. This blocking call helps ensure that we're passing data correctly to the Markdown module.
 
@@ -151,7 +151,7 @@ The `getFile()` function assumes that all requests occur at the base of the serv
 
 This function uses the same pattern of identifying a callback as the node libraries.  The `noop()` function is defined as `var noop = function() { };` which saves us from creating numerous empty callbacks and checking for functions where those callbacks are required.  For those unfamiliar with the term _noop_, it means the function performs **no op**eration.
 
-** getHtml(request) **
+### getHtml(request)
 
 The second function in our module performs the conversion between markdown and html.  It does this in the callack to the `getFile()` function, transforms the markdown to html, and passes the result to its own callback. 
 
@@ -178,7 +178,7 @@ The second function in our module performs the conversion between markdown and h
 
 If there are any errors, it returns a string: "Nothing to see here!" A message like this usually accompanies a `404 - Not Found` HTTP status, but we're keeping this pretty simple.
 
-** run() **
+### run()
 
 The run function requires the following server to be created.  The `requestListener` function calls `getHtml` and writes the html to the response.  Here, we're using a buffer to get the proper byte length and attempt to output a properly-encoded html string.
 
@@ -215,7 +215,7 @@ Next, the run function sets the options we're allowing (port number and a functi
 
 Notice how we've moved the console logging to the `server.listen` callback.  This makes more sense than the procedural example from before- if the port isn't available and `server.listen` throws an error, you don't want to tell the developer that the server has started!  This is how things should be programmed, and it's part of what makes node.js so awesome.
 
-** Exposing `run()` **
+### Exposing `run()`
 
 The last thing to do to make our module run is to expose the run function.  To revisit from the _Modules_ chapter, you can do this a few ways:
 
@@ -231,7 +231,7 @@ The last thing to do to make our module run is to expose the run function.  To r
     
 There's no 'correct' method, and each has it's benefits. Please refer to the _Best Practices_ section for more information.
 
-** Run it! **
+### Run it!
 
     $ node src/http/server_example.js 
     Server is running on http://localhost:9222
@@ -239,7 +239,7 @@ There's no 'correct' method, and each has it's benefits. Please refer to the _Be
 
 After receiving the output to confirm the server is running, visit [http://localhost:9222](http://localhost:9222) to check it out.  Then, hit `CTRL+C` to be sure the server's `close` function is working as expected.
 
-** Where are the events? **
+### Where are the events?
 
 You may have noticed that we met only half of the requirements with the above implementation of our server.  To expose events, our `run` method would have to inherit from `EventEmitter`. That doesn't *really* make sense.  For the sake of simplicity and brevity, we previously only had three methods.  We had no class-like objects, and we didn't touch an object's prototype.  Also, the three methods we did have didn't make good use of callbacks.  So, there is another take on this example at _./src/http/server/server2.js_.
 
