@@ -1,5 +1,6 @@
 @include intro.md
 @include installation.md
+@include debugging.md
 @include modules.md
 @include addons.md
 @include globals.md

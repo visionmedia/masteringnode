@@ -159,7 +159,7 @@ $ sudo make install</code></pre>
 
 <p>Using npm, we'll install other packages needed for the examples in this book.</p>
 
-<pre><code>$ sudo npm install connect express nodeunit geddy zombie</code></pre>
+<pre><code>$ sudo npm install connect express nodeunit geddy zombie node-inspector</code></pre>
 
 <p>Let npm do it's thing.  It will install these modules any any dependencies.  You'll see output similar to the following:</p>
 
@@ -171,6 +171,48 @@ npm info build Success: mime@1.2.1
 npm info build Success: geddy@0.1.3
 npm info build Success: websocket-client@1.0.0
 npm info build Success: connect@1.0.1</code></pre>
+
+<h1>Debugging</h1>
+
+<p>One of the most important aspects of programming in any language is the ability to debug code.</p>
+
+<h2 id="node_inspector">node-inspector</h2>
+
+<p><a href="https://github.com/dannycoates/node-inspector">node-inspector</a> is a Web Inspector node.js debugger.  This means you'll need a WebKit browser like Chrome or Safari to run node-inspector.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>If you've performed the npm installation from the previous section, you should be ready to go.  If not, you can install node-inspector from source or through npm.</p>
+
+<pre><code>$ npm install node-inspector</code></pre>
+
+<p>If you'd like to install from source, check out the <a href="https://github.com/dannycoates/node-inspector/wiki/Getting-Started---from-scratch">Getting Started from scratch</a> wiki entry from the node-inspector repository.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>Open one terminal to host a node-inspector server.  This terminal will remain open and provide a debug listener.</p>
+
+<pre><code>$ node-inspector&amp;
+&gt; visit http://0.0.0.0:8080/debug?port=5858 to start debugging</code></pre>
+
+<p>You will see output directing you to open a browser and point it to the node-inspector server at the default port (8080).</p>
+
+<p>Next, open another terminal and navigate to <code>./src/events</code> and run node with the <code>--debug-brk</code> switch.  This will connect to the debugger on port 5858.</p>
+
+<pre><code>$ node --debug-brk basic.js 
+&gt; debugger listening on port 5858</code></pre>
+
+<p>Now, open a browser to <a href="http://127.0.0.1:8080/debug?port=5858">http://127.0.0.1:8080/debug?port=5858</a> and you will see a breakpoint on what would be the first line of your file.  I phrased it like this intentionally because the debugger shows you how node.js sees your file:</p>
+
+<pre><code>(function (exports, require, module, filename, dirname) {
+/* Your code here */
+});</code></pre>
+
+<p>If you've used the Web Inspector view in Google Chrome, you should be familiar with using node-inspector's version of Web Inspector.  There is a console drawer if you click on the bottom-left icon which allows you to evaluate JavaScript and filter log messages by type (Errors, Warnings, Logs). There is also a 'Console' tab if you need a full view of the console.</p>
+
+<p>Expand the <code>Watch Expressions</code> section on the right of the Web Inspector's Scripts tab.  Click the 'Add' button and you can add variables which will be updated as you step through code.  In version 0.1.6 of node-inspector, when I click the 'Add' button, it automatically adds two single-quotes.  If this happens to you, delete the quotes and enter your text.</p>
+
+<p>You'll see as you step through the code that you step directly into node.js functions.  This is very useful if you are exploring node.js or if you want to see how something is implemented, like when you call something like <code>console.log("%d days without incident", 5);</code>.</p>
 
 <h1>CommonJS Module System</h1>
 

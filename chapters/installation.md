@@ -61,7 +61,7 @@ For more information on npm, check out the [repo](https://github.com/isaacs/npm)
 
 Using npm, we'll install other packages needed for the examples in this book.
 
-	$ sudo npm install connect express nodeunit geddy zombie
+	$ sudo npm install connect express nodeunit geddy zombie node-inspector
 
 Let npm do it's thing.  It will install these modules any any dependencies.  You'll see output similar to the following:
 
@@ -73,4 +73,3 @@ Let npm do it's thing.  It will install these modules any any dependencies.  You
 	npm info build Success: geddy@0.1.3
 	npm info build Success: websocket-client@1.0.0
 	npm info build Success: connect@1.0.1
-
