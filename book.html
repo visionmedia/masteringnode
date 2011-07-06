@@ -491,11 +491,11 @@ setTimeout(function(){
 </div>
 <div class='mp'>
 <h1>Events</h1>
-<p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
+<p> The concept of an "event" is crucial to node, and is used heavily throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
 
 <h2 id="Emitting-Events">Emitting Events</h2>
 
-<p>Typically an object inherits from <em>EventEmitter</em>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
+<p>Typically an object inherits from <em>EventEmitter</em>, however our small example below illustrates the API. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method, which accepts the <em>name</em> of the event and arbitrary objects passed as data. When <code>emitter.emit()</code> is called, we are only required to pass the event <em>name</em>, followed by any number of arguments (in this case the <code>first</code> and <code>last</code> name strings).</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
@@ -511,9 +511,9 @@ emitter.emit('name', 'simon', 'holowaychuk');
 
 <h2 id="Inheriting-From-EventEmitter">Inheriting From EventEmitter</h2>
 
-<p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
+<p>A more practical and common use of <code>EventEmitter</code> is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched while utilizing its API for our own means of world domination!</p>
 
-<p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>.</p>
+<p>To do so, we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time (also known as an <em>event</em>).</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
@@ -522,12 +522,12 @@ function Dog(name) {
 }
 </code></pre>
 
-<p>Here we inherit from <code>EventEmitter</code>, so that we may use the methods provided such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, no worries! we will be touching on this later.</p>
+<p>Here we inherit from <code>EventEmitter</code> so we can use the methods it provides, such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, don't worry, we'll be coming back to this later.</p>
 
 <pre><code>Dog.prototype.__proto__ = EventEmitter.prototype;
 </code></pre>
 
-<p>Now that we have our <code>Dog</code> set up, we can create .... simon! When simon barks we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback it-self is called in context to the object, aka <code>this</code>.</p>
+<p>Now that we have our <code>Dog</code> set up, we can create... Simon! When Simon barks, we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback itself is called in the context of the object (aka <code>this</code>).</p>
 
 <pre><code>var simon = new Dog('simon');
 
@@ -536,7 +536,7 @@ simon.on('bark', function(){
 });
 </code></pre>
 
-<p>Bark twice a second:</p>
+<p>Bark twice per second:</p>
 
 <pre><code>setInterval(function(){
     simon.emit('bark');
@@ -545,7 +545,7 @@ simon.on('bark', function(){
 
 <h2 id="Removing-Event-Listeners">Removing Event Listeners</h2>
 
-<p>As we have seen event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
+<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. We can remove these listeners by calling the <code>removeListener(type, callback)</code> method, although this isn't seen often. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has a callback of <code>console.log()</code>. After 1000 milliseconds, we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. We could also have used <code>removeAllListeners(type)</code>, which removes all listeners registered to the given <em>type</em>.</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
