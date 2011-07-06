@@ -5,11 +5,11 @@
 
 ## console
 
-The `console` object contains several methods which are used to output information to _stdout_ or _stderr_. Let's take a look at what each method does.
+The `console` object contains several methods which are used to output information to _stdout_ or _stderr_. Let's take a look at what each method does:
 
 ### console.log()
 
-The most frequently used console method is `console.log()` simply writing to _stdout_ with a line feed (`\n`). Currently aliased as `console.info()`.
+The most frequently used console method is `console.log()`, which simply writes to _stdout_ and appends a line feed (`\n`). Currently aliased as `console.info()`.
 
     console.log('wahoo');
 	// => wahoo
