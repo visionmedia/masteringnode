@@ -565,9 +565,9 @@ setTimeout(function(){
 </div>
 <div class='mp'>
 <h1>Buffers</h1>
-<p> To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
+<p> To handle binary data, node provides us with the global <code>Buffer</code> object. <code>Buffer</code> instances represent memory allocated independently of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate its data.</p>
 
-<p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
+<p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see in the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
 <pre><code>var hello = new Buffer('Hello');
 
@@ -578,7 +578,7 @@ console.log(hello.toString());
 // =&gt; "Hello"
 </code></pre>
 
-<p>By default the encoding is "utf8", however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the '&amp;' character when in "ascii" encoding.</p>
+<p>By default, the encoding is "utf8", but this can be overridden by passing a string as the second argument. For example, the ellipsis below will be printed to stdout as the "&amp;" character when in "ascii" encoding.</p>
 
 <pre><code>var buf = new Buffer('…');
 console.log(buf.toString());
@@ -589,12 +589,12 @@ console.log(buf.toString());
 // =&gt; &amp;
 </code></pre>
 
-<p>An alternative method is to pass an array of integers representing the octet stream, however in this case functionality equivalent.</p>
+<p>An alternative (but in this case functionality equivalent) method is to pass an array of integers representing the octet stream.</p>
 
 <pre><code>var hello = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]);
 </code></pre>
 
-<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below we provide the offset of 2 bytes to our second call to <code>write()</code>, buffering "Hel", and then we continue on to write another two bytes with an offset of 3, completing "Hello".</p>
+<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we can call the <code>write()</code> method, providing an optional offset and encoding. Below, we provide an offset of 2 bytes to our second call to <code>write()</code> (buffering "Hel") and then write another two bytes with an offset of 3 (completing "Hello").</p>
 
 <pre><code>var buf = new Buffer(5);
 buf.write('He');
@@ -604,7 +604,7 @@ console.log(buf.toString());
 // =&gt; "Hello"
 </code></pre>
 
-<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
+<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, as opposed to native strings, which simply return the number of characters. For example, the ellipsis character '…' consists of three bytes, so the buffer will respond with the byte length (3), and not the character length (1).</p>
 
 <pre><code>var ellipsis = new Buffer('…', 'utf8');
 
@@ -618,16 +618,16 @@ console.log(ellipsis);
 // =&gt; &lt;Buffer e2 80 a6>
 </code></pre>
 
-<p>When dealing with JavaScript strings, we may pass it to the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
+<p>To determine the byte length of a native string, pass it to the <code>Buffer.byteLength()</code> method.</p>
 
-<p>The api is written in such a way that it is String-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
+<p>The API is written in such a way that it is String-like. For example, we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
 <pre><code>var chunk = buf.slice(4, 9);
 console.log(chunk.toString());
 // =&gt; "some"
 </code></pre>
 
-<p>Alternatively when expecting a string we can pass offsets to <code>Buffer#toString()</code>:</p>
+<p>Alternatively, when expecting a string, we can pass offsets to <code>Buffer#toString()</code>:</p>
 
 <pre><code>var buf = new Buffer('just some data');
 console.log(buf.toString('ascii', 4, 9));
