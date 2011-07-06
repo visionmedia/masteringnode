@@ -168,7 +168,7 @@ Next we have to "register" the extension to assign our compiler. As previously m
 
     require.registerExtension('.ejs', require('./compiler/extended').compile);
 
-Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.
+Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler.
 
     var example = require('./compiler/example');
     console.dir(example)
