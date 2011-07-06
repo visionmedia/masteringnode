@@ -164,7 +164,7 @@ First let's create the module that will actually be doing the ejs to JavaScript 
             .replace(/::/g, 'exports.');
     };
 
-Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at _./compiler/extended.js_ so we are requiring it in, and passing the `compile()` method to `require.registerExtension()` which simply expects a function accepting a string, and returning a string of JavaScript.
+Next we have to "register" the extension to assign our compiler. As previously mentioned, our compiler lives at _./compiler/extended.js_; so we are requiring it, passing the `compile()` method to `require.registerExtension()` (which simply expects a function accepting a string), and returning a string of JavaScript.
 
     require.registerExtension('.ejs', require('./compiler/extended').compile);
 
