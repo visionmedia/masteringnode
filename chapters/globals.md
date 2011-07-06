@@ -1,7 +1,7 @@
 
 # Globals
 
- As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the `process` global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a `console` object.
+ As we have learnt, node's module system discourages the use of globals; however node provides a few important globals for use to utilize. The first and most important is the `process` global, which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals, such as the `console` object, are provided to those used to writing JavaScript for web browsers.
 
 ## console
 
