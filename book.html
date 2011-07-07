@@ -287,12 +287,12 @@ exports.max = function max(a, b) { return a &gt; b ? a : b }
 };
 </code></pre>
 
-<p>Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at <em>./compiler/extended.js</em> so we are requiring it in, and passing the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
+<p>Next we have to "register" the extension to assign our compiler. As previously mentioned, our compiler lives at <em>./compiler/extended.js</em>; so we are requiring it, passing the <code>compile()</code> method to <code>require.registerExtension()</code> (which simply expects a function accepting a string), and returning a string of JavaScript.</p>
 
 <pre><code>require.registerExtension('.ejs', require('./compiler/extended').compile);
 </code></pre>
 
-<p>Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.</p>
+<p>Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler.</p>
 
 <pre><code>var example = require('./compiler/example');
 console.dir(example)
@@ -307,15 +307,15 @@ console.log(example.max(10, 8));
 </div>
 <div class='mp'>
 <h1>Globals</h1>
-<p> As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the <code>process</code> global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a <code>console</code> object.</p>
+<p> As we have learnt, node's module system discourages the use of globals; however node provides a few important globals for use to utilize. The first and most important is the <code>process</code> global, which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals, such as the <code>console</code> object, are provided to those used to writing JavaScript for web browsers.</p>
 
 <h2 id="console">console</h2>
 
-<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does.</p>
+<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does:</p>
 
 <h3 id="console-log-">console.log()</h3>
 
-<p>The most frequently used console method is <code>console.log()</code> simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
+<p>The most frequently used console method is <code>console.log()</code>, which simply writes to <em>stdout</em> and appends a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
 <pre><code>console.log('wahoo');
 // =&gt; wahoo
@@ -349,24 +349,24 @@ console.log({ foo: 'bar' });
 
 <h2 id="process">process</h2>
 
-<p>The <code>process</code> object is plastered with goodies, first we will take a look
-at some properties that provide information about the node process itself.</p>
+<p>The <code>process</code> object is plastered with goodies. First we will take a look
+at some properties that provide information about the node process itself:</p>
 
 <h3 id="process-version">process.version</h3>
 
-<p>The version property contains the node version string, for example "v0.1.103".</p>
+<p>The node version string, for example "v0.1.103".</p>
 
 <h3 id="process-installPrefix">process.installPrefix</h3>
 
-<p>Exposes the installation prefix, in my case "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
+<p>The installation prefix. In my case "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process-execPath">process.execPath</h3>
 
-<p>Path to the executable itself "<em>/usr/local/bin/node</em>".</p>
+<p>The path to the executable itself "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process-platform">process.platform</h3>
 
-<p>Exposes a string indicating the platform you are running on, for example "darwin".</p>
+<p>The platform you are running on. For example, "darwin".</p>
 
 <h3 id="process-pid">process.pid</h3>
 
@@ -374,7 +374,7 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process-cwd-">process.cwd()</h3>
 
-<p>Returns the current working directory, for example:</p>
+<p>Returns the current working directory. For example:</p>
 
 <pre><code>cd ~ &amp;&amp; node
 node&gt; process.cwd()
@@ -402,11 +402,11 @@ node&gt; process.cwd()
 
 <h3 id="process-setgid-">process.setgid()</h3>
 
-<p>Similar to <code>process.setuid()</code> however operates on the group, also accepting a numerical value or string representation. For example <code>process.setgid(20)</code> or <code>process.setgid('www')</code>.</p>
+<p>Similar to <code>process.setuid()</code> however operates on the group, also accepting a numerical value or string representation. For example, <code>process.setgid(20)</code> or <code>process.setgid('www')</code>.</p>
 
 <h3 id="process-env">process.env</h3>
 
-<p>An object containing the user's environment variables, for example:</p>
+<p>An object containing the user's environment variables. For example:</p>
 
 <pre><code>{ PATH: '/Users/tj/.gem/ruby/1.8/bin:/Users/tj/.nvm/current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin'
 , PWD: '/Users/tj/ebooks/masteringnode'
@@ -425,7 +425,7 @@ node&gt; process.cwd()
 
 <p>When executing a file with the <code>node</code> executable <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
 
-<p>For example our source file <em>./src/process/misc.js</em> can be executed by running:</p>
+<p>For example, our source file <em>./src/process/misc.js</em> can be executed by running:</p>
 
 <pre><code>$ node src/process/misc.js foo bar baz
 </code></pre>
@@ -442,11 +442,11 @@ node&gt; process.cwd()
 
 <h3 id="process-exit-">process.exit()</h3>
 
-<p>The <code>process.exit()</code> method is synonymous with the C function <code>exit()</code>, in which a exit code > 0 is passed indicating failure, or 0 to indicate success. When invoked the <em>exit</em> event is emitted, allowing a short time for arbitrary processing to occur before <code>process.reallyExit()</code> is called with the given status code.</p>
+<p>The <code>process.exit()</code> method is synonymous with the C function <code>exit()</code>, in which an exit code > 0 is passed to indicate failure, or 0 is passed to indicate success. When invoked, the <em>exit</em> event is emitted, allowing a short time for arbitrary processing to occur before <code>process.reallyExit()</code> is called with the given status code.</p>
 
 <h3 id="process-on-">process.on()</h3>
 
-<p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
+<p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions via the <em>uncaughtException</em> event:</p>
 
 <pre><code>process.on('uncaughtException', function(err){
     console.log('got an error: %s', err.message);
@@ -460,7 +460,7 @@ setTimeout(function(){
 
 <h3 id="process-kill-">process.kill()</h3>
 
-<p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
+<p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In the example below, we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that the second timeout of 1000 milliseconds is never reached.</p>
 
 <pre><code>process.on('SIGTERM', function(){
     console.log('terminating');
@@ -479,7 +479,7 @@ setTimeout(function(){
 
 <h3 id="errno">errno</h3>
 
-<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
+<p>The <code>process</code> object is host of the error numbers, which  reference what you would find in C-land. For example, <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, but they're useful for handling exceptions as well:</p>
 
 <pre><code>if (err.errno === process.ENOENT) {
     // Display a 404 "Not Found" page
@@ -491,11 +491,11 @@ setTimeout(function(){
 </div>
 <div class='mp'>
 <h1>Events</h1>
-<p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
+<p> The concept of an "event" is crucial to node, and is used heavily throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <em>EventEmitter</em>.</p>
 
 <h2 id="Emitting-Events">Emitting Events</h2>
 
-<p>Typically an object inherits from <em>EventEmitter</em>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
+<p>Typically an object inherits from <em>EventEmitter</em>, however our small example below illustrates the API. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method, which accepts the <em>name</em> of the event and arbitrary objects passed as data. When <code>emitter.emit()</code> is called, we are only required to pass the event <em>name</em>, followed by any number of arguments (in this case the <code>first</code> and <code>last</code> name strings).</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
@@ -511,9 +511,9 @@ emitter.emit('name', 'simon', 'holowaychuk');
 
 <h2 id="Inheriting-From-EventEmitter">Inheriting From EventEmitter</h2>
 
-<p>A perhaps more practical use of <code>EventEmitter</code>, and commonly used throughout node is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
+<p>A more practical and common use of <code>EventEmitter</code> is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched while utilizing its API for our own means of world domination!</p>
 
-<p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>.</p>
+<p>To do so, we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time (also known as an <em>event</em>).</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
@@ -522,12 +522,12 @@ function Dog(name) {
 }
 </code></pre>
 
-<p>Here we inherit from <code>EventEmitter</code>, so that we may use the methods provided such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, no worries! we will be touching on this later.</p>
+<p>Here we inherit from <code>EventEmitter</code> so we can use the methods it provides, such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, don't worry, we'll be coming back to this later.</p>
 
 <pre><code>Dog.prototype.__proto__ = EventEmitter.prototype;
 </code></pre>
 
-<p>Now that we have our <code>Dog</code> set up, we can create .... simon! When simon barks we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback it-self is called in context to the object, aka <code>this</code>.</p>
+<p>Now that we have our <code>Dog</code> set up, we can create... Simon! When Simon barks, we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback itself is called in the context of the object (aka <code>this</code>).</p>
 
 <pre><code>var simon = new Dog('simon');
 
@@ -536,7 +536,7 @@ simon.on('bark', function(){
 });
 </code></pre>
 
-<p>Bark twice a second:</p>
+<p>Bark twice per second:</p>
 
 <pre><code>setInterval(function(){
     simon.emit('bark');
@@ -545,7 +545,7 @@ simon.on('bark', function(){
 
 <h2 id="Removing-Event-Listeners">Removing Event Listeners</h2>
 
-<p>As we have seen event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. To compliment this method is <code>removeAllListeners(type)</code> which removes all listeners associated to the given <em>type</em>.</p>
+<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. We can remove these listeners by calling the <code>removeListener(type, callback)</code> method, although this isn't seen often. In the example below we emit the <em>message</em> "foo bar" every <code>300</code> milliseconds, which has a callback of <code>console.log()</code>. After 1000 milliseconds, we call <code>removeListener()</code> with the same arguments that we passed to <code>on()</code> originally. We could also have used <code>removeAllListeners(type)</code>, which removes all listeners registered to the given <em>type</em>.</p>
 
 <pre><code>var EventEmitter = require('events').EventEmitter;
 
@@ -565,9 +565,9 @@ setTimeout(function(){
 </div>
 <div class='mp'>
 <h1>Buffers</h1>
-<p> To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
+<p> To handle binary data, node provides us with the global <code>Buffer</code> object. <code>Buffer</code> instances represent memory allocated independently of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate its data.</p>
 
-<p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
+<p>The simplest way to construct a <code>Buffer</code> from a string is to simply pass a string as the first argument. As you can see in the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
 <pre><code>var hello = new Buffer('Hello');
 
@@ -578,7 +578,7 @@ console.log(hello.toString());
 // =&gt; "Hello"
 </code></pre>
 
-<p>By default the encoding is "utf8", however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the '&amp;' character when in "ascii" encoding.</p>
+<p>By default, the encoding is "utf8", but this can be overridden by passing a string as the second argument. For example, the ellipsis below will be printed to stdout as the "&amp;" character when in "ascii" encoding.</p>
 
 <pre><code>var buf = new Buffer('…');
 console.log(buf.toString());
@@ -589,12 +589,12 @@ console.log(buf.toString());
 // =&gt; &amp;
 </code></pre>
 
-<p>An alternative method is to pass an array of integers representing the octet stream, however in this case functionality equivalent.</p>
+<p>An alternative (but in this case functionality equivalent) method is to pass an array of integers representing the octet stream.</p>
 
 <pre><code>var hello = new Buffer([0x48, 0x65, 0x6c, 0x6c, 0x6f]);
 </code></pre>
 
-<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below we provide the offset of 2 bytes to our second call to <code>write()</code>, buffering "Hel", and then we continue on to write another two bytes with an offset of 3, completing "Hello".</p>
+<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we can call the <code>write()</code> method, providing an optional offset and encoding. Below, we provide an offset of 2 bytes to our second call to <code>write()</code> (buffering "Hel") and then write another two bytes with an offset of 3 (completing "Hello").</p>
 
 <pre><code>var buf = new Buffer(5);
 buf.write('He');
@@ -604,7 +604,7 @@ console.log(buf.toString());
 // =&gt; "Hello"
 </code></pre>
 
-<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
+<p>The <code>.length</code> property of a buffer instance contains the byte length of the stream, as opposed to native strings, which simply return the number of characters. For example, the ellipsis character '…' consists of three bytes, so the buffer will respond with the byte length (3), and not the character length (1).</p>
 
 <pre><code>var ellipsis = new Buffer('…', 'utf8');
 
@@ -618,16 +618,16 @@ console.log(ellipsis);
 // =&gt; &lt;Buffer e2 80 a6>
 </code></pre>
 
-<p>When dealing with JavaScript strings, we may pass it to the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
+<p>To determine the byte length of a native string, pass it to the <code>Buffer.byteLength()</code> method.</p>
 
-<p>The api is written in such a way that it is String-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
+<p>The API is written in such a way that it is String-like. For example, we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
 <pre><code>var chunk = buf.slice(4, 9);
 console.log(chunk.toString());
 // =&gt; "some"
 </code></pre>
 
-<p>Alternatively when expecting a string we can pass offsets to <code>Buffer#toString()</code>:</p>
+<p>Alternatively, when expecting a string, we can pass offsets to <code>Buffer#toString()</code>:</p>
 
 <pre><code>var buf = new Buffer('just some data');
 console.log(buf.toString('ascii', 4, 9));
@@ -637,7 +637,7 @@ console.log(buf.toString('ascii', 4, 9));
 </div>
 <div class='mp'>
 <h1>Streams</h1>
-<p> Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from <em>stdin</em>. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.</p>
+<p> Streams are an important concept in node. The stream API is a unified way to handle stream-like data. For example, data can be streamed to a file, streamed to a socket to respond to an HTTP request, or streamed from a read-only source such as <em>stdin</em>. For now, we'll concentrate on the API, leaving stream specifics to later chapters.</p>
 
 <h2 id="Readable-Streams">Readable Streams</h2>
 
@@ -648,8 +648,7 @@ console.log(buf.toString('ascii', 4, 9));
 });
 </code></pre>
 
-<p>As we know, we can call <code>toString()</code> a buffer to return a string representation of the binary data, however in the case of streams if desired we may call <code>setEncoding()</code> on the stream,
-after which the <em>data</em> event will emit strings.</p>
+<p>As we know, we can call <code>toString()</code> on a buffer to return a string representation of the binary data. Likewise, we can call <code>setEncoding()</code> on a stream, after which the <em>data</em> event will emit strings.</p>
 
 <pre><code>req.setEncoding('utf8');
 req.on('data', function(str){
@@ -657,7 +656,7 @@ req.on('data', function(str){
 });
 </code></pre>
 
-<p>Another import event is the <em>end</em> event, which represents the ending of <em>data</em> events. For example below we define an HTTP echo server, simply "pumping" the request body data through to the response. So if we <strong>POST</strong> "hello world", our response will be "hello world".</p>
+<p>Another important event is  <em>end</em>, which represents the ending of <em>data</em> events. For example, here's an HTTP echo server, which simply "pumps" the request body data through to the response. So if we POST "hello world", our response will be "hello world".</p>
 
 <pre><code>var http = require('http');
 
@@ -672,7 +671,7 @@ http.createServer(function(req, res){
 }).listen(3000);
 </code></pre>
 
-<p>The <em>sys</em> module actually has a function designed specifically for this "pumping" action, aptly named <code>sys.pump()</code>, which accepts a read stream as the first argument, and write stream as the second.</p>
+<p>The <em>sys</em> module actually has a function designed specifically for this "pumping" action, aptly named <code>sys.pump()</code>. It accepts a read stream as the first argument, and write stream as the second.</p>
 
 <pre><code>var http = require('http'),
     sys = require('sys');
@@ -686,11 +685,11 @@ http.createServer(function(req, res){
 </div>
 <div class='mp'>
 <h1>File System</h1>
-<p> To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
+<p> To work with the filesystem, node provides the "fs" module. The commands emulate the POSIX operations, and most methods work synchronously or asynchronously. We will look at how to use both, then establish which is the better option.</p>
 
 <h2 id="Working-with-the-filesystem">Working with the filesystem</h2>
 
-<p> Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:</p>
+<p> Lets start with a basic example of working with the filesystem. This example creates a directory, creates a file inside it, then writes the contents of the file to console:</p>
 
 <pre><code>var fs = require('fs');
 
@@ -709,7 +708,7 @@ fs.mkdir('./helloDir',0777, function (err) {
 });
 </code></pre>
 
-<p>  As evident in the example above, each callback is placed in the previous callback - this is what is referred to as chainable callbacks. When using asynchronous methods this pattern should be used, as there is no guarantee that the operations will be completed in the order that they are created. This could lead to unpredictable behavior.</p>
+<p>  As evident in the example above, each callback is placed in the previous callback &mdash; these are referred to as chainable callbacks. This pattern should be followed when using asynchronous methods, as there's no guarantee that the operations will be completed in the order they're created. This could lead to unpredictable behavior.</p>
 
 <p>  The example can be rewritten to use a synchronous approach:</p>
 
@@ -720,12 +719,11 @@ console.log('file created with contents:');
 console.log(data);
 </code></pre>
 
-<p>  It is better to use the asynchronous approach on servers with a high load, as the synchronous methods will cause the whole process to halt and wait for the operation to complete. This will block any incoming connections and other events.</p>
+<p>  It is better to use the asynchronous approach on servers with a high load, as the synchronous methods will cause the whole process to halt and wait for the operation to complete. This will block any incoming connections or other events.</p>
 
 <h2 id="File-information">File information</h2>
 
-<p>  The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we
-  are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a
+<p>  The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we're working with. In this example, we're getting all the file objects in a directory and displaying whether they're a file or a
   directory object.</p>
 
 <pre><code>var fs = require('fs');
@@ -751,7 +749,7 @@ fs.readdir('/etc/', function (err, files) {
 
 <h2 id="Watching-files">Watching files</h2>
 
-<p>  The fs.watchfile monitors a file and will fire the event whenever the file is changed.</p>
+<p>  The fs.watchfile method monitors a file and fires an event whenever the file is changed.</p>
 
 <pre><code>var fs = require('fs');
 
@@ -767,11 +765,11 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 });
 </code></pre>
 
-<p>  A file can also be unwatched using the fs.unwatchFile method call. This is used once monitoring of a file is no longer required.</p>
+<p>  A file can also be unwatched using the fs.unwatchFile method call. This should be used once a file no longer needs to be monitored.</p>
 
 <h2 id="Nodejs-Docs-for-further-reading">Nodejs Docs for further reading</h2>
 
-<p>  The node api <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands
+<p>  The node API <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands
   available when working with Nodejs.</p>
 
 </div>
