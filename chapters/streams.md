@@ -1,7 +1,7 @@
 
 # Streams
 
- Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from _stdin_. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.
+ Streams are an important concept in node. The stream API is a unified way to handle stream-like data. For example, data can be streamed to a file, streamed to a socket to respond to an HTTP request, or streamed from a read-only source such as _stdin_. For now, we'll concentrate on the API, leaving stream specifics to later chapters.
  
 ## Readable Streams
 
@@ -11,15 +11,14 @@
         // Do something with the Buffer
     });
 
-As we know, we can call `toString()` a buffer to return a string representation of the binary data, however in the case of streams if desired we may call `setEncoding()` on the stream,
-after which the _data_ event will emit strings.
+As we know, we can call `toString()` on a buffer to return a string representation of the binary data. Likewise, we can call `setEncoding()` on a stream, after which the _data_ event will emit strings.
 
     req.setEncoding('utf8');
     req.on('data', function(str){
         // Do something with the String
     });
 
-Another import event is the _end_ event, which represents the ending of _data_ events. For example below we define an HTTP echo server, simply "pumping" the request body data through to the response. So if we **POST** "hello world", our response will be "hello world".
+Another important event is  _end_, which represents the ending of _data_ events. For example, here's an HTTP echo server, which simply "pumps" the request body data through to the response. So if we POST "hello world", our response will be "hello world".
 
     var http = require('http');
     
@@ -33,7 +32,7 @@ Another import event is the _end_ event, which represents the ending of _data_ e
         });
     }).listen(3000);
 
-The _sys_ module actually has a function designed specifically for this "pumping" action, aptly named `sys.pump()`, which accepts a read stream as the first argument, and write stream as the second.
+The _sys_ module actually has a function designed specifically for this "pumping" action, aptly named `sys.pump()`. It accepts a read stream as the first argument, and write stream as the second.
 
     var http = require('http'),
         sys = require('sys');

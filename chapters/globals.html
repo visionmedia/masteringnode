@@ -1,14 +1,14 @@
 <div class='mp'>
 <h1>Globals</h1>
-<p> As we have learnt node's module system discourages the use of globals, however node provides a few important globals for use to utilize. The first and most important is the <code>process</code> global which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals help drive to be similar to other familiar JavaScript environments such as the browser, by providing a <code>console</code> object.</p>
+<p> As we have learnt, node's module system discourages the use of globals; however node provides a few important globals for use to utilize. The first and most important is the <code>process</code> global, which exposes process manipulation such as signalling, exiting, the process id (pid), and more. Other globals, such as the <code>console</code> object, are provided to those used to writing JavaScript for web browsers.</p>
 
 <h2 id="console">console</h2>
 
-<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does.</p>
+<p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. Let's take a look at what each method does:</p>
 
 <h3 id="console-log-">console.log()</h3>
 
-<p>The most frequently used console method is <code>console.log()</code> simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
+<p>The most frequently used console method is <code>console.log()</code>, which simply writes to <em>stdout</em> and appends a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
 <pre><code>console.log('wahoo');
 // =&gt; wahoo
@@ -42,24 +42,24 @@ console.log({ foo: 'bar' });
 
 <h2 id="process">process</h2>
 
-<p>The <code>process</code> object is plastered with goodies, first we will take a look
-at some properties that provide information about the node process itself.</p>
+<p>The <code>process</code> object is plastered with goodies. First we will take a look
+at some properties that provide information about the node process itself:</p>
 
 <h3 id="process-version">process.version</h3>
 
-<p>The version property contains the node version string, for example "v0.1.103".</p>
+<p>The node version string, for example "v0.1.103".</p>
 
 <h3 id="process-installPrefix">process.installPrefix</h3>
 
-<p>Exposes the installation prefix, in my case "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
+<p>The installation prefix. In my case "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process-execPath">process.execPath</h3>
 
-<p>Path to the executable itself "<em>/usr/local/bin/node</em>".</p>
+<p>The path to the executable itself "<em>/usr/local/bin/node</em>".</p>
 
 <h3 id="process-platform">process.platform</h3>
 
-<p>Exposes a string indicating the platform you are running on, for example "darwin".</p>
+<p>The platform you are running on. For example, "darwin".</p>
 
 <h3 id="process-pid">process.pid</h3>
 
@@ -67,7 +67,7 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process-cwd-">process.cwd()</h3>
 
-<p>Returns the current working directory, for example:</p>
+<p>Returns the current working directory. For example:</p>
 
 <pre><code>cd ~ &amp;&amp; node
 node&gt; process.cwd()
@@ -95,11 +95,11 @@ node&gt; process.cwd()
 
 <h3 id="process-setgid-">process.setgid()</h3>
 
-<p>Similar to <code>process.setuid()</code> however operates on the group, also accepting a numerical value or string representation. For example <code>process.setgid(20)</code> or <code>process.setgid('www')</code>.</p>
+<p>Similar to <code>process.setuid()</code> however operates on the group, also accepting a numerical value or string representation. For example, <code>process.setgid(20)</code> or <code>process.setgid('www')</code>.</p>
 
 <h3 id="process-env">process.env</h3>
 
-<p>An object containing the user's environment variables, for example:</p>
+<p>An object containing the user's environment variables. For example:</p>
 
 <pre><code>{ PATH: '/Users/tj/.gem/ruby/1.8/bin:/Users/tj/.nvm/current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin'
 , PWD: '/Users/tj/ebooks/masteringnode'
@@ -118,7 +118,7 @@ node&gt; process.cwd()
 
 <p>When executing a file with the <code>node</code> executable <code>process.argv</code> provides access to the argument vector, the first value being the node executable, second being the filename, and remaining values being the arguments passed.</p>
 
-<p>For example our source file <em>./src/process/misc.js</em> can be executed by running:</p>
+<p>For example, our source file <em>./src/process/misc.js</em> can be executed by running:</p>
 
 <pre><code>$ node src/process/misc.js foo bar baz
 </code></pre>
@@ -135,11 +135,11 @@ node&gt; process.cwd()
 
 <h3 id="process-exit-">process.exit()</h3>
 
-<p>The <code>process.exit()</code> method is synonymous with the C function <code>exit()</code>, in which a exit code > 0 is passed indicating failure, or 0 to indicate success. When invoked the <em>exit</em> event is emitted, allowing a short time for arbitrary processing to occur before <code>process.reallyExit()</code> is called with the given status code.</p>
+<p>The <code>process.exit()</code> method is synonymous with the C function <code>exit()</code>, in which an exit code > 0 is passed to indicate failure, or 0 is passed to indicate success. When invoked, the <em>exit</em> event is emitted, allowing a short time for arbitrary processing to occur before <code>process.reallyExit()</code> is called with the given status code.</p>
 
 <h3 id="process-on-">process.on()</h3>
 
-<p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
+<p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions via the <em>uncaughtException</em> event:</p>
 
 <pre><code>process.on('uncaughtException', function(err){
     console.log('got an error: %s', err.message);
@@ -153,7 +153,7 @@ setTimeout(function(){
 
 <h3 id="process-kill-">process.kill()</h3>
 
-<p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
+<p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In the example below, we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that the second timeout of 1000 milliseconds is never reached.</p>
 
 <pre><code>process.on('SIGTERM', function(){
     console.log('terminating');
@@ -172,7 +172,7 @@ setTimeout(function(){
 
 <h3 id="errno">errno</h3>
 
-<p>The <code>process</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well:</p>
+<p>The <code>process</code> object is host of the error numbers, which  reference what you would find in C-land. For example, <code>process.EPERM</code> represents a permission based error, while <code>process.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, but they're useful for handling exceptions as well:</p>
 
 <pre><code>if (err.errno === process.ENOENT) {
     // Display a 404 "Not Found" page

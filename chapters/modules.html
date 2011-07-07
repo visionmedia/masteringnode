@@ -187,12 +187,12 @@ exports.max = function max(a, b) { return a &gt; b ? a : b }
 };
 </code></pre>
 
-<p>Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at <em>./compiler/extended.js</em> so we are requiring it in, and passing the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
+<p>Next we have to "register" the extension to assign our compiler. As previously mentioned, our compiler lives at <em>./compiler/extended.js</em>; so we are requiring it, passing the <code>compile()</code> method to <code>require.registerExtension()</code> (which simply expects a function accepting a string), and returning a string of JavaScript.</p>
 
 <pre><code>require.registerExtension('.ejs', require('./compiler/extended').compile);
 </code></pre>
 
-<p>Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.</p>
+<p>Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler.</p>
 
 <pre><code>var example = require('./compiler/example');
 console.dir(example)
