@@ -637,7 +637,7 @@ console.log(buf.toString('ascii', 4, 9));
 </div>
 <div class='mp'>
 <h1>Streams</h1>
-<p> Streams are an important concept in node. The stream api is a unified way to handle stream-like data, for example data can be streamed to a file, streamed to a socket to respond to an HTTP request, or a stream can be read-only such as reading from <em>stdin</em>. However since we will be touching on stream specifics in later chapters, for now we will concentrate on the api.</p>
+<p> Streams are an important concept in node. The stream API is a unified way to handle stream-like data. For example, data can be streamed to a file, streamed to a socket to respond to an HTTP request, or streamed from a read-only source such as <em>stdin</em>. For now, we'll concentrate on the API, leaving stream specifics to later chapters.</p>
 
 <h2 id="Readable-Streams">Readable Streams</h2>
 
@@ -648,8 +648,7 @@ console.log(buf.toString('ascii', 4, 9));
 });
 </code></pre>
 
-<p>As we know, we can call <code>toString()</code> a buffer to return a string representation of the binary data, however in the case of streams if desired we may call <code>setEncoding()</code> on the stream,
-after which the <em>data</em> event will emit strings.</p>
+<p>As we know, we can call <code>toString()</code> on a buffer to return a string representation of the binary data. Likewise, we can call <code>setEncoding()</code> on a stream, after which the <em>data</em> event will emit strings.</p>
 
 <pre><code>req.setEncoding('utf8');
 req.on('data', function(str){
@@ -657,7 +656,7 @@ req.on('data', function(str){
 });
 </code></pre>
 
-<p>Another import event is the <em>end</em> event, which represents the ending of <em>data</em> events. For example below we define an HTTP echo server, simply "pumping" the request body data through to the response. So if we <strong>POST</strong> "hello world", our response will be "hello world".</p>
+<p>Another important event is  <em>end</em>, which represents the ending of <em>data</em> events. For example, here's an HTTP echo server, which simply "pumps" the request body data through to the response. So if we POST "hello world", our response will be "hello world".</p>
 
 <pre><code>var http = require('http');
 
@@ -672,7 +671,7 @@ http.createServer(function(req, res){
 }).listen(3000);
 </code></pre>
 
-<p>The <em>sys</em> module actually has a function designed specifically for this "pumping" action, aptly named <code>sys.pump()</code>, which accepts a read stream as the first argument, and write stream as the second.</p>
+<p>The <em>sys</em> module actually has a function designed specifically for this "pumping" action, aptly named <code>sys.pump()</code>. It accepts a read stream as the first argument, and write stream as the second.</p>
 
 <pre><code>var http = require('http'),
     sys = require('sys');
