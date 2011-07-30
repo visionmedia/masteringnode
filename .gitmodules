@@ -1,0 +1,3 @@
+[submodule "deps/markdown-js"]
+	path = deps/markdown-js
+	url = https://github.com/evilstreak/markdown-js.git

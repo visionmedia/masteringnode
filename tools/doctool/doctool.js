@@ -8,7 +8,7 @@
 */
 var fs = require("fs"),
     path = require("path"),
-    markdown = require("./markdown"),
+    markdown = require("../../deps/markdown-js/lib/markdown"),
     argv = process.argv,
     argc = argv.length;
 
