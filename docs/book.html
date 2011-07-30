@@ -14,7 +14,7 @@
 <div style="display:none"><!-- all --></div>
 <h1>Mastering Node</h1>
 
-<p><a href="http://nodejs.org">Node</a> is an exciting new platform developed by <em>Ryan Dahl</em>, allowing JavaScript developers to create extremely high performance servers by leveraging <a href="http://code.google.com/p/v8/">Google V8</a> JavaScript engine, and asynchronous I/O. In <em>Mastering Node</em>) we will discover how to write high concurrency web servers, utilizing the CommonJS module system, node's core libraries, third party modules, high level web development and more.</p>
+<p><a href="http://nodejs.org">Node</a> is an exciting new platform developed by <em>Ryan Dahl</em>, allowing JavaScript developers to create extremely high performance servers by leveraging <a href="http://code.google.com/p/v8/">Google V8</a> JavaScript engine, and asynchronous I/O. In <em>Mastering Node</em>) we will discover how to write high concurrency web servers, utilizing the CommonJS module system, node&#39;s core libraries, third party modules, high level web development and more.</p>
 
 <h2 id="why_Node_">Why Node?</h2>
 
@@ -22,15 +22,15 @@
 
 <p>Using a busy office environment as an example, blocking I/O operations are like a very busy and very focussed desk worker name Frank. Work may pile up on the desk, but Frank finishes every task that he starts (however, when he finds the smallest problem, he gives up).  This is traditionally how procedural programming languages perform tasks.</p>
 
-<p>Node.js is more like an office manager. Sure, there are management tasks, but all of those I/O operations are handled fairly well by the operating system or node addons.  So, the manager sees a task, assigns it to Frank.  The manager may check back on Frank from time to time to see how he's doing, but he doesn't need to waste his time on the task because he knows that when it's completed, Frank will give it back.</p>
+<p>Node.js is more like an office manager. Sure, there are management tasks, but all of those I/O operations are handled fairly well by the operating system or node addons.  So, the manager sees a task, assigns it to Frank.  The manager may check back on Frank from time to time to see how he&#39;s doing, but he doesn&#39;t need to waste his time on the task because he knows that when it&#39;s completed, Frank will give it back.</p>
 
-<p>Don't worry, though.  Node.js isn't a jerk, so look forward to a healthy relationship.</p>
+<p>Don&#39;t worry, though.  Node.js isn&#39;t a jerk, so look forward to a healthy relationship.</p>
 
 <h2 id="why_JavaScript_">Why JavaScript?</h2>
 
 <p><strong>JavaScript is a well-known dynamic language.</strong></p>
 
-<p>In fact, many people who don't consider themselves programmers know JavaScript. Node.js uses <a href="http://code.google.com/apis/v8/intro.html">Google's V8 JavaScript engine</a>.  V8 is an implementation of the JavaScript standards specified in <a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf">ECMA-262, Version 3</a>. It is a high-performance, garbage-collected execution environment which can be embedded in any stand-alone application.</p>
+<p>In fact, many people who don&#39;t consider themselves programmers know JavaScript. Node.js uses <a href="http://code.google.com/apis/v8/intro.html">Google&#39;s V8 JavaScript engine</a>.  V8 is an implementation of the JavaScript standards specified in <a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf">ECMA-262, Version 3</a>. It is a high-performance, garbage-collected execution environment which can be embedded in any stand-alone application.</p>
 
 <p><strong>Everything in JavaScript is an <code>Object</code>.</strong></p>
 
@@ -40,7 +40,7 @@
 
 <p>Currying, closures, functions-as-arguments, and anonymous functions are concepts typically found in functional programming languages.  There are libraries available, such as <a href="http://documentcloud.github.com/underscore/">underscore.js</a>, which provider more functional programming functionality without changing JavaScript itself.</p>
 
-<p><strong>It's awesome. I had to say it.</strong></p>
+<p><strong>It&#39;s awesome. I had to say it.</strong></p>
 
 <p>For a deep understanding of what JavaScript really has to offer, check out <a href="http://oreilly.com/catalog/9780596806767">JavaScript Patterns</a>.</p>
 
@@ -49,10 +49,10 @@
 <p><strong>Becuase it has to be done</strong></p>
 
 <pre><code>// hello.js
-sys = require('sys');
-sys.puts("Hello, World!");</code></pre>
+sys = require(&#39;sys&#39;);
+sys.puts(&quot;Hello, World!&quot;);</code></pre>
 
-<p>To run the 'Hello, World!' example, execute <code>node hello.js</code> on the command line.</p>
+<p>To run the &#39;Hello, World!&#39; example, execute <code>node hello.js</code> on the command line.</p>
 
 <h2 id="conventions_in_this_book">Conventions in this book</h2>
 
@@ -60,11 +60,11 @@ sys.puts("Hello, World!");</code></pre>
 
 <p>There are a few conventions used in the code example blocks (such as the Hello, World! example above).</p>
 
-<p>First, if the example is a script (or a part of a script) that needs to be run from the command line, it will begin with a <code>//</code> styled comment of the filename.  These files are located under the <code>./src</code> directory of the <em>Mastering Node</em> project.  Running these examples is fairly simple: open a terminal (CTRL+SHIFT+T might do it) and type <code>node</code> followed by a space and the relative path of the script.  In other words, if you're in <em>/home/jim/masteringnode</em> and you want to run a script under <em>/home/jim/masteringnode/scripts/</em> which is called <em>hello.js</em>, you would run <code>node scripts/hello.js</code> or <code>node ./scripts/hello.js</code>.  For an example of how this code snippet is displayed, see the Hello, World! example above.</p>
+<p>First, if the example is a script (or a part of a script) that needs to be run from the command line, it will begin with a <code>//</code> styled comment of the filename.  These files are located under the <code>./src</code> directory of the <em>Mastering Node</em> project.  Running these examples is fairly simple: open a terminal (CTRL+SHIFT+T might do it) and type <code>node</code> followed by a space and the relative path of the script.  In other words, if you&#39;re in <em>/home/jim/masteringnode</em> and you want to run a script under <em>/home/jim/masteringnode/scripts/</em> which is called <em>hello.js</em>, you would run <code>node scripts/hello.js</code> or <code>node ./scripts/hello.js</code>.  For an example of how this code snippet is displayed, see the Hello, World! example above.</p>
 
-<p>Second, if the example is a command to be entered directly into what will be referred to as a 'node terminal', you should first open a terminal then type <code>node</code> and ENTER (assuming the node executable is in your PATH variable, and is called node).  At the prompt, you should enter the commands following the <code>&gt;</code> character. Text following the <code>&gt;</code> character are commands you should enter, while text on a line that does not begin with <code>&gt;</code> is the output.  This is done to closely match what you should see in your terminal.  These examples are not included in files under the <em>src</em> directory.  For instance:</p>
+<p>Second, if the example is a command to be entered directly into what will be referred to as a &#39;node terminal&#39;, you should first open a terminal then type <code>node</code> and ENTER (assuming the node executable is in your PATH variable, and is called node).  At the prompt, you should enter the commands following the <code>&gt;</code> character. Text following the <code>&gt;</code> character are commands you should enter, while text on a line that does not begin with <code>&gt;</code> is the output.  This is done to closely match what you should see in your terminal.  These examples are not included in files under the <em>src</em> directory.  For instance:</p>
 
-<pre><code>&gt; console.log("Hello, World!")
+<pre><code>&gt; console.log(&quot;Hello, World!&quot;)
 Hello, World.</code></pre>
 
 <p>Third, if an example is to be run from the terminal itself, it is prefixed by a <code>$</code>.  This represents a bash environment, and may look differently depending on your configuration.  For instance, my bash terminal displays:</p>
@@ -73,22 +73,22 @@ Hello, World.</code></pre>
 
 <p>These code examples will look like this:</p>
 
-<pre><code>$ ruby -e "puts 'Hello, World'"</code></pre>
+<pre><code>$ ruby -e &quot;puts &#39;Hello, World&#39;&quot;</code></pre>
 
-<p>Finally, code without a prefix is a sample of a possible solution or expected output from <em>stdout</em>.  This is not necessarily code you should type into your terminal or run as a script, unless of course you want to experiment.  For example, suppose we're discussing CommonJS and we'd like to show how something <em>would</em> be done in CommonJS, we might show an example such as:</p>
+<p>Finally, code without a prefix is a sample of a possible solution or expected output from <em>stdout</em>.  This is not necessarily code you should type into your terminal or run as a script, unless of course you want to experiment.  For example, suppose we&#39;re discussing CommonJS and we&#39;d like to show how something <em>would</em> be done in CommonJS, we might show an example such as:</p>
 
 <pre><code>var utils = {};
 utils.merge = function(obj, other) {};</code></pre>
 
-<p>This wouldn't contain a filename unless there is a working example (in which case, it's a concrete example and no longer hypothetical).</p>
+<p>This wouldn&#39;t contain a filename unless there is a working example (in which case, it&#39;s a concrete example and no longer hypothetical).</p>
 
 <p><strong>Inline Code</strong></p>
 
-<p>Occasionally, there will be code or commands that are being explained and displayed inline to separate them visually from the rest of the sentence.  For instance, if we were talking about how to include modules into your code, we may say to add a <code>var fs = require('fs');</code> line to the top of your file.  Code displayed like this is generally accompanied by an explanation of the code itself or instructions for where to add the code.  </p>
+<p>Occasionally, there will be code or commands that are being explained and displayed inline to separate them visually from the rest of the sentence.  For instance, if we were talking about how to include modules into your code, we may say to add a <code>var fs = require(&#39;fs&#39;);</code> line to the top of your file.  Code displayed like this is generally accompanied by an explanation of the code itself or instructions for where to add the code.  </p>
 
-<p>Functions may be displayed as <code>require()</code> or <code>require</code>, depending on the context for readability. That is, when we're talking about any JavaScript objects, we'll most likely use <code>require</code> since a function is also an object.  </p>
+<p>Functions may be displayed as <code>require()</code> or <code>require</code>, depending on the context for readability. That is, when we&#39;re talking about any JavaScript objects, we&#39;ll most likely use <code>require</code> since a function is also an object.  </p>
 
-<p>If we're talking about multiple functions, we may say "use the functions: <code>doSomething1</code> and <code>doSomething2</code>" instead of "use the functions: <code>doSomething1()</code> and <code>doSomething2()</code>" because the parentheses can be implied and the absence of parentheses is easier on the eyes.</p>
+<p>If we&#39;re talking about multiple functions, we may say &quot;use the functions: <code>doSomething1</code> and <code>doSomething2</code>&quot; instead of &quot;use the functions: <code>doSomething1()</code> and <code>doSomething2()</code>&quot; because the parentheses can be implied and the absence of parentheses is easier on the eyes.</p>
 
 <p><strong>Files and Directories</strong></p>
 
@@ -105,7 +105,7 @@ var num = 1;</code></pre>
 
 <p>Homebrew is a package management system for <em>OSX</em> written in Ruby, is extremely well adopted, and easy to use.  Homebrew can be installed in a number of ways.  Possibly the easiest way is to perform a quick install to <code>/usr/local/</code>:</p>
 
-<pre><code>$ ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"</code></pre>
+<pre><code>$ ruby -e &quot;$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)&quot;</code></pre>
 
 <p>Next, to install node via the <code>brew</code> executable, simply run:</p>
 
@@ -132,14 +132,14 @@ $ tar -zxf node.tar.gz</code></pre>
 
 <h2 id="installing_from_Distribution_Sources">Installing from Distribution Sources</h2>
 
-<p>Installing node.js from a distribution's repositories is not highly recommended.  This is because the version included with your distribution may be very outdated.  As an example, the original version of this document was written to target node.js 0.1.99.  In Ubuntu 10.10, the version of node.js included in the official repository is 0.1.97-1build1.  Because node.js is a relatively young project with a large community, changes to the API occur quickly and often.</p>
+<p>Installing node.js from a distribution&#39;s repositories is not highly recommended.  This is because the version included with your distribution may be very outdated.  As an example, the original version of this document was written to target node.js 0.1.99.  In Ubuntu 10.10, the version of node.js included in the official repository is 0.1.97-1build1.  Because node.js is a relatively young project with a large community, changes to the API occur quickly and often.</p>
 
 <p>If you still wish to install nodejs from an official repository, it can be done in the usual way:</p>
 
 <pre><code>$ sudo apt-get install nodejs
 $ yum install nodejs</code></pre>
 
-<p>Refer to your distribution's documention or wiki for the proper commannd for installation from the official repository.</p>
+<p>Refer to your distribution&#39;s documention or wiki for the proper commannd for installation from the official repository.</p>
 
 <h3 id="npm_Node_Package_Manager">npm: Node Package Manager</h3>
 
@@ -157,11 +157,11 @@ $ sudo make install</code></pre>
 
 <h2 id="installing_other_packages">Installing other packages</h2>
 
-<p>Using npm, we'll install other packages needed for the examples in this book.</p>
+<p>Using npm, we&#39;ll install other packages needed for the examples in this book.</p>
 
 <pre><code>$ sudo npm install connect express nodeunit geddy zombie node-inspector</code></pre>
 
-<p>Let npm do it's thing.  It will install these modules any any dependencies.  You'll see output similar to the following:</p>
+<p>Let npm do it&#39;s thing.  It will install these modules any any dependencies.  You&#39;ll see output similar to the following:</p>
 
 <pre><code>npm info activate jsdom@0.1.23
 npm info postactivate jsdom@0.1.23
@@ -178,15 +178,15 @@ npm info build Success: connect@1.0.1</code></pre>
 
 <h2 id="node_inspector">node-inspector</h2>
 
-<p><a href="https://github.com/dannycoates/node-inspector">node-inspector</a> is a Web Inspector node.js debugger.  This means you'll need a WebKit browser like Chrome or Safari to run node-inspector.</p>
+<p><a href="https://github.com/dannycoates/node-inspector">node-inspector</a> is a Web Inspector node.js debugger.  This means you&#39;ll need a WebKit browser like Chrome or Safari to run node-inspector.</p>
 
 <h2 id="installation">Installation</h2>
 
-<p>If you've performed the npm installation from the previous section, you should be ready to go.  If not, you can install node-inspector from source or through npm.</p>
+<p>If you&#39;ve performed the npm installation from the previous section, you should be ready to go.  If not, you can install node-inspector from source or through npm.</p>
 
 <pre><code>$ npm install node-inspector</code></pre>
 
-<p>If you'd like to install from source, check out the <a href="https://github.com/dannycoates/node-inspector/wiki/Getting-Started---from-scratch">Getting Started from scratch</a> wiki entry from the node-inspector repository.</p>
+<p>If you&#39;d like to install from source, check out the <a href="https://github.com/dannycoates/node-inspector/wiki/Getting-Started---from-scratch">Getting Started from scratch</a> wiki entry from the node-inspector repository.</p>
 
 <h2 id="usage">Usage</h2>
 
@@ -208,11 +208,11 @@ npm info build Success: connect@1.0.1</code></pre>
 /* Your code here */
 });</code></pre>
 
-<p>If you've used the Web Inspector view in Google Chrome, you should be familiar with using node-inspector's version of Web Inspector.  There is a console drawer if you click on the bottom-left icon which allows you to evaluate JavaScript and filter log messages by type (Errors, Warnings, Logs). There is also a 'Console' tab if you need a full view of the console.</p>
+<p>If you&#39;ve used the Web Inspector view in Google Chrome, you should be familiar with using node-inspector&#39;s version of Web Inspector.  There is a console drawer if you click on the bottom-left icon which allows you to evaluate JavaScript and filter log messages by type (Errors, Warnings, Logs). There is also a &#39;Console&#39; tab if you need a full view of the console.</p>
 
-<p>Expand the <code>Watch Expressions</code> section on the right of the Web Inspector's Scripts tab.  Click the 'Add' button and you can add variables which will be updated as you step through code.  In version 0.1.6 of node-inspector, when I click the 'Add' button, it automatically adds two single-quotes.  If this happens to you, delete the quotes and enter your text.</p>
+<p>Expand the <code>Watch Expressions</code> section on the right of the Web Inspector&#39;s Scripts tab.  Click the &#39;Add&#39; button and you can add variables which will be updated as you step through code.  In version 0.1.6 of node-inspector, when I click the &#39;Add&#39; button, it automatically adds two single-quotes.  If this happens to you, delete the quotes and enter your text.</p>
 
-<p>You'll see as you step through the code that you step directly into node.js functions.  This is very useful if you are exploring node.js or if you want to see how something is implemented, like when you call something like <code>console.log("%d days without incident", 5);</code>.</p>
+<p>You&#39;ll see as you step through the code that you step directly into node.js functions.  This is very useful if you are exploring node.js or if you want to see how something is implemented, like when you call something like <code>console.log(&quot;%d days without incident&quot;, 5);</code>.</p>
 
 <h1>CommonJS Module System</h1>
 
@@ -222,12 +222,12 @@ npm info build Success: connect@1.0.1</code></pre>
 
 <h2 id="creating_Modules">Creating Modules</h2>
 
-<p>Let's create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable. </p>
+<p>Let&#39;s create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable. </p>
 
 <pre><code>var utils = {};
 utils.merge = function(obj, other) {};</code></pre>
 
-<p>Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly. CommonJS modules aid in removing this issue by "wrapping" the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to <code>exports</code>, <code>require</code>, and <code>module</code>. The <code>exports</code> object is then returned when a user invokes <code>require('utils')</code>.</p>
+<p>Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly. CommonJS modules aid in removing this issue by &quot;wrapping&quot; the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to <code>exports</code>, <code>require</code>, and <code>module</code>. The <code>exports</code> object is then returned when a user invokes <code>require(&#39;utils&#39;)</code>.</p>
 
 <pre><code>var module = { exports: {}};
   (function(module, exports){
@@ -264,24 +264,24 @@ exports.merge = function(obj, other) {
 
 <h2 id="requiring_Modules">Requiring Modules</h2>
 
-<p>To get started with requiring modules, first create a second file named <em>./modules/app.js</em> with the code shown below. The first line <code>require('./utils')</code> fetches the contents of <em>./modules/utils.js</em> and returns the <code>exports</code> of which we later utilize our <code>merge()</code> method and display the results of our merged object using <code>console.dir()</code>.</p>
+<p>To get started with requiring modules, first create a second file named <em>./modules/app.js</em> with the code shown below. The first line <code>require(&#39;./utils&#39;)</code> fetches the contents of <em>./modules/utils.js</em> and returns the <code>exports</code> of which we later utilize our <code>merge()</code> method and display the results of our merged object using <code>console.dir()</code>.</p>
 
 <pre><code>// modules/app.js
-var utils = require('./utils');
+var utils = require(&#39;./utils&#39;);
 
 var a = { one: 1 };
 var b = { two: 2 };
 utils.merge(a, b);
 console.dir(a);</code></pre>
 
-<p>Core modules such as the <em>sys</em> which are bundled with node can be required without a path, such as <code>require('sys')</code>, however 3rd-party modules will iterate the <code>require.paths</code> array in search of a module matching the given path. By default <code>require.paths</code> includes <em>~/.node_libraries</em>, so if <em>~/.node_libraries/utils.js</em> exists we may simply <code>require('utils')</code>, instead of our relative example <code>require('./utils')</code> shown above.</p>
+<p>Core modules such as the <em>sys</em> which are bundled with node can be required without a path, such as <code>require(&#39;sys&#39;)</code>, however 3rd-party modules will iterate the <code>require.paths</code> array in search of a module matching the given path. By default <code>require.paths</code> includes <em>~/.node_libraries</em>, so if <em>~/.node_libraries/utils.js</em> exists we may simply <code>require(&#39;utils&#39;)</code>, instead of our relative example <code>require(&#39;./utils&#39;)</code> shown above.</p>
 
-<p>Node also supports the concept of <em>index</em> JavaScript files. To illustrate this example lets create a <em>math</em> module that will provide the <code>math.add()</code>, and <code>math.sub()</code> methods. For organizational purposes we will keep each method in their respective <em>./modules/math/add.js</em> and <em>./modules/math/sub.js</em> files. So where does <em>index.js</em> come into play? we can populate <em>./modules/math/index.js</em> with the code shown below, which is used when <code>require('./math')</code> is invoked, which is conceptually identical to invoking <code>require('./math/index')</code>.</p>
+<p>Node also supports the concept of <em>index</em> JavaScript files. To illustrate this example lets create a <em>math</em> module that will provide the <code>math.add()</code>, and <code>math.sub()</code> methods. For organizational purposes we will keep each method in their respective <em>./modules/math/add.js</em> and <em>./modules/math/sub.js</em> files. So where does <em>index.js</em> come into play? we can populate <em>./modules/math/index.js</em> with the code shown below, which is used when <code>require(&#39;./math&#39;)</code> is invoked, which is conceptually identical to invoking <code>require(&#39;./math/index&#39;)</code>.</p>
 
 <pre><code>// modules/util.js
 module.exports = {
-    add: require('./add'),
-    sub: require('./sub')
+    add: require(&#39;./add&#39;),
+    sub: require(&#39;./sub&#39;)
 };</code></pre>
 
 <p>The contents of <em>./modules/math/add.js</em> show us a new technique; here we use <code>module.exports</code> instead of <code>exports</code>.  As previously mentioned, <code>exports</code> is not the only object exposed to the module file when evaluated. We also have access to <code>__dirname</code>, <code>__filename</code>, and <code>module</code> which represents the current module. We simply define the module export object to a new object, which happens to be a function. </p>
@@ -297,7 +297,7 @@ module.exports = function add(a, b){
 
 <p>which can then be utilized as shown:</p>
 
-<pre><code>var Animal = require('./animal').Animal;</code></pre>
+<pre><code>var Animal = require(&#39;./animal&#39;).Animal;</code></pre>
 
 <p>if we change our module slightly, we can remove <code>.Animal</code>:</p>
 
@@ -305,11 +305,11 @@ module.exports = function add(a, b){
 
 <p>which can now be used without the property:</p>
 
-<pre><code>var Animal = require('./animal');</code></pre>
+<pre><code>var Animal = require(&#39;./animal&#39;);</code></pre>
 
 <h2 id="require_Paths">Require Paths</h2>
 
-<p>We talked about <code>require.paths</code>, the <code>Array</code> utilized by node's module system in order to discover modules. By default, node checks the following directories for modules:</p>
+<p>We talked about <code>require.paths</code>, the <code>Array</code> utilized by node&#39;s module system in order to discover modules. By default, node checks the following directories for modules:</p>
 
 <ul><li><code>&lt;node binary&gt;</code>/../../lib/node</li><li><strong>$HOME</strong>/.node_libraries</li><li><strong>$NODE_PATH</strong></li></ul>
 
@@ -317,12 +317,12 @@ module.exports = function add(a, b){
 
 <h3 id="runtime_Manipulation">Runtime Manipulation</h3>
 
-<p>Since <code>require.paths</code> is just an array, we can manipulate it at runtime in order to expose libraries. In our previous example we defined the libraries <em>./math/{add,sub}.js</em>, in which we would typically <code>require('./math')</code> or <code>require('./math/add')</code> etc. Another approach is to prepend or "unshift" a directory onto <code>require.paths</code> as shown below, after which we can simply <code>require('add')</code> since node will iterate the paths in order to try and locate the module.</p>
+<p>Since <code>require.paths</code> is just an array, we can manipulate it at runtime in order to expose libraries. In our previous example we defined the libraries <em>./math/{add,sub}.js</em>, in which we would typically <code>require(&#39;./math&#39;)</code> or <code>require(&#39;./math/add&#39;)</code> etc. Another approach is to prepend or &quot;unshift&quot; a directory onto <code>require.paths</code> as shown below, after which we can simply <code>require(&#39;add&#39;)</code> since node will iterate the paths in order to try and locate the module.</p>
 
-<pre><code>require.paths.unshift(__dirname + '/math');
+<pre><code>require.paths.unshift(__dirname + &#39;/math&#39;);
 
-var add = require('add'),
-    sub = require('sub');
+var add = require(&#39;add&#39;),
+    sub = require(&#39;sub&#39;);
 
 console.log(add(1,2));
 console.log(sub(1,2));</code></pre>
@@ -331,7 +331,7 @@ console.log(sub(1,2));</code></pre>
 
 <p>As mentioned above, modules have several pseudo globals available to them, these are as follows:</p>
 
-<ul><li><code>require</code> the require function itself </li><li><code>module</code> the current <code>Module</code> instance</li><li><code>exports</code> the current module's exported properties</li><li><code>__filename</code> absolute path to the current module's file</li><li><code>__dirname</code> absolute path to the current module's directory</li></ul>
+<ul><li><code>require</code> the require function itself </li><li><code>module</code> the current <code>Module</code> instance</li><li><code>exports</code> the current module&#39;s exported properties</li><li><code>__filename</code> absolute path to the current module&#39;s file</li><li><code>__dirname</code> absolute path to the current module&#39;s directory</li></ul>
 
 <p>To examine the functionality of <code>require</code>, <code>module</code>, and <code>exports</code>, open a node console by running the command <code>node</code>.  You should then enter a node prompt as seen below:</p>
 
@@ -345,7 +345,7 @@ console.log(sub(1,2));</code></pre>
 &gt; module.exports
 &gt; module.filename</code></pre>
 
-<p>If you'd like to examine other objects, the node console supports the well-known <code>&lt;TAB&gt;</code><code>&lt;TAB&gt;</code> auto-completion. </p>
+<p>If you&#39;d like to examine other objects, the node console supports the well-known <code>&lt;TAB&gt;</code><code>&lt;TAB&gt;</code> auto-completion. </p>
 
 <h3 id="require">require()</h3>
 
@@ -353,20 +353,20 @@ console.log(sub(1,2));</code></pre>
 
 <h3 id="module">module</h3>
 
-<p>When we <code>require()</code> a module, typically we only deal with the module's <code>exports</code>, however the <code>module</code> variable references the current module's <code>Module</code> instance. This is why the following is valid, as we may re-assign the module's <code>exports</code> to any object, even something trivial like a string:</p>
+<p>When we <code>require()</code> a module, typically we only deal with the module&#39;s <code>exports</code>, however the <code>module</code> variable references the current module&#39;s <code>Module</code> instance. This is why the following is valid, as we may re-assign the module&#39;s <code>exports</code> to any object, even something trivial like a string:</p>
 
 <pre><code>// modules/css.js
-module.exports = 'body { background: blue; }';</code></pre>
+module.exports = &#39;body { background: blue; }&#39;;</code></pre>
 
-<p>To obtain this string we would simply <code>require('./css')</code>. The <code>module</code> object also contains these useful properties:</p>
+<p>To obtain this string we would simply <code>require(&#39;./css&#39;)</code>. The <code>module</code> object also contains these useful properties:</p>
 
-<ul><li><code>id</code> the module's id, consisting of a path. Ex: <code>./app</code></li><li><code>parent</code> the parent <code>Module</code> (which required this one) or <code>undefined</code></li><li><code>filename</code> absolute path to the module</li><li><code>moduleCache</code> an object containing references to all cached modules</li></ul>
+<ul><li><code>id</code> the module&#39;s id, consisting of a path. Ex: <code>./app</code></li><li><code>parent</code> the parent <code>Module</code> (which required this one) or <code>undefined</code></li><li><code>filename</code> absolute path to the module</li><li><code>moduleCache</code> an object containing references to all cached modules</li></ul>
 
 <h2 id="registering_Module_Compilers">Registering Module Compilers</h2>
 
 <p>Another cool feature that node provides us is the ability to register compilers for a specific file extension. A good example of this is the CoffeeScript language, which is a ruby/python inspired language compiling to vanilla JavaScript. By using <code>require.registerExtension()</code> we can have node compile CoffeeScript to JavaScript in an automated fashion. </p>
 
-<p>To illustrate its usage, let's create a small (and useless) Extended JavaScript language, or "ejs" for our example which will live at <em>./modules/compiler/example.ejs</em>, its syntax will look like this:</p>
+<p>To illustrate its usage, let&#39;s create a small (and useless) Extended JavaScript language, or &quot;ejs&quot; for our example which will live at <em>./modules/compiler/example.ejs</em>, its syntax will look like this:</p>
 
 <pre><code>// modules/compiler/example.ejs
 ::min(a, b) a &lt; b ? a : b
@@ -377,37 +377,37 @@ module.exports = 'body { background: blue; }';</code></pre>
 <pre><code>exports.min = function min(a, b) { return a &lt; b ? a : b }
 exports.max = function max(a, b) { return a &gt; b ? a : b }</code></pre>
 
-<p>First let's create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./modules/compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
+<p>First let&#39;s create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./modules/compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
 
 <pre><code>// modules/compiler/extended.js
 exports.compile = function(str){
   return str
-        .replace(/(\w+)\(/g, '$1 = function $1(')
-        .replace(/\)(.+?)\n/g, '){ return $1 }\n')
-        .replace(/::/g, 'exports.');
+        .replace(/(\w+)\(/g, &#39;$1 = function $1(&#39;)
+        .replace(/\)(.+?)\n/g, &#39;){ return $1 }\n&#39;)
+        .replace(/::/g, &#39;exports.&#39;);
 	};</code></pre>
 
-<p>Next we have to "register" the extension to assign out compiler. As previously mentioned our compiler lives at <em>./modules/compiler/extended.js</em> so we are requiring it in.  Prior to node.js 0.3.0, we would pass the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
+<p>Next we have to &quot;register&quot; the extension to assign out compiler. As previously mentioned our compiler lives at <em>./modules/compiler/extended.js</em> so we are requiring it in.  Prior to node.js 0.3.0, we would pass the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
 
-<pre><code>require.registerExtension('.ejs', require('./compiler/extended').compile);</code></pre>
+<pre><code>require.registerExtension(&#39;.ejs&#39;, require(&#39;./compiler/extended&#39;).compile);</code></pre>
 
 <p>The new way to register an extension is to add a key to the require.extensions object with a function which specifies how to process the file.  For compatibility, we can use <code>require.extensions</code> and fallback to <code>require.registerExtension</code>.</p>
 
 <pre><code>// modules/compiler.js
 if(require.extensions) {
-  require.extensions['.ejs'] = function(module,filename){
-    var content = require('fs').readFileSync(filename, 'utf8');
-    var newContent = require('./compiler/extended').compile(content);
+  require.extensions[&#39;.ejs&#39;] = function(module,filename){
+    var content = require(&#39;fs&#39;).readFileSync(filename, &#39;utf8&#39;);
+    var newContent = require(&#39;./compiler/extended&#39;).compile(content);
     module._compile(newContent, filename);
   };
 } else {
-  require.registerExtension('.ejs', require('./compiler/extended').compile);
+  require.registerExtension(&#39;.ejs&#39;, require(&#39;./compiler/extended&#39;).compile);
 }</code></pre>
 
-<p>Now when we require our example, the ".ejs" extension is detected, and will pass the contents through our compiler, and everything works as expected.</p>
+<p>Now when we require our example, the &quot;.ejs&quot; extension is detected, and will pass the contents through our compiler, and everything works as expected.</p>
 
 <pre><code>// modules/compiler.js
-var example = require('./compiler/example');
+var example = require(&#39;./compiler/example&#39;);
 console.dir(example)
 console.log(example.min(2, 3));
 console.log(example.max(10, 8));</code></pre>
@@ -431,9 +431,9 @@ console.log(example.max(10, 8));</code></pre>
 
 <p>The node documentation for addons is self-admittedly pretty weak as of v0.4.0.</p>
 
-<p>This chapter doesn't aim to be a replacement for the official documentation.  Instead, we'd hope this can expand on some of the basics a little more than a simple "Hello, World!" and drive you as a developer more on the path toward mastering node through its source code.</p>
+<p>This chapter doesn&#39;t aim to be a replacement for the official documentation.  Instead, we&#39;d hope this can expand on some of the basics a little more than a simple &quot;Hello, World!&quot; and drive you as a developer more on the path toward mastering node through its source code.</p>
 
-<p>In fact, for now, we're only going to cover some shortcuts for creating properties on an object, functions, and interacting with function prototypes.  This doesn't reach the evented level of node's awesomeness, but you should be able to look at examples in node's source and the documention for <em>libev</em> and <em>libeio</em> to find answers.</p>
+<p>In fact, for now, we&#39;re only going to cover some shortcuts for creating properties on an object, functions, and interacting with function prototypes.  This doesn&#39;t reach the evented level of node&#39;s awesomeness, but you should be able to look at examples in node&#39;s source and the documention for <em>libev</em> and <em>libeio</em> to find answers.</p>
 
 <h2 id="pre_requisites">Pre-requisites</h2>
 
@@ -441,7 +441,7 @@ console.log(example.max(10, 8));</code></pre>
 
 <h2 id="hello.node">hello.node</h2>
 
-<p>Our first example is the very same one from node's docs.  We're going to include it for those who haven't read through the docs and have instead trusted in the knowledge of this ebook's authors (thanks, by the way).</p>
+<p>Our first example is the very same one from node&#39;s docs.  We&#39;re going to include it for those who haven&#39;t read through the docs and have instead trusted in the knowledge of this ebook&#39;s authors (thanks, by the way).</p>
 
 <p>A node addon begins with a source file containing a single entry point: </p>
 
@@ -450,71 +450,71 @@ console.log(example.max(10, 8));</code></pre>
 
 using namespace v8;
 
-extern "C" void
+extern &quot;C&quot; void
 init (Handle&lt;Object&gt; target)
 {
   HandleScope scope;
-  target-&gt;Set(String::New("hello"), String::New("world"));
+  target-&gt;Set(String::New(&quot;hello&quot;), String::New(&quot;world&quot;));
 }</code></pre>
 
-<p>This is a C/C++ file which begins by including the <em>v8.h</em> header.  It then uses the <em>v8</em> namespace to make the code a little cleaner. Finally, the entry point accepts a single parameter, <code>Handle&lt;Object&gt; target</code>.  If you don't use the <em>v8</em> namespace as we've done here, your parameter will read <code>v8::Handle&lt;v8::Object&gt; target</code>.  As you can see, <code>Object</code> is a <em>v8</em> class.  This is actually the same object we would otherwise refer to using <code>exports</code> in a regular node source file.</p>
+<p>This is a C/C++ file which begins by including the <em>v8.h</em> header.  It then uses the <em>v8</em> namespace to make the code a little cleaner. Finally, the entry point accepts a single parameter, <code>Handle&lt;Object&gt; target</code>.  If you don&#39;t use the <em>v8</em> namespace as we&#39;ve done here, your parameter will read <code>v8::Handle&lt;v8::Object&gt; target</code>.  As you can see, <code>Object</code> is a <em>v8</em> class.  This is actually the same object we would otherwise refer to using <code>exports</code> in a regular node source file.</p>
 
-<p>Within the <code>init</code> method, we do two things.  First, we create a scope.  Again, this is the same as is done with the <code>exports</code> object in a JavaScript file.  Then we set a property on the <code>target</code> called <code>hello</code> which returns the string "world".</p>
+<p>Within the <code>init</code> method, we do two things.  First, we create a scope.  Again, this is the same as is done with the <code>exports</code> object in a JavaScript file.  Then we set a property on the <code>target</code> called <code>hello</code> which returns the string &quot;world&quot;.</p>
 
 <p>If you were to perform the same actions as this source file (ignoring the scope part) in a node REPL console, it would look like:</p>
 
 <pre><code>$ node
 &gt; var target = {};
-&gt; target.hello = "world";
-'world'</code></pre>
+&gt; target.hello = &quot;world&quot;;
+&#39;world&#39;</code></pre>
 
 <h3 id="building_hello.node">Building hello.node</h3>
 
-<p>Building a node addon requires <a href="http://code.google.com/p/waf">WAF</a>.  <em>node-waf</em>  should be installed if you've installed node.js from source or distro. </p>
+<p>Building a node addon requires <a href="http://code.google.com/p/waf">WAF</a>.  <em>node-waf</em>  should be installed if you&#39;ve installed node.js from source or distro. </p>
 
 <pre><code>// addons/hello/wscript
-srcdir = '.'
-blddir = 'build'
-VERSION = '0.0.1'
+srcdir = &#39;.&#39;
+blddir = &#39;build&#39;
+VERSION = &#39;0.0.1&#39;
 
 def set_options(opt):
-  opt.tool_options('compiler_cxx')
+  opt.tool_options(&#39;compiler_cxx&#39;)
 
 def configure(conf):
-  conf.check_tool('compiler_cxx')
-  conf.check_tool('node_addon')
+  conf.check_tool(&#39;compiler_cxx&#39;)
+  conf.check_tool(&#39;node_addon&#39;)
 
 def build(bld):
-  obj = bld.new_task_gen('cxx', 'shlib', 'node_addon')
-  obj.target = 'hello'
-  obj.source = 'hello.cc'</code></pre>
+  obj = bld.new_task_gen(&#39;cxx&#39;, &#39;shlib&#39;, &#39;node_addon&#39;)
+  obj.target = &#39;hello&#39;
+  obj.source = &#39;hello.cc&#39;</code></pre>
 
 <p>This file is relatively simple, there are two tasks: <em>configure</em> and <em>build</em>.  To run this script:</p>
 
 <pre><code>$ cd src/addons/hello/wscript &amp;&amp; node-waf configure build</code></pre>
 
-<p>Notice how you have to run node-waf from the directory of the <code>wscript</code> build script. Afterward, your built addon will be located at <em>./build/default/hello.node</em>.  You can load and play with the addon when you're finished.</p>
+<p>Notice how you have to run node-waf from the directory of the <code>wscript</code> build script. Afterward, your built addon will be located at <em>./build/default/hello.node</em>.  You can load and play with the addon when you&#39;re finished.</p>
 
 <pre><code>$ cd build/default &amp;&amp; node
-&gt; var hello = require('./hello.node');
+&gt; var hello = require(&#39;./hello.node&#39;);
 &gt; hello
-{ hello: 'world' }
+{ hello: &#39;world&#39; }
 &gt; </code></pre>
 
 <h2 id="basic_Functions">Basic Functions</h2>
 
 <p>The world of functions begins with an object that will resemble the following object:</p>
 
-<pre><code>{ version: '0.1', echo: [Function] }</code></pre>
+<pre><code>{ version: &#39;0.1&#39;, echo: [Function] }</code></pre>
 
-<p>As you can imagine, node is already coding functions in the same way as you would for an addon.  Luckily, <em>node.h</em> provides a helper definition for setting a function to a callback, or method defined within your source file.  If you open <em>node.h</em> and look at line 33, you'll see:</p>
+<p>As you can imagine, node is already coding functions in the same way as you would for an addon.  Luckily, <em>node.h</em> provides a helper definition for setting a function to a callback, or method defined within your source file.  If you open <em>node.h</em> and look at line 33, you&#39;ll see:</p>
 
 <pre><code>// [node repo]/src/node.h
 #define NODE_SET_METHOD(obj, name, callback)                              \
   obj-&gt;Set(v8::String::NewSymbol(name),                                   \
            v8::FunctionTemplate::New(callback)-&gt;GetFunction())</code></pre>
 
-<p>Let's reuse this bit of code.  One thing to note here is that since node is already defining how to set a method on a target object, changes to this functionality in v8 will most likely be reflected in this macro.  Because the addon compilation process links node anyway, including the header here shouldn't be an issue.  Plus, reusing the macro ensures that we're creating functions in the same way as the rest of the framework.</p>
+<p>Let&#39;s reuse this bit of code.  One thing to note here is that since node is already defining how to set a method on a target object, changes to this functionality in v8 will most likely be reflected in this macro.  Because the addon compilation process links node anyway, including the header here shouldn&#39;t be an issue.  Plus, reusing the macro ensures that we&#39;re creating functions in the same way as the rest of the framework.</p>
 
 <p>The following example will compile our desired object mentioned earlier.</p>
 
@@ -528,28 +528,28 @@ static Handle&lt;Value&gt; Echo(const Arguments&amp; args) {
   HandleScope scope;
 
   if (args.Length() &lt; 1) {
-    return ThrowException(Exception::TypeError(String::New("Bad argument")));
+    return ThrowException(Exception::TypeError(String::New(&quot;Bad argument&quot;)));
   }
   return scope.Close(args[0]);
 }
 
-extern "C" void
+extern &quot;C&quot; void
 init (Handle&lt;Object&gt; target)
 {
     HandleScope scope;
 
-    target-&gt;Set(String::New("version"), String::New("0.1"));
+    target-&gt;Set(String::New(&quot;version&quot;), String::New(&quot;0.1&quot;));
 
-    NODE_SET_METHOD(target, "echo", Echo);
+    NODE_SET_METHOD(target, &quot;echo&quot;, Echo);
 }</code></pre>
 
 <p>This example differs in a couple of ways from the <em>Hello, World!</em> example.  First, it includes the <em>node.h</em> header containing the <code>NODE_SET_METHOD</code> macro.  Second, this contains a callback which is providing the functionality of our function.</p>
 
-<p>Just as you would expect in a JavaScript function, the entrance and exit points of the function define a <code>scope</code> in which the <em>context</em> of the function executes (i.e. 'this').  Our function will throw an error if it doesn't receive the proper number of arguments, then returns the first argument regardless of how many others are passed.</p>
+<p>Just as you would expect in a JavaScript function, the entrance and exit points of the function define a <code>scope</code> in which the <em>context</em> of the function executes (i.e. &#39;this&#39;).  Our function will throw an error if it doesn&#39;t receive the proper number of arguments, then returns the first argument regardless of how many others are passed.</p>
 
 <p>The <em>WAF</em> script used to build this file is nearly identical to the one used for the <em>Hello, World!</em> example.  </p>
 
-<p>Now, build the source and toy with it.  Here's a dump of my console, run from <em>./src/addons/functions/v0.1</em>. </p>
+<p>Now, build the source and toy with it.  Here&#39;s a dump of my console, run from <em>./src/addons/functions/v0.1</em>. </p>
 
 <pre><code>$ node-waf configure build &amp;&amp; cd build/default &amp;&amp; node
 Checking for program g++ or c++          : /usr/bin/g++ 
@@ -559,14 +559,14 @@ Checking for program ranlib              : /usr/bin/ranlib
 Checking for g++                         : ok  
 Checking for node path                   : ok /home/jim/.node_libraries 
 Checking for node prefix                 : ok /usr/local 
-'configure' finished successfully (0.164s)
-Waf: Entering directory `/media/16GB/projects/masteringnode/src/addons/functions/v0.1/build'
+&#39;configure&#39; finished successfully (0.164s)
+Waf: Entering directory `/media/16GB/projects/masteringnode/src/addons/functions/v0.1/build&#39;
 [1/2] cxx: func.cc -&gt; build/default/func_1.o
-Waf: Leaving directory `/media/16GB/projects/masteringnode/src/addons/functions/v0.1/build'
-'build' finished successfully (0.587s)
-&gt; var func = require('./func');
+Waf: Leaving directory `/media/16GB/projects/masteringnode/src/addons/functions/v0.1/build&#39;
+&#39;build&#39; finished successfully (0.587s)
+&gt; var func = require(&#39;./func&#39;);
 &gt; func
-{ version: '0.1', echo: [Function] }
+{ version: &#39;0.1&#39;, echo: [Function] }
 &gt; func.echo
 [Function]
 &gt; func.echo()
@@ -583,8 +583,8 @@ TypeError: Bad argument
     at ReadStream.onData (tty_posix.js:43:12)
 &gt; func.echo(1)
 1
-&gt; func.echo("asdf", 20)
-'asdf'
+&gt; func.echo(&quot;asdf&quot;, 20)
+&#39;asdf&#39;
 &gt; func.echo(function() { return 1; }, 222)
 [Function]
 &gt; func.echo(function() { return 1; }, 222)()
@@ -610,7 +610,7 @@ TypeError: Bad argument
 
 <h1>Globals</h1>
 
-<p> As we have learned, node's module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
+<p> As we have learned, node&#39;s module system discourages the use of globals. However, node provides a few important globals for us. The first, and probably the most important, is the <code>process</code> global which exposes process manipulation (e.g. signalling, exiting, process id (pid), and others). Other globals, such as the <code>console</code> object, provide JavaScript functionality common in most browsers.</p>
 
 <h2 id="console">console</h2>
 
@@ -627,41 +627,41 @@ TypeError: Bad argument
   trace: [Function],
   assert: [Function] }</code></pre>
 
-<p>Let's take a look at what each method does.</p>
+<p>Let&#39;s take a look at what each method does.</p>
 
 <h3 id="console.log">console.log()</h3>
 
 <p>The most frequently used console method is <code>console.log()</code>, simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
-<pre><code>&gt; console.log('wahoo');
+<pre><code>&gt; console.log(&#39;wahoo&#39;);
 wahoo
 
-&gt; console.log({ foo: 'bar' });
-{ foo: 'bar' }</code></pre>
+&gt; console.log({ foo: &#39;bar&#39; });
+{ foo: &#39;bar&#39; }</code></pre>
 
 <h3 id="console.error">console.error()</h3>
 
 <p>Identical to <code>console.log()</code>, however writes to <em>stderr</em>. Aliased as <code>console.warn()</code> as well.</p>
 
-<pre><code>console.error('database connection failed');</code></pre>
+<pre><code>console.error(&#39;database connection failed&#39;);</code></pre>
 
 <h3 id="console.dir">console.dir()</h3>
 
-<p>Utilizes the <em>sys</em> module's <code>inspect()</code> method to pretty-print the object to
+<p>Utilizes the <em>sys</em> module&#39;s <code>inspect()</code> method to pretty-print the object to
 <em>stdout</em>.</p>
 
-<pre><code>&gt; console.dir({ foo: 'bar' });
-{ foo: 'bar' } </code></pre>
+<pre><code>&gt; console.dir({ foo: &#39;bar&#39; });
+{ foo: &#39;bar&#39; } </code></pre>
 
 <h3 id="console.assert">console.assert()</h3>
 
 <p>Asserts that the given expression is truthy, or throws an exception.  Here, you can also use <code>console.trace()</code> and <code>console.error()</code> to print a stack trace and a helpful message when the exception is caught.</p>
 
 <pre><code>try {
-   console.assert( (1 != 2), '1 != 2: Should be true' );
-   console.assert( (1 == 2), '1 == 2: Should be false');
+   console.assert( (1 != 2), &#39;1 != 2: Should be true&#39; );
+   console.assert( (1 == 2), &#39;1 == 2: Should be false&#39;);
 } catch(e) {
-   console.error('Caught error ' + e);
+   console.error(&#39;Caught error &#39; + e);
    console.trace();
 }</code></pre>
 
@@ -672,26 +672,26 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process.version">process.version(s)</h3>
 
-<p>The <code>process.version</code> property contains the node version string, for example "v0.4.0".  The <code>process.versions</code> object displays the versions of node, v8, ares, ev, and openssl:</p>
+<p>The <code>process.version</code> property contains the node version string, for example &quot;v0.4.0&quot;.  The <code>process.versions</code> object displays the versions of node, v8, ares, ev, and openssl:</p>
 
 <pre><code>&gt; process.versions
-{ node: '0.4.0',
-  v8: '3.1.2',
-  ares: '1.7.4',
-  ev: '4.3',
-  openssl: '0.9.8o' }</code></pre>
+{ node: &#39;0.4.0&#39;,
+  v8: &#39;3.1.2&#39;,
+  ares: &#39;1.7.4&#39;,
+  ev: &#39;4.3&#39;,
+  openssl: &#39;0.9.8o&#39; }</code></pre>
 
 <h3 id="process.installPrefix">process.installPrefix</h3>
 
-<p>Exposes the installation prefix, which defaults to "<em>/usr/local</em>", as node's binary was installed to "<em>/usr/local/bin/node</em>".</p>
+<p>Exposes the installation prefix, which defaults to &quot;<em>/usr/local</em>&quot;, as node&#39;s binary was installed to &quot;<em>/usr/local/bin/node</em>&quot;.</p>
 
 <h3 id="process.execPath">process.execPath</h3>
 
-<p>Path to the executable itself, defaults to "<em>/usr/local/bin/node</em>".</p>
+<p>Path to the executable itself, defaults to &quot;<em>/usr/local/bin/node</em>&quot;.</p>
 
 <h3 id="process.platform">process.platform</h3>
 
-<p>Exposes a string indicating the platform you are running on, for example "darwin" or "linux".</p>
+<p>Exposes a string indicating the platform you are running on, for example &quot;darwin&quot; or &quot;linux&quot;.</p>
 
 <h3 id="process.pid">process.pid</h3>
 
@@ -703,15 +703,15 @@ at some properties that provide information about the node process itself.</p>
 
 <pre><code>$ cd /var &amp;&amp; node
 &gt; process.cwd()
-'/var'</code></pre>
+&#39;/var&#39;</code></pre>
 
 <h3 id="process.chdir">process.chdir()</h3>
 
 <p>Changes the current working directory to the path passed.</p>
 
-<pre><code>&gt; process.chdir('lib')
+<pre><code>&gt; process.chdir(&#39;lib&#39;)
 &gt; process.cwd()
-'/var/lib'</code></pre>
+&#39;/var/lib&#39;</code></pre>
 
 <h3 id="process.getuid">process.getuid()</h3>
 
@@ -719,7 +719,7 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process.setuid">process.setuid()</h3>
 
-<p>Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both <code>process.setuid(501)</code>, and <code>process.setuid('tj')</code> are valid, where 501 is TJ's <em>uid</em>.</p>
+<p>Sets the effective user id for the running process. This method accepts both a numerical id, as well as a string. For example both <code>process.setuid(501)</code>, and <code>process.setuid(&#39;tj&#39;)</code> are valid, where 501 is TJ&#39;s <em>uid</em>.</p>
 
 <h3 id="process.getgid">process.getgid()</h3>
 
@@ -727,22 +727,22 @@ at some properties that provide information about the node process itself.</p>
 
 <h3 id="process.setgid">process.setgid()</h3>
 
-<p>Similar to <code>process.setuid()</code> however operates on the group, also accepting a numerical value or string representation. For example <code>process.setgid(20)</code> or <code>process.setgid('www')</code>.</p>
+<p>Similar to <code>process.setuid()</code> however operates on the group, also accepting a numerical value or string representation. For example <code>process.setgid(20)</code> or <code>process.setgid(&#39;www&#39;)</code>.</p>
 
 <h3 id="process.env">process.env</h3>
 
-<p>An object containing the user's environment variables, for example:</p>
+<p>An object containing the user&#39;s environment variables, for example:</p>
 
-<pre><code>{ PATH: '/Users/tj/.gem/ruby/1.8/bin:/Users/tj/.nvm/current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin'
-, PWD: '/Users/tj/ebooks/masteringnode'
-, EDITOR: 'mate'
-, LANG: 'en_CA.UTF-8'
-, SHLVL: '1'
-, HOME: '/Users/tj'
-, LOGNAME: 'tj'
-, DISPLAY: '/tmp/launch-YCkT03/org.x:0'
-, _: '/usr/local/bin/node'
-, OLDPWD: '/Users/tj'
+<pre><code>{ PATH: &#39;/Users/tj/.gem/ruby/1.8/bin:/Users/tj/.nvm/current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin&#39;
+, PWD: &#39;/Users/tj/ebooks/masteringnode&#39;
+, EDITOR: &#39;mate&#39;
+, LANG: &#39;en_CA.UTF-8&#39;
+, SHLVL: &#39;1&#39;
+, HOME: &#39;/Users/tj&#39;
+, LOGNAME: &#39;tj&#39;
+, DISPLAY: &#39;/tmp/launch-YCkT03/org.x:0&#39;
+, _: &#39;/usr/local/bin/node&#39;
+, OLDPWD: &#39;/Users/tj&#39;
 }</code></pre>
 
 <h3 id="process.argv">process.argv</h3>
@@ -755,11 +755,11 @@ at some properties that provide information about the node process itself.</p>
 
 <p>in which we call <code>console.dir(process.argv)</code>, outputting the following:</p>
 
-<pre><code>[ 'node'
-, '/Users/tj/EBooks/masteringnode/src/process/misc.js'
-, 'foo'
-, 'bar'
-, 'baz'
+<pre><code>[ &#39;node&#39;
+, &#39;/Users/tj/EBooks/masteringnode/src/process/misc.js&#39;
+, &#39;foo&#39;
+, &#39;bar&#39;
+, &#39;baz&#39;
 ]</code></pre>
 
 <h3 id="process.exit">process.exit()</h3>
@@ -771,104 +771,104 @@ at some properties that provide information about the node process itself.</p>
 <p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
 
 <pre><code>// process/exceptions.js
-process.on('uncaughtException', function(err){
-    console.log('got an error: %s', err.message);
+process.on(&#39;uncaughtException&#39;, function(err){
+    console.log(&#39;got an error: %s&#39;, err.message);
     process.exit(1);
 });
 
 setTimeout(function(){
-    throw new Error('fail');
+    throw new Error(&#39;fail&#39;);
 }, 100);</code></pre>
 
 <h3 id="process.kill">process.kill()</h3>
 
-<p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output "terminating" and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
+<p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output &quot;terminating&quot; and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
 
 <pre><code>// process/kill.js
-process.on('SIGTERM', function(){
-    console.log('terminating');
+process.on(&#39;SIGTERM&#39;, function(){
+    console.log(&#39;terminating&#39;);
     process.exit(1);
 });
 
 setTimeout(function(){
-    console.log('sending SIGTERM to process %d', process.pid);
-    process.kill(process.pid, 'SIGTERM');
+    console.log(&#39;sending SIGTERM to process %d&#39;, process.pid);
+    process.kill(process.pid, &#39;SIGTERM&#39;);
 }, 500);
 
 setTimeout(function(){
-    console.log('never called');
+    console.log(&#39;never called&#39;);
 }, 1000);</code></pre>
 
 <h3 id="process.binding">process.binding()</h3>
 
-<p>Node performs lazy initialization and caching for a number of built-in modules through the <code>process.binding</code> function.  If you'd like to poke around in node's source code and view this binding cache implementation, navigate to your node checkout directory and open <em>./src/node.cc</em>.  The code for the binding cache starts on like 1749 (of node.js v0.4.0).</p>
+<p>Node performs lazy initialization and caching for a number of built-in modules through the <code>process.binding</code> function.  If you&#39;d like to poke around in node&#39;s source code and view this binding cache implementation, navigate to your node checkout directory and open <em>./src/node.cc</em>.  The code for the binding cache starts on like 1749 (of node.js v0.4.0).</p>
 
-<p>Currently, the cacheable process bindings include: built-in modules, <code>constants</code>, <code>io_watcher</code>, <code>timer</code> and <code>natives</code>.  To access the constants, instead of using <code>var constants = require('constants');</code>, you could lazily bind the constants as it is done in the <code>fs</code> module:</p>
+<p>Currently, the cacheable process bindings include: built-in modules, <code>constants</code>, <code>io_watcher</code>, <code>timer</code> and <code>natives</code>.  To access the constants, instead of using <code>var constants = require(&#39;constants&#39;);</code>, you could lazily bind the constants as it is done in the <code>fs</code> module:</p>
 
 <pre><code>// [node.js source]/lib/fs.js
-var util = require('util');
+var util = require(&#39;util&#39;);
 
-var binding = process.binding('fs');
-var constants = process.binding('constants');
+var binding = process.binding(&#39;fs&#39;);
+var constants = process.binding(&#39;constants&#39;);
 var fs = exports;
-var Stream = require('stream').Stream;
+var Stream = require(&#39;stream&#39;).Stream;
 // ...</code></pre>
 
 <p>Binding in this way allows us to perform the initialization of those modules bound to <code>process</code> only once. We can then extend those bindings because they are an exported module like any other <code>require</code>.</p>
 
-<p>Another reason for caching the bindings in this way is because these bindings differ across platforms.  If you were to open <em>node</em>constants.cc<em>, you would see conditional includes for </em>MINGW32<em> and <code>ifdef</code>s for each constant.  You wouldn't want to hardcode these constants in a module's exports.  If you opened opened the </em>constants_ module definition, you would see one line:</p>
+<p>Another reason for caching the bindings in this way is because these bindings differ across platforms.  If you were to open <em>node</em>constants.cc<em>, you would see conditional includes for </em>MINGW32<em> and <code>ifdef</code>s for each constant.  You wouldn&#39;t want to hardcode these constants in a module&#39;s exports.  If you opened opened the </em>constants_ module definition, you would see one line:</p>
 
 <pre><code>// [node.js source]/lib/constants.js
-module.exports = process.binding('constants');</code></pre>
+module.exports = process.binding(&#39;constants&#39;);</code></pre>
 
-<p>After a single require of this module, or call to <code>process.binding('constants')</code>, the constants are initialized and cached.  This lazy initialization improves node's startup.</p>
+<p>After a single require of this module, or call to <code>process.binding(&#39;constants&#39;)</code>, the constants are initialized and cached.  This lazy initialization improves node&#39;s startup.</p>
 
 <h3 id="errno">errno</h3>
 
-<p>To access <code>errno</code> constants, you'll need to either add the include <code>var constants = require('constants');</code> or use the <code>var constants = process.binding('constants');</code> method described earlier.</p>
+<p>To access <code>errno</code> constants, you&#39;ll need to either add the include <code>var constants = require(&#39;constants&#39;);</code> or use the <code>var constants = process.binding(&#39;constants&#39;);</code> method described earlier.</p>
 
 <p>The <code>constants</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>constants.EPERM</code> represents a permission based error, while <code>constants.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well as in the http request error object:</p>
 
 <pre><code>if (err.errno === constants.ENOENT) {
-	// Display a 404 "Not Found" page
+	// Display a 404 &quot;Not Found&quot; page
 } else {
-	// Display a 500 "Internal Server Error" page
+	// Display a 500 &quot;Internal Server Error&quot; page
 }</code></pre>
 
 <h1>Events</h1>
 
-<p> The concept of an "event" is crucial to node, and used greatly throughout core and 3rd-party modules. Node's core module <em>events</em> supplies us with a single constructor, <code>EventEmitter</code>.</p>
+<p> The concept of an &quot;event&quot; is crucial to node, and used greatly throughout core and 3rd-party modules. Node&#39;s core module <em>events</em> supplies us with a single constructor, <code>EventEmitter</code>.</p>
 
 <h2 id="emitting_Events">Emitting Events</h2>
 
 <p>Typically an object inherits from <code>EventEmitter</code>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
 
 <pre><code>// events/basic.js
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require(&#39;events&#39;).EventEmitter;
 
 var emitter = new EventEmitter;
 
-emitter.on('name', function(first, last){
-    console.log(first + ', ' + last);
+emitter.on(&#39;name&#39;, function(first, last){
+    console.log(first + &#39;, &#39; + last);
 });
 
-emitter.emit('name', 'tj', 'holowaychuk');
-emitter.emit('name', 'simon', 'holowaychuk');</code></pre>
+emitter.emit(&#39;name&#39;, &#39;tj&#39;, &#39;holowaychuk&#39;);
+emitter.emit(&#39;name&#39;, &#39;simon&#39;, &#39;holowaychuk&#39;);</code></pre>
 
 <h2 id="inheriting_From_EventEmitter">Inheriting From EventEmitter</h2>
 
-<p>Perhaps a more practical use of <code>EventEmitter</code>, and commonly used throughout node, is to inherit from it. This means we can leave <code>EventEmitter</code>'s prototype untouched, while utilizing its api for our own means of world domination!</p>
+<p>Perhaps a more practical use of <code>EventEmitter</code>, and commonly used throughout node, is to inherit from it. This means we can leave <code>EventEmitter</code>&#39;s prototype untouched, while utilizing its api for our own means of world domination!</p>
 
 <p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>.</p>
 
 <pre><code>// events/subclass.js
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require(&#39;events&#39;).EventEmitter;
 
 function Dog(name) {
     this.name = name;
 }</code></pre>
 
-<ul><li>Note: JavaScript doesn't have 'classes'.  The file above is called 'subclass' because this is a term commonly used for inheritance in an object-oriented language.*</li></ul>
+<ul><li>Note: JavaScript doesn&#39;t have &#39;classes&#39;.  The file above is called &#39;subclass&#39; because this is a term commonly used for inheritance in an object-oriented language.*</li></ul>
 
 <p>Here we inherit from <code>EventEmitter</code>, so that we may use the methods provided such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, no worries! we will be touching on this later.</p>
 
@@ -876,23 +876,23 @@ function Dog(name) {
 
 <p>Now that we have our <code>Dog</code> set up, we can create .... simon! When simon barks we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback it-self is called in context to the object, aka <code>this</code>.</p>
 
-<pre><code>var simon = new Dog('simon');
+<pre><code>var simon = new Dog(&#39;simon&#39;);
 
-simon.on('bark', function(){
-    console.log(this.name + ' barked');
+simon.on(&#39;bark&#39;, function(){
+    console.log(this.name + &#39; barked&#39;);
 });</code></pre>
 
 <p>Bark twice a second:</p>
 
 <pre><code>setInterval(function(){
-    simon.emit('bark');
+    simon.emit(&#39;bark&#39;);
 }, 500);</code></pre>
 
-<p>You may look at the above code and think, "Why don't I just add a <em>bark</em> function?"  That's a good question.  The power of events is in subscribing to events that occur when a function on the object is executed.  For instance, if you have a writeable <code>Stream</code> object with the function <code>write()</code>, you may subscribe to a data event.  The following event example is directly from the node api documentation:</p>
+<p>You may look at the above code and think, &quot;Why don&#39;t I just add a <em>bark</em> function?&quot;  That&#39;s a good question.  The power of events is in subscribing to events that occur when a function on the object is executed.  For instance, if you have a writeable <code>Stream</code> object with the function <code>write()</code>, you may subscribe to a data event.  The following event example is directly from the node api documentation:</p>
 
 <pre><code>// events/streams.js
-var util = require("util");
-var events = require("events");
+var util = require(&quot;util&quot;);
+var events = require(&quot;events&quot;);
 
 function MyStream() {
     events.EventEmitter.call(this);
@@ -901,7 +901,7 @@ function MyStream() {
 util.inherits(MyStream, events.EventEmitter);
 
 MyStream.prototype.write = function(data) {
-    this.emit("data", data);
+    this.emit(&quot;data&quot;, data);
 }
 
 var stream = new MyStream();
@@ -909,14 +909,14 @@ var stream = new MyStream();
 console.log(stream instanceof events.EventEmitter); // true
 console.log(MyStream.super_ === events.EventEmitter); // true
 
-stream.on("data", function(data) {
-	console.log('Received data: "' + data + '"');
+stream.on(&quot;data&quot;, function(data) {
+	console.log(&#39;Received data: &quot;&#39; + data + &#39;&quot;&#39;);
 });
-stream.write("It works!"); // Received data: "It works!"</code></pre>
+stream.write(&quot;It works!&quot;); // Received data: &quot;It works!&quot;</code></pre>
 
-<p>This example is fairly complicated compared to most of the examples so far.  It does a number of things that haven't yet been covered, but are included here for completeness.  First of all, we're creating an object of <code>MyStream</code> called <code>stream</code>, which inherits from <code>EventEmitter</code>. This was mentioned earlier, but the api's example provides a nice use of the util module for inheritance.  Then, we set the <code>write</code> function to emit the <em>data</em> event to any subscribers (which are called <em>EventListeners</em>).  In this function, we could also provide some default functionality (more than emitting an event), such as writing to an inner sink, logging, or any number of operations.</p>
+<p>This example is fairly complicated compared to most of the examples so far.  It does a number of things that haven&#39;t yet been covered, but are included here for completeness.  First of all, we&#39;re creating an object of <code>MyStream</code> called <code>stream</code>, which inherits from <code>EventEmitter</code>. This was mentioned earlier, but the api&#39;s example provides a nice use of the util module for inheritance.  Then, we set the <code>write</code> function to emit the <em>data</em> event to any subscribers (which are called <em>EventListeners</em>).  In this function, we could also provide some default functionality (more than emitting an event), such as writing to an inner sink, logging, or any number of operations.</p>
 
-<p>After setting up the object, this example writes to <code>console.log()</code> to demonstrate that both the stream and the <code>super_</code> object are instances of <code>EventEmitter</code>.  Afterward, we subscribe to the <code>"data"</code> event and log the data that is emitted from the <code>MyStream.prototype.write</code> function.  This means that anything passed to the <code>write()</code> function is emitted to all subscribers as the single object passed to the callback function.  In other words, anytime we call <code>write()</code>, we're going to log with a little message to show that the parameter is being written by the emitted event.</p>
+<p>After setting up the object, this example writes to <code>console.log()</code> to demonstrate that both the stream and the <code>super_</code> object are instances of <code>EventEmitter</code>.  Afterward, we subscribe to the <code>&quot;data&quot;</code> event and log the data that is emitted from the <code>MyStream.prototype.write</code> function.  This means that anything passed to the <code>write()</code> function is emitted to all subscribers as the single object passed to the callback function.  In other words, anytime we call <code>write()</code>, we&#39;re going to log with a little message to show that the parameter is being written by the emitted event.</p>
 
 <p>So, unlike the dog barking example, this shows that a single function can have multiple operations occur via events.</p>
 
@@ -924,46 +924,46 @@ stream.write("It works!"); // Received data: "It works!"</code></pre>
 
 <h2 id="removing_Event_Listeners">Removing Event Listeners</h2>
 
-<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often, we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below, we emit the <em>message</em> <code>'foo bar'</code> every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>emitter.on()</code> originally. To complement this method is <code>removeAllListeners(type)</code>, which removes all listeners associated to the given <em>type</em>.</p>
+<p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often, we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below, we emit the <em>message</em> <code>&#39;foo bar&#39;</code> every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>emitter.on()</code> originally. To complement this method is <code>removeAllListeners(type)</code>, which removes all listeners associated to the given <em>type</em>.</p>
 
 <pre><code>// events/removing.js
-var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require(&#39;events&#39;).EventEmitter;
 
 var emitter = new EventEmitter;
 
-emitter.on('message', console.log);
+emitter.on(&#39;message&#39;, console.log);
 
 setInterval(function(){
-    emitter.emit('message', 'foo bar');
+    emitter.emit(&#39;message&#39;, &#39;foo bar&#39;);
 }, 300);
 
 setTimeout(function(){
-    emitter.removeListener('message', console.log);
+    emitter.removeListener(&#39;message&#39;, console.log);
 }, 1000);</code></pre>
 
 <h1>Buffers</h1>
 
-<p>To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8's heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it's data.</p>
+<p>To handle binary data, node provides us with the global <code>Buffer</code> object. Buffer instances represent memory allocated independently to that of V8&#39;s heap. There are several ways to construct a <code>Buffer</code> instance, and many ways you can manipulate it&#39;s data.</p>
 
-<p>The simplest way to construct a <code>Buffer</code> from a string is to pass a string as the first argument to <code>Buffer</code>'s constructor. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
+<p>The simplest way to construct a <code>Buffer</code> from a string is to pass a string as the first argument to <code>Buffer</code>&#39;s constructor. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
-<pre><code>&gt; var hello = new Buffer('Hello');
+<pre><code>&gt; var hello = new Buffer(&#39;Hello&#39;);
 
 &gt; console.log(hello);
 &lt;Buffer 48 65 6c 6c 6f&gt;
 
 &gt; console.log(hello.toString());
-'Hello'</code></pre>
+&#39;Hello&#39;</code></pre>
 
-<p>By default the encoding is "utf8", however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the '&amp;' character when in "ascii" encoding.</p>
+<p>By default the encoding is &quot;utf8&quot;, however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the &#39;&amp;&#39; character when in &quot;ascii&quot; encoding.</p>
 
-<pre><code>&gt; var buf = new Buffer('…');
+<pre><code>&gt; var buf = new Buffer(&#39;…&#39;);
 &gt; console.log(buf.toString());
-'…'
+&#39;…&#39;
 
-&gt; var buf = new Buffer('…', 'ascii');
+&gt; var buf = new Buffer(&#39;…&#39;, &#39;ascii&#39;);
 &gt; console.log(buf.toString());
-'&amp;'</code></pre>
+&#39;&amp;&#39;</code></pre>
 
 <p>An alternative method is to pass an array of integers representing the octet stream.</p>
 
@@ -972,66 +972,66 @@ setTimeout(function(){
 [ 72, 101, 108, 108, 111 ]
 
 &gt; h.toString();
-'72,101,108,108,111'
+&#39;72,101,108,108,111&#39;
 
 &gt; var hello = new Buffer(h);
 &lt;Buffer 48 65 6c 6c 6f&gt;
 
 &gt; hello.toString();
-'Hello'</code></pre>
+&#39;Hello&#39;</code></pre>
 
-<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below, we create a buffer large enough to hold the string "Hello World!"  After writing 'Hello', we see the bytes 5 through 12 are unused bytes.  We then write ' World' starting at byte 6 and examine the output.  Whoops!  We skipped a byte.  We can overwrite this part of the buffer with ' World!' starting at byte 5.  We then call <code>toString()</code> on the buffer and see that the buffer is now filled with the desired string.</p>
+<p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below, we create a buffer large enough to hold the string &quot;Hello World!&quot;  After writing &#39;Hello&#39;, we see the bytes 5 through 12 are unused bytes.  We then write &#39; World&#39; starting at byte 6 and examine the output.  Whoops!  We skipped a byte.  We can overwrite this part of the buffer with &#39; World!&#39; starting at byte 5.  We then call <code>toString()</code> on the buffer and see that the buffer is now filled with the desired string.</p>
 
 <pre><code>&gt; var hello = new Buffer(12);
-&gt; hello.write('Hello');
+&gt; hello.write(&#39;Hello&#39;);
 5
 
 &gt; hello.toString();
-'Hello\u0000�̵\u0001\u0000\u0000'
-&gt; hello.write(' World', 6);
+&#39;Hello\u0000�̵\u0001\u0000\u0000&#39;
+&gt; hello.write(&#39; World&#39;, 6);
 6
 
 &gt; hello.toString();
-'Hello\u0000 World'
+&#39;Hello\u0000 World&#39;
 
-&gt; hello.write(' World!', 5);
+&gt; hello.write(&#39; World!&#39;, 5);
 7
 
 &gt; hello.toString();
-'Hello World!'
+&#39;Hello World!&#39;
 
 &gt; hello.length
 12</code></pre>
 
-<p>The <code>length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character '…' consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
+<p>The <code>length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character &#39;…&#39; consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
 
-<pre><code>&gt; var ellipsis = new Buffer('…', 'utf8');
-&gt; console.log('… string length: %d', '…'.length);
+<pre><code>&gt; var ellipsis = new Buffer(&#39;…&#39;, &#39;utf8&#39;);
+&gt; console.log(&#39;… string length: %d&#39;, &#39;…&#39;.length);
 … string length: 1
 
-&gt; console.log('… byte length: %d', ellipsis.length);
+&gt; console.log(&#39;… byte length: %d&#39;, ellipsis.length);
 … byte length: 3
 
 &gt; ellipsis
 &lt;Buffer e2 80 a6&gt;</code></pre>
 
-<p>When dealing with a JavaScript string, we may pass it to the <code>Buffer.byteLength()</code> method to determine it's byte length.</p>
+<p>When dealing with a JavaScript string, we may pass it to the <code>Buffer.byteLength()</code> method to determine it&#39;s byte length.</p>
 
-<pre><code>&gt; Buffer.byteLength('…');
+<pre><code>&gt; Buffer.byteLength(&#39;…&#39;);
 3</code></pre>
 
-<p>The api is written in such a way that it is String-like, so for example we can work with "slices" of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
+<p>The api is written in such a way that it is String-like, so for example we can work with &quot;slices&quot; of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
-<pre><code>&gt; var buf = new Buffer('For some other string!');
+<pre><code>&gt; var buf = new Buffer(&#39;For some other string!&#39;);
 &gt; var chunk = buf.slice(4, 8);
 &gt; console.log(chunk.toString());
-'some'</code></pre>
+&#39;some&#39;</code></pre>
 
 <p>Alternatively when expecting a string we can pass offsets to <code>Buffer#toString()</code>:</p>
 
-<pre><code>&gt; var buffer = new Buffer('The quick brown fox');
-&gt; buffer.toString('ascii', 4, 9);
-'quick'</code></pre>
+<pre><code>&gt; var buffer = new Buffer(&#39;The quick brown fox&#39;);
+&gt; buffer.toString(&#39;ascii&#39;, 4, 9);
+&#39;quick&#39;</code></pre>
 
 <p>A Buffer object has a number of helper functions: <code>.utf8Write()</code>, <code>.utf8Slice()</code>, <code>.asciiWrite()</code>, <code>.asciiSlice()</code>, <code>.binaryWrite()</code>, <code>.binarySlice()</code>.  These methods provide similar functionality while enforcing proper encoding.</p>
 
@@ -1043,37 +1043,37 @@ setTimeout(function(){
 
 <p>Readable streams such as an HTTP request inherit from <code>EventEmitter</code> in order to expose incoming data through events. The first of these events is the <em>data</em> event, which is an arbitrary chunk of data passed to the event handler as a <code>Buffer</code> instance. </p>
 
-<pre><code>req.on('data', function(buf){
+<pre><code>req.on(&#39;data&#39;, function(buf){
     // Do something with the Buffer
 });</code></pre>
 
 <p>As we know, we can call <code>toString()</code> on a buffer to return a string representation of the binary data. In the case of streams, if desired, we may call <code>setEncoding()</code> on the stream, after which the <em>data</em> event will emit strings.</p>
 
-<pre><code>req.setEncoding('utf8');
-req.on('data', function(str){
+<pre><code>req.setEncoding(&#39;utf8&#39;);
+req.on(&#39;data&#39;, function(str){
     // Do something with the String
 });</code></pre>
 
-<p>Another important event is the <em>end</em> event, which represents the ending of <em>data</em> events. For example below we define an HTTP echo server, simply "pumping" the request body data through to the response. So if we <strong>POST</strong> "hello world", our response will be "hello world".</p>
+<p>Another important event is the <em>end</em> event, which represents the ending of <em>data</em> events. For example below we define an HTTP echo server, simply &quot;pumping&quot; the request body data through to the response. So if we <strong>POST</strong> &quot;hello world&quot;, our response will be &quot;hello world&quot;.</p>
 
 <pre><code>// streams/echo.js
-var http = require('http');
+var http = require(&#39;http&#39;);
 
 http.createServer(function(req, res){
     res.writeHead(200);
-    req.on('data', function(data){
+    req.on(&#39;data&#39;, function(data){
         res.write(data);
     });
-    req.on('end', function(){
+    req.on(&#39;end&#39;, function(){
         res.end();
     });
 }).listen(3000);</code></pre>
 
-<p>The <em>sys</em> module actually has a function designed specifically for this "pumping" action, aptly named <code>sys.pump()</code>, which accepts a read stream as the first argument, and write stream as the second.</p>
+<p>The <em>sys</em> module actually has a function designed specifically for this &quot;pumping&quot; action, aptly named <code>sys.pump()</code>, which accepts a read stream as the first argument, and write stream as the second.</p>
 
 <pre><code>// streams/pump.js
-var http = require('http'),
-    sys = require('sys');
+var http = require(&#39;http&#39;),
+    sys = require(&#39;sys&#39;);
 
 http.createServer(function(req, res){
     res.writeHead(200);
@@ -1082,23 +1082,23 @@ http.createServer(function(req, res){
 
 <h1>File System</h1>
 
-<p>  To work with the filesystem, node provides the 'fs' module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
+<p>  To work with the filesystem, node provides the &#39;fs&#39; module. The commands follow the POSIX operations, with most methods supporting an asynchronous and synchronous method call. We will look at how to use both and then establish which is the better option.</p>
 
 <h2 id="working_with_the_filesystem">Working with the filesystem</h2>
 
 <p>  Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:</p>
 
 <pre><code>// fs/basics.js
-var fs = require('fs');
+var fs = require(&#39;fs&#39;);
 
-fs.mkdir('./helloDir',0777, function (err) {
+fs.mkdir(&#39;./helloDir&#39;,0777, function (err) {
   if (err) throw err;
 
-  fs.writeFile('./helloDir/message.txt', 'Hello Node', function (err) {
+  fs.writeFile(&#39;./helloDir/message.txt&#39;, &#39;Hello Node&#39;, function (err) {
     if (err) throw err;
-    console.log('file created with contents:');
+    console.log(&#39;file created with contents:&#39;);
 
-    fs.readFile('./helloDir/message.txt','UTF-8' ,function (err, data) {
+    fs.readFile(&#39;./helloDir/message.txt&#39;,&#39;UTF-8&#39; ,function (err, data) {
       if (err) throw err;
       console.log(data);
     });
@@ -1109,10 +1109,10 @@ fs.mkdir('./helloDir',0777, function (err) {
 
 <p>  The example can be rewritten to use a synchronous approach:</p>
 
-<pre><code>fs.mkdirSync('./helloDirSync',0777);
-fs.writeFileSync('./helloDirSync/message.txt', 'Hello Node');
-var data = fs.readFileSync('./helloDirSync/message.txt','UTF-8');
-console.log('file created with contents:');
+<pre><code>fs.mkdirSync(&#39;./helloDirSync&#39;,0777);
+fs.writeFileSync(&#39;./helloDirSync/message.txt&#39;, &#39;Hello Node&#39;);
+var data = fs.readFileSync(&#39;./helloDirSync/message.txt&#39;,&#39;UTF-8&#39;);
+console.log(&#39;file created with contents:&#39;);
 console.log(data);</code></pre>
 
 <p>  It is better to use the asynchronous approach on servers with a high load, as the synchronous methods will cause the whole process to halt and wait for the operation to complete. This will block any incoming connections and other events.</p>
@@ -1122,22 +1122,22 @@ console.log(data);</code></pre>
 <p>The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a directory object.</p>
 
 <pre><code>// fs/stat.js
-var fs = require('fs');
+var fs = require(&#39;fs&#39;);
 
-fs.readdir('/etc/', function (err, files) {
+fs.readdir(&#39;/etc/&#39;, function (err, files) {
   if (err) throw err;
 
   files.forEach( function (file) {
-    fs.stat('/etc/' + file, function (err, stats) {
+    fs.stat(&#39;/etc/&#39; + file, function (err, stats) {
       if (err) throw err;
 
       if (stats.isFile()) {
-        console.log("%s is file", file);
+        console.log(&quot;%s is file&quot;, file);
       }
       else if (stats.isDirectory ()) {
-      console.log("%s is a directory", file);
+      console.log(&quot;%s is a directory&quot;, file);
       }    
-    console.log('stats:  %s',JSON.stringify(stats));
+    console.log(&#39;stats:  %s&#39;,JSON.stringify(stats));
     });
   });
 });</code></pre>
@@ -1147,17 +1147,17 @@ fs.readdir('/etc/', function (err, files) {
 <p>  The fs.watchfile monitors a file and will fire the event whenever the file is changed.</p>
 
 <pre><code>// fs/watch.js
-var fs = require('fs');
+var fs = require(&#39;fs&#39;);
 
-fs.watchFile('./testFile.txt', function (curr, prev) {
-  console.log('the current mtime is: ' + curr.mtime);
-  console.log('the previous mtime was: ' + prev.mtime);
+fs.watchFile(&#39;./testFile.txt&#39;, function (curr, prev) {
+  console.log(&#39;the current mtime is: &#39; + curr.mtime);
+  console.log(&#39;the previous mtime was: &#39; + prev.mtime);
 });
 
-fs.writeFile('./testFile.txt', "changed", function (err) {
+fs.writeFile(&#39;./testFile.txt&#39;, &quot;changed&quot;, function (err) {
   if (err) throw err;
 
-  console.log("file write complete");   
+  console.log(&quot;file write complete&quot;);   
 });</code></pre>
 
 <p>  A file can also be unwatched using the fs.unwatchFile method call. This is used once monitoring of a file is no longer required.</p>
@@ -1172,22 +1172,22 @@ fs.writeFile('./testFile.txt', "changed", function (err) {
 
 <h2 id="tCP_Servers">TCP Servers</h2>
 
-<p>Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos "You were connected!" to a client connection and outputs "A client has connected!" to <em>stdout</em>.</p>
+<p>Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos &quot;You were connected!&quot; to a client connection and outputs &quot;A client has connected!&quot; to <em>stdout</em>.</p>
 
 <pre><code>// tcp/tcp_server.js
-var sys = require('sys');
-var tcp = require('net');
+var sys = require(&#39;sys&#39;);
+var tcp = require(&#39;net&#39;);
 var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
-    sys.puts("A client has connected!");
-    socket.write("You were connected!\n", "utf8");
+    sys.puts(&quot;A client has connected!&quot;);
+    socket.write(&quot;You were connected!\n&quot;, &quot;utf8&quot;);
     socket.end();
-}).listen(8000, '127.0.0.1');</code></pre>
+}).listen(8000, &#39;127.0.0.1&#39;);</code></pre>
 
 <p>To test this server, enter <code>node src/tcp/tcp_server.js</code> in a terminal.  Then, open another terminal to telnet into this server.</p>
 
 <pre><code>$ telnet 127.0.0.1 8000</code></pre>
 
-<p>In the server's terminal, you should see the message output from <code>sys.puts</code>, while the client's server should display, "You were connected!"</p>
+<p>In the server&#39;s terminal, you should see the message output from <code>sys.puts</code>, while the client&#39;s server should display, &quot;You were connected!&quot;</p>
 
 <h2 id="tCP_Clients">TCP Clients</h2>
 
@@ -1195,33 +1195,33 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <h1>HTTP</h1>
 
-<p>Node's HTTP module offers a chunkable, buffered interface to the HTTP protocol.  Headers are JSON objects with lower-case keys and original values.</p>
+<p>Node&#39;s HTTP module offers a chunkable, buffered interface to the HTTP protocol.  Headers are JSON objects with lower-case keys and original values.</p>
 
-<pre><code>{ 'content-length': '123', 'content-type': 'text/plain' }</code></pre>
+<pre><code>{ &#39;content-length&#39;: &#39;123&#39;, &#39;content-type&#39;: &#39;text/plain&#39; }</code></pre>
 
-<p>The HTTP module is low-level, meaning it handles the headers and the message (and that's about it).  This creates a solid framework ontop of which modules can be built for web frameworks (<a href="http://www.expressjs.com">express</a>, <a href="http://www.geddy.com">geddy</a>, file servers, browsers (<a href="http://www.google.com/?q=zombiejs">zombie.js</a>, and even SaaS (<a href="http://www.cloud9ide.com)">cloud9 IDE</a>.</p>
+<p>The HTTP module is low-level, meaning it handles the headers and the message (and that&#39;s about it).  This creates a solid framework ontop of which modules can be built for web frameworks (<a href="http://www.expressjs.com">express</a>, <a href="http://www.geddy.com">geddy</a>, file servers, browsers (<a href="http://www.google.com/?q=zombiejs">zombie.js</a>, and even SaaS (<a href="http://www.cloud9ide.com)">cloud9 IDE</a>.</p>
 
-<p>Let's take a look at the <code>request</code> and <code>response</code> objects of an HTTP server created by node.  To do this, we're going to create a server, inspect both of these objects in the request, and write a dump of the inspection out to a file.</p>
+<p>Let&#39;s take a look at the <code>request</code> and <code>response</code> objects of an HTTP server created by node.  To do this, we&#39;re going to create a server, inspect both of these objects in the request, and write a dump of the inspection out to a file.</p>
 
 <pre><code>// http/view_request.js
-var http = require('http'), 
-fs = require('fs'), 
-util = require('util'),
-tty = require('tty');
+var http = require(&#39;http&#39;), 
+fs = require(&#39;fs&#39;), 
+util = require(&#39;util&#39;),
+tty = require(&#39;tty&#39;);
 
 var server = http.createServer(function(req, res) {
-    console.log("Received a request!");
-    fs.writeFile('./request.txt', util.inspect(req) );
-    res.writeHead(200, { 'Content-Type' : 'text/html' });
-    res.write("&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;p&gt;We're serving up html!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;");
+    console.log(&quot;Received a request!&quot;);
+    fs.writeFile(&#39;./request.txt&#39;, util.inspect(req) );
+    res.writeHead(200, { &#39;Content-Type&#39; : &#39;text/html&#39; });
+    res.write(&quot;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;p&gt;We&#39;re serving up html!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;);
     res.end();
-    fs.writeFile('./response.txt', util.inspect(res) );
+    fs.writeFile(&#39;./response.txt&#39;, util.inspect(res) );
 });
 
 // ... cleanup on exit (see file)
 
-console.log("Server is running on http://localhost:9111");
-console.log("Hit CTRL+C to shutdown the http server");</code></pre>
+console.log(&quot;Server is running on http://localhost:9111&quot;);
+console.log(&quot;Hit CTRL+C to shutdown the http server&quot;);</code></pre>
 
 <p>Run this sample with <code>node src/http/view_request.js</code> from a terminal.  Then, navigate to the server location displayed in the terminal.  This will generate two files: <code>./src/http/request.txt</code> and <code>./src/http/response.txt</code>.</p>
 
@@ -1229,30 +1229,30 @@ console.log("Hit CTRL+C to shutdown the http server");</code></pre>
 
 <h2 id="hTTP_Request">HTTP Request</h2>
 
-<p>Let's take a look at what the request object looks like from the server example above. You should see output similar to:</p>
+<p>Let&#39;s take a look at what the request object looks like from the server example above. You should see output similar to:</p>
 
 <pre><code>// http/request.txt
 // ...
-httpVersion: '1.1',
+httpVersion: &#39;1.1&#39;,
   complete: false,
   headers: 
-   { host: 'localhost:9111',
-     connection: 'keep-alive',
-     accept: '*/*',
-     'user-agent': 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.14 Safari/534.24',
-     'accept-encoding': 'gzip,deflate,sdch',
-     'accept-language': 'en-US,ru;q=0.8',
-     'accept-charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3' },
+   { host: &#39;localhost:9111&#39;,
+     connection: &#39;keep-alive&#39;,
+     accept: &#39;*/*&#39;,
+     &#39;user-agent&#39;: &#39;Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/11.0.696.14 Safari/534.24&#39;,
+     &#39;accept-encoding&#39;: &#39;gzip,deflate,sdch&#39;,
+     &#39;accept-language&#39;: &#39;en-US,ru;q=0.8&#39;,
+     &#39;accept-charset&#39;: &#39;ISO-8859-1,utf-8;q=0.7,*;q=0.3&#39; },
   trailers: {},
   readable: true,
-  url: '/favicon.ico',
-  method: 'GET',
+  url: &#39;/favicon.ico&#39;,
+  method: &#39;GET&#39;,
   statusCode: null, 
 // ...</code></pre>
 
 <h2 id="hTTP_Response">HTTP Response</h2>
 
-<p>Let's take a look at what the request object looks like from the server example above. You should see output similar to:</p>
+<p>Let&#39;s take a look at what the request object looks like from the server example above. You should see output similar to:</p>
 
 <pre><code>{ output: [],
   outputEncodings: [],
@@ -1262,21 +1262,21 @@ httpVersion: '1.1',
   shouldKeepAlive: true,
   useChunkedEncodingByDefault: true,
   _hasBody: true,
-  _trailer: '',
+  _trailer: &#39;&#39;,
   finished: true,
   socket: null,
   connection: null,
   _events: { finish: [Function] },
-  _header: 'HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: keep-alive\r\nTransfer-Encoding: chunked\r\n\r\n',
+  _header: &#39;HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nConnection: keep-alive\r\nTransfer-Encoding: chunked\r\n\r\n&#39;,
   _headerSent: true }</code></pre>
 
 <h2 id="hTTP_Servers">HTTP Servers</h2>
 
-<p>http.Server exposes a number of events (request, connection, close, response, etc.) and three functions for creation, listening for requests, and closing the server.  We saw examples of a few of these at the beginning of this section. Up to this point, most of the code we've looked at has been mainly procedural.  To create a server, we will have to implement quite a few things we've learned up to this point:</p>
+<p>http.Server exposes a number of events (request, connection, close, response, etc.) and three functions for creation, listening for requests, and closing the server.  We saw examples of a few of these at the beginning of this section. Up to this point, most of the code we&#39;ve looked at has been mainly procedural.  To create a server, we will have to implement quite a few things we&#39;ve learned up to this point:</p>
 
 <ul><li>Write a module for an http server</li><li>Expose events which occur on the server</li><li>Serve/compile files</li></ul>
 
-<p>Like the first example in this chapter, we'll be using the <em>http</em>, <em>fs</em> and <em>tty</em> modules.  To make this interesting, though, we'll also do a compilation from markdown to html so that our server is doing a little more than serving static files. To simplify the example, we won't also be serving static files or even sending a full range of HTTP status codes; everything is <code>200 OK</code> in this example.</p>
+<p>Like the first example in this chapter, we&#39;ll be using the <em>http</em>, <em>fs</em> and <em>tty</em> modules.  To make this interesting, though, we&#39;ll also do a compilation from markdown to html so that our server is doing a little more than serving static files. To simplify the example, we won&#39;t also be serving static files or even sending a full range of HTTP status codes; everything is <code>200 OK</code> in this example.</p>
 
 <h3 id="creating_the_module">Creating the module</h3>
 
@@ -1290,54 +1290,54 @@ drwxr-xr-x 2 jim jim 4096 2011-03-24 07:25 pages
 -rw-r--r-- 1 jim jim 3034 2011-03-24 07:57 server.js
 drwxr-xr-x 2 jim jim 4096 2011-03-23 20:31 templates</code></pre>
 
-<p>The file <code>server.js</code> is our module.  So we don't need to call <code>var server = require('./server/server.js')</code> at the top of our node application, we're also going to include <code>package.json</code> which specifies where the main routine for our module is located.</p>
+<p>The file <code>server.js</code> is our module.  So we don&#39;t need to call <code>var server = require(&#39;./server/server.js&#39;)</code> at the top of our node application, we&#39;re also going to include <code>package.json</code> which specifies where the main routine for our module is located.</p>
 
 <pre><code>// http/server/package.json
-{ "name" : "example server",
-  "main" : "./server.js" }</code></pre>
+{ &quot;name&quot; : &quot;example server&quot;,
+  &quot;main&quot; : &quot;./server.js&quot; }</code></pre>
 
 <p>Recall from the <em>Modules</em> chapter that it is also possible to include an <code>index.js</code> file.  </p>
 
-<p>Next, let's identify the functionality we'll require in this module.  First, we know that we'll have to read a file.  We'll call that function <code>getFile()</code>. Then, since we're simplifying things for example's sake, we're assuming all files are in markdown format and converting all files to html.  We'll call that function <code>getHtml()</code>.  I know, I'm really creative.</p>
+<p>Next, let&#39;s identify the functionality we&#39;ll require in this module.  First, we know that we&#39;ll have to read a file.  We&#39;ll call that function <code>getFile()</code>. Then, since we&#39;re simplifying things for example&#39;s sake, we&#39;re assuming all files are in markdown format and converting all files to html.  We&#39;ll call that function <code>getHtml()</code>.  I know, I&#39;m really creative.</p>
 
-<p>Finally, we'll have a function called <code>run()</code> which creates the server and listens on the specified port.  To make our module useful, we have to expose functionality which, in our case, is only the run method.  Here is how we will interface with our module:</p>
+<p>Finally, we&#39;ll have a function called <code>run()</code> which creates the server and listens on the specified port.  To make our module useful, we have to expose functionality which, in our case, is only the run method.  Here is how we will interface with our module:</p>
 
 <pre><code>// http/server_example.js
-var server = require('./server');
+var server = require(&#39;./server&#39;);
 server.run({ port: 9222 });</code></pre>
 
 <p>We also have the option of performing a function before starting the server:</p>
 
 <pre><code>server.run({ port: 9222, 
     beforeStart: function(){ 
-        console.log("before start");
+        console.log(&quot;before start&quot;);
     } 
 });</code></pre>
 
-<p>Now that we have a plan in place for the interaction with the module, let's take a look at the three functions, <code>getFile()</code>, <code>getHtml()</code>, and <code>run()</code>.</p>
+<p>Now that we have a plan in place for the interaction with the module, let&#39;s take a look at the three functions, <code>getFile()</code>, <code>getHtml()</code>, and <code>run()</code>.</p>
 
 <h3 id="getFile">getFile(request)</h3>
 
-<p>The <code>getFile()</code> function assumes that all requests occur at the base of the server's uri. It also ignores requests for <code>/favicon.ico</code> and for the base uri <code>/</code>.  It then builds a full path to the file and attempts to read the file in a single blocking call. This blocking call helps ensure that we're passing data correctly to the Markdown module.</p>
+<p>The <code>getFile()</code> function assumes that all requests occur at the base of the server&#39;s uri. It also ignores requests for <code>/favicon.ico</code> and for the base uri <code>/</code>.  It then builds a full path to the file and attempts to read the file in a single blocking call. This blocking call helps ensure that we&#39;re passing data correctly to the Markdown module.</p>
 
 <pre><code>// http/server/server.js
 var getFile = function(request) {
     if(!request) {
-        console.log("getFile called with empty request");
+        console.log(&quot;getFile called with empty request&quot;);
         noop();
     }
 
    var callback = arguments[arguments.length - 1];
-   if (typeof(callback) !== 'function') callback = noop;
+   if (typeof(callback) !== &#39;function&#39;) callback = noop;
 
-   var filename = url.parse(request).pathname.replace('html', 'md');
-   if(filename === "/favicon.ico") return;
-   if(filename === "/" || filename === "") { filename = "/index.md"; }
+   var filename = url.parse(request).pathname.replace(&#39;html&#39;, &#39;md&#39;);
+   if(filename === &quot;/favicon.ico&quot;) return;
+   if(filename === &quot;/&quot; || filename === &quot;&quot;) { filename = &quot;/index.md&quot;; }
 
-   var requestedFile = __dirname + '/pages' + filename;
+   var requestedFile = __dirname + &#39;/pages&#39; + filename;
 
-   console.log('Requested: ' + requestedFile);
-   var data = fs.readFileSync(requestedFile, "utf8");
+   console.log(&#39;Requested: &#39; + requestedFile);
+   var data = fs.readFileSync(requestedFile, &quot;utf8&quot;);
    callback(data);
 };</code></pre>
 
@@ -1350,64 +1350,64 @@ var getFile = function(request) {
 <pre><code>// http/server/server.js
 var getHtml = function(request) {
     var callback = arguments[arguments.length - 1];
-    if (typeof(callback) !== 'function') callback = noop;
+    if (typeof(callback) !== &#39;function&#39;) callback = noop;
 
     // get the data and call markdown
     try {
         getFile(request, function(data) {
             if(!data) { 
-                callback("Nothing to see here!");
+                callback(&quot;Nothing to see here!&quot;);
             }
-            var html = template.replace("{{content}}", markdown.toHTML(markdown.parse(data), {xhtml:true}));
+            var html = template.replace(&quot;{{content}}&quot;, markdown.toHTML(markdown.parse(data), {xhtml:true}));
             console.log(html);
             callback(html);
         }); 
     } catch(err) {
         console.log(err);
-        callback("Nothing to see here!");
+        callback(&quot;Nothing to see here!&quot;);
     }
 }; </code></pre>
 
-<p>If there are any errors, it returns a string: "Nothing to see here!" A message like this usually accompanies a <code>404 - Not Found</code> HTTP status, but we're keeping this pretty simple.</p>
+<p>If there are any errors, it returns a string: &quot;Nothing to see here!&quot; A message like this usually accompanies a <code>404 - Not Found</code> HTTP status, but we&#39;re keeping this pretty simple.</p>
 
 <h3 id="run">run()</h3>
 
-<p>The run function requires the following server to be created.  The <code>requestListener</code> function calls <code>getHtml</code> and writes the html to the response.  Here, we're using a buffer to get the proper byte length and attempt to output a properly-encoded html string.</p>
+<p>The run function requires the following server to be created.  The <code>requestListener</code> function calls <code>getHtml</code> and writes the html to the response.  Here, we&#39;re using a buffer to get the proper byte length and attempt to output a properly-encoded html string.</p>
 
 <pre><code>// http/server/server.js
 var server = http.createServer(function(req, res) {
     getHtml(req.url, function(html) {
-        var buf = new Buffer(html, "utf8");
-        res.writeHead(200, { 'Content-Type' : 'text/html', 'Content-Length' : buf.length });
+        var buf = new Buffer(html, &quot;utf8&quot;);
+        res.writeHead(200, { &#39;Content-Type&#39; : &#39;text/html&#39;, &#39;Content-Length&#39; : buf.length });
         res.write(buf.toString());
         res.end();
     });
 });</code></pre>
 
-<p>Next, the run function sets the options we're allowing (port number and a function to call before starting the server).  We're also catching all errors and logging the output to the console.  </p>
+<p>Next, the run function sets the options we&#39;re allowing (port number and a function to call before starting the server).  We&#39;re also catching all errors and logging the output to the console.  </p>
 
 <pre><code>// http/server/server.js
 var run = function(opts) {
     try {
-        if(opts &amp;&amp; typeof opts['beforeStart'] === 'function'){
-            opts['beforeStart']();
+        if(opts &amp;&amp; typeof opts[&#39;beforeStart&#39;] === &#39;function&#39;){
+            opts[&#39;beforeStart&#39;]();
         }
         var port = (opts &amp;&amp; opts.port) || 9111;
 
         // ... Removed CTRL+C interrupt code from previous example
 
         server.listen(port, function() {
-            console.log("Server is running on http://localhost:" + port);
-            console.log("Hit CTRL+C to shutdown the http server");
+            console.log(&quot;Server is running on http://localhost:&quot; + port);
+            console.log(&quot;Hit CTRL+C to shutdown the http server&quot;);
         });
     } catch(err) {
         console.log(err);
     }
 };</code></pre>
 
-<p>Notice how we've moved the console logging to the <code>server.listen</code> callback.  This makes more sense than the procedural example from before- if the port isn't available and <code>server.listen</code> throws an error, you don't want to tell the developer that the server has started!  This is how things should be programmed, and it's part of what makes node.js so awesome.</p>
+<p>Notice how we&#39;ve moved the console logging to the <code>server.listen</code> callback.  This makes more sense than the procedural example from before- if the port isn&#39;t available and <code>server.listen</code> throws an error, you don&#39;t want to tell the developer that the server has started!  This is how things should be programmed, and it&#39;s part of what makes node.js so awesome.</p>
 
-<h3 id="exposing_run_">Exposing `run()`</h3>
+<h3>Exposing <code>run()</code></h3>
 
 <p>The last thing to do to make our module run is to expose the run function.  To revisit from the <em>Modules</em> chapter, you can do this a few ways:</p>
 
@@ -1421,7 +1421,7 @@ exports.server = http.createServer(requestListener);
 var server = http.createServer(requestListener);
 exports.server = server;</code></pre>
 
-<p>There's no 'correct' method, and each has it's benefits. Please refer to the <em>Best Practices</em> section for more information.</p>
+<p>There&#39;s no &#39;correct&#39; method, and each has it&#39;s benefits. Please refer to the <em>Best Practices</em> section for more information.</p>
 
 <h3 id="run_it_">Run it!</h3>
 
@@ -1429,74 +1429,74 @@ exports.server = server;</code></pre>
 Server is running on http://localhost:9222
 Hit CTRL+C to shutdown the http server</code></pre>
 
-<p>After receiving the output to confirm the server is running, visit <a href="http://localhost:9222">http://localhost:9222</a> to check it out.  Then, hit <code>CTRL+C</code> to be sure the server's <code>close</code> function is working as expected.</p>
+<p>After receiving the output to confirm the server is running, visit <a href="http://localhost:9222">http://localhost:9222</a> to check it out.  Then, hit <code>CTRL+C</code> to be sure the server&#39;s <code>close</code> function is working as expected.</p>
 
 <h3 id="where_are_the_events_">Where are the events?</h3>
 
-<p>You may have noticed that we met only half of the requirements with the above implementation of our server.  To expose events, our <code>run</code> method would have to inherit from <code>EventEmitter</code>. That doesn't <em>really</em> make sense.  For the sake of simplicity and brevity, we previously only had three methods.  We had no class-like objects, and we didn't touch an object's prototype.  Also, the three methods we did have didn't make good use of callbacks.  So, there is another take on this example at <em>./src/http/server/server2.js</em>.</p>
+<p>You may have noticed that we met only half of the requirements with the above implementation of our server.  To expose events, our <code>run</code> method would have to inherit from <code>EventEmitter</code>. That doesn&#39;t <em>really</em> make sense.  For the sake of simplicity and brevity, we previously only had three methods.  We had no class-like objects, and we didn&#39;t touch an object&#39;s prototype.  Also, the three methods we did have didn&#39;t make good use of callbacks.  So, there is another take on this example at <em>./src/http/server/server2.js</em>.</p>
 
 <p>This is set up so that our <code>run</code> function returns our <code>Example</code> object. This object has properties for our configurables (such as the pages directory, template name, etc.).  It also has the functions from the previous example, which have been slightly refactored.</p>
 
-<p>First, you'll notice the inheritence of the <code>Example</code> object from <code>EventEmitter</code>:</p>
+<p>First, you&#39;ll notice the inheritence of the <code>Example</code> object from <code>EventEmitter</code>:</p>
 
 <pre><code>// http/server/server2.js
 util.inherits(Example, EventEmitter);</code></pre>
 
-<p>This allows us to call <code>this.emit('eventName')</code> at different times in our code, which executes all of the listeners bound to these events in the order they were declared.</p>
+<p>This allows us to call <code>this.emit(&#39;eventName&#39;)</code> at different times in our code, which executes all of the listeners bound to these events in the order they were declared.</p>
 
-<p>Now, at different points of the code, you'll see a <code>this.emit()</code> or <code>self.emit()</code> call.  For instance, in the <code>getServer</code> function, we emit the <code>request</code> and <code>requestComplete</code> events.</p>
+<p>Now, at different points of the code, you&#39;ll see a <code>this.emit()</code> or <code>self.emit()</code> call.  For instance, in the <code>getServer</code> function, we emit the <code>request</code> and <code>requestComplete</code> events.</p>
 
 <pre><code>// http/server/server2.js
 Example.prototype.getServer = function() {
-	var self = this, ct = 'text/html; charset=utf-8';
+	var self = this, ct = &#39;text/html; charset=utf-8&#39;;
 	return http.createServer(function(req, res) {
-		self.emit('request', req.url);
+		self.emit(&#39;request&#39;, req.url);
 		self.getHtml(req.url, function(html) {
-			var buf = new Buffer(html, "utf8");
+			var buf = new Buffer(html, &quot;utf8&quot;);
 			res.writeHead(200, 
 				{ 
-					'Content-Type' : ct, 
-				 	'Content-Length' : buf.length 
+					&#39;Content-Type&#39; : ct, 
+				 	&#39;Content-Length&#39; : buf.length 
 			 	});
 			res.write(buf.toString());
 			res.end();
-			self.emit('requestComplete');
+			self.emit(&#39;requestComplete&#39;);
 		});
 	});
 };</code></pre>
 
-<p>Because we know that all responses will be <em>html</em>, the request comes in and immediate emits the <code>request</code> event.  Our <code>getHtml</code> function is written to do one of two things. First, it gets a valid string of html, emits it as <em>data</em> to the <code>data</code> event, then passes it to <code>getHtml</code>'s callback as the <em>html</em> parameter, which ultimately writes that string to the response. </p>
+<p>Because we know that all responses will be <em>html</em>, the request comes in and immediate emits the <code>request</code> event.  Our <code>getHtml</code> function is written to do one of two things. First, it gets a valid string of html, emits it as <em>data</em> to the <code>data</code> event, then passes it to <code>getHtml</code>&#39;s callback as the <em>html</em> parameter, which ultimately writes that string to the response. </p>
 
-<p>The alternative is when a request is ignored either explicitly with the <code>option.ignorePaths</code> array, or implicitly by <code>fs.readFileSync</code> throwing an error.  Either way, we emit the <code>data</code> event with the content as "ignored".  The <code>getHtml</code> function above then writes an empty response.</p>
+<p>The alternative is when a request is ignored either explicitly with the <code>option.ignorePaths</code> array, or implicitly by <code>fs.readFileSync</code> throwing an error.  Either way, we emit the <code>data</code> event with the content as &quot;ignored&quot;.  The <code>getHtml</code> function above then writes an empty response.</p>
 
 <p><strong>Note:</strong> <code>http.ServerRequest</code>, the type of the <code>request</code> parameter in the <em>requestListener</em> passed to <code>http.createServer</code>, emits its own <em>data</em> and <em>end</em> events.  Instead of emitting our own events, we could expose the existing events instead of emitting completely new and renamed events.</p>
 
 <h2 id="hTTP_Clients">HTTP Clients</h2>
 
-<p>Node also provides client functionality in the <em>http</em> module.  To begin with the http client functionality, we're going to open one terminal and run the server from the previous example: <code>node src/http/server_example2.js</code>.  The first client code we're going to run is slightly modified from node's v0.4.0 documentation.  </p>
+<p>Node also provides client functionality in the <em>http</em> module.  To begin with the http client functionality, we&#39;re going to open one terminal and run the server from the previous example: <code>node src/http/server_example2.js</code>.  The first client code we&#39;re going to run is slightly modified from node&#39;s v0.4.0 documentation.  </p>
 
 <h3 id="http.get">http.get(options, callback)</h3>
 
-<p>This example uses the <code>http.get</code> function.  This function is a wrapper around the <code>http.request</code> function which assumes that a get doesn't write a body to the server request, ultimately only expecting a response.  If you're familiar with jQuery, node's <code>http.get</code> is a wrapper around <code>http.request</code> in much the same way as jQuery's <code>$.get</code> is a wrapper around the <code>$.ajax</code> function; the big difference is that in node, we're not working with an <em>XmlHttpRequest</em> object-- we're working directly with <em>sockets</em> and <em>streams</em>.</p>
+<p>This example uses the <code>http.get</code> function.  This function is a wrapper around the <code>http.request</code> function which assumes that a get doesn&#39;t write a body to the server request, ultimately only expecting a response.  If you&#39;re familiar with jQuery, node&#39;s <code>http.get</code> is a wrapper around <code>http.request</code> in much the same way as jQuery&#39;s <code>$.get</code> is a wrapper around the <code>$.ajax</code> function; the big difference is that in node, we&#39;re not working with an <em>XmlHttpRequest</em> object-- we&#39;re working directly with <em>sockets</em> and <em>streams</em>.</p>
 
 <pre><code>// http/http_get.js
-var http = require('http'),
-	util = require('util');
+var http = require(&#39;http&#39;),
+	util = require(&#39;util&#39;);
 
 var opt = {
-	host: 'localhost',
+	host: &#39;localhost&#39;,
 	port: 9222,
-	path: '/index.html'
+	path: &#39;/index.html&#39;
 };
 
 http.get(opt, function(response) {
-	console.log("http.get [Status]: %s", response.statusCode);
-	console.log("http.get [method]: %s", response.client._httpMessage.method);
-	console.log("http.get [path]: %s", response.client._httpMessage.path);
-	console.log("http.get [method]:\n%s", response.client._httpMessage._header);
-	// console.log("http.get [client]:\n%s", util.inspect(response.client));
-}).on('error', function(err) {
-	console.log("http.get [Error]: " + err.message);
+	console.log(&quot;http.get [Status]: %s&quot;, response.statusCode);
+	console.log(&quot;http.get [method]: %s&quot;, response.client._httpMessage.method);
+	console.log(&quot;http.get [path]: %s&quot;, response.client._httpMessage.path);
+	console.log(&quot;http.get [method]:\n%s&quot;, response.client._httpMessage._header);
+	// console.log(&quot;http.get [client]:\n%s&quot;, util.inspect(response.client));
+}).on(&#39;error&#39;, function(err) {
+	console.log(&quot;http.get [Error]: &quot; + err.message);
 });</code></pre>
 
 <p><strong>Note: see the Globals chapter for information on <code>err.errno</code> constants</strong></p>
@@ -1512,7 +1512,7 @@ GET /index.html HTTP/1.1
 Host: localhost
 Connection: close</code></pre>
 
-<p>If you'd like to view the full client object, uncomment the last line from the callback in the file <em>./src/http/http</em>get.js_.  </p>
+<p>If you&#39;d like to view the full client object, uncomment the last line from the callback in the file <em>./src/http/http</em>get.js_.  </p>
 
 <h2 id="url_Module">Url Module</h2>
 
@@ -1554,9 +1554,9 @@ Connection: close</code></pre>
 
 <p>Testing is a very large topic.  There are different types of testing, each with different methodologies.  Then, there are also strong feelings of developers toward which type of testing is the best or most effective.</p>
 
-<ul><li>Assertion Testing<ul><li>Tests a true or false condition against known objects or values</li></ul></li><li>Behavioral Testing<ul><li>Tests how one object acts when interacting with another</li></ul></li><li>Functional/Acceptance Testing<ul><li>"Black box" testing of a system, usually code-agnostic</li></ul></li><li>Regression Testing<ul><li>Tests for consistency after changes have been made to code</li></ul></li><li>Others...</li></ul>
+<ul><li>Assertion Testing<ul><li>Tests a true or false condition against known objects or values</li></ul></li><li>Behavioral Testing<ul><li>Tests how one object acts when interacting with another</li></ul></li><li>Functional/Acceptance Testing<ul><li>&quot;Black box&quot; testing of a system, usually code-agnostic</li></ul></li><li>Regression Testing<ul><li>Tests for consistency after changes have been made to code</li></ul></li><li>Others...</li></ul>
 
-<p>There are many other types of testing, but these are some large topics in the testing arena.  Development practices include Test-Driven Development (TDD), Behavior-Driven Development, and others. Some programmers don't believe in testing, others believe tests should be written before the code, while others still believe tests should only be written for the most important code.  As you can see, this is a large and complex topic.</p>
+<p>There are many other types of testing, but these are some large topics in the testing arena.  Development practices include Test-Driven Development (TDD), Behavior-Driven Development, and others. Some programmers don&#39;t believe in testing, others believe tests should be written before the code, while others still believe tests should only be written for the most important code.  As you can see, this is a large and complex topic.</p>
 
 <p>Whether you write tests before you code, test only the most important code, or casually write tests when there is time, it is important to choose a testing tool that fits your needs.</p>
 
@@ -1564,7 +1564,7 @@ Connection: close</code></pre>
 
 <p>To begin, require the assert module:</p>
 
-<pre><code>var assert = require('assert');</code></pre>
+<pre><code>var assert = require(&#39;assert&#39;);</code></pre>
 
 <p>This module exposes a few functions common to assertion testing:</p>
 
@@ -1585,73 +1585,73 @@ assert.ifError(value)
 assert.ok(value, [message])
 assert.fail(actual, expected, message, operator)</code></pre>
 
-<p>These are pretty self-explanatory if you've written assertion tests before. Let's look at a pretty simple test, anyway.  We'll code in an object for the test that will do what we want for each test.</p>
+<p>These are pretty self-explanatory if you&#39;ve written assertion tests before. Let&#39;s look at a pretty simple test, anyway.  We&#39;ll code in an object for the test that will do what we want for each test.</p>
 
 <h3 id="synchronous_Testing_with_Assert">Synchronous Testing with Assert</h3>
 
 <pre><code>// testing/equality_no_errors.js
-var assert = require('assert'),
+var assert = require(&#39;assert&#39;),
     tester_a = {
-      val : 'a'
+      val : &#39;a&#39;
     }, 	
     tester_b = {
-      val : 'b'
+      val : &#39;b&#39;
     };
 
-assert.equal(tester_a.val, 'a');
-assert.equal(tester_b.val, 'b');</code></pre>
+assert.equal(tester_a.val, &#39;a&#39;);
+assert.equal(tester_b.val, &#39;b&#39;);</code></pre>
 
-<p>In this example, we're using the assert module to check that a value on each of these objects is the expected value.  This works well because the values are equal.  But, the assert module throws an <code>AssertionError</code> whenever an assertion fails.  So, it doesn't really make sense to have a single file with end-to-end assertions as in the <code>./src/testing/equality\_no\_errors.js</code> file.  This is where testing frameworks like <em>nodeunit</em> or <em>expresso</em> come in very handy.  They offer common functionality of test frameworks (like metrics, etc.).</p>
+<p>In this example, we&#39;re using the assert module to check that a value on each of these objects is the expected value.  This works well because the values are equal.  But, the assert module throws an <code>AssertionError</code> whenever an assertion fails.  So, it doesn&#39;t really make sense to have a single file with end-to-end assertions as in the <code>./src/testing/equality\_no\_errors.js</code> file.  This is where testing frameworks like <em>nodeunit</em> or <em>expresso</em> come in very handy.  They offer common functionality of test frameworks (like metrics, etc.).</p>
 
-<p>To see how the <code>AssertionError</code> being thrown from <code>assert.equal</code> can be problematic, change the expected value in the first test to an incorrect value.  Then, change the expected value in the very last test to an incorrect value and run <code>node src/testing/equality_no_errors.js</code> again.  You'll see that, because of the procedural style of the code, the last test never runs!  </p>
+<p>To see how the <code>AssertionError</code> being thrown from <code>assert.equal</code> can be problematic, change the expected value in the first test to an incorrect value.  Then, change the expected value in the very last test to an incorrect value and run <code>node src/testing/equality_no_errors.js</code> again.  You&#39;ll see that, because of the procedural style of the code, the last test never runs!  </p>
 
 <p>In order to run multiple assertions and provide feedback, the simplest test (without a testing framework) would use a <code>try/catch</code> and provide output to <em>stdout</em>.</p>
 
 <pre><code>// testing/equality_with_errors.js
-var assert = require('assert'),
+var assert = require(&#39;assert&#39;),
     tester_a = {
-      val : 'aa'
+      val : &#39;aa&#39;
     }, total = 0, good = 0;
 
 // assert.equal(actual, expected, [message])
 try {
-    console.log("assert.equal(tester_a.val, 'a')");
-    assert.equal(tester_a.val, 'a');
+    console.log(&quot;assert.equal(tester_a.val, &#39;a&#39;)&quot;);
+    assert.equal(tester_a.val, &#39;a&#39;);
     passed();
 } catch (err) { writeException(err); }
 
-console.log("%d of %d tests passed", good, total);
+console.log(&quot;%d of %d tests passed&quot;, good, total);
 
 function writeException(err) {
-    console.log("Test failed!");
+    console.log(&quot;Test failed!&quot;);
     util.inspect(err);
-    if(err["name"] === "AssertionError") {
-        console.log("Message: " + (err["message"] || "None"));
-        console.log("Expected: " + err["expected"]);
-        console.log("Actual: " + err["actual"]);
-        console.log("Operation: " + err["operator"]);
+    if(err[&quot;name&quot;] === &quot;AssertionError&quot;) {
+        console.log(&quot;Message: &quot; + (err[&quot;message&quot;] || &quot;None&quot;));
+        console.log(&quot;Expected: &quot; + err[&quot;expected&quot;]);
+        console.log(&quot;Actual: &quot; + err[&quot;actual&quot;]);
+        console.log(&quot;Operation: &quot; + err[&quot;operator&quot;]);
     }
-    console.log("");
+    console.log(&quot;&quot;);
     total = total + 1;
 }
 
 function passed() {
     good = good + 1;
     total = total + 1;
-    console.log("Test passed!\n");
+    console.log(&quot;Test passed!\n&quot;);
 }</code></pre>
 
-<p>The above code is part of the code from within <em>./src/testing/equality_with_errors.js</em>.  It shows how to run synchronous tests with a minimal amount of redundant code, <em>without</em> writing a lightweight testing module for your tests.  This may be what you want, but most likely it isn't.</p>
+<p>The above code is part of the code from within <em>./src/testing/equality_with_errors.js</em>.  It shows how to run synchronous tests with a minimal amount of redundant code, <em>without</em> writing a lightweight testing module for your tests.  This may be what you want, but most likely it isn&#39;t.</p>
 
 <h3 id="the_problems">The problems</h3>
 
 <p>You <em>could</em> write a simple helper module to run these tests for you.  But, how do you verify the order of your tests?  This can become complex very quickly.</p>
 
-<p>You can partially resolve this with the <code>try/catch</code> block example above, but this requires a lot of redundant code.  Compare <em>./src/testing/equality_with_errors.js</em> and <em>./src/testing/equality_no_errors.js</em> to see how the testing quickly expands!  Run <code>node testing/equality_with_errors.js</code> to see the output.  That's more like it! Isn't that nice?  </p>
+<p>You can partially resolve this with the <code>try/catch</code> block example above, but this requires a lot of redundant code.  Compare <em>./src/testing/equality_with_errors.js</em> and <em>./src/testing/equality_no_errors.js</em> to see how the testing quickly expands!  Run <code>node testing/equality_with_errors.js</code> to see the output.  That&#39;s more like it! Isn&#39;t that nice?  </p>
 
 <p>Yes and no.  There are a few problems with this code: </p>
 
-<ol><li>It isn't evented</li><li>It hard-codes test objects</li><li>It is very redundant</li><li>It isn't scalable</li></ol>
+<ol><li>It isn&#39;t evented</li><li>It hard-codes test objects</li><li>It is very redundant</li><li>It isn&#39;t scalable</li></ol>
 
 <p>Well, then, <em>what are other options?</em></p>
 
@@ -1663,15 +1663,15 @@ function passed() {
 
 <pre><code>// testing/nodeunit_basics.js
 module.exports = {
-    'Test 1' : function(test) {
+    &#39;Test 1&#39; : function(test) {
         test.expect(1);
-        test.ok(true, "This shouldn't fail");
+        test.ok(true, &quot;This shouldn&#39;t fail&quot;);
         test.done();
     },
-    'Test 2' : function(test) {
+    &#39;Test 2&#39; : function(test) {
         test.expect(2);
-        test.ok(1 === 1, "This shouldn't fail");
-        test.ok(false, "This should fail");
+        test.ok(1 === 1, &quot;This shouldn&#39;t fail&quot;);
+        test.ok(false, &quot;This should fail&quot;);
         test.done();
     }
 };</code></pre>
@@ -1724,14 +1724,14 @@ Build-in reporters:
 <p>This creates an xml file (whitespace has been condensed):</p>
 
 <pre><code>// testing/junit.out/nodeunit_basics.js.xml
-&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
-&lt;testsuite name="nodeunit_basics.js"
-         errors="0"
-         failures="0"
-         tests="2"&gt;
-  &lt;testcase name="Test 1"&gt;
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;testsuite name=&quot;nodeunit_basics.js&quot;
+         errors=&quot;0&quot;
+         failures=&quot;0&quot;
+         tests=&quot;2&quot;&gt;
+  &lt;testcase name=&quot;Test 1&quot;&gt;
   &lt;/testcase&gt;
-  &lt;testcase name="Test 2"&gt;
+  &lt;testcase name=&quot;Test 2&quot;&gt;
   &lt;/testcase&gt;
 &lt;/testsuite&gt;</code></pre>
 
@@ -1739,11 +1739,11 @@ Build-in reporters:
 
 <h3 id="nodeunit_Custom_reporters">Nodeunit Custom reporters</h3>
 
-<p>To write a custom reporter for nodeunit, first decide how you'd like nodeunit to report information about your tests.  As a simple example, let's take a look at a different take on the <a href="https://github.com/caolan/nodeunit/blob/master/lib/reporters/minimal.js">minimal</a> reporter.</p>
+<p>To write a custom reporter for nodeunit, first decide how you&#39;d like nodeunit to report information about your tests.  As a simple example, let&#39;s take a look at a different take on the <a href="https://github.com/caolan/nodeunit/blob/master/lib/reporters/minimal.js">minimal</a> reporter.</p>
 
-<p>Here are the modifications I'd like to see:</p>
+<p>Here are the modifications I&#39;d like to see:</p>
 
-<ul><li>Show the start time of the test</li><li>Show the filename as bold/green</li><li>Add <em>[PASS]</em> or <em>[FAIL]</em> after the <em>✔</em> or <em>✖</em></li><li>Prefix a test case with a '|'</li></ul>
+<ul><li>Show the start time of the test</li><li>Show the filename as bold/green</li><li>Add <em>[PASS]</em> or <em>[FAIL]</em> after the <em>✔</em> or <em>✖</em></li><li>Prefix a test case with a &#39;|&#39;</li></ul>
 
 <p>These may seem like contrived requirements.  But, what if my manager wants me to parse textual output for <em>[FAIL]</em> and, for whatever reason, it has to say <em>[FAIL]</em>?  </p>
 
