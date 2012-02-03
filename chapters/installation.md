@@ -73,3 +73,57 @@ Let npm do it's thing.  It will install these modules any any dependencies.  You
 	npm info build Success: geddy@0.1.3
 	npm info build Success: websocket-client@1.0.0
 	npm info build Success: connect@1.0.1
+	
+## Setting up an editor
+
+Part of setting up a development environment is using the right tools.  While some may prefer a full IDE, others will go with a very simple text editor.  I enjoy using *vim*, and this is my *~/.vimrc* file's contents:
+
+    syntax on " enabled syntax highlighting
+    :set number " line numbers
+    :set ai " autoindent
+    :set tabstop=4 " sets tabs to 4 characters
+    :set shiftwidth=4
+    :set expandtab
+    :set softtabstop=4 " makes the spaces feel like real tabs
+    
+    " CSS (tabs = 2, lines = 79)
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType css set sw=2
+    autocmd FileType css set ts=2
+    autocmd FileType css set sts=2
+    
+    " JavaScript (tabs = 4, lines = 79)
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType javascript set sw=4
+    autocmd FileType javascript set ts=4
+    autocmd FileType javascript set sts=4
+    " autocmd FileType javascript set tw=79
+
+    " Jade
+    autocmd FileType jade set omnifunc=jadecomplete#CompleteJade
+    autocmd FileType jade set sw=2
+    autocmd FileType jade set ts=2
+    autocmd FileType jade set sts=2
+
+    " ejs
+    autocmd FileType ejs set sw=2
+    autocmd FileType ejs set ts=2
+    autocmd FileType ejs set sts=2
+
+    " Highlight current line only in insert mode
+    autocmd InsertLeave * set nocursorline
+    autocmd InsertEnter * set cursorline
+
+    " Makefiles require TAB instead of whitespace
+    autocmd FileType make setlocal noexpandtab
+
+    " Highlight cursor
+    highlight CursorLine ctermbg=8 cterm=NONE
+    
+If your install of *vim* doesn't include the _*complete_ functions, you can download them from [vim.org/scripts](http://www.vim.org/scripts/index.php).  Most likely, you'll need the [jade.vim](http://www.vim.org/scripts/script.php?script_id=3192) script.
+
+Other excellent IDEs include:
+
+ 1. [cloud9 IDE](http://cloud9ide.com/)
+ 2. [geany](http://www.geany.org/)
+ 3. [Aptana Studio](http://aptana.org/)

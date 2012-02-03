@@ -172,6 +172,58 @@ npm info build Success: geddy@0.1.3
 npm info build Success: websocket-client@1.0.0
 npm info build Success: connect@1.0.1</code></pre>
 
+<h2 id="setting_up_an_editor">Setting up an editor</h2>
+
+<p>Part of setting up a development environment is using the right tools.  While some may prefer a full IDE, others will go with a very simple text editor.  I enjoy using <em>vim</em>, and this is my <em>~/.vimrc</em> file&#39;s contents:</p>
+
+<pre><code>syntax on &quot; enabled syntax highlighting
+:set number &quot; line numbers
+:set ai &quot; autoindent
+:set tabstop=4 &quot; sets tabs to 4 characters
+:set shiftwidth=4
+:set expandtab
+:set softtabstop=4 &quot; makes the spaces feel like real tabs
+
+&quot; CSS (tabs = 2, lines = 79)
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css set sw=2
+autocmd FileType css set ts=2
+autocmd FileType css set sts=2
+
+&quot; JavaScript (tabs = 4, lines = 79)
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript set sw=4
+autocmd FileType javascript set ts=4
+autocmd FileType javascript set sts=4
+&quot; autocmd FileType javascript set tw=79
+
+&quot; Jade
+autocmd FileType jade set omnifunc=jadecomplete#CompleteJade
+autocmd FileType jade set sw=2
+autocmd FileType jade set ts=2
+autocmd FileType jade set sts=2
+
+&quot; ejs
+autocmd FileType ejs set sw=2
+autocmd FileType ejs set ts=2
+autocmd FileType ejs set sts=2
+
+&quot; Highlight current line only in insert mode
+autocmd InsertLeave * set nocursorline
+autocmd InsertEnter * set cursorline
+
+&quot; Makefiles require TAB instead of whitespace
+autocmd FileType make setlocal noexpandtab
+
+&quot; Highlight cursor
+highlight CursorLine ctermbg=8 cterm=NONE</code></pre>
+
+<p>If your install of <em>vim</em> doesn&#39;t include the <em>*complete</em> functions, you can download them from <a href="http://www.vim.org/scripts/index.php">vim.org/scripts</a>.  Most likely, you&#39;ll need the <a href="http://www.vim.org/scripts/script.php?script_id=3192">jade.vim</a> script.</p>
+
+<p>Other excellent IDEs include:</p>
+
+<ol><li><a href="http://cloud9ide.com/">cloud9 IDE</a></li><li><a href="http://www.geany.org/">geany</a></li><li><a href="http://aptana.org/">Aptana Studio</a></li></ol>
+
 <h1>Debugging</h1>
 
 <p>One of the most important aspects of programming in any language is the ability to debug code.</p>
@@ -1794,7 +1846,55 @@ FAILURES: 1/3 assertions failed (9ms)</code></pre>
 
 <h1>Deployment</h1>
 
-<p>  ...</p>
+<p>Deploying an application depends on the host environment. Most shared hosts don&#39;t currently support node.js.</p>
+
+<p>Heroku is a cloud-based hosting platform with support for Node.js.  It also supports Ruby, Clojure, Java, Python, and Scala.</p>
+
+<p>Other hosting platforms include:<br></br>  <em> <a href="https://no.de">Joyent Node</a><br></br>  </em> <a href="http://www.windowsazure.com/en-us/develop/nodejs/tutorials/getting-started/">Windows Azure</a><br></br>  * <a href="http://aws.amazon.com/ec2/">Amazon EC2</a>  </p>
+
+<p>The level of effort for hosting in these platforms varies.  Heroku is relatively simple.</p>
+
+<h2 id="deploying_to_Heroku">Deploying to Heroku</h2>
+
+<p>For complete instructions, refer to <a href="http://devcenter.heroku.com/articles/node-js">Heroku&#39;s Documentation</a>.</p>
+
+<p>Assuming you have already created your app and an account on Heroku, the next step is to install the <a href="http://toolbelt.herokuapp.com/linux/readme">heroku-toolbelt</a>. In Debian/Ubuntu, this can be accomplished with:  </p>
+
+<pre><code>$ sudo -s
+$ echo &quot;deb http://toolbelt.herokuapp.com/ubuntu ./&quot; &gt; /etc/apt/sources.list.d/heroku.list
+$ wget -q -O - http://toolbelt.herokuapp.com/apt/release.key | apt-key add -
+$ apt-get update
+$ apt-get install heroku-toolbelt</code></pre>
+
+<p>Once installed, run the command <code>heroku login</code> and follow the prompts.</p>
+
+<p>Next, in the root of your app directory, you will need to create a <em>Procfile</em> file containing:</p>
+
+<pre><code>web: node app.js</code></pre>
+
+<p>In this file, <code>node app.js</code> is the command you would normally use to run your app locally.  If your app requires parameters, either enter those on this line or modify your script to read defaults from <code>env</code>.</p>
+
+<p>The Heroku documentation for deploying a node.js suggests you test the <em>Procfile</em> using <em>foreman</em>.  This isn&#39;t a necessity.  However, if you want to install <em>foreman</em>, instructions for Ubuntu can be found <a href="http://theforeman.org/projects/foreman/wiki/Debian-Ubuntu_installation_by_packages">here</a>.</p>
+
+<p>Next, you&#39;ll need to create a cedar stack and push your code to heroku:</p>
+
+<pre><code>$ heroku create --stack cedar
+$ git push heroku master</code></pre>
+
+<p>You&#39;ll also need to configure some settings on heroku using the toolbelt.  You&#39;ll need to set web scaling to 1 and <code>NODE_ENV=production</code>:  </p>
+
+<pre><code>$ heroku ps:scale web=1
+$ heroku config:add NODE_ENV=production</code></pre>
+
+<p>With the heroku toolbelt, you can also run commands within your cedar stack.  Try the following to become familiar with the toolbelt:  </p>
+
+<pre><code>$ heroku ps
+$ heroku logs
+$ heroku run node</code></pre>
+
+<p>Heroku also offers free database addons (postgresql, redistogo, etc.). There are also services such as <a href="http://www.iriscouch.com/">Iris Couch</a> which offer free services that are not tied to the heroku service.</p>
+
+<p>At any time, you can login to heroku.com and modify settings for your newly-created cedar stack.  You can also opt-in to logging, notifications, and a plethora of other free and paid services.</p>
 
   </div>
   <script type="text/javascript" src="assets/sh_main.js"></script>
