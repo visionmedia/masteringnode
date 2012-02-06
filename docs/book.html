@@ -562,7 +562,7 @@ def build(bld):
 <p>As you can imagine, node is already coding functions in the same way as you would for an addon.  Luckily, <em>node.h</em> provides a helper definition for setting a function to a callback, or method defined within your source file.  If you open <em>node.h</em> and look at line 33, you&#39;ll see:</p>
 
 <pre><code>// [node repo]/src/node.h
-#define NODE_SET_METHOD(obj, name, callback)                              \
+#define NODE\_SET\_METHOD(obj, name, callback)                              \
   obj-&gt;Set(v8::String::NewSymbol(name),                                   \
            v8::FunctionTemplate::New(callback)-&gt;GetFunction())</code></pre>
 
@@ -646,7 +646,150 @@ TypeError: Bad argument
 
 <h2 id="functionTemplate">FunctionTemplate</h2>
 
-<p><em>TODO</em></p>
+<p>In v8, a FunctionTemplate is used to create the equivalent to:</p>
+
+<pre><code>var template = function() { }</code></pre>
+
+<p>The function at this point is an object and not an <em>instance</em> of the function. </p>
+
+<p>As an example, we will use the linux package <em>uuid</em> to generate a uuid. We will define the header for this addon as:</p>
+
+<pre><code>// addons/uuid/v0.1/uuid.h
+#ifndef __node_uuid_h__
+#define __node_uuid_h__
+
+#include &lt;string&gt;
+#include &lt;v8.h&gt;
+#include &lt;node.h&gt;
+#include &quot;uuid/uuid.h&quot;
+
+using namespace v8;
+using namespace node;
+
+class Uuid : public node::ObjectWrap {
+    public:
+        Uuid() { }
+        static Persistent&lt;FunctionTemplate&gt; constructor;
+        static void Init(Handle&lt;Object&gt; target);
+        static Handle&lt;Value&gt; New(const Arguments &amp;args);
+        static Handle&lt;Value&gt; Generate(const Arguments &amp;args);
+        static Handle&lt;Value&gt; GenerateRandom(const Arguments &amp;args);
+        static Handle&lt;Value&gt; GenerateTime(const Arguments &amp;args);
+    private:   
+        ~Uuid();
+        static std::string GetString(uuid_t id);
+};
+
+#endif // __node_uuid_h__</code></pre>
+
+<p>This addon will showcase three methods, <code>Generate</code>, <code>GenerateRandom</code>, and <code>GenerateTime</code>. It will also include a trivial private <code>GetString</code> method to demonstrate how to <em>Unwrap</em> a <code>node::ObjectWrap</code> object and interact with C++ code that is not specific to node or v8.</p>
+
+<p>A lot of the public function definitions should look similar to the <em>Echo</em> example. One notable difference is that instead of using a macro and hiding the <code>FunctionTemplate</code> method, we are defining <code>static Persistent&lt;FunctionTemplate&gt; constructor;</code>.  The <code>Persistent&lt;T&gt;</code> type is used &quot;when you need to keep a reference to an object for more than one function call, or when handle lifetimes do not correspond to C++ scopes.&quot; <a href="http://code.google.com/apis/v8/embed.html">source</a>.  Since we&#39;d expect our object&#39;s constructor to last longer than a single function, we declare it separately and as a persistent handle.  Another point to notice is that all of the method we&#39;re pulling from <em>uuid.h</em> have the signature <code>static Handle&lt;Value&gt; Method(const Arguments &amp;args)</code> even though we will plan to call it as <code>uuid.generate()</code>.  This is because we will be accessing the <em>scope</em> of the call via <code>args.This()</code>.</p>
+
+<p>Although more methods are implemented in <em>uuid.cc</em>, we will look at three:  </p>
+
+<ul><li><code>Uuid::Init(Handle&lt;Object&gt; target)</code></li><li><code>Handle&lt;Value&gt; Uuid::New(const Arguments &amp;args)</code></li><li><code>Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args)</code></li></ul>
+
+<p>Just as before, node expects to find a signature of <code>extern &quot;C&quot; void init(Handle&lt;Object&gt; target)</code> in order to initialize the addon.  Inside this method, we may set parameters such as the version number from the previous example.  We may also pass-through initialization to any modules within our node addon.  In this example, our addon will be <em>uuid.node</em> and contain a single module, <em>Uuid</em>. There is no reason we can&#39;t later add <em>Uuid2</em> which, instead of returning a normalized string value might return a <code>Buffer</code> object.  To initialize the Uuid module, we pass the <code>target</code> object along to <code>Uuid::Init</code> and add the module definition to <code>target</code>:</p>
+
+<pre><code>// addons/uuid/v0.1/uuid.cc
+void Uuid::Init(Handle&lt;Object&gt; target) {
+    HandleScope scope;
+
+    // Setup the constructor
+    constructor = Persistent&lt;FunctionTemplate&gt;::New(FunctionTemplate::New(Uuid::New));
+    constructor-&gt;InstanceTemplate()-&gt;SetInternalFieldCount(1); // for constructors
+    constructor-&gt;SetClassName(String::NewSymbol(&quot;Uuid&quot;));
+
+    // Setup the prototype
+    NODE_SET_PROTOTYPE_METHOD(constructor, &quot;generate&quot;, Generate);
+    NODE_SET_PROTOTYPE_METHOD(constructor, &quot;generateRandom&quot;, GenerateRandom);
+    NODE_SET_PROTOTYPE_METHOD(constructor, &quot;generateTime&quot;, GenerateTime);
+
+    target-&gt;Set(String::NewSymbol(&quot;Uuid&quot;), constructor-&gt;GetFunction());
+}</code></pre>
+
+<p>In this scope, we are instantiating the <code>constructor</code> using <code>Uuid::New</code> as a new <code>FunctionTemplate</code>. We then call <code>InstanceTemplate()</code> and on that object we call <code>SetInternalFieldCount(1)</code>. This tells v8 that this object holds a reference to one object.</p>
+
+<p>Next, we setup the prototype using another macro provided by node. These calls say, for instance, &quot;Add a method called <em>generate</em> to the constructor function which executes the native method <em>Generate</em>&quot;.</p>
+
+<p>Lastly, we have to create a &quot;Uuid&quot; module on the object returned by the call to <code>require()</code>. Here, <code>Uuid</code> will point to a function (<code>constructor</code>) which returns a function that internally executes <code>Uuid::New</code>.  In other words, we have created something akin to: </p>
+
+<pre><code>var Uuid = function() { };
+Uuid.constructor = function() {
+    return function() {
+        // Uuid::New executes here.
+    }
+}</code></pre>
+
+<p>Although the above is not exactly what we have done, it may provide a better view for some to understand <code>FunctionTemplate</code> references and why we assign one to the constructor object in such a way.</p>
+
+<p>The <code>Uuid::New</code> method is defined as:</p>
+
+<pre><code>// addons/uuid/v0.1/uuid.cc
+Handle&lt;Value&gt; Uuid::New(const Arguments &amp;args) {
+    HandleScope scope;
+    // no args are checked
+    Uuid *uuid = new Uuid();
+    uuid-&gt;Wrap(args.This());
+    return args.This();
+}</code></pre>
+
+<p>As you would expect, calling the constructor function multiple times will create newly-scoped <code>Uuid</code> objects on the heap. In this method, we <a href="https://github.com/joyent/node/blob/v0.4.8/src/node_object_wrap.h#L59">wrap</a> the parameter (scoped object) by setting a reference to <code>Uuid</code> in the args as a contextual scope (i.e. <code>this</code>) and then returns <code>this</code>.</p>
+
+<p>Within the <code>Generate</code> method, we will want to unwrap the contextual <code>Uuid</code> object and call the private method <code>GetString</code>.</p>
+
+<pre><code>// addons/uuid/v0.1/uuid.cc
+Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args) {
+    HandleScope scope;
+    uuid_t id;
+    uuid_generate(id);
+
+    Uuid *uuid = ObjectWrap::Unwrap&lt;Uuid&gt;(args.This());
+    return scope.Close(String::New(uuid-&gt;GetString(id).c_str()));
+}</code></pre>
+
+<p>As with any JavaScript function call, we have to ensure <a href="https://developer.mozilla.org/en/JavaScript/Reference/Functions_and_function_scope">functional scope</a>. Scoped methods should create a <a href="http://code.google.com/apis/v8/embed.html">HandleScope</a> object at the start and call <code>scope.Close()</code> at the end. <code>HandleScope</code> will get rid of temporary handles when the scope is closed.</p>
+
+<p>Within each of the <em>Generate*</em> methods, we will create a <code>uuid_t</code> type and call the corresponding method defined in <em>/usr/includes/uuid/uuid.h</em> (location may vary per system). To demonstrate accessing the pointer to our original <code>Uuid</code> object, we unwrap the contextual scope of this function using <code>ObjectWrap::Unwrap&lt;Uuid&gt;(args.This())</code>. From this pointer, we can access any private methods such as <code>GetString</code>. Be careful with your returned values, though. <code>String::New</code> in the v8 library does not take <code>std::string</code> in any of its signatures. Simply enough, <code>std::string</code> provides a <code>c_str()</code> method to return a <code>const char*</code> which <code>String::New</code> does accept.</p>
+
+<h3 id="uuid.node_demo">uuid.node demo</h3>
+
+<p>Navigate to <em>addons/uuid/v0.1/</em> and execute:</p>
+
+<pre><code>$ node-waf configure build</code></pre>
+
+<p>If there are build errors and the <em>func.cc</em> example from before built successfully, check that you have the <em>uuid-dev</em> package installed and rerun the above command. Then, navigate to <em>build/default</em> and try out the Uuid addon:</p>
+
+<pre><code>$ node
+&gt; var Uuid = require(&#39;./uuid.node&#39;).Uuid;
+&gt; var uuid = new Uuid();
+&gt; uuid.generate();
+&#39;83475e0c-212b-402c-bdc7-b81ebb7b34f8&#39;
+&gt; uuid.generateRandom();
+&#39;4d597bda-8f5f-4c3c-b2fa-1cd6cd4a6903&#39;
+&gt; uuid.generateTime();
+&#39;25a0dd30-5076-11e1-96be-0022fb93b24c&#39;
+&gt; var util = require(&#39;util&#39;);
+&gt; util.inspect(uuid);
+&#39;{}&#39;
+&gt; util.inspect(Uuid);
+&#39;[Function: Uuid]&#39;
+&gt; </code></pre>
+
+<p>The above output may surprise you. Firstly, where is the <code>version</code> option?! It&#39;s at the required module level: <code>require(&#39;./uuid.node&#39;).version;</code>. Secondly, if we can access <code>uuid.generate()</code> and others, why don&#39;t they display when inspecting the object? That&#39;s because we defined those methods on the prototype:</p>
+
+<pre><code>&gt; uuid.__proto__
+{ generate: [Function: generate],
+  generateRandom: [Function: generateRandom],
+  generateTime: [Function: generateTime] }
+&gt; </code></pre>
+
+<p>Thirdly, you may have noticed that I didn&#39;t say anything about <code>constructor-&gt;SetClassName(String::NewSymbol(&quot;Uuid&quot;));</code> in <code>Uuid::Init</code>. You may have also wondered where <code>SetClassName</code> actually sets a class name, considering JavaScript is a prototypal language. That string value is what is displayed when you call inspect and get the value <code>&#39;[Function: Uuid]&#39;</code>. Just as you would expect, <code>Uuid</code> is the constructor and it is named <code>Uuid</code>. </p>
+
+<p>Now, if you&#39;ve played around with this a bit, you may have noticed that <code>uuid.__proto__</code> gives us our three functions but <code>uuid.prototype</code> is empty. Why is that? That&#39;s because <code>uuid.__proto__</code> really is <code>uuid.constructor.prototype</code>, which is also really <code>Uuid.prototype</code>. This is the essence of prototypal inheritance. If this concept is foreign or difficult to grasp, be sure to check out the excellent explanation on <a href="http://bonsaiden.github.com/JavaScript-Garden/#object.prototype">JavaScript Garden</a>.</p>
+
+<p>Logically, the next step would be to understand how to declare a prototype of our own.</p>
 
 <h2 id="function_Prototypes">Function Prototypes</h2>
 

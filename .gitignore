@@ -1,3 +1,8 @@
 .DS_Store
 chapters/*.html
 tmp
+
+src/addons/*/build
+src/addons/*/*/build
+
+*-wscript
