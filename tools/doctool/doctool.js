@@ -86,7 +86,8 @@ function convertData(data) {
     .replace(/<hr><\/hr>/g, "<hr />")
     .replace(/(\<h[2-6])\>([^<]+)(\<\/h[1-6]\>)/gmi, function(o, ts, c, te) {
       return ts+' id="'+formatIdString(c)+'">'+c+te;
-    });
+    })
+    .replace(/<pre>/g, '<pre class="prettyprint">');
 
   return html;
 }
