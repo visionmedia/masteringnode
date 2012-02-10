@@ -5,11 +5,303 @@
   <meta name="description" content="Mastering Node" />
   <meta name="keywords" content="node.js,node,Mastering Node,JavaScript" />
   <meta name="author" content="TJ Holowaychuk, et al." />
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <link rel="stylesheet" href="assets/style.css" type="text/css" media="all" />
-  <link rel="stylesheet" href="assets/sh.css" type="text/css" media="all"/>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />  
+  <script type="text/javascript" src="https://raw.github.com/jimschubert/masteringnode/master/pages/prettify.js"></script>
+  <style type="text/css">
+  /*--------------------- Layout and Typography ----------------------------*/
+body {
+font-family: "Helvetica Neue", Helvetica, FreeSans, Arial, sans-serif;
+/*  font-family: Georgia, FreeSerif, Times, serif; */
+font-size: 0.9375em;
+line-height: 1.4667em;
+color: #222;
+margin: 0; padding: 0;
+}
+a {
+color: #0050c0;
+text-decoration: underline;
+}
+a:visited {
+color: #b950b7;
+text-decoration: underline;
+}
+a:hover, a:focus {
+text-decoration: none;
+}
+
+code a:hover {
+background: none;
+color: #b950b7;
+}
+
+#changelog #gtoc {
+display: none;
+}
+
+.notice {
+display: block;
+padding: 1em;
+margin: 1.4667em 0 2.9334em;
+background:#FFF6BF;
+color:#514721;
+border:1px solid #FFD324;
+}
+.notice p {
+margin: 0;
+}
+
+ul.plain {
+list-style: none;
+}
+
+abbr {
+border-bottom: 1px dotted #454545;
+}
+
+p {
+margin: 0 0 1.4667em 0;
+position: relative;
+text-rendering: optimizeLegibility;
+}
+
+ol, ul, dl {
+margin: 0 0 1em 0;
+padding: 0;
+}
+
+ol ul, ol ol, ol dl,
+ul ul, ul ol, ul dl,
+dl ul, dl ol, dl dl {
+margin-bottom: 0;
+}
+
+ol p:first-child, ul p:first-child, dl p:first-child {
+margin-bottom: 0;
+}
+
+ul, ol {
+margin-left: 2em;
+}
+
+
+dl dt {
+position: relative;
+margin: 1.5em 0 0;
+}
+
+dl dd {
+position: relative;
+margin: 0 1em 0;
+}
+
+dd + dt.pre {
+margin-top: 1.6em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: Georgia, FreeSerif, Times, serif;
+color: #000;
+text-rendering: optimizeLegibility;
+position: relative;
+}
+
+h1 {
+font-size: 2.55em;
+line-height: 1.375em;
+}
+
+h2 {
+font-size: 1.9em;
+line-height: 1.227em;
+margin: 0 0 0.5em;
+}
+
+h3 {
+font-size: 1.5em;
+line-height: 1.0909em;
+margin: 1.5em 0 0.5em;
+}
+
+h3 + h3 {
+margin: 0 0 0.5em;
+}
+
+h4 {
+font-size: 1.3em;
+line-height: 1.1282em;
+margin: 2.2em 0 0.5em;
+}
+
+h4 + h4 {
+margin: 0 0 0.5em;
+}
+
+h5 {
+font-size: 1.125em;
+line-height: 1.4em;
+}
+
+h6 {
+font-size: 1em;
+line-height: 1.4667em;
+}
+
+pre, tt, code {
+font-size: 0.95em;
+line-height: 1.5438em;
+font-family: Monaco, Consolas, "Lucida Console", monospace;
+margin: 0; padding: 0;
+}
+
+.pre {
+font-family: Monaco, Consolas, "Lucida Console", monospace;
+line-height: 1.5438em;
+font-size: 0.95em;
+}
+
+pre {
+padding: 2em 1.6em 2em 1.2em;
+vertical-align: top;
+background: #f8f8f8;
+border: 1px solid #e8e8e8;
+border-width: 1px 1px 1px 6px;
+margin: -0.5em 0 1.1em;
+}
+
+pre + h3 {
+margin-top: 2.225em;
+}
+
+code.pre {
+white-space: pre;
+}
+
+#container {
+position: relative;
+padding: 6em;
+max-width: 50em;
+text-align: left;
+}
+
+#container header {
+margin: 1.25em -0.5em 1.3em;
+padding: 0 0.5em 0.225em;
+}
+
+hr {
+background: none;
+border: medium none;
+border-bottom: 1px solid #ccc;
+margin: 5em 0 2em;
+}
+
+#container header hr {
+margin: 0;
+padding: 0;
+}
+
+#toc {
+
+}
+
+#toc h2 {
+font-size: 1em;
+line-height: 1.4em;
+}
+
+#toc h2 a {
+float: right;
+}
+
+#toc hr {
+margin: 1em 0 2em;
+}
+
+p tt, p code {
+background: #f8f8ff;
+border: 1px solid #dedede;
+padding: 0 0.2em;
+}
+
+a.octothorpe {
+text-decoration: none;
+color: #777;
+position: absolute;
+top: 0; left: -1.4em;
+padding: 1px 2px;
+opacity: 0;
+-webkit-transition: opacity 0.2s linear;
+}
+p:hover  > a.octothorpe, 
+dt:hover > a.octothorpe,
+dd:hover > a.octothorpe,
+h1:hover > a.octothorpe,
+h2:hover > a.octothorpe,
+h3:hover > a.octothorpe,
+h4:hover > a.octothorpe,
+h5:hover > a.octothorpe,
+h6:hover > a.octothorpe {
+opacity: 1;
+}
+
+
+/* Pretty printing styles. Used with prettify.js. */
+
+/* SPAN elements with the classes below are added by prettyprint. */
+.pln { color: #000 }  /* plain text */
+
+@media screen {
+  .str { color: #080 }  /* string content */
+  .kwd { color: #008 }  /* a keyword */
+  .com { color: #800 }  /* a comment */
+  .typ { color: #606 }  /* a type name */
+  .lit { color: #066 }  /* a literal value */
+  /* punctuation, lisp open bracket, lisp close bracket */
+  .pun, .opn, .clo { color: #660 }
+  .tag { color: #008 }  /* a markup tag name */
+  .atn { color: #606 }  /* a markup attribute name */
+  .atv { color: #080 }  /* a markup attribute value */
+  .dec, .var { color: #606 }  /* a declaration; a variable name */
+  .fun { color: red }  /* a function name */
+}
+
+/* Use higher contrast and text-weight for printable form. */
+@media print, projection {
+  .str { color: #060 }
+  .kwd { color: #006; font-weight: bold }
+  .com { color: #600; font-style: italic }
+  .typ { color: #404; font-weight: bold }
+  .lit { color: #044 }
+  .pun, .opn, .clo { color: #440 }
+  .tag { color: #006; font-weight: bold }
+  .atn { color: #404 }
+  .atv { color: #060 }
+}
+
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint { padding: 2px; border: 1px solid #888 }
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L5,
+li.L6,
+li.L7,
+li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 { background: #eee }
+
+  </style>
 </head>
 <body>
+<img style="display:none;" width="810" height="813" title="" alt="" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAMtAyoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0uikzRmvzozuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuLRSZozQFxaKTNGaAuNzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigAzRmiigBKKbRTEOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQAlFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAmaM0lFMBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooASikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAWikooAbRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUAJRSZozTsMWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WAWikzRmiwC0UmaM0WATNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoASikzRmmAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ANoozRmgQUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZozQAlFNopgOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQA6im0UAOoptFADqKbRQAlFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQA2ikopgLRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUAJRTaKdgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYB1FNoosA6im0UWAdRTaKLAOoptFFgHUU2iiwDqKbRRYBKKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBKKTNGaYC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQA3NGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoASikooELRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRQqs7qiLud2CqM4yScCrGoWVxp15Ja3kflzx43LuBxkA9Rx0NVyu3NbQZXopKKkQtFJV+XTJItEttSeWIpcSMixD7y7SRk/XH61cYOSbXQZRopKKgQtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQAtFJRQA3NGaSiqAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzWr4VsIdU8R2Nldb/IlL7gjYJwjMOfqBWTXQfD/AP5HTS/rJ/6Ket8LFSrQT2uhrctxWnhmz1Eafefbrqcy+U9yj7ERi2PlXuB0yc9KdqWlaD4f1GS21M3moTE7gkT+WsSH7oOOS2OfSufuP+Q43/X0P/Q61/iL/wAjhffSP/0WtdTqr2UpqCunZadNfv26jvoR+KtHt7OXT5dIdntdQiWWETHlc46n05FWru38LaLJ9lu1vNSuEA82dJ9iZIz8oUgf561PrVp9v0/wTZmQxrcW0UTOOqg7Ace9Q61eWehazJpulaFZNNEQqNPCZ55D6jPPNbSpxpylJJJXXS+6vZIZX8Q6FDDqGlJpUri21NY2haYcx7yBz64yDVzULXwxo2oPp13a6lPNFgSXBmwckZyFyBjn0q544hv7mfwzDMyJqUsKo7MdirKdueQDj5vQVU1LxLeWF2dO8S6fY6i8R2jzY/nYdipx39cU5wp0pzXLbVatXW21ugFX7Ho2m+KEjknlv7IlDbtbyKcOWGNxB7Va+JEmn/2zdrBBcnVN8e9i2UYbBgKPXlai8VaZZ6drmkvYxvAlz5UzQOTmIlxxz/ng0njdvI8eTTyI3lxzQSHIOCAqH+hqaicKUqbSS5l+KYCT6boegGO31wXV9qRUPNHDJ5ccORnaMHJNVPEek2kNhbanpEskmnXJKAP9+Jx1U/kfy/Guj8a63JpurM7aTpNxazqrw3M1tvMgIH8WeT/TFZXiC+1SfwpbG8sdNsbK4m3wwwI0chxn5ivQD9eRVVqdL34W2202+fW4MvazoHh/QNSd9UkupYWC/Z7SFvmIA5Zzx/FkAZ7d+3PXmm28Hgmx1NN/2q4mlRyWyMKzgYHboK0/iaxPiqQE8LEgH5Z/rUOqf8kx0j/r5uP/AEOSoq8jnVgopKKdvvQmXNZ0TQtFa0mvWu5lmgRktYpMEt/EzN1x0AA9DVLXNM01tBt9Y0bz44GlMEsMzbijYJ6/h+oqf4jH/iY6b/14RfzamRjPwylHrqJ/9BoqqDnUpqKSSvtr0GRWWk6bYaNa6n4ha5le8G+3s4G2fJ/eY9ecg/jV+20XQ9R0rU9S097lfs0BP2aV+Y3wSGz3B9/SmeL4nvPD2g6jbqXtktRBJsGRGygZB9OQR+FSeDrG4h8L+JL2eN4op7bZEHGC4UNlsHt8wGfrVxgva+yUFypXvby3v6gcZmjNJRXjkC5ozSUUALmjNJSM20dyScAAZJPoKNxjs0ZrUj8O6xIgYWDgHs0iA/lmnf8ACN6z/wA+J/7+p/jXR9Tr/wAj+4LMyc0ZrW/4RrWf+fE/9/U/xrPu7S4s5fLuoXikxnDf55qJ4erTV5xaQakOaM0lFZCFzRmkooAXNGaSigBc0ZpKKAFzRmkqK5mW3haRug7UJXGTZozWEdXnYny4lx9CaP7Wuf8AniPyNa+wmFmbuaM1hf2tc/8APEfkaP7Wuf8AniPyNHsJhZm7mjNYa6vOpzJCNv4ita2nS4hEqH5T1z2qZU5R3AmzRms+51SGElV+dvbpVL+1bmZsQRZ9lUsacaUpdAszdzRmsYSawRkW02P+uJpGudUi5ktpAPeI0/YyHZm1mjNYsesspxNDz7HFXYtStpFJ37SBnDDmpdKUd0LUu5ozWJJrEhciGIEe/NWtP1IXL+XIuyTt6Gm6UkrtBZmjmjNJRWYhc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBKKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBas6de3GnXkd3Zv5dxHnY+0NjIIPBBHQmqtCZd9kYZ3HO1FLH8hVRck047jJTM5uPPJzLv35wPvZznH1qXUb641K8kur2TzJ3xubaBnAwOBx0FQ+RP/z73H/fpv8ACjyJ/wDn3uP+/Tf4VfLUtazsBZudTu7mKzjmmJS0QJAFULsAxjBA9hWs/jPXnt/KN8QMY3BFDY+uM/jXPOjp/rEdD6OpX+dMjJlfZCryv/djUsfyFVGrWi2k3d+oampda5qF1pkVhPcF7aJt6gqMg89+vc1oweNNdhhEYvdwUYDPGrMPxI5/GsmPSNUkGU066x/tJt/nilfRtUQZfT7kD2Xd/LNar63H3lzfiGpDe3lxe3TXN3M8s7dXY81d1PxBqmp2iWt/dmaFGDgFFByARnIGT1NZTq0blJFZHHVWBBH4Gkrm9pUV1d67/wDBA29L8UavpluILS7IhHRHUOB9MjiqOp6neapcie/naeQcDdjAHoB0FUqKbrVJR5XJ2C5c1PULrVLtrm+l82cgAttC8DpwABRLqFzLpkOnySA2cLM6R7QMEkknOMnqetUiQBknA96ktoJ7v/j0t55x6xxlh+fSiLqTbtdt7+YFnUtRutSljkvZfMeOMRKdoXCjOBwB6mgajdDTP7PEv+h+Z5vl7R97GM5xn9akGiasRkadcfp/jS/2Hq3/AEDrj9P8a19jiLt8r19QszofD9rrMGjRXXhi/NxM5P2m0GwGMjocMcH6/T8Ld1LqOmaJqtx4kuQ2qX8a28NtvVmSME5JC8DOT09BXFT2t3ZndPb3EGP4nQqPzquSTyTnNbfWXSjy8rTtbd29bDuLRSUVwEi0UlEW6Z9kCSTP/djUsf0ppNuyAWruhtHHrdhJMQI0mBJPQeh/PFKmi6q4yunXOPdQP5mmy6TqUQzJYXQHqIy38s10QpVqclPkenkOx61S15RZa1qOnsEiuZFC/wDLOTkD8D0r0Xw9ey6jo1tdThRJIDu2jA4Yj+lfSYTHQxLcUmmjRO5pVx3xEUeXYtj5suM+3FdjXHfEX/UWP+8/8hRmX+7T+X5hLY4mikozXyRkLRRAslw222ilnb0iQv8Ayq8ui6qwyNOuce4A/ma0jRqT1jFv5DsUaK0P7D1b/oHXH6f41VubO6tRm5tp4R6vGQPz6U5UKsVeUWvkFiGikorIQtUtYjZ7FtuSVIY/SrlFOLs7jH+FdVsLfTY7eeVIZgxJ3jAOT1zXTROkq7onR19VIIriptOtpSTs2k91OKzVjay1WBIZXALpyDjuPStuWNR3T1He56VSce1KeprnvHDEaTHtJGZgDg9eDWMY8zSGWNc1SwjsbmF543ldCoRfmOccfSuFtnnkRbWAMzSNwq9SattZww6cJyCzsoIyeATW74GsVEUt84y5Plx+w7mumPLCLa1An0jwvBCqyahiaXrsB+Rf8a6GKOOFAsKLGo7KMCn1y+v6/NHdNZaYMyqcPJjOD6D/ABrH3qrA6nn3o5HrXnzWuoTndcXjlj6uTQtrqERzDeuD/wBdGFP2cf5hHdT20FwuJ4Y5B/tKDWJqHhWznBa0Jt5PT7yn8O1ZVvr+pae6rfL9oi9TwfwYf1rrbC8hv7ZZ7ZtyHjnqD6Gi06eqegyj4b0xtMsmSYIZ3clmXnjtz/nrXP8AiABfFabQBlUJx9K7euJ8Rf8AI1p/uJ/I06cnKTb7AW6KSisSBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBKKbmjNMB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1ej+AoY4/DcLqgWSSSRnOOWO9gM/gBXm2a0tJ1u90sFbWUeWTkxuMrn+lduAxMcPV5prSxSdj1miub8NeJTq901tJbiORYzJuVsg4IHT8a6SvqaVWFaPPB6GidyC9tLe+gMF3EksRIJVhkcU63ghtoxHbxJEg6KigD9KlqtfX1tYQ+bdzLEnbPU/Qd6p8sfeYFmiuWl8a6erkJFcOPUAD+tamja7Z6tuW3ZllUZMbjBx6+9YwxdGpLljJNiui7e2dtexGO6hSVP9odPoe1ee+KPD7aUwmtyz2jnGT1Q+h/xr0qq9/ape2c1vKMpIpX6ehrPGYSGIg1b3ujBq549T7eGa7uY7a0jMtxIflUfzJ7AetR3CmB5Fk4MZIb8K9G8E6MNO04XM6/6ZcgO+eqL2X/H3r57BYR4ipyvZbkJXI9D8IWdmqy6gFvLrr8w/dofZf6munVQqgKAAOgFLUN3cw2kDTXMixxL1ZjX1FOnToxtFWRexNRXLzeNdPRyI4riQf3gAAfzNJH41sGcB4bhB64Bx+tY/XsPe3OgujqCMjB5FYOseGLG/VnhQW1x2aMYBPuK17G9t76ATWkqyRnuO3sR2qxW06dOvG0ldMe55BqVhcaddNBdLtccgjow9RVN2CKWY8CvVfEmlJqunOgA89AWib39Poa43wRpAv8AVHurlMwWbABWH3pf/rdfqRXztbLZRrqnDZmbWpb8O+EGuUS61kMsbcpag4JH+2f6fnXb21tBawiK2hjhjHRUUKP0qaivoKGGp0I8sEWlYKK57UPFmnWkpjUyTspwfKAwPxNQQ+NNOdsSR3EY9SoI/Q1LxtBPlc0F0dDdWlvdpsuoI5V9HUGiytYbK2S3tk2QpnauScZOe/1pLK8t76HzbSZJU9VPT6+lWK3XK/eX3jCuO+I3+osf95/5CuxrjfiP/qLH/ef+QrkzH/dp/wBdRS2OH+YsqorO7EKqqMliegFdxoHg2JEWfWgJpjyLcH92n1/vH9KrfD7SVlZ9VnXO0mO3B7dmb+n4Gu7riy7ARUVVqK7ewooZFHHDGEiRUQdFUYA/Cn02SRIo2eRlRFGSzHAArm7rxlp0MhSJZpgP4kUAfqa9WrXp0V77sO9jpqQjIwelcqvjawLANb3IHrhf8a39N1K11KEyWcocDqOhX6ippYmlVdoSTYXTM3WPDFjfqzxILa47PGMAn3Hf+defalYXGnXTQXS7WHII6MPUV6/WP4n0pdU011UD7RGC0R9/T8a4sdl8asXOCtL8xNHl1FNPBweDRmvmTMdWNef8hq3/AN9P5itfNZF3/wAhq3/30/mK1o/ENHox6mud8c/8gmL/AK7D+Rroj1Nc745/5BMX/XYfyNRS+NFHO3x/4lFv9F/lXWeEgBoFtjuWP/jxrlLxd2jwn+6FP6V1XhBw+gwAfwsyn88/1rSXwfMSNnpXnej/AD3V1I3Lk9fqTXoledfNpGp3ENyjAE8H1GeCPappq8ZJAbFFV4rqGUfJKp9s4qbPvWbVtxCSossbI4yp4IqHwZO0GrTWuSY5FJx7r3/LNT5rM0q5j0zxB5t1uEfzDIGeo4Na09U4jR6FXE+I/wDka0/3E/lW+PEelf8APz/443+Fczqd1FqHiNZrUlowqjcRjoOaKcWm210GaFFNzRmsiB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgB1FNzRmgBuaM02iiwx2aM02iiwDs0ZptFFgHZozTaKLAOzRmm0UWAdmjNNoosA7NGabRRYB2aM02iiwDs0ZptFFgHZozTaKLAOzRmm0UWAdmjNNoosA7NGabRRYDqPh5/yHpf8Ar2b/ANCWvR683+HX/Iem/wCvZv8A0Ja9Ir6nK/8Ad18y47DZHWONnc4VQWJ9hXkWs6lNql9JcTE4Jwi9lXsK9T1g40m9I/54v/6Ca8crjzmpL3YLYUh2a0PD9y1rrlhIpxmZUPuGO0/zrNqxp3/ITsf+viL/ANDFePQbVSLXdEo9nooor7U1PML6yW68bmzI+SS63MPVR85/QGvT64bT03/Ei5J/gR2H5KP613NefgIKKm+8mTEK8y8Z6o99qrwox+z252KAeC3c/wBK9KlbZG7f3QTXisjl3Z2OWYkmufOKrjCNNdf0CTDNGabRXztiDX8N6q+lanHJuP2dyFlXtt9fw616xXh7DKketex6LKZ9HsZm6yQIx/FRX0GT1W4ypvoXFl2q9laRWaSrAu0SSNK3uzHJqxRXs2V7lBXLePNUe0sUtYGKyXGdxHUIOv5/411Nea/ECQvrwXPCRKB+p/rXDmVV06D5eugpPQ5zNGabRXyljMvaVqVxpl2s9s3I+8ueHHoa9asrmO8tIbmE5jlUOPxrxevTfAMhfw1CGOdkkij/AL6P+Ne3k9WXM6T23Kizoq4r4mEraWRUZO58D3wK7WuS8dp5lxosZ6PdKv5stepjo81CUe9vzRT2Oh0i0Ww0u1tVH+qjVT7nHJ/OrlFFdSSSshnCfEDVHM6adE2EUB5cdyeg/r+Ncbmu41nwle6hqlxdLd26rI2QrK2QOgql/wAILff8/tt/3y1fOYvCYmtVlPl06bbENNnKZq7o+pSaXqEVzGSFU4kX+8vcVvf8ILff8/tt/wB8tSHwLfEEfbbbn/ZasYYDFQkpRjqvQVmehKQyhlOQRkGlqCyiaCzghkYM8caozDuQMZqevqUaHk/im2+ya9dxqMKzb1+jc/1rKzXT/ENNutxMP4oRn8zXLV8fi4clecV3MnuOzWTdf8hm3/30/mK1Kyrn/kMwf76fzFZ0fiGj0g9TXO+Of+QTF/12H8jXRHqa53xz/wAgmL/rsP5GopfGhmPEgl09I26NGB+lP8K6kNOupLK8OyKRshj0Vv8AA0lp/wAesP8AuD+VR3lolyvPDjo1WpK7jLZiud5VW/sLa/jCXUSyAdD0I+hrjbLVdT0lRGwE9uvRW5AHseorZtvFtnIALiKaFvYbhS9lJax1GQ3Pg+JiTa3Tp/syLu/UVQk8L6lDzBNE/wDuuVP6108GtabPjZeRA+jHaf1q/G6SDMbq49VINP2s1uBwMllrdqPngmYDuAH/AJVVkvSSEvbYEj1BUivSqiubeG6QpcRJKvo4zQqq6oDgbeGxuB+7Xn+6SQauwwRQZ8pAue/erGs+GPKU3GllsryYSef+An+lZ2n3fnqUk4lXr705JtXi7oTL2aM02isbCHZozTaKLAOzRmm0UWAdmjNNoosA7NGabRRYB2aM02iiwDs0ZptFFgHZozTaKLAOzRmm0UWAdmjNNoosA7NGabRRYB2aM02iiwDs0ZptFFgEzRmkzRmmIXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoA6n4df8AIfm/69m/9CWvSK82+HP/ACH5v+vZv/Qlr0mvqMr/AN3XzNI7FPWf+QRff9cH/wDQTXjea9j1n/kEX3/XB/8A0E143muHOfjgKQuasacf+JnY/wDXxF/6GKrZqxpx/wCJnY/9fMX/AKGK8ml8cfVEo9pooor7U1OK0r/ko19/1yf/ANkrta4fTW2/Ei7H95HX9FP9K7iuPBfDL/E/zEiG7/49Zv8Acb+VeK5r22dd8Mi/3lI/SvEjwSD1HFednK1h8/0JkGaM0maM14ZAua9c8L/8i3pn/Xun/oIryFmwpPoM17F4fjMOhadGwwVt4wf++RXtZMvfky4mhRRRXvlhXmPjw/8AFRS/7ifyr06vMvH6lfEDE/xRKR+o/pXmZt/A+aJlsc5mjNJmjNfMmYua9L+Hv/IuL/12k/8AQq8zzXpvw/Ur4ZhYj78kjD6byP6V6uUL98/T/IqO50lcr40/4/8AQP8Ar8T/ANDSuqrk/HDBLzQmPQXan/x5a9vF/wAJ/L80W9jrKKKK6RhRXB614s1Gx1W6to0tykbkLuQ5x271S/4TfU/+edr/AN8H/GvPlmdCMnF308ieZHpNFebf8Jvqf/PO1/74P+NMl8b6n5bcW0fH3gh4/M1P9q4fz+4OZHb67rlro8QM2Xmb7kS9T7+wrkZfHtyHO22tlHYMxJrO0vStQ8Samst59oS3cb5Lh0K7gOirn19ulei2GkWFhCIrW0hRR1O0En6k8moi8TinzRfJHppqGrPMNd1eXWbmOeaONGVNmEzg8k/1rNzXqGveGbPUIHa3iSC6AyroMBj6Ef1rzCRGjkZHBV1JUg9iK8jHYapRnzVHe/UlpoTNZdx/yGYP99P5itPNZc//ACGYP99P5iuej8Qkeknqa53xz/yCYv8ArsP5GuiPU1zvjn/kExf9dh/I1nS+NFGGkywWETv02jA9eKqHVmzxGuPrSX3/ACD7b6D+Vdl4bt4TodoTDGSy5JKg5OTWtoxXM1fUSOPTVvm+eMY9jV3y4LhA+xGB74rpvEFtB/Yt4fIiDLGSCEAINcnpJ/0Qf7xpOzjzR0Bg+mwN0DL9DUX9mtGd0E7Ify/UVo5ozSVSS6iuV4dT1fT8EymeIdQ/zD/EV1WiavDqsLFB5cyffjJzj3HqK53NVvDLGLxMqpwrF1I9sE/0p6TT01Q07nfVxHim2Wx1qK5iG1JxuYD16Gu3rk/H33LL6v8A0qaPxW7jK+aM0yM/u1+gp2aggXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoAXNGaTNGaAFzRmkzRmgBc0ZpM0ZoASikopgLRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSUUALRSVLaW1xeymOyt5rhx1Ea5A+p6D8acYuTtFXA6X4c/8jBN/wBezf8AoS16TXE+B9A1DTtQku7+OOFGhMYTfubJIPOOO3rXbV9Tl9OVOgozVmax2KWtf8ge+/64P/6Ca8ar2rUIWubC5gQgPJGyAnpkjFeU6h4f1SwJM1o7IP44vnX9OR+OK4s2pTm4yirpEyRl1Y07/kJ2P/XzF/6GKrKC8ixxqzyOcKiKWY/QCui0Twvq817azy2wtoY5UkJmbDEBgeFGT274rysPRnUmnFX1JSPUaKKK+wNTze4uRZ/EHzicL9oCN9GXb/WvSK868WeHdSk1S5vLeDz4ZG3Dymyw47jr+Wa6/wANai2oaannhku4cRzowwwb1x79a83BOUKk6c1a7bRKNavJvFenNp2tTrtxFKTJGe2D2/A8V6zVDWNKtdWtfJu1PHKuvDIfUVtjsL9Zp2W62G1c8corsp/AVyHPkX8JTtvjIP6GmR+AbtmAl1CBF7lIiT+prwf7NxF7cv4ojlZzWlWD6rqdvYxgkSNmQj+GMfeP9Pqa9nUBVAUYAGAKytA0Kz0SBltVZpXx5kznLP8A4D2rWr3MDhPq0LPdlpWCmRSJKCY2DAMVOPUHBFUtd1KPStNluXI3AYRT/E3YVyvw+1ctNcWNy+XlYzRk9yfvD+v51rPEwhVjSe7C+tjuq4z4i6c0tvBfRqT5XySY7Keh/P8AnXZ0yWNJY2jkUMjDDKRkEVeIoqvTdN9QaueIUV3ep+BVkmZ9OuhEp58uVdwH0INVoPANwzj7RqMap3EURJ/Mn+lfOPLMQnbl/EjlZyNrbT313HaWaF7iU4UdlHdj6AV7Jplmmn6fb2kX3IUCA+uO9VdD0Kx0WJls4yZH+/K5y7/U+nsOK1K9rA4L6tFuW7KSsFcV8S2ZYNPZPvK7EfUYrta5nxxpN3qlrb/YkV2hLFlLYJzjpnjtWuNjKVCSgrv/AII3sdBZzrdWkM8f3JUDj6EZqauY8EXM6WR02+ikhubfJRZFwWTPb1wePyrp62o1PaQUho85+IWntBqa3ir+6nABPowGP5Y/WuTr2q/s4L+1e3uow8T9Qe3uPeuKvPAUnmE2V8vl9llTkfiDz+VeLjcuqSqOpSV0yHE4qt/wPpsOo67m5UPFbR+aEPIZsgDP05P5VfXwHe7huvrYDvhGrN0u5n8Ma+32mNsLmORf7ynuPyBrkpYeWGqxnXjaNxWs9T1aisdPEmkPD5v22IDGdrZDfl1p0PiLSZk3LfQr7Odp/WvpPb0n9pfeXdGtXHeLPDNs1rd6hbF0uBmVwWyrdz9K07/xXpVrGStwJ37JEM5/HpWB4g8Y293pclvZRSq8q7XaTACjv35rkxdfDSg4zaYm0cVWZH/pOu26x85lQcexq42k6jqOJbaPEDDClnC598VueHvD39nS/aLl1knAwoXonv7mvnItQV29SUjoT1Nc346YDS4F7mYfyNdJXF+MboXepQWURyIvvY/vH/AVnRXvDMm/GLG3B9v5V2/hr/kA2X+5/U1xerDEMYHTP9K7Tw1/yAbL/c/qauf8P5iReuoVubaWB/uyIVJ+orzyBn065ltbtSpVuT6e/wBDXpFZ+q6Ta6mgFwpEijCyLww/xFRCaWkthnMKysMqQR6ilpLjwrfQMTaTRyr/AL2w/wCFVTo+trx5Mp+jg/1q+SL2kKxZkkWNCznAFReEo2n8QCUD5UDOfbIx/WiDw3qly488LEvcyPnH4Cut0fS4dLtzHFlnbl5D1Y/4UNxhFpO7YJWNCuR8esCbGMfe+Y4/KutJABJIAHJJ7VwOqXY1bXDJHzBF8qH1A7/iamive5uwywgwij2paSipIFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAFopKKAEopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOopuaM0AOr1D4eoieF4CoUO0kpfHUne2M/hivLc1d0/Vr7TgwsrmSJW5IHIP4GuzBYmOGqc8ldWKTse00V5H/wlOs/8/wA//fK/4Uf8JTrP/P8AP/3yv+Fet/bFHs/w/wAyuZHrlFeR/wDCU6z/AM/z/wDfK/4U2TxNrDoVa+lweOAAfzAo/tij/K/w/wAw5kdh4Ygtl8Wa+8apvUqqY7Ak7sfjj9K66vELW8uLS4E9tM8cv95Tya0/+Ep1n/n+f/vlf8Kxw+aU6cOWUXu9hKR65RXkf/CU6z/z/P8A98r/AIUf8JTrP/P8/wD3yv8AhW39sUez/D/MfMj1yuO8Zak+j6vYXVrjzWRhKnZ0yMA/rg1yn/CU6z/z/P8A98r/AIVl3d1PdztNcyvLKerMcmufE5pGpDlppp9xOR65out2erRBreQCXHzRMcMv+P1rUrwtJGRwyMysOQQcEVtWfivV7UBRc+ao7SqG/XrWlHN42tVWvkCl3PWqK80HjrUwOYrUn/dP+NB8daljiG1B/wB0/wCNdP8AauH7v7h8yPS6oatq1npUJe7lCnHyoOWb6CvNrvxbq9yCPtAiU9olC/r1rDlleVy8rs7nqzHJP41zVs3ilaktfMTkaviHWp9Zu/MkGyFOI4weFHr9azYZZIJklhcpIhDKw6g1FmjNeLOpKcueT1JPUfDXim31KNIbtlhvOmDwr+4/wrpa8JzWtYeItUsVCw3blB0WT5h+tevh82suWsr+aKUu57BRXmaeOdTA+aO2b32H/Go5fG2rOMKYI/dY/wDEmuv+1aHn9w+ZHp9MhljmUtDIkig4JU5GfSvHb7WtRvgRc3czqf4QcL+Q4pmn6rfacGFlcyRBuSByD+BrD+2Ic3wuwuY9poryP/hKdZ/5/n/75X/Cj/hKdZ/5/n/75X/Cr/tij2f4f5j5kd94yuWstJW7hYLcRSqY2PrnkfQjNO0DxHaatGq7hDdY+aJj1P8AsnvXmOoape6iV+23Eku3oD0H4DiqYbByCc1ySzVqrzwXu9mLm1PdqK8gsvEmq2YCxXkjIP4ZPnH61pp451RR80ds3vsP+NdsM2ote8mh8yPTKytd0O01mFVuAySr9yVPvD29xXFf8J3qX/PG1/75P+NVbrxlq86lVljhB/55oM/rmlUzLDSi4yTa9A5kX9T8IWmnQGW71gxp2BhBZvYDPNcde5BY2eSoPyiQckfh3qW4uZrmUyXEsksh6s7Emos14lerTm/3cLIhsq2N3C0xTUnmhX1jUfr3rprWz0Wfa0UyTAc7WmPP1BNc/LFHKP3ig+/eqr6dET8rMP1rP3JeQ9D0UMgAwyAD3FQT39nbjM11Cn1cZ/KvP/7OH/PU4/3acmnRA/MzH9KXJDuF0b2reKVKmHS1ZpG481hgD6DvWLZWzRkyzEmVuTnn/JqaKGOL/VqAfXvUmaHJJWiJsp6sCYFI6Bua6jw9qVlFotqkt1CjouGVmwRyawmAZSrDIPUGqhsIScjcPbNNOLjyyGmXJPEd3HqtzPbnzbUtgRsONo4B9q3LPxRYTgCcvbv3DDI/MVz8MSQrtQYHf3pkltDJyyAH1HFDcH0C528OoWcwzFdwN9HFTiRD0dD9GFedNp0RPDMP1pv9mjtIR/wGlyQ7hdHozyxIMvLGo9SwFZ95runWoO65WRh/DF8x/wAK4kaaueZCfwqaOxhTqC31NHJBbu4XRZ1XWrrV8wWyGG2PUZ5b6n+lMtYFt49o5J6n1p6gKMKMD0FLmhz0sthNjqKbmjNQIdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoAdRTc0ZoASikzRmmAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0AMzRmkopgLmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFACUUlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFAC0UlFACZozTc0ZpgOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADs0ZpuaM0AOzRmm5ozQA7NGabmjNADc0ZpKKYxc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAbRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0ALRSZozQAtFJmjNAC0UmaM0AJmjNJmjNMQuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNACUUlFMBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBaKSigBM0ZpM0ZoGLmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQA3NGaTNGaYC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0AJmjNJRTAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAEzRmkzRmgQuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNAC5ozSZozQAuaM0maM0ALmjNJmjNACZozSUUwFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBc0ZpKKAFzRmkooAXNGaSigBM0ZpKKBi5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAmaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAuaM0lFAC5ozSUUALmjNJRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//Z" />
   <div id="container"> 
 <div style="display:none"><!-- all --></div>
 <h1>Mastering Node</h1>
@@ -48,7 +340,7 @@
 
 <p><strong>Becuase it has to be done</strong></p>
 
-<pre><code>// hello.js
+<pre class="prettyprint"><code>// hello.js
 sys = require(&#39;sys&#39;);
 sys.puts(&quot;Hello, World!&quot;);</code></pre>
 
@@ -64,20 +356,20 @@ sys.puts(&quot;Hello, World!&quot;);</code></pre>
 
 <p>Second, if the example is a command to be entered directly into what will be referred to as a &#39;node terminal&#39;, you should first open a terminal then type <code>node</code> and ENTER (assuming the node executable is in your PATH variable, and is called node).  At the prompt, you should enter the commands following the <code>&gt;</code> character. Text following the <code>&gt;</code> character are commands you should enter, while text on a line that does not begin with <code>&gt;</code> is the output.  This is done to closely match what you should see in your terminal.  These examples are not included in files under the <em>src</em> directory.  For instance:</p>
 
-<pre><code>&gt; console.log(&quot;Hello, World!&quot;)
+<pre class="prettyprint"><code>&gt; console.log(&quot;Hello, World!&quot;)
 Hello, World.</code></pre>
 
 <p>Third, if an example is to be run from the terminal itself, it is prefixed by a <code>$</code>.  This represents a bash environment, and may look differently depending on your configuration.  For instance, my bash terminal displays:</p>
 
-<pre><code>jim@cr-48:~/projects/masteringnode$</code></pre>
+<pre class="prettyprint"><code>jim@cr-48:~/projects/masteringnode$</code></pre>
 
 <p>These code examples will look like this:</p>
 
-<pre><code>$ ruby -e &quot;puts &#39;Hello, World&#39;&quot;</code></pre>
+<pre class="prettyprint"><code>$ ruby -e &quot;puts &#39;Hello, World&#39;&quot;</code></pre>
 
 <p>Finally, code without a prefix is a sample of a possible solution or expected output from <em>stdout</em>.  This is not necessarily code you should type into your terminal or run as a script, unless of course you want to experiment.  For example, suppose we&#39;re discussing CommonJS and we&#39;d like to show how something <em>would</em> be done in CommonJS, we might show an example such as:</p>
 
-<pre><code>var utils = {};
+<pre class="prettyprint"><code>var utils = {};
 utils.merge = function(obj, other) {};</code></pre>
 
 <p>This wouldn&#39;t contain a filename unless there is a working example (in which case, it&#39;s a concrete example and no longer hypothetical).</p>
@@ -94,7 +386,7 @@ utils.merge = function(obj, other) {};</code></pre>
 
 <p>Files and directories will be displayed in italics when inline, or as a relative path to the <em>Mastering Node</em> source directory in code comments when in a code example block.  For instance, if we reference <em>/home/jim/masteringnode/src/modules/fake.js</em> in a code example, it will look like:</p>
 
-<pre><code>// modules/fake.js
+<pre class="prettyprint"><code>// modules/fake.js
 var num = 1;</code></pre>
 
 <h1>Installing Node</h1>
@@ -105,11 +397,11 @@ var num = 1;</code></pre>
 
 <p>Homebrew is a package management system for <em>OSX</em> written in Ruby, is extremely well adopted, and easy to use.  Homebrew can be installed in a number of ways.  Possibly the easiest way is to perform a quick install to <code>/usr/local/</code>:</p>
 
-<pre><code>$ ruby -e &quot;$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)&quot;</code></pre>
+<pre class="prettyprint"><code>$ ruby -e &quot;$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)&quot;</code></pre>
 
 <p>Next, to install node via the <code>brew</code> executable, simply run:</p>
 
-<pre><code>$ brew install node.js</code></pre>
+<pre class="prettyprint"><code>$ brew install node.js</code></pre>
 
 <p>For more information on packages and commands available to homebrew, checkout the README at github.</p>
 
@@ -118,17 +410,17 @@ var num = 1;</code></pre>
 <p>To build and install node from source, we first need to obtain the code. The first method of doing so is
 via <code>git</code>, if you have git installed you can execute:</p>
 
-<pre><code>$ git clone http://github.com/joyent/node.git &amp;&amp; cd node
+<pre class="prettyprint"><code>$ git clone http://github.com/joyent/node.git &amp;&amp; cd node
 $ git checkout v0.4.0</code></pre>
 
 <p>For those without <em>git</em>, or who prefer not to use it, we can also download the source via <em>curl</em>, <em>wget</em>, or similar:</p>
 
-<pre><code>$ curl -# http://nodejs.org/dist/node-v0.4.0.tar.gz &gt; node.tar.gz
+<pre class="prettyprint"><code>$ curl -# http://nodejs.org/dist/node-v0.4.0.tar.gz &gt; node.tar.gz
 $ tar -zxf node.tar.gz</code></pre>
 
 <p>Now that we have the source on our machine, we can run <code>./configure</code> which discovers which libraries are available for node to utilize such as <em>OpenSSL</em> for transport security support, C and C++ compilers, etc. <code>make</code> which builds node, and finally <code>make install</code> which will install node.</p>
 
-<pre><code>$ ./configure &amp;&amp; make &amp;&amp; sudo make install</code></pre>
+<pre class="prettyprint"><code>$ ./configure &amp;&amp; make &amp;&amp; sudo make install</code></pre>
 
 <h2 id="installing_from_Distribution_Sources">Installing from Distribution Sources</h2>
 
@@ -136,7 +428,7 @@ $ tar -zxf node.tar.gz</code></pre>
 
 <p>If you still wish to install nodejs from an official repository, it can be done in the usual way:</p>
 
-<pre><code>$ sudo apt-get install nodejs
+<pre class="prettyprint"><code>$ sudo apt-get install nodejs
 $ yum install nodejs</code></pre>
 
 <p>Refer to your distribution&#39;s documention or wiki for the proper commannd for installation from the official repository.</p>
@@ -145,11 +437,11 @@ $ yum install nodejs</code></pre>
 
 <p>npm is a node package manager with a relatively large category of available modules.  To install directly in one line, run:</p>
 
-<pre><code>$ curl http://npmjs.org/install.sh | sh</code></pre>
+<pre class="prettyprint"><code>$ curl http://npmjs.org/install.sh | sh</code></pre>
 
 <p>If this one-liner fails, run:</p>
 
-<pre><code>$ git clone http://github.com/isaacs/npm.git
+<pre class="prettyprint"><code>$ git clone http://github.com/isaacs/npm.git
 $ cd npm
 $ sudo make install</code></pre>
 
@@ -159,11 +451,11 @@ $ sudo make install</code></pre>
 
 <p>Using npm, we&#39;ll install other packages needed for the examples in this book.</p>
 
-<pre><code>$ sudo npm install connect express nodeunit geddy zombie node-inspector</code></pre>
+<pre class="prettyprint"><code>$ sudo npm install connect express nodeunit geddy zombie node-inspector</code></pre>
 
 <p>Let npm do it&#39;s thing.  It will install these modules any any dependencies.  You&#39;ll see output similar to the following:</p>
 
-<pre><code>npm info activate jsdom@0.1.23
+<pre class="prettyprint"><code>npm info activate jsdom@0.1.23
 npm info postactivate jsdom@0.1.23
 npm info build Success: express@1.0.7
 npm info build Success: nodeunit@0.5.1
@@ -176,7 +468,7 @@ npm info build Success: connect@1.0.1</code></pre>
 
 <p>Part of setting up a development environment is using the right tools.  While some may prefer a full IDE, others will go with a very simple text editor.  I enjoy using <em>vim</em>, and this is my <em>~/.vimrc</em> file&#39;s contents:</p>
 
-<pre><code>syntax on &quot; enabled syntax highlighting
+<pre class="prettyprint"><code>syntax on &quot; enabled syntax highlighting
 :set number &quot; line numbers
 :set ai &quot; autoindent
 :set tabstop=4 &quot; sets tabs to 4 characters
@@ -236,7 +528,7 @@ highlight CursorLine ctermbg=8 cterm=NONE</code></pre>
 
 <p>If you&#39;ve performed the npm installation from the previous section, you should be ready to go.  If not, you can install node-inspector from source or through npm.</p>
 
-<pre><code>$ npm install node-inspector</code></pre>
+<pre class="prettyprint"><code>$ npm install node-inspector</code></pre>
 
 <p>If you&#39;d like to install from source, check out the <a href="https://github.com/dannycoates/node-inspector/wiki/Getting-Started---from-scratch">Getting Started from scratch</a> wiki entry from the node-inspector repository.</p>
 
@@ -244,19 +536,19 @@ highlight CursorLine ctermbg=8 cterm=NONE</code></pre>
 
 <p>Open one terminal to host a node-inspector server.  This terminal will remain open and provide a debug listener.</p>
 
-<pre><code>$ node-inspector&amp;
+<pre class="prettyprint"><code>$ node-inspector&amp;
 &gt; visit http://0.0.0.0:8080/debug?port=5858 to start debugging</code></pre>
 
 <p>You will see output directing you to open a browser and point it to the node-inspector server at the default port (8080).</p>
 
 <p>Next, open another terminal and navigate to <code>./src/events</code> and run node with the <code>--debug-brk</code> switch.  This will connect to the debugger on port 5858.</p>
 
-<pre><code>$ node --debug-brk basic.js 
+<pre class="prettyprint"><code>$ node --debug-brk basic.js 
 &gt; debugger listening on port 5858</code></pre>
 
 <p>Now, open a browser to <a href="http://127.0.0.1:8080/debug?port=5858">http://127.0.0.1:8080/debug?port=5858</a> and you will see a breakpoint on what would be the first line of your file.  I phrased it like this intentionally because the debugger shows you how node.js sees your file:</p>
 
-<pre><code>(function (exports, require, module, filename, dirname) {
+<pre class="prettyprint"><code>(function (exports, require, module, filename, dirname) {
 /* Your code here */
 });</code></pre>
 
@@ -276,12 +568,12 @@ highlight CursorLine ctermbg=8 cterm=NONE</code></pre>
 
 <p>Let&#39;s create a utility module named <em>utils</em>, which will contain a <code>merge()</code> function to copy the properties of one object to another. Typically in a browser, or environment without CommonJS module support, this may look similar to below, where <code>utils</code> is a global variable. </p>
 
-<pre><code>var utils = {};
+<pre class="prettyprint"><code>var utils = {};
 utils.merge = function(obj, other) {};</code></pre>
 
 <p>Although namespacing can lower the chance of collisions, it can still become an issue, and when further namespacing is applied it can look flat-out silly. CommonJS modules aid in removing this issue by &quot;wrapping&quot; the contents of a JavaScript file with a closure similar to what is shown below, however more pseudo globals are available to the module in addition to <code>exports</code>, <code>require</code>, and <code>module</code>. The <code>exports</code> object is then returned when a user invokes <code>require(&#39;utils&#39;)</code>.</p>
 
-<pre><code>var module = { exports: {}};
+<pre class="prettyprint"><code>var module = { exports: {}};
   (function(module, exports){
       function merge(){};
       exports.merge = merge;
@@ -289,7 +581,7 @@ utils.merge = function(obj, other) {};</code></pre>
 
 <p>First create the file <em>./modules/utils.js</em>, and define the <code>merge()</code> function as seen below. The implied anonymous wrapper function shown above allows us to seemingly define globals, however these are not accessible until exported. </p>
 
-<pre><code>function merge(obj, other) {
+<pre class="prettyprint"><code>function merge(obj, other) {
   var keys = Object.keys(other);
   for (var i = 0, len = keys.length; i &lt; len; ++i) {
     var key = keys[i];
@@ -302,7 +594,7 @@ exports.merge = merge;</code></pre>
 
 <p>The typical pattern for public properties is to simply define them on the <code>exports</code> object like so:</p>
 
-<pre><code>// modules/utils.js
+<pre class="prettyprint"><code>// modules/utils.js
 exports.merge = function(obj, other) {
   var keys = Object.keys(other);
   for (var i = 0, len = keys.length; i &lt; len; ++i) {
@@ -318,7 +610,7 @@ exports.merge = function(obj, other) {
 
 <p>To get started with requiring modules, first create a second file named <em>./modules/app.js</em> with the code shown below. The first line <code>require(&#39;./utils&#39;)</code> fetches the contents of <em>./modules/utils.js</em> and returns the <code>exports</code> of which we later utilize our <code>merge()</code> method and display the results of our merged object using <code>console.dir()</code>.</p>
 
-<pre><code>// modules/app.js
+<pre class="prettyprint"><code>// modules/app.js
 var utils = require(&#39;./utils&#39;);
 
 var a = { one: 1 };
@@ -330,7 +622,7 @@ console.dir(a);</code></pre>
 
 <p>Node also supports the concept of <em>index</em> JavaScript files. To illustrate this example lets create a <em>math</em> module that will provide the <code>math.add()</code>, and <code>math.sub()</code> methods. For organizational purposes we will keep each method in their respective <em>./modules/math/add.js</em> and <em>./modules/math/sub.js</em> files. So where does <em>index.js</em> come into play? we can populate <em>./modules/math/index.js</em> with the code shown below, which is used when <code>require(&#39;./math&#39;)</code> is invoked, which is conceptually identical to invoking <code>require(&#39;./math/index&#39;)</code>.</p>
 
-<pre><code>// modules/util.js
+<pre class="prettyprint"><code>// modules/util.js
 module.exports = {
     add: require(&#39;./add&#39;),
     sub: require(&#39;./sub&#39;)
@@ -338,26 +630,26 @@ module.exports = {
 
 <p>The contents of <em>./modules/math/add.js</em> show us a new technique; here we use <code>module.exports</code> instead of <code>exports</code>.  As previously mentioned, <code>exports</code> is not the only object exposed to the module file when evaluated. We also have access to <code>__dirname</code>, <code>__filename</code>, and <code>module</code> which represents the current module. We simply define the module export object to a new object, which happens to be a function. </p>
 
-<pre><code>// modules/math/add.js
+<pre class="prettyprint"><code>// modules/math/add.js
 module.exports = function add(a, b){
     return a + b;
 };</code></pre>
 
 <p>This technique is usually only helpful when your module has one aspect that it wishes to expose, be it a single function, constructor, string, etc. Below is an example of how we could provide the <code>Animal</code> constructor:</p>
 
-<pre><code>exports.Animal = function Animal(){};</code></pre>
+<pre class="prettyprint"><code>exports.Animal = function Animal(){};</code></pre>
 
 <p>which can then be utilized as shown:</p>
 
-<pre><code>var Animal = require(&#39;./animal&#39;).Animal;</code></pre>
+<pre class="prettyprint"><code>var Animal = require(&#39;./animal&#39;).Animal;</code></pre>
 
 <p>if we change our module slightly, we can remove <code>.Animal</code>:</p>
 
-<pre><code>module.exports = function Animal(){};</code></pre>
+<pre class="prettyprint"><code>module.exports = function Animal(){};</code></pre>
 
 <p>which can now be used without the property:</p>
 
-<pre><code>var Animal = require(&#39;./animal&#39;);</code></pre>
+<pre class="prettyprint"><code>var Animal = require(&#39;./animal&#39;);</code></pre>
 
 <h2 id="require_Paths">Require Paths</h2>
 
@@ -371,7 +663,7 @@ module.exports = function add(a, b){
 
 <p>Since <code>require.paths</code> is just an array, we can manipulate it at runtime in order to expose libraries. In our previous example we defined the libraries <em>./math/{add,sub}.js</em>, in which we would typically <code>require(&#39;./math&#39;)</code> or <code>require(&#39;./math/add&#39;)</code> etc. Another approach is to prepend or &quot;unshift&quot; a directory onto <code>require.paths</code> as shown below, after which we can simply <code>require(&#39;add&#39;)</code> since node will iterate the paths in order to try and locate the module.</p>
 
-<pre><code>require.paths.unshift(__dirname + &#39;/math&#39;);
+<pre class="prettyprint"><code>require.paths.unshift(__dirname + &#39;/math&#39;);
 
 var add = require(&#39;add&#39;),
     sub = require(&#39;sub&#39;);
@@ -387,12 +679,12 @@ console.log(sub(1,2));</code></pre>
 
 <p>To examine the functionality of <code>require</code>, <code>module</code>, and <code>exports</code>, open a node console by running the command <code>node</code>.  You should then enter a node prompt as seen below:</p>
 
-<pre><code>$ node
+<pre class="prettyprint"><code>$ node
 &gt; </code></pre>
 
 <p>To view these objects, enter the following commands into node:</p>
 
-<pre><code>&gt; require
+<pre class="prettyprint"><code>&gt; require
 &gt; module
 &gt; module.exports
 &gt; module.filename</code></pre>
@@ -407,7 +699,7 @@ console.log(sub(1,2));</code></pre>
 
 <p>When we <code>require()</code> a module, typically we only deal with the module&#39;s <code>exports</code>, however the <code>module</code> variable references the current module&#39;s <code>Module</code> instance. This is why the following is valid, as we may re-assign the module&#39;s <code>exports</code> to any object, even something trivial like a string:</p>
 
-<pre><code>// modules/css.js
+<pre class="prettyprint"><code>// modules/css.js
 module.exports = &#39;body { background: blue; }&#39;;</code></pre>
 
 <p>To obtain this string we would simply <code>require(&#39;./css&#39;)</code>. The <code>module</code> object also contains these useful properties:</p>
@@ -420,18 +712,18 @@ module.exports = &#39;body { background: blue; }&#39;;</code></pre>
 
 <p>To illustrate its usage, let&#39;s create a small (and useless) Extended JavaScript language, or &quot;ejs&quot; for our example which will live at <em>./modules/compiler/example.ejs</em>, its syntax will look like this:</p>
 
-<pre><code>// modules/compiler/example.ejs
+<pre class="prettyprint"><code>// modules/compiler/example.ejs
 ::min(a, b) a &lt; b ? a : b
 ::max(a, b) a &gt; b ? a : b</code></pre>
 
 <p>which will be compiled to:</p>
 
-<pre><code>exports.min = function min(a, b) { return a &lt; b ? a : b }
+<pre class="prettyprint"><code>exports.min = function min(a, b) { return a &lt; b ? a : b }
 exports.max = function max(a, b) { return a &gt; b ? a : b }</code></pre>
 
 <p>First let&#39;s create the module that will actually be doing the ejs to JavaScript compilation. In this example it is located at <em>./modules/compiler/extended.js</em>, and exports a single method named <code>compile()</code>. This method accepts a string, which is the raw contents of what node is requiring, transformed to vanilla JavaScript via regular expressions.</p>
 
-<pre><code>// modules/compiler/extended.js
+<pre class="prettyprint"><code>// modules/compiler/extended.js
 exports.compile = function(str){
   return str
         .replace(/(\w+)\(/g, &#39;$1 = function $1(&#39;)
@@ -441,11 +733,11 @@ exports.compile = function(str){
 
 <p>Next we have to &quot;register&quot; the extension to assign out compiler. As previously mentioned our compiler lives at <em>./modules/compiler/extended.js</em> so we are requiring it in.  Prior to node.js 0.3.0, we would pass the <code>compile()</code> method to <code>require.registerExtension()</code> which simply expects a function accepting a string, and returning a string of JavaScript.</p>
 
-<pre><code>require.registerExtension(&#39;.ejs&#39;, require(&#39;./compiler/extended&#39;).compile);</code></pre>
+<pre class="prettyprint"><code>require.registerExtension(&#39;.ejs&#39;, require(&#39;./compiler/extended&#39;).compile);</code></pre>
 
 <p>The new way to register an extension is to add a key to the require.extensions object with a function which specifies how to process the file.  For compatibility, we can use <code>require.extensions</code> and fallback to <code>require.registerExtension</code>.</p>
 
-<pre><code>// modules/compiler.js
+<pre class="prettyprint"><code>// modules/compiler.js
 if(require.extensions) {
   require.extensions[&#39;.ejs&#39;] = function(module,filename){
     var content = require(&#39;fs&#39;).readFileSync(filename, &#39;utf8&#39;);
@@ -458,7 +750,7 @@ if(require.extensions) {
 
 <p>Now when we require our example, the &quot;.ejs&quot; extension is detected, and will pass the contents through our compiler, and everything works as expected.</p>
 
-<pre><code>// modules/compiler.js
+<pre class="prettyprint"><code>// modules/compiler.js
 var example = require(&#39;./compiler/example&#39;);
 console.dir(example)
 console.log(example.min(2, 3));
@@ -466,7 +758,7 @@ console.log(example.max(10, 8));</code></pre>
 
 <p>This should display the following output when run with <code>node ./src/modules/compiler.js</code> in a terminal:</p>
 
-<pre><code>$ node compiler.js 
+<pre class="prettyprint"><code>$ node compiler.js 
 { min: [Function: min], max: [Function: max] }
 2
 10</code></pre>
@@ -497,7 +789,7 @@ console.log(example.max(10, 8));</code></pre>
 
 <p>A node addon begins with a source file containing a single entry point: </p>
 
-<pre><code>// addons/hello/hello.cc
+<pre class="prettyprint"><code>// addons/hello/hello.cc
 #include &lt;v8.h&gt;
 
 using namespace v8;
@@ -515,7 +807,7 @@ init (Handle&lt;Object&gt; target)
 
 <p>If you were to perform the same actions as this source file (ignoring the scope part) in a node REPL console, it would look like:</p>
 
-<pre><code>$ node
+<pre class="prettyprint"><code>$ node
 &gt; var target = {};
 &gt; target.hello = &quot;world&quot;;
 &#39;world&#39;</code></pre>
@@ -524,7 +816,7 @@ init (Handle&lt;Object&gt; target)
 
 <p>Building a node addon requires <a href="http://code.google.com/p/waf">WAF</a>.  <em>node-waf</em>  should be installed if you&#39;ve installed node.js from source or distro. </p>
 
-<pre><code>// addons/hello/wscript
+<pre class="prettyprint"><code>// addons/hello/wscript
 srcdir = &#39;.&#39;
 blddir = &#39;build&#39;
 VERSION = &#39;0.0.1&#39;
@@ -543,11 +835,11 @@ def build(bld):
 
 <p>This file is relatively simple, there are two tasks: <em>configure</em> and <em>build</em>.  To run this script:</p>
 
-<pre><code>$ cd src/addons/hello/wscript &amp;&amp; node-waf configure build</code></pre>
+<pre class="prettyprint"><code>$ cd src/addons/hello/wscript &amp;&amp; node-waf configure build</code></pre>
 
 <p>Notice how you have to run node-waf from the directory of the <code>wscript</code> build script. Afterward, your built addon will be located at <em>./build/default/hello.node</em>.  You can load and play with the addon when you&#39;re finished.</p>
 
-<pre><code>$ cd build/default &amp;&amp; node
+<pre class="prettyprint"><code>$ cd build/default &amp;&amp; node
 &gt; var hello = require(&#39;./hello.node&#39;);
 &gt; hello
 { hello: &#39;world&#39; }
@@ -557,11 +849,11 @@ def build(bld):
 
 <p>The world of functions begins with an object that will resemble the following object:</p>
 
-<pre><code>{ version: &#39;0.1&#39;, echo: [Function] }</code></pre>
+<pre class="prettyprint"><code>{ version: &#39;0.1&#39;, echo: [Function] }</code></pre>
 
 <p>As you can imagine, node is already coding functions in the same way as you would for an addon.  Luckily, <em>node.h</em> provides a helper definition for setting a function to a callback, or method defined within your source file.  If you open <em>node.h</em> and look at line 33, you&#39;ll see:</p>
 
-<pre><code>// [node repo]/src/node.h
+<pre class="prettyprint"><code>// [node repo]/src/node.h
 #define NODE\_SET\_METHOD(obj, name, callback)                              \
   obj-&gt;Set(v8::String::NewSymbol(name),                                   \
            v8::FunctionTemplate::New(callback)-&gt;GetFunction())</code></pre>
@@ -570,7 +862,7 @@ def build(bld):
 
 <p>The following example will compile our desired object mentioned earlier.</p>
 
-<pre><code>// addons/functions/v0.1/func.cc
+<pre class="prettyprint"><code>// addons/functions/v0.1/func.cc
 #include &lt;v8.h&gt;
 #include &lt;node.h&gt;
 
@@ -603,7 +895,7 @@ init (Handle&lt;Object&gt; target)
 
 <p>Now, build the source and toy with it.  Here&#39;s a dump of my console, run from <em>./src/addons/functions/v0.1</em>. </p>
 
-<pre><code>$ node-waf configure build &amp;&amp; cd build/default &amp;&amp; node
+<pre class="prettyprint"><code>$ node-waf configure build &amp;&amp; cd build/default &amp;&amp; node
 Checking for program g++ or c++          : /usr/bin/g++ 
 Checking for program cpp                 : /usr/bin/cpp 
 Checking for program ar                  : /usr/bin/ar 
@@ -648,13 +940,13 @@ TypeError: Bad argument
 
 <p>In v8, a FunctionTemplate is used to create the equivalent to:</p>
 
-<pre><code>var template = function() { }</code></pre>
+<pre class="prettyprint"><code>var template = function() { }</code></pre>
 
 <p>The function at this point is an object and not an <em>instance</em> of the function. </p>
 
 <p>As an example, we will use the linux package <em>uuid</em> to generate a uuid. We will define the header for this addon as:</p>
 
-<pre><code>// addons/uuid/v0.1/uuid.h
+<pre class="prettyprint"><code>// addons/uuid/v0.1/uuid.h
 #ifndef __node_uuid_h__
 #define __node_uuid_h__
 
@@ -692,7 +984,7 @@ class Uuid : public node::ObjectWrap {
 
 <p>Just as before, node expects to find a signature of <code>extern &quot;C&quot; void init(Handle&lt;Object&gt; target)</code> in order to initialize the addon.  Inside this method, we may set parameters such as the version number from the previous example.  We may also pass-through initialization to any modules within our node addon.  In this example, our addon will be <em>uuid.node</em> and contain a single module, <em>Uuid</em>. There is no reason we can&#39;t later add <em>Uuid2</em> which, instead of returning a normalized string value might return a <code>Buffer</code> object.  To initialize the Uuid module, we pass the <code>target</code> object along to <code>Uuid::Init</code> and add the module definition to <code>target</code>:</p>
 
-<pre><code>// addons/uuid/v0.1/uuid.cc
+<pre class="prettyprint"><code>// addons/uuid/v0.1/uuid.cc
 void Uuid::Init(Handle&lt;Object&gt; target) {
     HandleScope scope;
 
@@ -715,7 +1007,7 @@ void Uuid::Init(Handle&lt;Object&gt; target) {
 
 <p>Lastly, we have to create a &quot;Uuid&quot; module on the object returned by the call to <code>require()</code>. Here, <code>Uuid</code> will point to a function (<code>constructor</code>) which returns a function that internally executes <code>Uuid::New</code>.  In other words, we have created something akin to: </p>
 
-<pre><code>var Uuid = function() { };
+<pre class="prettyprint"><code>var Uuid = function() { };
 Uuid.constructor = function() {
     return function() {
         // Uuid::New executes here.
@@ -726,7 +1018,7 @@ Uuid.constructor = function() {
 
 <p>The <code>Uuid::New</code> method is defined as:</p>
 
-<pre><code>// addons/uuid/v0.1/uuid.cc
+<pre class="prettyprint"><code>// addons/uuid/v0.1/uuid.cc
 Handle&lt;Value&gt; Uuid::New(const Arguments &amp;args) {
     HandleScope scope;
     // no args are checked
@@ -739,7 +1031,7 @@ Handle&lt;Value&gt; Uuid::New(const Arguments &amp;args) {
 
 <p>Within the <code>Generate</code> method, we will want to unwrap the contextual <code>Uuid</code> object and call the private method <code>GetString</code>.</p>
 
-<pre><code>// addons/uuid/v0.1/uuid.cc
+<pre class="prettyprint"><code>// addons/uuid/v0.1/uuid.cc
 Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args) {
     HandleScope scope;
     uuid_t id;
@@ -757,11 +1049,11 @@ Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args) {
 
 <p>Navigate to <em>addons/uuid/v0.1/</em> and execute:</p>
 
-<pre><code>$ node-waf configure build</code></pre>
+<pre class="prettyprint"><code>$ node-waf configure build</code></pre>
 
 <p>If there are build errors and the <em>func.cc</em> example from before built successfully, check that you have the <em>uuid-dev</em> package installed and rerun the above command. Then, navigate to <em>build/default</em> and try out the Uuid addon:</p>
 
-<pre><code>$ node
+<pre class="prettyprint"><code>$ node
 &gt; var Uuid = require(&#39;./uuid.node&#39;).Uuid;
 &gt; var uuid = new Uuid();
 &gt; uuid.generate();
@@ -779,7 +1071,7 @@ Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args) {
 
 <p>The above output may surprise you. Firstly, where is the <code>version</code> option?! It&#39;s at the required module level: <code>require(&#39;./uuid.node&#39;).version;</code>. Secondly, if we can access <code>uuid.generate()</code> and others, why don&#39;t they display when inspecting the object? That&#39;s because we defined those methods on the prototype:</p>
 
-<pre><code>&gt; uuid.__proto__
+<pre class="prettyprint"><code>&gt; uuid.__proto__
 { generate: [Function: generate],
   generateRandom: [Function: generateRandom],
   generateTime: [Function: generateTime] }
@@ -811,7 +1103,7 @@ Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args) {
 
 <p>The <code>console</code> object contains several methods which are used to output information to <em>stdout</em> or <em>stderr</em>. </p>
 
-<pre><code>&gt; console
+<pre class="prettyprint"><code>&gt; console
 { log: [Function],
   info: [Function],
   warn: [Function],
@@ -828,7 +1120,7 @@ Handle&lt;Value&gt; Uuid::Generate(const Arguments &amp;args) {
 
 <p>The most frequently used console method is <code>console.log()</code>, simply writing to <em>stdout</em> with a line feed (<code>\n</code>). Currently aliased as <code>console.info()</code>.</p>
 
-<pre><code>&gt; console.log(&#39;wahoo&#39;);
+<pre class="prettyprint"><code>&gt; console.log(&#39;wahoo&#39;);
 wahoo
 
 &gt; console.log({ foo: &#39;bar&#39; });
@@ -838,21 +1130,21 @@ wahoo
 
 <p>Identical to <code>console.log()</code>, however writes to <em>stderr</em>. Aliased as <code>console.warn()</code> as well.</p>
 
-<pre><code>console.error(&#39;database connection failed&#39;);</code></pre>
+<pre class="prettyprint"><code>console.error(&#39;database connection failed&#39;);</code></pre>
 
 <h3 id="console.dir">console.dir()</h3>
 
 <p>Utilizes the <em>sys</em> module&#39;s <code>inspect()</code> method to pretty-print the object to
 <em>stdout</em>.</p>
 
-<pre><code>&gt; console.dir({ foo: &#39;bar&#39; });
+<pre class="prettyprint"><code>&gt; console.dir({ foo: &#39;bar&#39; });
 { foo: &#39;bar&#39; } </code></pre>
 
 <h3 id="console.assert">console.assert()</h3>
 
 <p>Asserts that the given expression is truthy, or throws an exception.  Here, you can also use <code>console.trace()</code> and <code>console.error()</code> to print a stack trace and a helpful message when the exception is caught.</p>
 
-<pre><code>try {
+<pre class="prettyprint"><code>try {
    console.assert( (1 != 2), &#39;1 != 2: Should be true&#39; );
    console.assert( (1 == 2), &#39;1 == 2: Should be false&#39;);
 } catch(e) {
@@ -869,7 +1161,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>The <code>process.version</code> property contains the node version string, for example &quot;v0.4.0&quot;.  The <code>process.versions</code> object displays the versions of node, v8, ares, ev, and openssl:</p>
 
-<pre><code>&gt; process.versions
+<pre class="prettyprint"><code>&gt; process.versions
 { node: &#39;0.4.0&#39;,
   v8: &#39;3.1.2&#39;,
   ares: &#39;1.7.4&#39;,
@@ -896,7 +1188,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>Returns the current working directory, for example:</p>
 
-<pre><code>$ cd /var &amp;&amp; node
+<pre class="prettyprint"><code>$ cd /var &amp;&amp; node
 &gt; process.cwd()
 &#39;/var&#39;</code></pre>
 
@@ -904,7 +1196,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>Changes the current working directory to the path passed.</p>
 
-<pre><code>&gt; process.chdir(&#39;lib&#39;)
+<pre class="prettyprint"><code>&gt; process.chdir(&#39;lib&#39;)
 &gt; process.cwd()
 &#39;/var/lib&#39;</code></pre>
 
@@ -928,7 +1220,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>An object containing the user&#39;s environment variables, for example:</p>
 
-<pre><code>{ PATH: &#39;/Users/tj/.gem/ruby/1.8/bin:/Users/tj/.nvm/current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin&#39;
+<pre class="prettyprint"><code>{ PATH: &#39;/Users/tj/.gem/ruby/1.8/bin:/Users/tj/.nvm/current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin&#39;
 , PWD: &#39;/Users/tj/ebooks/masteringnode&#39;
 , EDITOR: &#39;mate&#39;
 , LANG: &#39;en_CA.UTF-8&#39;
@@ -946,11 +1238,11 @@ at some properties that provide information about the node process itself.</p>
 
 <p>For example, our source file <em>./src/process/misc.js</em> can be executed by running:</p>
 
-<pre><code>$ node src/process/misc.js foo bar baz</code></pre>
+<pre class="prettyprint"><code>$ node src/process/misc.js foo bar baz</code></pre>
 
 <p>in which we call <code>console.dir(process.argv)</code>, outputting the following:</p>
 
-<pre><code>[ &#39;node&#39;
+<pre class="prettyprint"><code>[ &#39;node&#39;
 , &#39;/Users/tj/EBooks/masteringnode/src/process/misc.js&#39;
 , &#39;foo&#39;
 , &#39;bar&#39;
@@ -965,7 +1257,7 @@ at some properties that provide information about the node process itself.</p>
 
 <p>The process itself is an <code>EventEmitter</code>, allowing you to do things like listen for uncaught exceptions, via the <em>uncaughtException</em> event:</p>
 
-<pre><code>// process/exceptions.js
+<pre class="prettyprint"><code>// process/exceptions.js
 process.on(&#39;uncaughtException&#39;, function(err){
     console.log(&#39;got an error: %s&#39;, err.message);
     process.exit(1);
@@ -979,7 +1271,7 @@ setTimeout(function(){
 
 <p><code>process.kill()</code> method sends the signal passed to the given <em>pid</em>, defaulting to <strong>SIGINT</strong>. In our example below we send the <strong>SIGTERM</strong> signal to the same node process to illustrate signal trapping, after which we output &quot;terminating&quot; and exit. Note that our second timeout of 1000 milliseconds is never reached.</p>
 
-<pre><code>// process/kill.js
+<pre class="prettyprint"><code>// process/kill.js
 process.on(&#39;SIGTERM&#39;, function(){
     console.log(&#39;terminating&#39;);
     process.exit(1);
@@ -1000,7 +1292,7 @@ setTimeout(function(){
 
 <p>Currently, the cacheable process bindings include: built-in modules, <code>constants</code>, <code>io_watcher</code>, <code>timer</code> and <code>natives</code>.  To access the constants, instead of using <code>var constants = require(&#39;constants&#39;);</code>, you could lazily bind the constants as it is done in the <code>fs</code> module:</p>
 
-<pre><code>// [node.js source]/lib/fs.js
+<pre class="prettyprint"><code>// [node.js source]/lib/fs.js
 var util = require(&#39;util&#39;);
 
 var binding = process.binding(&#39;fs&#39;);
@@ -1013,7 +1305,7 @@ var Stream = require(&#39;stream&#39;).Stream;
 
 <p>Another reason for caching the bindings in this way is because these bindings differ across platforms.  If you were to open <em>node</em>constants.cc<em>, you would see conditional includes for </em>MINGW32<em> and <code>ifdef</code>s for each constant.  You wouldn&#39;t want to hardcode these constants in a module&#39;s exports.  If you opened opened the </em>constants_ module definition, you would see one line:</p>
 
-<pre><code>// [node.js source]/lib/constants.js
+<pre class="prettyprint"><code>// [node.js source]/lib/constants.js
 module.exports = process.binding(&#39;constants&#39;);</code></pre>
 
 <p>After a single require of this module, or call to <code>process.binding(&#39;constants&#39;)</code>, the constants are initialized and cached.  This lazy initialization improves node&#39;s startup.</p>
@@ -1024,7 +1316,7 @@ module.exports = process.binding(&#39;constants&#39;);</code></pre>
 
 <p>The <code>constants</code> object is host of the error numbers, these reference what you would find in C-land, for example <code>constants.EPERM</code> represents a permission based error, while <code>constants.ENOENT</code> represents a missing file or directory. Typically these are used within bindings to bridge the gap between C++ and JavaScript, however useful for handling exceptions as well as in the http request error object:</p>
 
-<pre><code>if (err.errno === constants.ENOENT) {
+<pre class="prettyprint"><code>if (err.errno === constants.ENOENT) {
 	// Display a 404 &quot;Not Found&quot; page
 } else {
 	// Display a 500 &quot;Internal Server Error&quot; page
@@ -1038,7 +1330,7 @@ module.exports = process.binding(&#39;constants&#39;);</code></pre>
 
 <p>Typically an object inherits from <code>EventEmitter</code>, however our small example below illustrates the api. First we create an <code>emitter</code>, after which we can define any number of callbacks using the <code>emitter.on()</code> method which accepts the <em>name</em> of the event, and arbitrary objects passed as data. When <code>emitter.emit()</code> is called we are only required to pass the event <em>name</em>, followed by any number of arguments, in this case the <code>first</code> and <code>last</code> name strings.</p>
 
-<pre><code>// events/basic.js
+<pre class="prettyprint"><code>// events/basic.js
 var EventEmitter = require(&#39;events&#39;).EventEmitter;
 
 var emitter = new EventEmitter;
@@ -1056,7 +1348,7 @@ emitter.emit(&#39;name&#39;, &#39;simon&#39;, &#39;holowaychuk&#39;);</code></pr
 
 <p>To do so we begin by defining the <code>Dog</code> constructor, which of course will bark from time to time, also known as an <em>event</em>.</p>
 
-<pre><code>// events/subclass.js
+<pre class="prettyprint"><code>// events/subclass.js
 var EventEmitter = require(&#39;events&#39;).EventEmitter;
 
 function Dog(name) {
@@ -1067,11 +1359,11 @@ function Dog(name) {
 
 <p>Here we inherit from <code>EventEmitter</code>, so that we may use the methods provided such as <code>EventEmitter#on()</code> and <code>EventEmitter#emit()</code>. If the <code>__proto__</code> property is throwing you off, no worries! we will be touching on this later.</p>
 
-<pre><code>Dog.prototype.__proto__ = EventEmitter.prototype;</code></pre>
+<pre class="prettyprint"><code>Dog.prototype.__proto__ = EventEmitter.prototype;</code></pre>
 
 <p>Now that we have our <code>Dog</code> set up, we can create .... simon! When simon barks we can let <em>stdout</em> know by calling <code>console.log()</code> within the callback. The callback it-self is called in context to the object, aka <code>this</code>.</p>
 
-<pre><code>var simon = new Dog(&#39;simon&#39;);
+<pre class="prettyprint"><code>var simon = new Dog(&#39;simon&#39;);
 
 simon.on(&#39;bark&#39;, function(){
     console.log(this.name + &#39; barked&#39;);
@@ -1079,13 +1371,13 @@ simon.on(&#39;bark&#39;, function(){
 
 <p>Bark twice a second:</p>
 
-<pre><code>setInterval(function(){
+<pre class="prettyprint"><code>setInterval(function(){
     simon.emit(&#39;bark&#39;);
 }, 500);</code></pre>
 
 <p>You may look at the above code and think, &quot;Why don&#39;t I just add a <em>bark</em> function?&quot;  That&#39;s a good question.  The power of events is in subscribing to events that occur when a function on the object is executed.  For instance, if you have a writeable <code>Stream</code> object with the function <code>write()</code>, you may subscribe to a data event.  The following event example is directly from the node api documentation:</p>
 
-<pre><code>// events/streams.js
+<pre class="prettyprint"><code>// events/streams.js
 var util = require(&quot;util&quot;);
 var events = require(&quot;events&quot;);
 
@@ -1121,7 +1413,7 @@ stream.write(&quot;It works!&quot;); // Received data: &quot;It works!&quot;</co
 
 <p>As we have seen, event listeners are simply functions which are called when we <code>emit()</code> an event. Although not seen often, we can remove these listeners by calling the <code>removeListener(type, callback)</code> method. In the example below, we emit the <em>message</em> <code>&#39;foo bar&#39;</code> every <code>300</code> milliseconds, which has the callback of <code>console.log()</code>. After 1000 milliseconds we call <code>removeListener()</code> with the same arguments that we passed to <code>emitter.on()</code> originally. To complement this method is <code>removeAllListeners(type)</code>, which removes all listeners associated to the given <em>type</em>.</p>
 
-<pre><code>// events/removing.js
+<pre class="prettyprint"><code>// events/removing.js
 var EventEmitter = require(&#39;events&#39;).EventEmitter;
 
 var emitter = new EventEmitter;
@@ -1142,7 +1434,7 @@ setTimeout(function(){
 
 <p>The simplest way to construct a <code>Buffer</code> from a string is to pass a string as the first argument to <code>Buffer</code>&#39;s constructor. As you can see by the log output, we now have a buffer object containing 5 bytes of data represented in hexadecimal.</p>
 
-<pre><code>&gt; var hello = new Buffer(&#39;Hello&#39;);
+<pre class="prettyprint"><code>&gt; var hello = new Buffer(&#39;Hello&#39;);
 
 &gt; console.log(hello);
 &lt;Buffer 48 65 6c 6c 6f&gt;
@@ -1152,7 +1444,7 @@ setTimeout(function(){
 
 <p>By default the encoding is &quot;utf8&quot;, however this can be specified by passing as string as the second argument. The ellipsis below for example will be printed to stdout as the &#39;&amp;&#39; character when in &quot;ascii&quot; encoding.</p>
 
-<pre><code>&gt; var buf = new Buffer(&#39;…&#39;);
+<pre class="prettyprint"><code>&gt; var buf = new Buffer(&#39;…&#39;);
 &gt; console.log(buf.toString());
 &#39;…&#39;
 
@@ -1162,7 +1454,7 @@ setTimeout(function(){
 
 <p>An alternative method is to pass an array of integers representing the octet stream.</p>
 
-<pre><code>&gt; var h = [0x48, 0x65, 0x6c, 0x6c, 0x6f];
+<pre class="prettyprint"><code>&gt; var h = [0x48, 0x65, 0x6c, 0x6c, 0x6f];
 &gt; h
 [ 72, 101, 108, 108, 111 ]
 
@@ -1177,7 +1469,7 @@ setTimeout(function(){
 
 <p>Buffers can also be created with an integer representing the number of bytes allocated, after which we may call the <code>write()</code> method, providing an optional offset and encoding. As shown below, we create a buffer large enough to hold the string &quot;Hello World!&quot;  After writing &#39;Hello&#39;, we see the bytes 5 through 12 are unused bytes.  We then write &#39; World&#39; starting at byte 6 and examine the output.  Whoops!  We skipped a byte.  We can overwrite this part of the buffer with &#39; World!&#39; starting at byte 5.  We then call <code>toString()</code> on the buffer and see that the buffer is now filled with the desired string.</p>
 
-<pre><code>&gt; var hello = new Buffer(12);
+<pre class="prettyprint"><code>&gt; var hello = new Buffer(12);
 &gt; hello.write(&#39;Hello&#39;);
 5
 
@@ -1200,7 +1492,7 @@ setTimeout(function(){
 
 <p>The <code>length</code> property of a buffer instance contains the byte length of the stream, opposed to JavaScript strings which will simply return the number of characters. For example the ellipsis character &#39;…&#39; consists of three bytes, however the buffer will respond with the byte length, and not the character length.</p>
 
-<pre><code>&gt; var ellipsis = new Buffer(&#39;…&#39;, &#39;utf8&#39;);
+<pre class="prettyprint"><code>&gt; var ellipsis = new Buffer(&#39;…&#39;, &#39;utf8&#39;);
 &gt; console.log(&#39;… string length: %d&#39;, &#39;…&#39;.length);
 … string length: 1
 
@@ -1212,19 +1504,19 @@ setTimeout(function(){
 
 <p>When dealing with a JavaScript string, we may pass it to the <code>Buffer.byteLength()</code> method to determine it&#39;s byte length.</p>
 
-<pre><code>&gt; Buffer.byteLength(&#39;…&#39;);
+<pre class="prettyprint"><code>&gt; Buffer.byteLength(&#39;…&#39;);
 3</code></pre>
 
 <p>The api is written in such a way that it is String-like, so for example we can work with &quot;slices&quot; of a <code>Buffer</code> by passing offsets to the <code>slice()</code> method:</p>
 
-<pre><code>&gt; var buf = new Buffer(&#39;For some other string!&#39;);
+<pre class="prettyprint"><code>&gt; var buf = new Buffer(&#39;For some other string!&#39;);
 &gt; var chunk = buf.slice(4, 8);
 &gt; console.log(chunk.toString());
 &#39;some&#39;</code></pre>
 
 <p>Alternatively when expecting a string we can pass offsets to <code>Buffer#toString()</code>:</p>
 
-<pre><code>&gt; var buffer = new Buffer(&#39;The quick brown fox&#39;);
+<pre class="prettyprint"><code>&gt; var buffer = new Buffer(&#39;The quick brown fox&#39;);
 &gt; buffer.toString(&#39;ascii&#39;, 4, 9);
 &#39;quick&#39;</code></pre>
 
@@ -1238,20 +1530,20 @@ setTimeout(function(){
 
 <p>Readable streams such as an HTTP request inherit from <code>EventEmitter</code> in order to expose incoming data through events. The first of these events is the <em>data</em> event, which is an arbitrary chunk of data passed to the event handler as a <code>Buffer</code> instance. </p>
 
-<pre><code>req.on(&#39;data&#39;, function(buf){
+<pre class="prettyprint"><code>req.on(&#39;data&#39;, function(buf){
     // Do something with the Buffer
 });</code></pre>
 
 <p>As we know, we can call <code>toString()</code> on a buffer to return a string representation of the binary data. In the case of streams, if desired, we may call <code>setEncoding()</code> on the stream, after which the <em>data</em> event will emit strings.</p>
 
-<pre><code>req.setEncoding(&#39;utf8&#39;);
+<pre class="prettyprint"><code>req.setEncoding(&#39;utf8&#39;);
 req.on(&#39;data&#39;, function(str){
     // Do something with the String
 });</code></pre>
 
 <p>Another important event is the <em>end</em> event, which represents the ending of <em>data</em> events. For example below we define an HTTP echo server, simply &quot;pumping&quot; the request body data through to the response. So if we <strong>POST</strong> &quot;hello world&quot;, our response will be &quot;hello world&quot;.</p>
 
-<pre><code>// streams/echo.js
+<pre class="prettyprint"><code>// streams/echo.js
 var http = require(&#39;http&#39;);
 
 http.createServer(function(req, res){
@@ -1266,7 +1558,7 @@ http.createServer(function(req, res){
 
 <p>The <em>sys</em> module actually has a function designed specifically for this &quot;pumping&quot; action, aptly named <code>sys.pump()</code>, which accepts a read stream as the first argument, and write stream as the second.</p>
 
-<pre><code>// streams/pump.js
+<pre class="prettyprint"><code>// streams/pump.js
 var http = require(&#39;http&#39;),
     sys = require(&#39;sys&#39;);
 
@@ -1283,7 +1575,7 @@ http.createServer(function(req, res){
 
 <p>  Lets start with a basic example of working with the filesystem, this example creates a directory, it then creates a file in it. Once the file has been created the contents of the file are written to console:</p>
 
-<pre><code>// fs/basics.js
+<pre class="prettyprint"><code>// fs/basics.js
 var fs = require(&#39;fs&#39;);
 
 fs.mkdir(&#39;./helloDir&#39;,0777, function (err) {
@@ -1304,7 +1596,7 @@ fs.mkdir(&#39;./helloDir&#39;,0777, function (err) {
 
 <p>  The example can be rewritten to use a synchronous approach:</p>
 
-<pre><code>fs.mkdirSync(&#39;./helloDirSync&#39;,0777);
+<pre class="prettyprint"><code>fs.mkdirSync(&#39;./helloDirSync&#39;,0777);
 fs.writeFileSync(&#39;./helloDirSync/message.txt&#39;, &#39;Hello Node&#39;);
 var data = fs.readFileSync(&#39;./helloDirSync/message.txt&#39;,&#39;UTF-8&#39;);
 console.log(&#39;file created with contents:&#39;);
@@ -1316,7 +1608,7 @@ console.log(data);</code></pre>
 
 <p>The fs.Stats object contains information about a particular file or directory. This can be used to determine what type of object we are working with. In this example we are getting all the file objects in a directory and displaying whether they are a file or a directory object.</p>
 
-<pre><code>// fs/stat.js
+<pre class="prettyprint"><code>// fs/stat.js
 var fs = require(&#39;fs&#39;);
 
 fs.readdir(&#39;/etc/&#39;, function (err, files) {
@@ -1341,7 +1633,7 @@ fs.readdir(&#39;/etc/&#39;, function (err, files) {
 
 <p>  The fs.watchfile monitors a file and will fire the event whenever the file is changed.</p>
 
-<pre><code>// fs/watch.js
+<pre class="prettyprint"><code>// fs/watch.js
 var fs = require(&#39;fs&#39;);
 
 fs.watchFile(&#39;./testFile.txt&#39;, function (curr, prev) {
@@ -1369,7 +1661,7 @@ fs.writeFile(&#39;./testFile.txt&#39;, &quot;changed&quot;, function (err) {
 
 <p>Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos &quot;You were connected!&quot; to a client connection and outputs &quot;A client has connected!&quot; to <em>stdout</em>.</p>
 
-<pre><code>// tcp/tcp_server.js
+<pre class="prettyprint"><code>// tcp/tcp_server.js
 var sys = require(&#39;sys&#39;);
 var tcp = require(&#39;net&#39;);
 var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
@@ -1380,7 +1672,7 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <p>To test this server, enter <code>node src/tcp/tcp_server.js</code> in a terminal.  Then, open another terminal to telnet into this server.</p>
 
-<pre><code>$ telnet 127.0.0.1 8000</code></pre>
+<pre class="prettyprint"><code>$ telnet 127.0.0.1 8000</code></pre>
 
 <p>In the server&#39;s terminal, you should see the message output from <code>sys.puts</code>, while the client&#39;s server should display, &quot;You were connected!&quot;</p>
 
@@ -1392,13 +1684,13 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <p>Node&#39;s HTTP module offers a chunkable, buffered interface to the HTTP protocol.  Headers are JSON objects with lower-case keys and original values.</p>
 
-<pre><code>{ &#39;content-length&#39;: &#39;123&#39;, &#39;content-type&#39;: &#39;text/plain&#39; }</code></pre>
+<pre class="prettyprint"><code>{ &#39;content-length&#39;: &#39;123&#39;, &#39;content-type&#39;: &#39;text/plain&#39; }</code></pre>
 
 <p>The HTTP module is low-level, meaning it handles the headers and the message (and that&#39;s about it).  This creates a solid framework ontop of which modules can be built for web frameworks (<a href="http://www.expressjs.com">express</a>, <a href="http://www.geddy.com">geddy</a>, file servers, browsers (<a href="http://www.google.com/?q=zombiejs">zombie.js</a>, and even SaaS (<a href="http://www.cloud9ide.com)">cloud9 IDE</a>.</p>
 
 <p>Let&#39;s take a look at the <code>request</code> and <code>response</code> objects of an HTTP server created by node.  To do this, we&#39;re going to create a server, inspect both of these objects in the request, and write a dump of the inspection out to a file.</p>
 
-<pre><code>// http/view_request.js
+<pre class="prettyprint"><code>// http/view_request.js
 var http = require(&#39;http&#39;), 
 fs = require(&#39;fs&#39;), 
 util = require(&#39;util&#39;),
@@ -1426,7 +1718,7 @@ console.log(&quot;Hit CTRL+C to shutdown the http server&quot;);</code></pre>
 
 <p>Let&#39;s take a look at what the request object looks like from the server example above. You should see output similar to:</p>
 
-<pre><code>// http/request.txt
+<pre class="prettyprint"><code>// http/request.txt
 // ...
 httpVersion: &#39;1.1&#39;,
   complete: false,
@@ -1449,7 +1741,7 @@ httpVersion: &#39;1.1&#39;,
 
 <p>Let&#39;s take a look at what the request object looks like from the server example above. You should see output similar to:</p>
 
-<pre><code>{ output: [],
+<pre class="prettyprint"><code>{ output: [],
   outputEncodings: [],
   writable: true,
   _last: false,
@@ -1477,7 +1769,7 @@ httpVersion: &#39;1.1&#39;,
 
 <p>Our module will be located at <code>./src/http/server/</code>.  The directory is structured in the following way:</p>
 
-<pre><code>$ ls -l
+<pre class="prettyprint"><code>$ ls -l
 total 20
 drwxr-xr-x 3 jim jim 4096 2011-03-23 16:31 lib
 -rw-r--r-- 1 jim jim   56 2011-03-23 17:13 package.json
@@ -1487,7 +1779,7 @@ drwxr-xr-x 2 jim jim 4096 2011-03-23 20:31 templates</code></pre>
 
 <p>The file <code>server.js</code> is our module.  So we don&#39;t need to call <code>var server = require(&#39;./server/server.js&#39;)</code> at the top of our node application, we&#39;re also going to include <code>package.json</code> which specifies where the main routine for our module is located.</p>
 
-<pre><code>// http/server/package.json
+<pre class="prettyprint"><code>// http/server/package.json
 { &quot;name&quot; : &quot;example server&quot;,
   &quot;main&quot; : &quot;./server.js&quot; }</code></pre>
 
@@ -1497,13 +1789,13 @@ drwxr-xr-x 2 jim jim 4096 2011-03-23 20:31 templates</code></pre>
 
 <p>Finally, we&#39;ll have a function called <code>run()</code> which creates the server and listens on the specified port.  To make our module useful, we have to expose functionality which, in our case, is only the run method.  Here is how we will interface with our module:</p>
 
-<pre><code>// http/server_example.js
+<pre class="prettyprint"><code>// http/server_example.js
 var server = require(&#39;./server&#39;);
 server.run({ port: 9222 });</code></pre>
 
 <p>We also have the option of performing a function before starting the server:</p>
 
-<pre><code>server.run({ port: 9222, 
+<pre class="prettyprint"><code>server.run({ port: 9222, 
     beforeStart: function(){ 
         console.log(&quot;before start&quot;);
     } 
@@ -1515,7 +1807,7 @@ server.run({ port: 9222 });</code></pre>
 
 <p>The <code>getFile()</code> function assumes that all requests occur at the base of the server&#39;s uri. It also ignores requests for <code>/favicon.ico</code> and for the base uri <code>/</code>.  It then builds a full path to the file and attempts to read the file in a single blocking call. This blocking call helps ensure that we&#39;re passing data correctly to the Markdown module.</p>
 
-<pre><code>// http/server/server.js
+<pre class="prettyprint"><code>// http/server/server.js
 var getFile = function(request) {
     if(!request) {
         console.log(&quot;getFile called with empty request&quot;);
@@ -1542,7 +1834,7 @@ var getFile = function(request) {
 
 <p>The second function in our module performs the conversion between markdown and html.  It does this in the callack to the <code>getFile()</code> function, transforms the markdown to html, and passes the result to its own callback. </p>
 
-<pre><code>// http/server/server.js
+<pre class="prettyprint"><code>// http/server/server.js
 var getHtml = function(request) {
     var callback = arguments[arguments.length - 1];
     if (typeof(callback) !== &#39;function&#39;) callback = noop;
@@ -1569,7 +1861,7 @@ var getHtml = function(request) {
 
 <p>The run function requires the following server to be created.  The <code>requestListener</code> function calls <code>getHtml</code> and writes the html to the response.  Here, we&#39;re using a buffer to get the proper byte length and attempt to output a properly-encoded html string.</p>
 
-<pre><code>// http/server/server.js
+<pre class="prettyprint"><code>// http/server/server.js
 var server = http.createServer(function(req, res) {
     getHtml(req.url, function(html) {
         var buf = new Buffer(html, &quot;utf8&quot;);
@@ -1581,7 +1873,7 @@ var server = http.createServer(function(req, res) {
 
 <p>Next, the run function sets the options we&#39;re allowing (port number and a function to call before starting the server).  We&#39;re also catching all errors and logging the output to the console.  </p>
 
-<pre><code>// http/server/server.js
+<pre class="prettyprint"><code>// http/server/server.js
 var run = function(opts) {
     try {
         if(opts &amp;&amp; typeof opts[&#39;beforeStart&#39;] === &#39;function&#39;){
@@ -1606,7 +1898,7 @@ var run = function(opts) {
 
 <p>The last thing to do to make our module run is to expose the run function.  To revisit from the <em>Modules</em> chapter, you can do this a few ways:</p>
 
-<pre><code>// 1. Multiple assignment
+<pre class="prettyprint"><code>// 1. Multiple assignment
 var server = exports.server = http.createServer(requestListener);
 
 // 2. Inline assignment
@@ -1620,7 +1912,7 @@ exports.server = server;</code></pre>
 
 <h3 id="run_it_">Run it!</h3>
 
-<pre><code>$ node src/http/server_example.js 
+<pre class="prettyprint"><code>$ node src/http/server_example.js 
 Server is running on http://localhost:9222
 Hit CTRL+C to shutdown the http server</code></pre>
 
@@ -1634,14 +1926,14 @@ Hit CTRL+C to shutdown the http server</code></pre>
 
 <p>First, you&#39;ll notice the inheritence of the <code>Example</code> object from <code>EventEmitter</code>:</p>
 
-<pre><code>// http/server/server2.js
+<pre class="prettyprint"><code>// http/server/server2.js
 util.inherits(Example, EventEmitter);</code></pre>
 
 <p>This allows us to call <code>this.emit(&#39;eventName&#39;)</code> at different times in our code, which executes all of the listeners bound to these events in the order they were declared.</p>
 
 <p>Now, at different points of the code, you&#39;ll see a <code>this.emit()</code> or <code>self.emit()</code> call.  For instance, in the <code>getServer</code> function, we emit the <code>request</code> and <code>requestComplete</code> events.</p>
 
-<pre><code>// http/server/server2.js
+<pre class="prettyprint"><code>// http/server/server2.js
 Example.prototype.getServer = function() {
 	var self = this, ct = &#39;text/html; charset=utf-8&#39;;
 	return http.createServer(function(req, res) {
@@ -1674,7 +1966,7 @@ Example.prototype.getServer = function() {
 
 <p>This example uses the <code>http.get</code> function.  This function is a wrapper around the <code>http.request</code> function which assumes that a get doesn&#39;t write a body to the server request, ultimately only expecting a response.  If you&#39;re familiar with jQuery, node&#39;s <code>http.get</code> is a wrapper around <code>http.request</code> in much the same way as jQuery&#39;s <code>$.get</code> is a wrapper around the <code>$.ajax</code> function; the big difference is that in node, we&#39;re not working with an <em>XmlHttpRequest</em> object-- we&#39;re working directly with <em>sockets</em> and <em>streams</em>.</p>
 
-<pre><code>// http/http_get.js
+<pre class="prettyprint"><code>// http/http_get.js
 var http = require(&#39;http&#39;),
 	util = require(&#39;util&#39;);
 
@@ -1698,7 +1990,7 @@ http.get(opt, function(response) {
 
 <p>With the server from the previous example running, we can run the <em>./src/http/http</em>get.js_ example and examine the output.</p>
 
-<pre><code>$ node src/http/http_get.js 
+<pre class="prettyprint"><code>$ node src/http/http_get.js 
 http.get [Status]: 200
 http.get [method]: GET
 http.get [path]: /index.html
@@ -1759,11 +2051,11 @@ Connection: close</code></pre>
 
 <p>To begin, require the assert module:</p>
 
-<pre><code>var assert = require(&#39;assert&#39;);</code></pre>
+<pre class="prettyprint"><code>var assert = require(&#39;assert&#39;);</code></pre>
 
 <p>This module exposes a few functions common to assertion testing:</p>
 
-<pre><code>// equality
+<pre class="prettyprint"><code>// equality
 assert.equal(actual, expected, [message])
 assert.notEqual(actual, expected, [message])
 assert.deepEqual(actual, expected, [message])
@@ -1784,7 +2076,7 @@ assert.fail(actual, expected, message, operator)</code></pre>
 
 <h3 id="synchronous_Testing_with_Assert">Synchronous Testing with Assert</h3>
 
-<pre><code>// testing/equality_no_errors.js
+<pre class="prettyprint"><code>// testing/equality_no_errors.js
 var assert = require(&#39;assert&#39;),
     tester_a = {
       val : &#39;a&#39;
@@ -1802,7 +2094,7 @@ assert.equal(tester_b.val, &#39;b&#39;);</code></pre>
 
 <p>In order to run multiple assertions and provide feedback, the simplest test (without a testing framework) would use a <code>try/catch</code> and provide output to <em>stdout</em>.</p>
 
-<pre><code>// testing/equality_with_errors.js
+<pre class="prettyprint"><code>// testing/equality_with_errors.js
 var assert = require(&#39;assert&#39;),
     tester_a = {
       val : &#39;aa&#39;
@@ -1856,7 +2148,7 @@ function passed() {
 
 <p>Nodeunit testing starts with exporting a test or two from a module.</p>
 
-<pre><code>// testing/nodeunit_basics.js
+<pre class="prettyprint"><code>// testing/nodeunit_basics.js
 module.exports = {
     &#39;Test 1&#39; : function(test) {
         test.expect(1);
@@ -1875,7 +2167,7 @@ module.exports = {
 
 <p>The output of nodeunit is visually helpful.  </p>
 
-<pre><code>$ nodeunit src/testing/nodeunit_basics.js 
+<pre class="prettyprint"><code>$ nodeunit src/testing/nodeunit_basics.js 
 
 nodeunit_basics.js
 ✔ Test 1
@@ -1903,7 +2195,7 @@ FAILURES: 1/3 assertions failed (8ms)</code></pre>
 
 <p>Nodeunit ships with a number of reporters and it is possible to add custom reporters.  </p>
 
-<pre><code>$ nodeunit --list-reporters
+<pre class="prettyprint"><code>$ nodeunit --list-reporters
 Build-in reporters: 
   * default: Default tests reporter
   * minimal: Pretty minimal output
@@ -1914,11 +2206,11 @@ Build-in reporters:
 
 <p>To output to junit, run the command as:</p>
 
-<pre><code>$ cd src/testing &amp;&amp; nodeunit --reporter junit nodeunit_basics.js --output junit.out</code></pre>
+<pre class="prettyprint"><code>$ cd src/testing &amp;&amp; nodeunit --reporter junit nodeunit_basics.js --output junit.out</code></pre>
 
 <p>This creates an xml file (whitespace has been condensed):</p>
 
-<pre><code>// testing/junit.out/nodeunit_basics.js.xml
+<pre class="prettyprint"><code>// testing/junit.out/nodeunit_basics.js.xml
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;testsuite name=&quot;nodeunit_basics.js&quot;
          errors=&quot;0&quot;
@@ -1946,7 +2238,7 @@ Build-in reporters:
 
 <p>Here is the slightly modified minimal output, meeting all of the requirements.</p>
 
-<pre><code>$ cd src/testing &amp;&amp; nodeunit --reporter reporters/example.js nodeunit_basics.js 
+<pre class="prettyprint"><code>$ cd src/testing &amp;&amp; nodeunit --reporter reporters/example.js nodeunit_basics.js 
 Tests started: Tue Mar 22 2011 21:24:42 GMT-0700 (PDT)
 nodeunit_basics.js: 
 
@@ -2003,7 +2295,7 @@ FAILURES: 1/3 assertions failed (9ms)</code></pre>
 
 <p>Assuming you have already created your app and an account on Heroku, the next step is to install the <a href="http://toolbelt.herokuapp.com/linux/readme">heroku-toolbelt</a>. In Debian/Ubuntu, this can be accomplished with:  </p>
 
-<pre><code>$ sudo -s
+<pre class="prettyprint"><code>$ sudo -s
 $ echo &quot;deb http://toolbelt.herokuapp.com/ubuntu ./&quot; &gt; /etc/apt/sources.list.d/heroku.list
 $ wget -q -O - http://toolbelt.herokuapp.com/apt/release.key | apt-key add -
 $ apt-get update
@@ -2013,7 +2305,7 @@ $ apt-get install heroku-toolbelt</code></pre>
 
 <p>Next, in the root of your app directory, you will need to create a <em>Procfile</em> file containing:</p>
 
-<pre><code>web: node app.js</code></pre>
+<pre class="prettyprint"><code>web: node app.js</code></pre>
 
 <p>In this file, <code>node app.js</code> is the command you would normally use to run your app locally.  If your app requires parameters, either enter those on this line or modify your script to read defaults from <code>env</code>.</p>
 
@@ -2021,17 +2313,17 @@ $ apt-get install heroku-toolbelt</code></pre>
 
 <p>Next, you&#39;ll need to create a cedar stack and push your code to heroku:</p>
 
-<pre><code>$ heroku create --stack cedar
+<pre class="prettyprint"><code>$ heroku create --stack cedar
 $ git push heroku master</code></pre>
 
 <p>You&#39;ll also need to configure some settings on heroku using the toolbelt.  You&#39;ll need to set web scaling to 1 and <code>NODE_ENV=production</code>:  </p>
 
-<pre><code>$ heroku ps:scale web=1
+<pre class="prettyprint"><code>$ heroku ps:scale web=1
 $ heroku config:add NODE_ENV=production</code></pre>
 
 <p>With the heroku toolbelt, you can also run commands within your cedar stack.  Try the following to become familiar with the toolbelt:  </p>
 
-<pre><code>$ heroku ps
+<pre class="prettyprint"><code>$ heroku ps
 $ heroku logs
 $ heroku run node</code></pre>
 
@@ -2040,12 +2332,8 @@ $ heroku run node</code></pre>
 <p>At any time, you can login to heroku.com and modify settings for your newly-created cedar stack.  You can also opt-in to logging, notifications, and a plethora of other free and paid services.</p>
 
   </div>
-  <script type="text/javascript" src="assets/sh_main.js"></script>
-  <script type="text/javascript" src="assets/sh_javascript.min.js"></script>
   <script type="text/javascript">
-	sh_highlightDocument(undefined, 'javascript', 'tt');
-	sh_highlightDocument(undefined, 'javascript', 'code');
-	sh_highlightDocument(undefined, 'javascript', 'pre');
+    (function() { prettyPrint(); }());
   </script>
 </body>
 </html>
