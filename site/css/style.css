@@ -34,7 +34,7 @@ html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10
 
 html, button, input, select, textarea { font-family: sans-serif; color: #222; }
 
-body { margin: 0; font-size: 1em; line-height: 1.4; }
+body { background: #698027; margin: 0; font-size: 1em; line-height: 1.4; }
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -218,7 +218,7 @@ td { vertical-align: top; }
    Author:
    ========================================================================== */
    
-body { background: url(../img/bg.png) 0 0 repeat-x; overflow: hidden;}
+body { background: url(../img/bg.png) 0 0 repeat; overflow: hidden;}
 h1 a, h1 span, footer div a { display: block; color: #ffffff; text-decoration: none; }
 h1 span { line-height: 1.1em; font-size: 0.8em;}
 #container { text-align: center; height:auto; }
