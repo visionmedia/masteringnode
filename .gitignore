@@ -4,5 +4,5 @@ tmp
 
 src/addons/*/build
 src/addons/*/*/build
-
+gh-pages
 *-wscript
