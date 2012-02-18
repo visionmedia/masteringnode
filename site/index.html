@@ -1,104 +1,88 @@
-<!DOCTYPE 5>
-<html>
-  <head>
-    <title>Mastering Node - Open Source Nodejs eBook</title>
-    <style>
-      body {
-        font: 12px Arial, sans-serif;
-        background: url(public/images/bg.png) 0 0 repeat-x;
-        text-align: center;
-      }
-      h1 {
-        margin: 0;
-      }
-      h1:hover {
-        opacity: 0.8;
-      }
-      h1 a {
-        text-indent: -999999px;
-        display: block;
-        outline: none;
-        width: 322px;
-        height: 113px;
-        background: url(public/images/logo.png) 0 0 no-repeat;
-      }
-      ul {
-        list-style: none;
-      }
-      a {
-        color: white;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      #logo {
-        margin: 250px auto 0 auto;
-        width: 322px;
-      }
-      #logo span {
-        color: white;
-      }
-      #formats {
-        margin: 15px 0 0 0;
-        padding: 0;
-      }
-      #formats li {
-        display: inline-block;
-      }
-      #formats a {
-        outline: none;
-        display: block;
-        margin: 0 1px;
-        padding: 5px 10px;
-        border-top: 1px solid rgba(255,255,255,0.4);
-        background: #3981c7;
-        background: -webkit-gradient(linear, left top, left bottom, from(#4399ec), to(#3981c7));
-        -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,0.4);
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-      }
-      #formats a:hover {
-        text-decoration: none;
-        background: #255fac;
-        background: -webkit-gradient(linear, left top, left bottom, from(#4399ec), to(#255fac));
-      }
-      #formats a:active {
-        background: #4399ec;
-        background: -webkit-gradient(linear, left top, left bottom, from(#3981c7), to(#4399ec));
-      }
-      #footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 90px;
-        line-height: 90px;
-        background: #161616;
-        color: #292929;
-        text-align: right;
-      }
-      #footer a {
-        margin-right: 20px;
-        text-decoration: none;
-        color: #696868;
-      }
-      #footer a:hover {
-        color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="logo">
-      <h1><a href="http://github.com/visionmedia/masteringnode">Mastering Node eBook</a></h1>
-      <span>Open Source Node eBook</span>
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Mastering Node eBook</title>
+  <meta name="description" content="">
+
+  <!-- Mobile viewport optimized: h5bp.com/viewport -->
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+  <!-- All JavaScript at the bottom, except this Modernizr build.
+       Modernizr enables HTML5 elements & feature detects for optimal performance.
+       Create your own custom Modernizr build: www.modernizr.com/download/ -->
+  <script src="js/libs/modernizr-2.5.2.min.js"></script>
+</head>
+<body>
+<div id="container">
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header>
+    <h1>
+        <a href="http://github.com/jimschubert/masteringnode">Mastering Node eBook</a>
+        <span>Open Source Node eBook</span>
+    </h1>
+    <div id="ribbon-container">
+        <a id="ribbon" href="https://github.com/jimschubert/masteringnode" target="_blank">
+            <span>Fork Me</span>
+        </a>
     </div>
-    <ul id="formats">
-      <li id="pdf"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.pdf">pdf</a></li>
-      <li id="epub"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.epub">epub</a></li>
-      <li id="mobi"><a href="http://github.com/visionmedia/masteringnode/raw/master/book.mobi">mobi</a></li>
-      <li id="html"><a href="http://visionmedia.github.com/masteringnode/book.html">html</a></li>
-    </ul>
-    <div id="footer">Created by <a href="http://github.com/visionmedia">TJ Holowaychuk</a></div>
-  </body>
+  </header>
+  <div role="main">
+    <nav>
+        <ul>
+          <li><a href="https://github.com/jimschubert/masteringnode/raw/master/docs/book.pdf" role="download">pdf</a></li>
+          <li><a href="https://github.com/jimschubert/masteringnode/raw/master/docs/book.epub" role="download">epub</a></li>
+          <li><a href="https://github.com/jimschubert/masteringnode/raw/master/docs/book.mobi" role="download">mobi</a></li>
+          <li><a href="https://github.com/jimschubert/masteringnode/raw/master/docs/book.html" role="download">html</a></li>
+        </ul>
+    </nav>
+  </div>
+  <footer>
+    <div id="credits">
+        <div id="authors">
+            <label>Authors</label>
+            <a href="https://github.com/visionmedia" target="_blank">TJ Holowaychuk</a>
+            <a href="https://github.com/jimschubert" target="_blank">Jim Schubert</a>
+        </div>
+    </div>
+  </footer>
+</div>
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <!-- scripts concatenated and minified via build script -->
+  <script src="js/plugins.js"></script>
+  <script src="js/script.js"></script>
+  <!-- end scripts -->
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+</body>
 </html>

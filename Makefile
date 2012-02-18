@@ -68,4 +68,13 @@ clean_html:
 	@echo "\nRemoving html files..."
 	rm -f chapters/*.html
 
+gh-pages:
+	@echo "\nCloning masteringnode.git..."
+	[ ! -d "gh-pages" ] && git clone git@github.com:jimschubert/masteringnode.git gh-pages
+	@echo "\nChecking out gh-pages..."
+	cd gh-pages && git checkout gh-pages
+	@echo "\nCopying site contents into gh-pages"
+	cp -r ./site/* ./gh-pages/
+	@echo "\nDone. Be sure to commit and push the files under gh-pages"
+
 .PHONY: view clean regenerate
