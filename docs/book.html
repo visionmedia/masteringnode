@@ -1653,18 +1653,52 @@ fs.writeFile(&#39;./testFile.txt&#39;, &quot;changed&quot;, function (err) {
 
 <p>  The node api <a href="http://nodejs.org/api.html#file-system-106">docs</a> are very detailed and list all the possible filesystem commands available when working with Nodejs.</p>
 
-<h1>TCP</h1>
+<h1>Net (TCP)</h1>
 
-<p>  ...</p>
+<p>The <code>net</code> module handles lower-level networking than the <code>http</code> module. In fact, the <code>http</code> module uses the <code>net</code> module to create connections and <code>http.Server</code> even inherits <code>net.Server</code> while adding listeners (&#39;connect&#39;, &#39;request&#39;).</p>
 
-<h2 id="tCP_Servers">TCP Servers</h2>
+<p>The <code>net</code> module was previously (pre- 0.2.0) called the <code>tcp</code> module.  The module was most likely renamed to create a logical API similar to other APIs.</p>
 
-<p>Many times, a server will do two things: write data to the console and send data to a client connection.  Below is a simple TCP server which echos &quot;You were connected!&quot; to a client connection and outputs &quot;A client has connected!&quot; to <em>stdout</em>.</p>
+<p>What the <code>net</code> module really accomplishes is opening <code>sockets</code> for bi-directional communication.  These sockets can either be network-based (TCP/IP) or process-based.  Network-based sockets refer to addresses in the form <em>ip:port</em>, which you are probably very familiar with at this point.  Process-based sockets, commonly referred to as <em>inter-process communication (IPC) sockets</em> or <em>unix domain sockets</em>, are generally meant for communicating between applications within the operating system. This does <em>not</em> necessarily mean these sockets are inaccessible from the network. It only means they are not explicitly bound to an IP address and port number. <em>Unix domain sockets</em> allow for TCP and UDP packets while the somewhat similar <em>named pipes</em> in Windows allow for TCP packets.  This may be useful in unix-based systems for broadcast messages.  Any limitations with these file-based sockets will be limitations on the transport (TCP or UDP/datagrams).</p>
+
+<p>An example of a <em>unix domain socket</em> is the <em>iface_socket</em> one would find in <em>~/.dropbox</em> (see <a href="http://www.dropbox.com/install?os=lnx">dropbox.com</a> for download details).  Connecting to this socket and viewing activity is fairly easy.  Here, I have connected to the <em>unix domain socket</em> and subsequently edited <em>~/Dropbox/Example.txt</em> in gedit.</p>
+
+<pre class="prettyprint"><code>$ nc -Ud /home/jim/.dropbox/iface_socket 
+shell_touch
+path    /home/jim/Dropbox/.goutputstream-J48D9V
+done
+shell_touch
+path    /home/jim/Dropbox
+done
+shell_touch
+path    /home/jim/Dropbox/Example.txt~
+done
+shell_touch
+path    /home/jim/Dropbox/Example.txt
+done
+shell_touch
+path    /home/jim/Dropbox/.goutputstream-J48D9V
+done
+shell_touch
+path    /home/jim/Dropbox/Example.txt~
+done
+shell_touch
+path    /home/jim/Dropbox/Example.txt
+done
+shell_touch
+path    /home/jim/Dropbox
+done</code></pre>
+
+<p>I apologize for the length of output here.  Dropbox also provides a <em>command_socket</em> which allows you to enter commands for processing.  Instead of focussing too much on <em>unix domain sockets</em> right now, we will start with some TCP/IP examples. The application <code>nc</code> is the &#39;netcat&#39; utility used to connect to file-based sockets.  It can also connect to network-based sockets and the manpage says it is scriptable whereas <code>telnet</code> is not.  Because Windows users may not have access to <code>nc</code>, we will use <code>telnet</code> for network-based sockets.</p>
+
+<h2 id="tCP_IP_Servers">TCP/IP Servers</h2>
+
+<p>Many times, a server will do two things: write data to the console (or, <em>stdout</em>) and send data to a client connection.  Below is a simple TCP server which echos &quot;You were connected!&quot; to a client connection and outputs &quot;A client has connected!&quot; to <em>stdout</em>.</p>
 
 <pre class="prettyprint"><code>// tcp/tcp_server.js
 var sys = require(&#39;sys&#39;);
-var tcp = require(&#39;net&#39;);
-var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
+var net = require(&#39;net&#39;);
+var server = net.createServer({ allowHalfOpen:false }, function(socket) {
     sys.puts(&quot;A client has connected!&quot;);
     socket.write(&quot;You were connected!\n&quot;, &quot;utf8&quot;);
     socket.end();
@@ -1674,7 +1708,84 @@ var server = tcp.createServer({ allowHalfOpen:false }, function(socket) {
 
 <pre class="prettyprint"><code>$ telnet 127.0.0.1 8000</code></pre>
 
-<p>In the server&#39;s terminal, you should see the message output from <code>sys.puts</code>, while the client&#39;s server should display, &quot;You were connected!&quot;</p>
+<p>In the terminal running the server, you should see the message output from <code>sys.puts</code>, while the client terminal should display, &quot;You were connected!&quot;.  Because this is TCP/IP, an address is made up of an IP address and a port number. The <code>listen()</code> function accepts the port and IP address used to bind this network-based socket.  On the other end, <code>telnet</code> requires the IP address and the port number.  If you were to execute <code>telnet</code> without a port number, the default port defined in <em>/etc/services</em> would be used.  Grepping this file for &#39;telnet&#39; should yield:</p>
+
+<pre class="prettyprint"><code>$ cat /etc/services | grep telnet
+telnet      23/tcp
+rtelnet     107/tcp             # Remote Telnet
+rtelnet     107/udp
+telnets     992/tcp             # Telnet over SSL
+telnets     992/udp
+tfido       60177/tcp           # fidonet EMSI over telnet</code></pre>
+
+<p>So, invoking <code>telnet 127.0.0.1</code> may look like the program accepts an incomplete network socket address (missing port), but the operating system knows and understands these defaults.</p>
+
+<p>It is important to understand that TCP server applications provide a &quot;service&quot; in the sense that a client makes a request and a server reponds. For example, HTTP is the ubiquitous protocol of internet web pages which uses the TCP/IP stack. In the TCP/IP protocol suite, an HTTP server and an HTTP client (or, browser) would exist at the <em>Application</em> layer, while the <code>net</code> module would handle the <em>Transport</em> layer and below. The HTTP protocol defines how a client makes a request and how a server responds to that request.</p>
+
+<p>Because we have not discussed TCP clients yet and the first server example of this section provides a service of echoing the obvious, we should take a look at a TCP server example that does something (somewhat) useful-- allows the client user to enter contacts.</p>
+
+<pre class="prettyprint"><code>// src/tcp/tcp_contact_server.js
+var sys = require(&#39;sys&#39;),
+    net = require(&#39;net&#39;),
+    util = require(&#39;util&#39;),
+    port = 9108,
+    contacts = [];
+
+// ... some code omitted
+
+var opt = { allowHalfOpen: false };
+var server = net.createServer(opt, function(socket) {
+    socket.write(&#39;Welcome to the contact manager!\n&#39;);
+    socket.on(&#39;data&#39;, function(d) {
+        var s = socket;
+        onData(s, d);
+    });
+    showHelp(socket);
+});
+
+server.on(&#39;connection&#39;, function(socket) {
+    sys.puts(&#39;Client connected! (&#39; + socket.remoteAddress + &#39;)&#39;);
+});
+
+server.listen(port, &#39;localhost&#39;, function() {
+    sys.puts(&#39;TCP server listening on port &#39; + port);
+});</code></pre>
+
+<p>This is quite a bit of code to start.  You may have noticed that <code>net.createServer</code> and <code>.listen()</code> are no longer chained.  This is to make room for the &#39;connection&#39; event binding.  Whenever a client connects to this server, we will write a message to <em>stdout</em>.  The <code>.listen()</code> function also accepts a callback function as the third argument. This function executes after the server is created successfully. It is not only important to give feedback to the client of an application, it is also important to provide some sort of output locally whether it is status messages, debug messages, or error messages.</p>
+
+<p>The <code>showHelp(socket);</code> call will write a help message to the socket to which the client application is connected.  This help message resembles:</p>
+
+<pre class="prettyprint"><code>Commands: [quit help save list]
+    quit- closes the connection
+    help- displays this message
+    save- saves the contact. e.g save Jim Schubert
+    list- displays the list of contacts</code></pre>
+
+<p>The &#39;data&#39; event captures a reference to the <code>socket</code> and passes it to the <code>onData</code> function along with the data from the client.  Although the documention for the <code>net</code> module claims this data may be either a <code>Buffer</code> or a <code>String</code>, play it safe and call <code>toString()</code> on that data. </p>
+
+<p>When a command is accepted from the client (the <code>d</code> passed to the emitted <code>&#39;data&#39;</code> event), the <code>onData</code> function does some processing on the data to determine the command (which we have limited to 4 letters) and any parameters, writing a status message to <em>stdout</em>:</p>
+
+<pre class="prettyprint"><code>var arg = buffer.toString().replace(&#39;\r\n&#39;, &#39;&#39;);
+var command = arg.substring(0,4);
+sys.puts(&#39;Received data: &#39; + command);</code></pre>
+
+<p>The function then switches on each of the known commands, writing out the response to the client. If a command is not known, or is in a format that is unexpected (it is case-sensitive), a message is written to the client that the command is invalid.  The &#39;save&#39; case may be handled like this:</p>
+
+<pre class="prettyprint"><code>var toSave = arg.replace(command,&#39;&#39;).trim();
+if(toSave) {
+    contacts.push(toSave);
+    socket.write(toSave + &#39; was saved\n&#39;);
+} else {
+    socket.write(&#39;Syntax is: save FirstName LastName\n&#39;);
+}</code></pre>
+
+<p>Because <code>save</code> and <code>save FirstName LastName</code> are both valid commands received from the client, the parameter(s) can be determined by removing the command from the line. If the result is <code>&#39;&#39;</code>, no parameters were given and a message is displayed to the client.</p>
+
+<p>Try this example by again opening two terminals.  In the first terminal, run:</p>
+
+<pre class="prettyprint"><code>$ node src/tcp/tcp\_contact\_server.js</code></pre>
+
+<p>In the second terminal, connect by running <code>telnet localhost 9108</code>. Try saving two or three names, then send the <code>quit</code> command.  Reconnect and issue the <code>list</code> command. You&#39;ll notice that although we didn&#39;t persist the contacts to some persistent storage, it remains resident in memory as long as the server application is running.  Depending on your comfort with client-server technologies, this may seem like a basic concept. In any case, it is always important to be mindful of resources in your server application.</p>
 
 <h2 id="tCP_Clients">TCP Clients</h2>
 
