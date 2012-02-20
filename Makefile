@@ -75,6 +75,9 @@ gh-pages:
 	cd gh-pages && git checkout gh-pages
 	@echo "\nCopying site contents into gh-pages"
 	cp -r ./site/* ./gh-pages/
+	@echo "\nCopying book.html to gh-pages"
+	mkdir -p ./gh-pages/read/
+	cp ./docs/book.html ./gh-pages/read/mastering-node-all.html
 	@echo "\nDone. Be sure to commit and push the files under gh-pages"
 
 .PHONY: view clean regenerate
