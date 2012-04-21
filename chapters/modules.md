@@ -1,4 +1,3 @@
-
 # CommonJS Module System
 
 [CommonJS](http://commonjs.org) is a community driven effort to standardize packaging of JavaScript libraries, known as _modules_. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers. 
@@ -58,7 +57,7 @@ To get started with requiring modules, first create a second file named _./app.j
 	utils.merge(a, b);
 	console.dir(a);
 
-Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if _~/.node_libraries_/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
+Core modules such as the _sys_ which are bundled with node can be required without a path, such as `require('sys')`, however 3rd-party modules will iterate the `require.paths` array in search of a module matching the given path. By default `require.paths` includes _~/.node_libraries_, so if _~/.node_libraries/utils.js_ exists we may simply `require('utils')`, instead of our relative example `require('./utils')` shown above.
 
 Node also supports the concept of _index_ JavaScript files. To illustrate this example lets create a _math_ module that will provide the `math.add()`, and `math.sub()` methods. For organizational purposes we will keep each method in their respective _./math/add.js_ and _./math/sub.js_ files. So where does _index.js_ come into play? we can populate _./math/index.js_ with the code shown below, which is used when `require('./math')` is invoked, which is conceptually identical to invoking `require('./math/index')`.
 
