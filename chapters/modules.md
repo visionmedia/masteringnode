@@ -1,4 +1,3 @@
-
 # CommonJS Module System
 
 [CommonJS](http://commonjs.org) is a community driven effort to standardize packaging of JavaScript libraries, known as _modules_. Modules written which comply to this standard provide portability between other compliant frameworks such as narwhal, and in some cases even browsers. 
@@ -45,7 +44,7 @@ on the `exports` object like so:
         return obj;
     };
  
-Next we will look at utilizing out new module in other libraries.
+Next we will look at utilizing our new module in other libraries.
 
 ## Requiring Modules
 
