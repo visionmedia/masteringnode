@@ -1,4 +1,3 @@
-
 # File System
 
  To work with the filesystem, node provides the "fs" module. The commands emulate the POSIX operations, and most methods work synchronously or asynchronously. We will look at how to use both, then establish which is the better option.
@@ -29,8 +28,8 @@
 
     fs.mkdirSync('./helloDirSync',0777);
     fs.writeFileSync('./helloDirSync/message.txt', 'Hello Node');
-    var data = fs.readFileSync('./helloDirSync/message.txt','UTF-8');
     console.log('file created with contents:');
+    var data = fs.readFileSync('./helloDirSync/message.txt','UTF-8');
     console.log(data);
 
   It is better to use the asynchronous approach on servers with a high load, as the synchronous methods will cause the whole process to halt and wait for the operation to complete. This will block any incoming connections or other events.
@@ -53,7 +52,7 @@
             console.log("%s is file", file);
           }
           else if (stats.isDirectory ()) {
-          console.log("%s is a directory", file);
+            console.log("%s is a directory", file);
           }    
         console.log('stats:  %s',JSON.stringify(stats));
         });
