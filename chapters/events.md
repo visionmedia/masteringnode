@@ -1,4 +1,3 @@
-
 # Events
 
  The concept of an "event" is crucial to node, and is used heavily throughout core and 3rd-party modules. Node's core module _events_ supplies us with a single constructor, _EventEmitter_.
@@ -56,13 +55,17 @@ As we have seen, event listeners are simply functions which are called when we `
 
 	var emitter = new EventEmitter;
 
-	emitter.on('message', console.log);
+	var log = function(stream){
+	  console.log(stream);
+	}
+
+	emitter.on('message', log);
 
 	setInterval(function(){
-	    emitter.emit('message', 'foo bar');
+	      emitter.emit('message', 'foo bar');
 	}, 300);
 
 	setTimeout(function(){
-	    emitter.removeListener('message', console.log);
+	      emitter.removeListener('message', log);
 	}, 1000);
 
