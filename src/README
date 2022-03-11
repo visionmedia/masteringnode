@@ -1,7 +1,0 @@
-
-Once node is installed, you can run any of these
-examples from the root of this directory simply by executing:
-
-    $ node process.js
-    $ node events/basic.js
-    ...
